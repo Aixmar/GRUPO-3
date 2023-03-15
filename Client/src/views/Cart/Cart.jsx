@@ -1,11 +1,13 @@
-import React from 'react'
+import Cupon from "./Helper/cupon/Cupon";
+import Table from "./Helper/Table/Table";
 
 const Cart = () => {
   return (
     <div>
-      SOY EL COMPONENTE CART
+      <Table></Table>
+      <Cupon></Cupon>
     </div>
-  )
-}
+  );
+};
 
-export default Cart
+export default Cart;
