@@ -1,0 +1,9 @@
+.mainContainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 4rem;
+  padding: 0 2rem;
+  border-radius: 0px;
+  backdrop-filter: blur(7px);
+}
