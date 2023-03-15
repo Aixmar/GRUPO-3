@@ -22,6 +22,9 @@ const NavBar = () => {
       <Link to="/login" className={style.item}>
         LOGIN
       </Link>
+      <Link to="/cart" className={style.item}>
+        CART
+      </Link>
     </div>
   );
 };
