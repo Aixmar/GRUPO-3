@@ -1,5 +1,5 @@
 import {Routes, Route, useLocation} from "react-router-dom";
-import {Landing, Home, About, NavBar, UserForm, UserProfile, PizzaDetail, CreatePizza,AllPizzas} from './views/index'; 
+import {Landing, Home, About, NavBar, UserForm, UserProfile, PizzaDetail, CreatePizza,AllPizzas, Cart} from './views/index'; 
 
 
 function App() {
@@ -20,6 +20,7 @@ function App() {
       <Route path="/pizzadetail/:id" element={<PizzaDetail />}/> 
       <Route path="/profile/:id" element={<UserProfile />}/> 
       <Route path="/createpizza" element={<CreatePizza />}/>
+      <Route path="/cart" element={<Cart />}/>
   </Routes>
       
 
