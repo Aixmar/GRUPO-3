@@ -1,9 +1,10 @@
-import {GET_INGREDIENTS,GET_INGREDIENTS_QUERY,GET_PIZZAS} from './actionTypes'
+import {GET_INGREDIENTS,GET_INGREDIENTS_QUERY,GET_PIZZAS,PUSH_TO_CART} from './actionTypes'
 
 
 const initialState = {
   ingredients:[],
-  pizzas: []
+  pizzas: [],
+  cart : []
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -22,6 +23,11 @@ const rootReducer = (state = initialState, action) => {
       return{
         ...state,
         pizzas:action.payload
+      }
+    case PUSH_TO_CART:
+      return{
+        ...state,
+        cart: [...state.cart,action.payload]
       }
     default:
       return { ...state };
