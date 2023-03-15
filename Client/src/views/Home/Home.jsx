@@ -1,22 +1,17 @@
-import Footer from '../../components/Footer/Footer';
-import styles from './Home.module.css';
-
-
+import { Box } from "@chakra-ui/react";
+import Footer from "../../components/Footer/Footer";
+import { containerStyle, titleStyle } from "./homeStyles";
 
 const Home = () => {
   return (
-    <> 
-      <div className={styles.contHome} >
+    <Box sx={containerStyle}>
+      <Box sx={titleStyle}>Home</Box>
 
-        <div>Home</div>
-        
-        <div>
-          <Footer />
-        </div>
-      </div>
-    </>
-    
-  )
-}
+      <Box flex="1" display="flex" flexDirection="column" justifyContent="flex-end">
+        <Footer width="100%" />
+      </Box>
+    </Box>
+  );
+};
 
-export default Home
+export default Home;

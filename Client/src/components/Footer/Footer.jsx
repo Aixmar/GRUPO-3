@@ -1,47 +1,44 @@
-import styles from './Footer.module.css';
-import fbIco from '../../assets/facebook.png';
-import igIco from '../../assets/instagram.png';
-import twIco from '../../assets/twitter.png';
-
-
+import {footerStyles, titleStyles, textStyles} from './footerStyles'
+import { Box , Flex, Image, Text} from "@chakra-ui/react";
+import fbIco from '../../assets/facebook.png'
+import igIco from '../../assets/instagram.png'
+import twIco from '../../assets/twitter.png'
 
 const Footer = () => {
-
     return (
-        <>
-        <div className={styles.containerFooter} >
-            <div className={styles.contContact} >
-                <h2>Contact</h2>
-                <p>support@mix2pizza.app</p>
-                <div className={styles.contNetworks} >
-                    <img src={fbIco} />
-                    <img src={igIco} />
-                    <img src={twIco} />
-                </div>
-            </div>
-
-            <div className={styles.contAbout} >
-                <h2>About us</h2>
-                <h3>Our history</h3>
-                <h3>Work with us</h3>
-                <h3>franchise yourself</h3>
-            </div>
-
-            <div className={styles.contNutrition} >
-                <h2>Nutrition and Quality</h2>
-                <h3>Without gluten</h3>
-                <h3>Nutritional values</h3>
-                <h3>Quality food</h3>
-                {/* <h3>allergen list</h3> */}
-            </div>
-                
-            <div className={styles.contCopyright} >
-                <p>© 2023 Mix2Pizza Todos los derechos reservados.</p>
-            </div>
-        </div>
-        </>
-    )
-};
-
-
-export default Footer;
+  
+      //aplicamos estilos a los componentes utilizando la sintaxis de spread operator {...estilos}.
+      <Box {...footerStyles}>
+        <Flex justifyContent="space-between" mb={8}>
+          <Box flex="1">
+            <Text {...titleStyles}>Contact</Text>
+            <Text {...textStyles}>support@mix2pizza.app</Text>
+            <Flex mt={4}>
+              <Image boxSize="30px" src={fbIco} mr={4} />
+              <Image boxSize="30px" src={igIco} mr={4} />
+              <Image boxSize="30px" src={twIco} />
+            </Flex>
+          </Box>
+          <Box flex="1">
+            <Text {...titleStyles}>About us</Text>
+            <Text {...textStyles}>Our history</Text>
+            <Text {...textStyles}>Work with us</Text>
+            <Text {...textStyles}>franchise yourself</Text>
+          </Box>
+          <Box flex="1">
+            <Text {...titleStyles}>Nutrition and Quality</Text>
+            <Text {...textStyles}>Without gluten</Text>
+            <Text {...textStyles}>Nutritional values</Text>
+            <Text {...textStyles}>Quality food</Text>
+          </Box>
+        </Flex>
+        <Box textAlign="center">
+          <Text fontSize="sm" color="#272727">
+            © 2023 Mix2Pizza Todos los derechos reservados.
+          </Text>
+        </Box>
+      </Box>
+    );
+  };
+  
+  export default Footer;
