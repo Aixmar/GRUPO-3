@@ -4,7 +4,6 @@ import { getIngredients, getIngredientsQuery } from "../../redux/actions";
 
 const SearchBar = () => {
   const dispatch = useDispatch();
-  let ingredients = useSelector((state) => state.ingredients);
 
   const handlerQuery = (e) => {
     dispatch(getIngredientsQuery(e.target.value));
@@ -20,9 +19,6 @@ const SearchBar = () => {
         onChange={handlerQuery}
         placeholder="Search..."
       ></input>
-      {ingredients.map((ingr) => (
-        <h1>{ingr.name}</h1>
-      ))}
     </div>
   );
 };

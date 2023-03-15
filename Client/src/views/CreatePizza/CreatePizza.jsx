@@ -1,25 +1,27 @@
-import {useState, useEffect }from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import { getIngredients, getIngredientsQuery } from '../../redux/actions';
-// import SearchBar from '../../components/SearchBar/SearchBar';
-import {Button, Text } from "@chakra-ui/react";
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getIngredients, pushToCart } from '../../redux/actions';
+import SearchBar from '../../components/SearchBar/SearchBar';
+import { Button, Text } from "@chakra-ui/react";
 
 const CreatePizza = () => {
 
-     const [form, setForm] = useState({
-        dough:[],
-        type:[],
-        mozzarella:[],
-        ingredients:[],
-      });
+  const [form, setForm] = useState({
+    name: "Create your pizza",
+    image: "",
+    dough: "",
+    type: "",
+    mozzarella: "",
+    ingredients: [],
+  });
 
 
-      const [errors, setErrors] = useState({
-        dough:"",
-        type:"",
-        mozzarella:"",
-        ingredients:"",
-      });
+  const [errors, setErrors] = useState({
+    dough: "",
+    type: "",
+    mozzarella: "",
+    ingredients: "",
+  });
 
 
   const dispatch = useDispatch();
@@ -29,100 +31,97 @@ const CreatePizza = () => {
   //   dispatch(getIngredientsQuery(e.target.value));
   // };
 
-  
-        
-        const handleOnChange = (event) => {
-          if(event.target.checked) 
-          setForm({
-            ...form,
-            ingredients:[...form.ingredients, event.target.value]
-          })
-          else {
-            const ingredientsChecked = form.ingredients.filter(ingre=> ingre !== event.target.value)
-            setForm({
-              ...form,
-              ingredients:ingredientsChecked,
-            })
-          }
-        }
-
-        const handleRadio = (event) => {
-          if(event.target.value) {
-            setForm({
-              ...form,
-              dough: event.target.value
-            })
-          }
-        }
 
 
-        
-        const validate = (form) => {
-          const newErrors = {};
-          
-          if (!form.dough) newErrors.dough = "Dough required";   
-          if (!form.type) newErrors.type = "Type of pizza required";
-          if (!form.mozzarella) newErrors.mozzarella = "Mozzarella type required";
-          if (!form.ingredients) newErrors.ingredients = "Ingredients required";
-          
-          setErrors(newErrors);
-        }
-        
-        
-        
-        useEffect(()=>{
-          dispatch(getIngredients());
-        }, []);
-        
-        
-      
-        return (
-          <>
-    <Text fontSize='5xl'>CREATE NEW PIZZA</Text>
-        
-      <form>
+  const handleOnChange = (event) => {
+    if (event.target.checked)
+      setForm({
+        ...form,
+        ingredients: [...form.ingredients, event.target.value]
+      })
+    else {
+      const ingredientsChecked = form.ingredients.filter(ingre => ingre !== event.target.value)
+      setForm({
+        ...form,
+        ingredients: ingredientsChecked,
+      })
+    }
+  }
+
+  const handleRadio = (event) => {
+    setForm({
+      ...form,
+      [event.target.name]: event.target.value
+    })
+  }
+
+
+  const validate = (form) => {
+    const newErrors = {};
+
+    if (!form.dough) newErrors.dough = "Dough required";
+    if (!form.type) newErrors.type = "Type of pizza required";
+    if (!form.mozzarella) newErrors.mozzarella = "Mozzarella type required";
+    if (!form.ingredients) newErrors.ingredients = "Ingredients required";
+
+    setErrors(newErrors);
+  }
+
+  const handleSubmit =(e) => { 
+    e.preventDefault()
+    dispatch(pushToCart(form))
+  }
+  useEffect(() => {
+    dispatch(getIngredients());
+  }, []);
+
+  return (
+    <>
+      <Text fontSize='5xl'>CREATE NEW PIZZA</Text>
+
+      <form onSubmit={handleSubmit}>
         <div>
           <label> Dough:</label>
-        
-            <label> <input type="radio" name= "dough" value="wholemeal flour" /> wholemeal flour </label>
-            <label> <input type="radio" name= "dough" value="wheat" /> wheat </label> 
-            <label> <input type="radio" name= "dough" value="gluten free" /> gluten free </label>
-                            
-         </div> 
 
-         <div>
+          <label> <input type="radio" name="dough" value="wholemeal flour" onChange={handleRadio} /> wholemeal flour </label>
+          <label> <input type="radio" name="dough" value="wheat" onChange={handleRadio} /> wheat </label>
+          <label> <input type="radio" name="dough" value="gluten free" onChange={handleRadio} /> gluten free </label>
+
+        </div>
+
+        <div>
           <label> Type:</label>
-        
-            <label> <input type="radio" name= "type" value="thin" /> Thin </label>
-            <label> <input type="radio" name= "type" value="gross" /> Gross </label> 
-                 
-         </div> 
 
-         <div>
+          <label> <input type="radio" name="type" value="thin" onChange={handleRadio} /> Thin </label>
+          <label> <input type="radio" name="type" value="gross" onChange={handleRadio} /> Gross </label>
+
+        </div>
+
+        <div>
           <label> Muzarella:</label>
-            <label> <input type="radio" name= "mozzarella" value="mozarella" /> Mozzarella </label>
-            <label> <input type="radio" name= "mozzarella" value="vegan mozarella" /> Vegan Mozzarella </label>
-            <label> <input type="radio" name= "mozzarella" value="lactose-free mozarella" /> Lactose-free Mozzarella </label>
-            <label> <input type="radio" name= "mozzarella" value="without mozarella" /> Without Mozzarella </label>              
-         </div> 
+          <label> <input type="radio" name="mozzarella" value="mozarella" onChange={handleRadio} /> Mozzarella </label>
+          <label> <input type="radio" name="mozzarella" value="vegan mozarella" onChange={handleRadio} /> Vegan Mozzarella </label>
+          <label> <input type="radio" name="mozzarella" value="lactose-free mozarella" onChange={handleRadio} /> Lactose-free Mozzarella </label>
+          <label> <input type="radio" name="mozzarella" value="without mozarella" onChange={handleRadio} /> Without Mozzarella </label>
+        </div>
 
-         <div>
-         {
-       ingredients.map((ingr) => {
-          return(
-            <div>
-              <input type="checkbox" id={ingr.id} value={ingr.name} onChange={handleOnChange} disabled={form.ingredients.length === 2 && !form.ingredients.includes(ingr.name)? true : false}></input>
-              <label for={ingr.id}>{ingr.name}</label>
-            </div>
-          ) 
-        })  
-        }
-
-
-      {/* <SearchBar /> */}
-    </div>
-
-    <Button
+        <div>
+          <SearchBar />
+          {
+            !ingredients.length? <p>no results</p> :
+            ingredients.map((ingr) => {
+              return (
+                <div>
+                  <input type="checkbox" id={ingr.id} value={ingr.name}  key={ingr.id} checked={form.ingredients.includes(ingr.name) ? true : false} onChange={handleOnChange} disabled={form.ingredients.length === 2 && !form.ingredients.includes(ingr.name) ? true : false}></input>
+                  <label for={ingr.id}>{ingr.name}</label>
+                </div>
+              )
+            })
+          }
+        </div>
+        <Button
+          // disabled
+          type='submit'
           hoverbg="white"
           size="lg"
           borderRadius="full"
@@ -132,13 +131,14 @@ const CreatePizza = () => {
         >
           Add to cart
         </Button>
-        
-
-         </form>
-
-        </>
 
 
-)}
+      </form>
+
+    </>
+
+
+  )
+}
 
 export default CreatePizza;
