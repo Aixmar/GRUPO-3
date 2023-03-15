@@ -1,4 +1,4 @@
-import {GET_INGREDIENTS,GET_INGREDIENTS_QUERY,GET_PIZZAS} from "./actionTypes"
+import {GET_INGREDIENTS,GET_INGREDIENTS_QUERY,GET_PIZZAS,PUSH_TO_CART} from "./actionTypes"
 import axios from 'axios'
 
 export const getIngredients = ()=>{
@@ -21,3 +21,7 @@ export const getPizzas = () => {
         return dispatch({type: GET_PIZZAS, payload : response.data})
     }
 }
+
+export const pushToCart = (form) => {
+    return {type:PUSH_TO_CART, payload:form}
+}   
