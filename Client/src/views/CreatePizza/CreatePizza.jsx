@@ -51,7 +51,7 @@ const CreatePizza = () => {
   const handleRadio = (event) => {
     setForm({
       ...form,
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     })
   }
 
