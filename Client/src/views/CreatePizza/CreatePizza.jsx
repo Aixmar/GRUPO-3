@@ -58,7 +58,7 @@ const CreatePizza = () => {
     </div>
 
     <Button
-          hoverBg="white"
+          hoverbg="white"
           size="lg"
           borderRadius="full"
           padding="10px"
