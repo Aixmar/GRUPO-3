@@ -1,0 +1,60 @@
+form {
+    background-color: #aaa;
+    width: 38%;
+    height: auto;
+    margin: 0 auto;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 6px 6px 12px 0px rgba(0,0,0,0.75);
+    margin-top: 2rem;
+}
+
+form section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 6rem;
+}
+
+form section label {
+    font-size: 1.4rem;
+    margin-left: 1.4rem;
+}
+
+form section input {
+    font-size: 1.4rem;
+    width: 90%;
+    height: 3rem;
+    border-radius: 4px;
+    align-self: center;
+    padding-left: 1rem;
+
+}
+
+.contButton {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    /* align-items: end; */
+}
+
+.linkBtn {
+    margin-top: 4rem;
+}
+
+dialog {
+    overflow: hidden;
+    width: 44%;
+    height: 16rem;
+    text-align: center;
+    border-radius: 12px;
+}
+
+dialog h2 {
+    font-size: 2rem;
+}
+
+
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.687);
+}
