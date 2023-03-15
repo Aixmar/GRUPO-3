@@ -1,3 +1,9 @@
+import {footerStyles, titleStyles, textStyles} from './footerStyles'
+import { Box , Flex, Image, Text} from "@chakra-ui/react";
+import fbIco from '../../assets/facebook.png'
+import igIco from '../../assets/instagram.png'
+import twIco from '../../assets/twitter.png'
+
 const Footer = () => {
     return (
   
