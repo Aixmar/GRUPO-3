@@ -7,10 +7,10 @@ import About from './About/About';
 import PizzaDetail from './PizzaDetail/PizzaDetail';
 import CreatePizza from './CreatePizza/CreatePizza';
 import AllPizzas from './AllPizzas/AllPizzas';
+import Cart from './Cart/Cart';
 
 
-
-export {Landing,Home, About, NavBar, UserForm, UserProfile, PizzaDetail, CreatePizza,AllPizzas};
+export {Landing,Home, About, NavBar, UserForm, UserProfile, PizzaDetail, CreatePizza,AllPizzas, Cart};
 
 
 

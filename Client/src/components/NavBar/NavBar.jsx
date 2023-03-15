@@ -4,6 +4,9 @@ import style from "./NavBar.module.css";
 const NavBar = () => {
   return (
     <div className={style.mainContainer}>
+      <Link to="/home" className={style.item}>
+        HOME
+      </Link>
       <Link to="/about" className={style.item}>
         ABOUT
       </Link>
@@ -13,11 +16,14 @@ const NavBar = () => {
       <Link to="/allpizzas" className={style.item}>
         TRADITIONAL MENU
       </Link>
-      <Link to="/home" className={style.item}>
-        HOME
+      <Link to="/createuser" className={style.item}>
+        SING IN
       </Link>
       <Link to="/login" className={style.item}>
         LOGIN
+      </Link>
+      <Link to="/cart" className={style.item}>
+        CART
       </Link>
     </div>
   );
