@@ -13,27 +13,48 @@ const CreatePizza = () => {
     image: "",
     dough: "",
     type: "",
+    base: "",
     mozzarella: "",
     price: 0,
-    ingredients: [],
+    toppingIngredients: [],
+    cheeseIngredients: [],
+    meatIngredients: [],
   });
-
-
   const [errors, setErrors] = useState({
     dough: "",
     type: "",
+    base: "",
     mozzarella: "",
-    ingredients: "",
+    toppingIngredients: "",
+    cheeseIngredients: "",
+    meatIngredients: "",
   });
-
-
+  const [typesOfDough, setTypesOfDough] = useState([])
+  const [typesOfBaking, setTypesOfBanking] = useState([])
+  const [sauceBases, setSauceBases] = useState([])
+  const [cheeseBases, setCheeseBases] = useState([])
+  const [toppings, setToppings] = useState([])
+  const [cheeses, setCheeses] = useState([])
+  const [meats, setMeats] = useState([])
   const dispatch = useDispatch();
+  
+  const ingredients = useSelector((state) => state.ingredients);
+  
+  const validate = (form) => {
+    const newErrors = {};
 
-  let ingredients = useSelector((state) => state.ingredients);
+    if (!form.dough) newErrors.dough = "Dough required";
+    if (!form.type) newErrors.type = "Type of pizza required";
+    if (!form.base) newErrors.base = "Type of base required"
+    if (!form.mozzarella) newErrors.mozzarella = "Mozzarella type required";
+    // if (!form.toppingIngredients.length) newErrors.toppingIngredients = "Ingredients required";
+    // if (!form.cheeseIngredients.length) newErrors.cheeseIngredients = "Ingredients required";
+
+    setErrors(newErrors);
+  }
 
   const handleOnChange = (event) => {
     const currentIngredientPrice = ingredients.filter(ingr => ingr.name === event.target.value)
-    console.log(currentIngredientPrice);
     if (event.target.checked) {
       // validate({
       //   ...form,
@@ -42,24 +63,23 @@ const CreatePizza = () => {
       // })
       setForm({
         ...form,
-        ingredients: [...form.ingredients, event.target.value],
+        [event.target.name]: [...form[event.target.name], event.target.value],
         price: form.price + currentIngredientPrice[0].price
       })
     }
     else {
-      const ingredientsChecked = form.ingredients.filter(ingre => ingre !== event.target.value)
+      const ingredientsChecked = form[event.target.name].filter(ingre => ingre !== event.target.value)
       // validate({
       //   ...form,
       //   ingredients: ingredientsChecked,
       //   price: form.price - currentIngredientPrice[0].price})
       setForm({
         ...form,
-        ingredients: ingredientsChecked,
+        [event.target.name]: ingredientsChecked,
         price: form.price - currentIngredientPrice[0].price
       })
     }
   }
-
   const handleRadio = (event) => {
     // validate({ ...form, [event.target.name]: event.target.value })
     setForm({
@@ -69,22 +89,13 @@ const CreatePizza = () => {
   }
 
 
-  const validate = (form) => {
-    const newErrors = {};
-
-    if (!form.dough) newErrors.dough = "Dough required";
-    if (!form.type) newErrors.type = "Type of pizza required";
-    if (!form.mozzarella) newErrors.mozzarella = "Mozzarella type required";
-    if (!form.ingredients.length) newErrors.ingredients = "Ingredients required";
-
-    setErrors(newErrors);
-  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
     validate(form)
     // !form.dough || !form.type || !form.mozzarella || !form.ingredients.length ? (null) : (dispatch(pushToCart(form)))
-    if (!form.dough || !form.type || !form.mozzarella || !form.ingredients.length) return null
+    if (!form.dough || !form.type || !form.base || !form.mozzarella) return null
+    // || !form.toppingIngredients.length || !form.cheeseIngredients.length
     else {
       const modal = document.querySelector('#createPizzaModal');
       dispatch(pushToCart(form))
@@ -95,52 +106,143 @@ const CreatePizza = () => {
     dispatch(getIngredients());
   }, []);
 
+  useEffect(() => {
+    const typesOfDoughFilter = ingredients.filter(i => i.category === "Dough")
+    const typesOfBakingFilter = ingredients.filter(i => i.category === "Type")
+    const sauceBasesFilter = ingredients.filter(i => i.category === "Sauce base")
+    const cheeseBasesFilter = ingredients.filter(i => i.category === "Cheese base")
+    const toppingIngredientsFilter = ingredients.filter(i => i.category === "Toppings")
+    const cheeseIngredientsFilter = ingredients.filter(i => i.category === "Cheese")
+    const meatIngredientsFilter = ingredients.filter(i => i.category === "Meat")
+    setTypesOfDough(typesOfDoughFilter)
+    setTypesOfBanking(typesOfBakingFilter)
+    setSauceBases(sauceBasesFilter)
+    setCheeseBases(cheeseBasesFilter)
+    setToppings(toppingIngredientsFilter)
+    setCheeses(cheeseIngredientsFilter)
+    setMeats(meatIngredientsFilter)
+  }, [ingredients])
+
   return (
     <>
       <Text fontSize='5xl'>CREATE NEW PIZZA</Text>
 
       <form onSubmit={handleSubmit}>
         <div>
-          <label> Dough:</label>
-
-          <label> <input type="radio" name="dough" value="wholemeal flour" onChange={handleRadio} /> wholemeal flour </label>
-          <label> <input type="radio" name="dough" value="wheat" onChange={handleRadio} /> wheat </label>
-          <label> <input type="radio" name="dough" value="gluten free" onChange={handleRadio} /> gluten free </label>
+          <label> Dough (1):</label>
+          <br></br>
+          {
+            typesOfDough.map((dough) => {
+              return (
+                <label> <input type="radio" name="dough" value={dough.name} onChange={handleRadio} />{dough.name} </label>
+              )
+            })
+          }
+          {/* <label> Dough (1):</label>
+          <br></br>
+          <label> <input type="radio" name="dough" value="wheat" onChange={handleRadio} /> Wheat </label>
+          <label> <input type="radio" name="dough" value="wholemeal flour" onChange={handleRadio} /> Wholemeal flour </label>
+          <label> <input type="radio" name="dough" value="gluten free" onChange={handleRadio} /> Gluten free </label> */}
         </div>
         {errors.dough && <span>{errors.dough}</span>}
-
+        <br></br>
         <div>
-          <label> Type:</label>
-
+          <label> Type (1):</label>
+          <br></br>
+          {
+            typesOfBaking.map((t) => {
+              return (
+                <label> <input type="radio" name="type" value={t.name} onChange={handleRadio} />{t.name}</label>
+              )
+            })
+          }
+          {/* <label> Type (1):</label>
+          <br></br>
           <label> <input type="radio" name="type" value="thin" onChange={handleRadio} /> Thin </label>
-          <label> <input type="radio" name="type" value="gross" onChange={handleRadio} /> Gross </label>
-
+          <label> <input type="radio" name="type" value="gross" onChange={handleRadio} /> Gross </label> */}
         </div>
         {errors.type && <span>{errors.type}</span>}
-
+        <br></br>
         <div>
-          <label> Muzarella:</label>
+          <label> Base of (1):</label>
+          <br></br>
+          {
+            sauceBases.map((base) => {
+              return (
+                <label> <input type="radio" name="base" value={base.name} onChange={handleRadio} />{base.name} </label>
+              )
+            })
+          }
+          {/* <label> <input type="radio" name="base" value="tomato" onChange={handleRadio} /> Tomato </label>
+          <label> <input type="radio" name="base" value="milk cream" onChange={handleRadio} /> Milk cream </label>
+          <label> <input type="radio" name="base" value="white sauce" onChange={handleRadio} /> White sauce </label> */}
+        </div>
+        {errors.base && <span>{errors.base}</span>}
+        <br></br>
+        <div>
+          <label> Muzarella (1):</label>
+          <br></br>
+          {
+            cheeseBases.map((base) => {
+              return (
+                <label> <input type="radio" name="mozzarella" value={base.name} onChange={handleRadio} /> {base.name} </label>
+              )
+            })
+          }
+          {/* <label> Muzarella (1):</label>
+          <br></br>
           <label> <input type="radio" name="mozzarella" value="mozarella" onChange={handleRadio} /> Mozzarella </label>
           <label> <input type="radio" name="mozzarella" value="vegan mozarella" onChange={handleRadio} /> Vegan Mozzarella </label>
           <label> <input type="radio" name="mozzarella" value="lactose-free mozarella" onChange={handleRadio} /> Lactose-free Mozzarella </label>
-          <label> <input type="radio" name="mozzarella" value="without mozarella" onChange={handleRadio} /> Without Mozzarella </label>
+          <label> <input type="radio" name="mozzarella" value="without mozarella" onChange={handleRadio} /> Without Mozzarella </label> */}
         </div>
         {errors.mozzarella && <span>{errors.mozzarella}</span>}
-
+        <br></br>
         <div>
-          <SearchBar />
+          <label>Toppings list (2):</label>
+          {/* <SearchBar /> */}
           {
             !ingredients.length ? <p>no results</p> :
-              ingredients.map((ingr) => {
+              toppings.map((ingr) => {
                 return (
                   <div>
-                    <input type="checkbox" id={ingr.id} value={ingr.name} key={ingr.id} checked={form.ingredients.includes(ingr.name) ? true : false} onChange={handleOnChange} disabled={form.ingredients.length === 2 && !form.ingredients.includes(ingr.name) ? true : false}></input>
-                    <label for={ingr.id}>{ingr.name}</label>
+                    <input type="checkbox" id={ingr.id} name="toppingIngredients" value={ingr.name} key={ingr.id} checked={form.toppingIngredients.includes(ingr.name) ? true : false} onChange={handleOnChange} disabled={form.toppingIngredients.length === 2 && !form.toppingIngredients.includes(ingr.name) ? true : false}></input>
+                    <label htmlFor={ingr.id}>{ingr.name}</label>
                   </div>
                 )
               })
           }
-          {errors.ingredients && <span>{errors.ingredients}</span>}
+          {errors.toppingIngredients && <span>{errors.toppingIngredients}</span>}
+        </div>
+        <br></br>
+        <div>
+          <label>Cheeses list (3): </label>
+          {
+            cheeses.map((ingr) => {
+              return (
+                <div>
+                  <input type="checkbox" key={ingr.id} id={ingr.id} name="cheeseIngredients" value={ingr.name} checked={form.cheeseIngredients.includes(ingr.name) ? true : false} onChange={handleOnChange} disabled={form.cheeseIngredients.length === 3 && !form.cheeseIngredients.includes(ingr.name) ? true : false}></input>
+                  <label htmlFor={ingr.id}>{ingr.name}</label>
+                </div>
+              )
+            })
+          }
+          {errors.cheeseIngredients && <span>{errors.cheeseIngredients}</span>}
+        </div>
+        <br></br>
+
+        <label>Meats list (3) :</label>
+        <div>
+          {
+            meats.map((ingr) => {
+              return (
+                <div>
+                  <input type="checkbox" key={ingr.id} id={ingr.id} name="meatIngredients" value={ingr.name} checked={form.meatIngredients.includes(ingr.name) ? true : false} onChange={handleOnChange} disabled={form.meatIngredients.length === 3 && !form.meatIngredients.includes(ingr.name) ? true : false}></input>
+                  <label htmlFor={ingr.id}>{ingr.name}</label>
+                </div>
+              )
+            })
+          }
         </div>
 
         <Button
