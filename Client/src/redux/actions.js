@@ -3,7 +3,7 @@ import {
   GET_INGREDIENTS_QUERY,
   GET_PIZZAS,
   PUSH_TO_CART,
-  SORT_PIZZAS_ALPHABETICALLY,
+  SORT_PIZZAS,
 } from "./actionTypes";
 import axios from "axios";
 
@@ -30,23 +30,18 @@ export const getPizzas = () => {
   };
 };
 
-export const sortPizzasAlphabetically = (pizzas, state) => {
-  console.log(pizzas);
-  const sortedPizzas = pizzas.sort((a, b) => {
-    const nameA = a.name.toLowerCase();
-    const nameB = b.name.toLowerCase();
-    if (state === "A-Z") {
-      if (nameA < nameB) return -1;
-      if (nameA > nameB) return 1;
-      return 0;
-    } else if (state === "Z-A") {
-      if (nameA > nameB) return -1;
-      if (nameA < nameB) return 1;
-      return 0;
-    }
-  });
-
-  return { type: SORT_PIZZAS_ALPHABETICALLY, payload: sortedPizzas };
+export const sortPizzas = (pizzas, sortBy) => {
+  let sortedPizzas;
+  if (sortBy === "A-Z") {
+    sortedPizzas = pizzas.sort((a, b) => a.name.localeCompare(b.name));
+  } else if (sortBy === "Z-A") {
+    sortedPizzas = pizzas.sort((a, b) => b.name.localeCompare(a.name));
+  } else if (sortBy === "Price: Low to high") {
+    sortedPizzas = pizzas.sort((a, b) => a.price - b.price);
+  } else if (sortBy === "Price: High to low") {
+    sortedPizzas = pizzas.sort((a, b) => b.price - a.price);
+  }
+  return { type: SORT_PIZZAS, payload: sortedPizzas };
 };
 
 export const pushToCart = (form) => {

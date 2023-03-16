@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPizzas, sortPizzasAlphabetically } from "../../redux/actions";
+import { getPizzas, sortPizzas } from "../../redux/actions";
 import Card from "../Card/Card";
 
 const CardsContainer = ({ selectedSort }) => {
@@ -19,7 +19,7 @@ const CardsContainer = ({ selectedSort }) => {
   }, [pizzas]);
 
   useEffect(() => {
-    setSortedPizzas(dispatch(sortPizzasAlphabetically(pizzas, selectedSort)));
+    setSortedPizzas(dispatch(sortPizzas(pizzas, selectedSort)));
   }, [selectedSort, pizzas]);
 
   return (

@@ -3,7 +3,7 @@ import {
   GET_INGREDIENTS_QUERY,
   GET_PIZZAS,
   PUSH_TO_CART,
-  SORT_PIZZAS_ALPHABETICALLY,
+  SORT_PIZZAS,
 } from "./actionTypes";
 
 const initialState = {
@@ -34,11 +34,12 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         cart: [...state.cart, action.payload],
       };
-    case SORT_PIZZAS_ALPHABETICALLY:
+    case SORT_PIZZAS:
       return {
         ...state,
         pizzas: action.payload,
       };
+
     default:
       return { ...state };
   }
