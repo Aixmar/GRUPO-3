@@ -9,8 +9,8 @@ const CardsContainer = ({ selectedSort }) => {
   const pizzas = useSelector((state) => state.pizzas);
   const [isLoading, setIsLoading] = useState(true);
   const [sortedPizzas, setSortedPizzas] = useState([]);
-  
-    useEffect(() => {
+
+  useEffect(() => {
     dispatch(getPizzas());
   }, [dispatch, selectedSort]);
 
@@ -22,8 +22,6 @@ const CardsContainer = ({ selectedSort }) => {
     setSortedPizzas(dispatch(sortPizzas(pizzas, selectedSort)));
   }, [selectedSort, pizzas]);
 
-
-
   return (
     <>
       {isLoading ? (
@@ -31,7 +29,6 @@ const CardsContainer = ({ selectedSort }) => {
       ) : (
         <>
           <div className={styles.container}>
-
             {pizzas.map((pizza) => {
               return (
                 <Card
@@ -39,6 +36,7 @@ const CardsContainer = ({ selectedSort }) => {
                   id={pizza.id}
                   name={pizza.name}
                   image={pizza.image}
+                  price={pizza.price}
                 />
               );
             })}
