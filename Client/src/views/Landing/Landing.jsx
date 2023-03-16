@@ -17,9 +17,9 @@ const Landing = () => {
         <Heading as="h1" {...heading}>
           Create your{" "}
           <Text as="span" color="#f27825">
-            own pizza
+            own pizza with
           </Text>{" "}
-          with{" "}
+          
           <Text as="span" color="#eab830">
             Mix2Pizza
           </Text>
