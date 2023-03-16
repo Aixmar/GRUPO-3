@@ -4,6 +4,7 @@ import {
   GET_PIZZAS,
   PUSH_TO_CART,
   SORT_PIZZAS,
+  POP_TO_CART,
 } from "./actionTypes";
 
 const initialState = {
@@ -33,6 +34,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         cart: [...state.cart, action.payload],
+      };
+    case POP_TO_CART:
+      return {
+        ...state,
+        cart: action.payload,
       };
     case SORT_PIZZAS:
       return {

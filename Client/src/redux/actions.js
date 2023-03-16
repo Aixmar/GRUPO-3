@@ -4,6 +4,7 @@ import {
   GET_PIZZAS,
   PUSH_TO_CART,
   SORT_PIZZAS,
+  POP_TO_CART,
 } from "./actionTypes";
 import axios from "axios";
 
@@ -46,4 +47,8 @@ export const sortPizzas = (pizzas, sortBy) => {
 
 export const pushToCart = (form) => {
   return { type: PUSH_TO_CART, payload: form };
+};
+
+export const popToCart = (sliceForm) => {
+  return { type: POP_TO_CART, payload: sliceForm };
 };
