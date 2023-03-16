@@ -1,11 +1,12 @@
-import { Box, Flex, Link, Spacer, ChakraProvider } from "@chakra-ui/react";
+import { Box, Flex, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Spacer, ChakraProvider, Image, Link } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
 import logopizza from "../../assets/logo-pizza-app.png";
-import navbarStyles from "./navbarStyles";
+import cart from "../../assets/cart.png";
+
 
 const NavBar = () => {
   return (
-    <ChakraProvider theme={navbarStyles}>
+    
       <Box bgGradient="linear(to-l,#000000, #272727)" color="white" py={0} px={8}>
         <Flex alignItems="center">
           <Box fontWeight="bold" fontSize="2xl">
@@ -15,31 +16,41 @@ const NavBar = () => {
           </Box>
           <Spacer />
           <Box>
-            <Link as={RouterLink} to="/home">
-              HOME
-            </Link>
-            <Link as={RouterLink} to="/about">
-              ABOUT
-            </Link>
-            <Link as={RouterLink} to="/createpizza">
-              CREATE PIZZA
-            </Link>
-            <Link as={RouterLink} to="/allpizzas">
-              TRADITIONAL MENU
-            </Link>
-            <Link as={RouterLink} to="/createuser">
-              SING IN
-            </Link>
-            <Link as={RouterLink} to="/login">
-              LOGIN
-            </Link>
-            <Link as={RouterLink} to="/cart">
-              CART
-            </Link>
+            <Breadcrumb spacing="8px" separator="|">
+              <BreadcrumbItem>
+                <BreadcrumbLink as={RouterLink} to="/home" _hover={{ color: "#f27825" }}>HOME</BreadcrumbLink>
+              </BreadcrumbItem>
+
+              <BreadcrumbItem>
+                <BreadcrumbLink as={RouterLink} to="/about" _hover={{ color: "#f27825" }}>ABOUT</BreadcrumbLink>
+              </BreadcrumbItem>
+
+              <BreadcrumbItem>
+                <BreadcrumbLink as={RouterLink} to="/createpizza" _hover={{ color: "#f27825" }}>CREATE PIZZA</BreadcrumbLink>
+              </BreadcrumbItem>
+
+              <BreadcrumbItem>
+                <BreadcrumbLink as={RouterLink} to="/allpizzas" _hover={{ color: "#f27825" }}>TRADITIONAL MENU</BreadcrumbLink>
+              </BreadcrumbItem>
+
+              <BreadcrumbItem>
+                <BreadcrumbLink as={RouterLink} to="/createuser" _hover={{ color: "#f27825" }}>SING IN</BreadcrumbLink>
+              </BreadcrumbItem>
+
+              <BreadcrumbItem>
+                <BreadcrumbLink as={RouterLink} to="/login" _hover={{ color: "#f27825" }}>LOGIN</BreadcrumbLink>
+              </BreadcrumbItem>
+
+              <BreadcrumbItem>
+              <Link as={RouterLink} to="/cart">
+                <Image src={cart} alt="cart" w={10} h={10} />
+                </Link>
+              </BreadcrumbItem>
+            </Breadcrumb>
           </Box>
         </Flex>
       </Box>
-    </ChakraProvider>
+    
   );
 };
 
