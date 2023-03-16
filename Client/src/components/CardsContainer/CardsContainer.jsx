@@ -10,6 +10,37 @@ const CardsContainer = ({ selectedSort }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [sortedPizzas, setSortedPizzas] = useState([]);
 
+
+  //---------------INFINIT SCROLLING---------------
+  const [PizzasPerPage, setPizzasPerPage] = useState(6);
+  const [actualPizzas, setActualPizzas] = useState(
+    pizzas?.slice(0, PizzasPerPage)
+  );
+
+  useEffect(() => {
+    setActualPizzas(pizzas?.slice(0, PizzasPerPage));
+  }, [PizzasPerPage, actualPizzas]);
+
+  useEffect(() => {
+    const handleScroll = (event) => {
+      const scrollHeight = event.target.documentElement.scrollHeight;
+      const currentHeight =
+        event.target.documentElement.scrollTop + window.innerHeight;
+      if (currentHeight + 1 >= scrollHeight) {
+        if (PizzasPerPage + 6 <= pizzas.length) {
+          setPizzasPerPage(PizzasPerPage + 6);
+        } else {
+          setPizzasPerPage(pizzas.length);
+        }
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [actualPizzas]);
+  //-----------------END INFINIT SCROLLING-------------------
+
+
+
   useEffect(() => {
     dispatch(getPizzas());
   }, [dispatch, selectedSort]);
@@ -29,7 +60,8 @@ const CardsContainer = ({ selectedSort }) => {
       ) : (
         <>
           <div className={styles.container}>
-            {pizzas.map((pizza) => {
+
+            {actualPizzas?.map((pizza) => {
               return (
                 <Card
                   key={pizza.id}
