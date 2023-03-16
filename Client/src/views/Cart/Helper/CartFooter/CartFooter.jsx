@@ -1,35 +1,30 @@
 import { Box , Flex, Image, Text, Divider} from "@chakra-ui/react";
 import {cartFooterStyles, titleStyles, textStyles, secondFooter} from './cartFooterStyles'
-import phone from "../../../../assets/phone.png";
-import mp from "../../../../assets/mp.png";
-import pizza from "../../../../assets/pizza.png";
-import lock from "../../../../assets/lock.png";
-import tic from "../../../../assets/tic.png";
+import phone2 from "../../../../assets/phone2.gif";
+import mp2 from "../../../../assets/mp2.png";
+import pizza from "../../../../assets/pizza.gif";
+import lock from "../../../../assets/lock.gif";
+import tic from "../../../../assets/tic.gif";
 
 const CartFooter = () => {
   return (
     <>
-    <div>CartFooter</div>
-      <Box {...cartFooterStyles } >
+          <Box {...cartFooterStyles } >
 
        <Flex justifyContent="space-between" mb="2" mt="0">
 
           
-            <Box flex="1">
-              <Text {...titleStyles}>Contact Us</Text>
-
-              <Flex mt={2}>
-                <Image boxSize="30px" src={phone} mr={2} />
-              </Flex>
-
-              <Text {...textStyles}>+025 455 665</Text>
-              <Text {...textStyles}>support@mix2pizza.app</Text>
+            <Box flex="1" align="center" >
+                 <Text {...titleStyles}>Contact Us</Text> 
+                 <Image boxSize="40px"  src={phone2} mr={2}  align="center"/>
+                 <Text {...textStyles}>+025 455 665</Text>
+                 <Text {...textStyles}>support@mix2pizza.app</Text>
             </Box>
 
-            <Box flex="1">
-              <Text {...titleStyles}>Payment</Text>
-                <Image  src={mp} boxSize="40px" objectFit="contain" />
-                <Text>Mercado Pago</Text>
+            <Box flex="1" align="center">
+                <Text {...titleStyles}>Payment</Text>
+                <Image  src={mp2} boxSize="60px" objectFit="contain" />
+               
               </Box>
 
       </Flex>
@@ -41,20 +36,20 @@ const CartFooter = () => {
 
          <Flex justifyContent="space-between" mb="1">
 
-          <Box>
+          <Box  padding="3" align="center">
             <Image  src={pizza} boxSize="30px" objectFit="contain" />
-            <Text {...textStyles}>You can have a unique pizza</Text>
+            <Text {...textStyles} >You can have a unique pizza</Text>
           </Box>
 
         
-          <Box>
-              <Image  src={lock} boxSize="30px" objectFit="contain" />
-              <Text {...textStyles}>Your information is safe</Text>
+          <Box  padding="3" align="center">
+              <Image  src={lock} boxSize="30px"  objectFit="contain" />
+              <Text {...textStyles} >Your information is safe</Text>
           </Box>
       
-          <Box>
+          <Box  padding="3" align="center">
          <Image  src={tic} boxSize="30px" objectFit="contain" />
-         <Text {...textStyles}>First quality ingredients</Text>
+         <Text {...textStyles}  >First quality ingredients</Text>
          </Box>
 
          </Flex>
