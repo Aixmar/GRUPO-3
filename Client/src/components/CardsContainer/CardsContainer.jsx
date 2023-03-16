@@ -4,12 +4,12 @@ import { getPizzas, sortPizzas } from "../../redux/actions";
 import Card from "../Card/Card";
 import styles from "./CardsContainer.module.css";
 
-const CardsContainer = () => {
+const CardsContainer = ({ selectedSort }) => {
   const dispatch = useDispatch();
-
   const pizzas = useSelector((state) => state.pizzas);
   const [isLoading, setIsLoading] = useState(true);
   const [sortedPizzas, setSortedPizzas] = useState([]);
+  
     useEffect(() => {
     dispatch(getPizzas());
   }, [dispatch, selectedSort]);
@@ -23,6 +23,7 @@ const CardsContainer = () => {
   }, [selectedSort, pizzas]);
 
 
+
   return (
     <>
       {isLoading ? (
@@ -30,6 +31,7 @@ const CardsContainer = () => {
       ) : (
         <>
           <div className={styles.container}>
+
             {pizzas.map((pizza) => {
               return (
                 <Card

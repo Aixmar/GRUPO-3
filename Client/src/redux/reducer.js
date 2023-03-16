@@ -1,34 +1,45 @@
-import {GET_INGREDIENTS,GET_INGREDIENTS_QUERY,GET_PIZZAS,PUSH_TO_CART} from './actionTypes'
-
+import {
+  GET_INGREDIENTS,
+  GET_INGREDIENTS_QUERY,
+  GET_PIZZAS,
+  PUSH_TO_CART,
+  SORT_PIZZAS,
+} from "./actionTypes";
 
 const initialState = {
-  ingredients:[],
+  ingredients: [],
   pizzas: [],
-  cart : []
+  cart: [],
 };
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_INGREDIENTS:
-      return{
+      return {
         ...state,
-        ingredients:action.payload
-      }
-      case GET_INGREDIENTS_QUERY:
-        return{
-          ...state,
-          ingredients:action.payload
-        }
+        ingredients: action.payload,
+      };
+    case GET_INGREDIENTS_QUERY:
+      return {
+        ...state,
+        ingredients: action.payload,
+      };
     case GET_PIZZAS:
-      return{
+      return {
         ...state,
-        pizzas:action.payload
-      }
+        pizzas: action.payload,
+      };
     case PUSH_TO_CART:
-      return{
+      return {
         ...state,
-        cart: [...state.cart,action.payload]
-      }
+        cart: [...state.cart, action.payload],
+      };
+    case SORT_PIZZAS:
+      return {
+        ...state,
+        pizzas: action.payload,
+      };
+
     default:
       return { ...state };
   }
