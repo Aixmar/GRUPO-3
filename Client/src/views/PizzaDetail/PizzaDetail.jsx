@@ -19,8 +19,8 @@ const PizzaDetail = () => {
     <div className={styles.container}>
       <h1>PIZZA DETAIL</h1>
       <h2>{pizza.name}</h2>
-      <img src={pizza.image} alt={pizza.name} />
-      <span>{pizza.price}</span>
+      <img src={pizza.image} alt={pizza.name} className={styles.image} />
+      <span>Price: $ {pizza.price / 100}</span>
     </div>
   );
 };

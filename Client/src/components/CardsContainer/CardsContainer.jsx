@@ -2,15 +2,15 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPizzas, sortPizzas } from "../../redux/actions";
 import Card from "../Card/Card";
+import styles from "./CardsContainer.module.css";
 
 const CardsContainer = ({ selectedSort }) => {
   const dispatch = useDispatch();
-
   const pizzas = useSelector((state) => state.pizzas);
-
   const [isLoading, setIsLoading] = useState(true);
   const [sortedPizzas, setSortedPizzas] = useState([]);
-  useEffect(() => {
+  
+    useEffect(() => {
     dispatch(getPizzas());
   }, [dispatch, selectedSort]);
 
@@ -22,13 +22,16 @@ const CardsContainer = ({ selectedSort }) => {
     setSortedPizzas(dispatch(sortPizzas(pizzas, selectedSort)));
   }, [selectedSort, pizzas]);
 
+
+
   return (
     <>
       {isLoading ? (
         <p>Loading...</p>
       ) : (
         <>
-          <div>
+          <div className={styles.container}>
+
             {pizzas.map((pizza) => {
               return (
                 <Card
