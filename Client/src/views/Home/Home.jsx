@@ -5,7 +5,7 @@ import { containerStyle, titleStyle } from "./homeStyles";
 const Home = () => {
   return (
     <Box sx={containerStyle}>
-      <Box sx={titleStyle}>Home</Box>
+      <Box sx={titleStyle}></Box>
 
       <Box flex="1" display="flex" flexDirection="column" justifyContent="flex-end">
         <Footer width="100%" />

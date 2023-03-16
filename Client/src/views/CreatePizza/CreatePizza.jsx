@@ -12,6 +12,7 @@ const CreatePizza = () => {
     dough: "",
     type: "",
     mozzarella: "",
+    price: 0,
     ingredients: [],
   });
 
@@ -34,16 +35,21 @@ const CreatePizza = () => {
 
 
   const handleOnChange = (event) => {
-    if (event.target.checked)
+    const currentIngredientPrice = ingredients.filter(ingr => ingr.name === event.target.value)
+    console.log(currentIngredientPrice);
+    if (event.target.checked){
       setForm({
         ...form,
-        ingredients: [...form.ingredients, event.target.value]
+        ingredients: [...form.ingredients, event.target.value],
+        price : form.price + currentIngredientPrice[0].price
       })
+    }
     else {
       const ingredientsChecked = form.ingredients.filter(ingre => ingre !== event.target.value)
       setForm({
         ...form,
         ingredients: ingredientsChecked,
+        price : form.price - currentIngredientPrice[0].price
       })
     }
   }
