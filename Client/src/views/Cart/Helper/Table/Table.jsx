@@ -46,7 +46,7 @@ const Table = () => {
           </Heading>
 
           <Stack spacing="6">
-            {cart.map((item, index) => (
+          {cart.length > 0 && cart.map((item, index) => (
               <CartItem
                 key={index}
                 {...item}
@@ -54,6 +54,7 @@ const Table = () => {
                 onClickDelete={onClickDelete}
               />
             ))}
+            {cart.length < 1 && <Box>NO ITEMS TO DISPLAY</Box> }
           </Stack>
         </Stack>
 
