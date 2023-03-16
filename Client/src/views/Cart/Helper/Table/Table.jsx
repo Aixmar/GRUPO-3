@@ -1,6 +1,18 @@
 import { useDispatch, useSelector } from "react-redux";
 import { popToCart } from "../../../../redux/actions";
-import styles from "./Table.module.css";
+import { Link as RouterLink } from "react-router-dom";
+import {
+  Box,
+  Flex,
+  Heading,
+  HStack,
+  Link,
+  Stack,
+  useColorModeValue as mode,
+} from "@chakra-ui/react";
+import { CartItem } from "./CartItem/CartItem";
+import { CartOrderSummary } from "./CartOrderSummary/CartOrderSummary";
+// import { cartData } from './_data'
 
 const Table = () => {
   const cart = useSelector((state) => state.cart) || [];
@@ -9,7 +21,7 @@ const Table = () => {
 
   const dispatch = useDispatch();
 
-  const removeItem = (index) => {
+  const onClickDelete = (index) => {
     const newCart = cart.filter((item, i) => i !== index);
     dispatch(popToCart(newCart));
   };
@@ -17,21 +29,49 @@ const Table = () => {
   const totalPrice = cart.reduce((total, item) => total + item.price, 0);
 
   return (
-    <div className={styles.shoppingCart}>
-      <div className={styles.title}>Shopping Cart</div>
-      {cart.length > 0 &&
-        cart.map((item, index) => (
-          <div className={styles.shoppingCartItem} key={index}>
-            <div className={styles.itemName}>{item.name}</div>
-            <div className={styles.itemPrice}>${item.price}</div>
-            
-            <button onClick={() => removeItem(index)}>Remove</button>
-          </div>
-        ))}
+    <Box
+      maxW={{ base: "3xl", lg: "7xl" }}
+      mx="auto"
+      px={{ base: "4", md: "8", lg: "12" }}
+      py={{ base: "6", md: "8", lg: "12" }}
+    >
+      <Stack
+        direction={{ base: "column", lg: "row" }}
+        align={{ lg: "flex-start" }}
+        spacing={{ base: "8", md: "16" }}
+      >
+        <Stack spacing={{ base: "8", md: "10" }} flex="2">
+          <Heading fontSize="2xl" fontWeight="extrabold">
+            Shopping Cart
+          </Heading>
 
-      <label> PRECIO TOTAL </label>
-      <div>${totalPrice} </div>
-    </div>
+          <Stack spacing="6">
+            {cart.map((item, index) => (
+              <CartItem
+                key={index}
+                {...item}
+                index={index}
+                onClickDelete={onClickDelete}
+              />
+            ))}
+          </Stack>
+        </Stack>
+
+        <Flex direction="column" align="center" flex="1">
+          <CartOrderSummary totalPrice={totalPrice} />
+          <HStack mt="6" fontWeight="semibold">
+            <p>or</p>
+            <Link
+              color={mode("orange.500", "orange.200")}
+              as={RouterLink}
+              to="/allpizzas"
+            >
+              Continue shopping
+            </Link>
+          </HStack>
+        </Flex>
+      </Stack>
+    </Box>
   );
 };
 
