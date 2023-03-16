@@ -1,4 +1,4 @@
-form {
+.userForm {
     background-color: #aaa;
     width: 38%;
     height: auto;
@@ -9,26 +9,33 @@ form {
     margin-top: 2rem;
 }
 
-form section {
+/* form section {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 6rem;
-}
+    height: 10rem;
+} */
 
 form section label {
     font-size: 1.4rem;
     margin-left: 1.4rem;
 }
 
-form section input {
+.section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 6.4rem;
+}
+
+
+.input {
     font-size: 1.4rem;
     width: 90%;
     height: 3rem;
     border-radius: 4px;
     align-self: center;
     padding-left: 1rem;
-
 }
 
 .contButton {
@@ -36,10 +43,6 @@ form section input {
     display: flex;
     justify-content: center;
     /* align-items: end; */
-}
-
-.linkBtn {
-    margin-top: 4rem;
 }
 
 dialog {
@@ -57,4 +60,24 @@ dialog h2 {
 
 dialog::backdrop {
     background-color: rgba(0, 0, 0, 0.687);
+}
+
+dialog img {
+    width: 4rem;
+    height: 4rem;
+    object-fit: cover;
+    margin: 1rem auto;
+}
+
+
+
+.errors {
+    color: rgb(202, 0, 0);
+    margin-left: 1.2rem;
+    /* padding-bottom: 1rem; */
+}
+
+.disabledSubmit {
+    opacity: .4;
+    pointer-events: none;
 }
