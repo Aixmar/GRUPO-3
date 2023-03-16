@@ -11,7 +11,7 @@ const Cart = () => {
       <Table />
       <TotalBuy />
       <CartExtras />
-      <CartFooter />
+      <CartFooter width="100%"/>
     </div>
   );
 };
