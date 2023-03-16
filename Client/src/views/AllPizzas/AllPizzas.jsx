@@ -1,13 +1,31 @@
-import CardsContainer from "../../components/CardsContainer/CardsContainer"
+import { useDispatch } from "react-redux";
+import CardsContainer from "../../components/CardsContainer/CardsContainer";
+import SortSelect from "../../components/Sorters/SortSelect";
+import { useState } from "react";
+
+import { getPizzas } from "../../redux/actions";
 
 const AllPizzas = () => {
-    return(
-        <>
-        <p>SOY EL COMPONENTE HOME</p>
-            <CardsContainer />
-        </>
-    )
-   
-}
+  const dispatch = useDispatch();
+  const [selectedSort, setSelectedSort] = useState("A-Z");
 
-export default AllPizzas
+  return (
+    <>
+      <p>SOY EL COMPONENTE ALLPIZZAS</p>
+      <SortSelect
+        Sort={[
+          "A-Z",
+          "Z-A",
+          "Price: Low to high",
+          "Price: High to low",
+          "Avg. customers reviews",
+        ]}
+        selectedSort={selectedSort}
+        setSelectedSort={setSelectedSort}
+      />
+      <CardsContainer selectedSort={selectedSort} />
+    </>
+  );
+};
+
+export default AllPizzas;
