@@ -1,18 +1,22 @@
-import styles from "./index.module.css";
+import { Box, Flex, Text } from "@chakra-ui/react";
 
 const Terms = () => {
   return (
-    <div>
-      <div className={styles.posdata}>
-        <div className={styles.t1}>Try the best pizzas created to your style with Mix2Pizza</div>
-        <div className={styles.t2}>We have a wide variety of ingredients to taste.</div>
-        <div className={styles.t3}>Made with love love for you.</div>
-      </div>
-      <div className={styles.terms}>
-        <div className={styles.termsOfService}>Terms of Service</div>
-        <div className={styles.privacy}>Privacy</div>
-      </div>
-    </div>
+    <Box p={8} bgGradient="linear-gradient(to right, #f27825, #eab830)">
+      <Box mt={8} mb={12} textAlign="center">
+        <Text fontSize="3xl" fontWeight="bold" color="white">Try the best pizzas created to your style with Mix2Pizza</Text>
+        <Text fontSize="xl" color="#272727" mt={4}>We have a wide variety of ingredients to taste.</Text>
+        <Text fontSize="xl" color="#272727" mt={4}>Made with love for you.</Text>
+      </Box>
+      <Flex justifyContent="center">
+        <Box mr={4}>
+          <Text fontSize="lg" fontWeight="bold" color="white">Terms of Service</Text>
+        </Box>
+        <Box>
+          <Text fontSize="lg" fontWeight="bold" color="white">Privacy</Text>
+        </Box>
+      </Flex>
+    </Box>
   );
 };
 
