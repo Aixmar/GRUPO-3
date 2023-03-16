@@ -10,6 +10,7 @@ const CardsContainer = ({ selectedSort }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [sortedPizzas, setSortedPizzas] = useState([]);
 
+
   //---------------INFINIT SCROLLING---------------
   const [PizzasPerPage, setPizzasPerPage] = useState(6);
   const [actualPizzas, setActualPizzas] = useState(
@@ -38,6 +39,8 @@ const CardsContainer = ({ selectedSort }) => {
   }, [actualPizzas]);
   //-----------------END INFINIT SCROLLING-------------------
 
+
+
   useEffect(() => {
     dispatch(getPizzas());
   }, [dispatch, selectedSort]);
@@ -57,6 +60,7 @@ const CardsContainer = ({ selectedSort }) => {
       ) : (
         <>
           <div className={styles.container}>
+
             {actualPizzas?.map((pizza) => {
               return (
                 <Card
@@ -64,6 +68,7 @@ const CardsContainer = ({ selectedSort }) => {
                   id={pizza.id}
                   name={pizza.name}
                   image={pizza.image}
+                  price={pizza.price}
                 />
               );
             })}
