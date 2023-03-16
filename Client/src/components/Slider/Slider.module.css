@@ -1,0 +1,181 @@
+body {
+    overflow-x: hidden;
+}
+
+
+.contSlides {
+    /* background-color: aqua; */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+    height: 100vh;
+    transform: scale(1.06);
+    animation: slides 1.2s forwards ease-in-out;
+}
+    @keyframes slides {
+        to {transform: scale(1)}
+    }
+    
+
+.contSlides img {
+    position: relative;
+    cursor: pointer;
+
+    width: 100vw;
+    height: 80vh;
+    object-fit: cover;
+
+}
+
+.pizza {
+    transform: scale(1);
+    opacity: 1;
+    transition: transform 1s, opacity .6s;
+}
+    .pizza:hover {
+        opacity: .6;
+        animation: zoom 1s alternate infinite ease-out;
+    }
+    @keyframes zoom {
+        to { transform: scale(1.016) };        
+    }
+        
+    .pizza:hover + .infoPizza h3 {
+        font-size: 8rem;
+        color: #fff;
+        font-weight: 700;
+        
+    }
+    
+    .pizza:hover + .infoPizza h2 {
+        font-size: 8rem;
+        color: #fff;
+        font-weight: 700;
+    }
+    
+    .pizza:hover + .infoPizza p {
+        font-size: 1.8rem;
+        font-weight: 700;
+        text-align: center;
+        color: #fff;
+        background-color: rgb(40, 46, 46);
+        border-radius: 12px;
+        padding: .4rem 1rem;
+    }
+
+    .pizza:hover + .infoPizza + .contBtn {
+        right: 4rem;
+    }
+    
+    
+
+.infoPizza {
+    position: absolute;
+
+}
+
+
+
+.contBtn {
+    
+    background-color: rgba(255, 128, 0, 0.208);
+    position: absolute;
+    right: -26rem;
+    color: #fff;
+    background-color: rgba(31, 35, 35, 0.853);
+    font-size: 4.2rem;
+    width: auto;
+    height: 14%;
+    border-radius: 20rem;
+    padding: 0 2rem;
+    transition: all .6s;
+    pointer-events: none;
+}
+
+
+.infoPizza1 {
+    top: 3rem;
+}
+
+.infoPizza2 {
+    top: 44rem;
+}
+
+.infoPizza3 {
+    top: 84rem;
+}
+
+.infoPizza4 {
+    top: 120rem;
+}
+
+
+.contBtn1 {
+    top: 26rem;
+}
+
+.contBtn2 {
+    top: 66rem;   
+}
+
+.contBtn3 {
+    top: 106rem;
+}
+
+.contBtn4 {
+    top: 146rem;
+}
+
+
+
+
+.infoPizza {
+    position: absolute;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: #121212;
+    margin-left: 2rem;
+    cursor: pointer;
+    pointer-events: none;
+    left: -36rem;
+    /* transform: scale(0); */
+    opacity: 0;
+    animation: infoPizza 1.2s forwards;
+}
+
+    @keyframes infoPizza {
+        to { 
+            left: 2rem;
+            opacity: 1;
+            /* transform: scale(1); */
+        }
+    }
+
+
+.contSlides h3 {
+    font-size: 4rem;
+    font-weight: 700;
+    transition: all .6s;
+
+}
+
+.contSlides h2 {
+    font-size: 4rem;
+    font-weight: 700;
+    transition: all .6s;
+
+
+}
+
+.contSlides p {
+    font-size: .8rem;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    background-color: rgb(40, 46, 46);
+    border-radius: 12px;
+    padding: .4rem 1rem;
+    transition: all .6s;
+
+}
