@@ -10,7 +10,7 @@ const CardsContainer = ({ selectedSort }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [sortedPizzas, setSortedPizzas] = useState([]);
 
-  //INFINIT SCROLLING
+  //---------------INFINIT SCROLLING---------------
   const [PizzasPerPage, setPizzasPerPage] = useState(6);
   const [actualPizzas, setActualPizzas] = useState(
     pizzas?.slice(0, PizzasPerPage)
