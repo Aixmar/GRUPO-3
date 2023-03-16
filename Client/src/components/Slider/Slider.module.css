@@ -60,7 +60,7 @@ body {
         font-weight: 700;
         text-align: center;
         color: #fff;
-        background-color: rgb(40, 46, 46);
+        background-color: #f27825;
         border-radius: 12px;
         padding: .4rem 1rem;
     }
@@ -80,11 +80,11 @@ body {
 
 .contBtn {
     
-    background-color: rgba(255, 128, 0, 0.208);
+    background-color:#f27825;
     position: absolute;
     right: -26rem;
     color: #fff;
-    background-color: rgba(31, 35, 35, 0.853);
+    background-color: #f27825;
     font-size: 4.2rem;
     width: auto;
     height: 14%;
@@ -173,7 +173,7 @@ body {
     width: 100%;
     text-align: center;
     color: #fff;
-    background-color: rgb(40, 46, 46);
+    background-color: #f27825;
     border-radius: 12px;
     padding: .4rem 1rem;
     transition: all .6s;
