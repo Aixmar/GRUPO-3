@@ -43,7 +43,7 @@ const NavBar = () => {
 
               <BreadcrumbItem>
               <Link as={RouterLink} to="/cart">
-                <Image src={cart} alt="cart" w={10} h={10} />
+              <img src={cart} alt="Logo" width="50px" height="50px" />
                 </Link>
               </BreadcrumbItem>
             </Breadcrumb>
