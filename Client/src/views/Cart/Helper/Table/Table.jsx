@@ -58,7 +58,7 @@ const Table = () => {
         </Stack>
 
         <Flex direction="column" align="center" flex="1">
-          <CartOrderSummary totalPrice={totalPrice} />
+          <CartOrderSummary totalPrice={totalPrice.toFixed(2)} />
           <HStack mt="6" fontWeight="semibold">
             <p>or</p>
             <Link
