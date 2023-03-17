@@ -1,5 +1,6 @@
 import { Box, Flex, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Spacer, ChakraProvider, Image, Link } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
+import { motion } from "framer-motion";
 import logopizza from "../../assets/logo-pizza-app.png";
 import cart from "../../assets/cart.png";
 
@@ -10,9 +11,22 @@ const NavBar = () => {
       <Box bgGradient="linear(to-l,#000000, #272727)" color="white" py={0} px={8}>
         <Flex alignItems="center">
           <Box fontWeight="bold" fontSize="2xl">
-            <Link as={RouterLink} to="/">
-              <img src={logopizza} alt="Logo" width="65px" height="65px" />
-            </Link>
+          <motion.div
+  whileHover={{ scale: 1.1, rotate: 5 }}
+  whileTap={{ scale: 0.9 }}
+>
+  <Link as={RouterLink} to="/">
+    <motion.img
+      src={logopizza}
+      alt="Logo"
+      width="85px"
+      height="85px"
+      initial={{ opacity: 0, rotate: 0 }}
+      animate={{ opacity: 1, rotate: 360 }}
+      transition={{ duration: 0.5 }}
+    />
+  </Link>
+</motion.div>
           </Box>
           <Spacer />
           <Box>

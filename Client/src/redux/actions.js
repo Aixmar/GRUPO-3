@@ -32,18 +32,8 @@ export const getPizzas = () => {
   };
 };
 
-export const sortPizzas = (pizzas, sortBy) => {
-  let sortedPizzas;
-  if (sortBy === "A-Z") {
-    sortedPizzas = pizzas.sort((a, b) => a.name.localeCompare(b.name));
-  } else if (sortBy === "Z-A") {
-    sortedPizzas = pizzas.sort((a, b) => b.name.localeCompare(a.name));
-  } else if (sortBy === "Price: Low to high") {
-    sortedPizzas = pizzas.sort((a, b) => a.price - b.price);
-  } else if (sortBy === "Price: High to low") {
-    sortedPizzas = pizzas.sort((a, b) => b.price - a.price);
-  }
-  return { type: SORT_PIZZAS, payload: sortedPizzas };
+export const sortPizzas = (selectedSort) => {
+  return { type: SORT_PIZZAS, payload: selectedSort };
 };
 
 export const pushToCart = (form) => {
@@ -55,5 +45,5 @@ export const popToCart = (sliceForm) => {
 };
 
 export const filterByVegetarian = (filterVege) => {
-  return {type:FILTER_BY_VEGETARIAN, payload: filterVege }
+  return { type: FILTER_BY_VEGETARIAN, payload: filterVege };
 };

@@ -16,7 +16,7 @@ const Filters = () => {
 
   return (
     <div>
-      <select name="vegetarian" value={pizzas} onChange={handleInputChange} >
+      <select name="vegetarian" onChange={handleInputChange} >
             <option value="all"> All Pizzas</option>
             <option value='yes'> ✓ vegetarian</option>
             <option value='no'>X no vegetarian</option>
