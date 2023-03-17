@@ -21,6 +21,7 @@ const Slider = () => {
             <div className={css.contSlider} >
                 <div className={css.contSlides} >
 
+                <div className={css.contPizza} >
                     <Link to='/allpizzas' >
                         <img src={pizza1} alt='pizza' className={`pizza`} />
                         <div className={`${css.infoPizza1} ${css.infoPizza}`} >
@@ -32,7 +33,9 @@ const Slider = () => {
                             <button className={css.orderBtn} >Order now!</button>
                         </div>
                     </Link>
+                </div>
 
+                <div className={css.contPizza} >
                     <Link to='/allpizzas' >
                         <img src={pizza2} alt='pizza' className={`pizza`} />
                         <div className={`${css.infoPizza2} ${css.infoPizza}`} >
@@ -44,6 +47,9 @@ const Slider = () => {
                             <button className={css.orderBtn} >Order now!</button>
                         </div>
                     </Link>
+                </div>
+
+                <div className={css.contPizza} >
                     <Link to='/allpizzas' >
                         <img src={pizza3} alt='pizza' className={`pizza`} />
                         <div className={`${css.infoPizza3} ${css.infoPizza}`} >
@@ -55,6 +61,9 @@ const Slider = () => {
                             <button className={css.orderBtn} >Order now!</button>
                         </div>
                     </Link>
+                </div>
+
+                <div className={css.contPizza} >
                     <Link to='/allpizzas' >
                         <img src={pizza4} alt='pizza' className={`pizza`} />
                         <div className={`${css.infoPizza4} ${css.infoPizza}`} >
@@ -66,6 +75,8 @@ const Slider = () => {
                             <button className={css.orderBtn} >Order now!</button>
                         </div>
                     </Link>
+                </div>
+
                 </div>
 
               

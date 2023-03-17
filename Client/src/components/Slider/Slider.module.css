@@ -23,6 +23,7 @@ body {
     position: relative;
     cursor: pointer;
 
+    /* z-index: 2 ; */
     width: 100vw;
     height: 80vh;
     object-fit: cover;
@@ -72,22 +73,23 @@ body {
     
 
 .infoPizza {
-    position: absolute;
-
+    /* position: absolute; */
+    position: relative;
+    margin-top: 2rem;
 }
 
 
 
 .contBtn {
     
-    background-color:#f27825;
-    position: absolute;
-    right: -26rem;
-    color: #fff;
     background-color: #f27825;
+    position: absolute;
+    right: -40%;
+    color: #fff;
     font-size: 4.2rem;
     width: auto;
-    height: 14%;
+    /* height: 14%; */
+    height: 7.4rem;
     border-radius: 20rem;
     padding: 0 2rem;
     transition: all .6s;
@@ -95,37 +97,45 @@ body {
 }
 
 
+.contPizza {
+    width: 100%;
+    height: auto;
+    position: relative;
+}
+
+
+
 .infoPizza1 {
-    top: 3rem;
+    top: 0;
 }
 
 .infoPizza2 {
-    top: 44rem;
+    top: 0;
 }
 
 .infoPizza3 {
-    top: 84rem;
+    top: 0;
 }
 
 .infoPizza4 {
-    top: 124rem;
+    top: 0;
 }
 
 
 .contBtn1 {
-    top: 26rem;
+    bottom: 20%;
 }
 
 .contBtn2 {
-    top: 66rem;   
+    bottom: 20%;
 }
 
 .contBtn3 {
-    top: 106rem;
+    bottom: 20%;
 }
 
 .contBtn4 {
-    top: 146rem;
+    bottom: 20%;
 }
 
 
@@ -189,53 +199,23 @@ body {
 
 
 
+/* media queries */
 
 
-/* media querie */
 
-@media (min-width: 1920px) {
+@media (min-width: 1920px) {    
     
-    .infoPizza1 {
-        top: 3rem;
+    .pizza:hover + .infoPizza + .contBtn {
+        right: 14rem;
     }
-
-    .infoPizza2 {
-        top: 59rem;
+}
+@media (min-width: 1360px) {   
+   
+    body {
+        height: 410vh;
     }
-
-    .infoPizza3 {
-        top: 116rem;
-    }
-
-    .infoPizza4 {
-        top: 172rem;
-    }
-
-
-
-    .contBtn {
-        height: 11%;
-    }
-
-
-    .contBtn1 {
-        top: 36rem;
-    }
-
-    .contBtn2 {
-        top: 92rem;   
-    }
-
-    .contBtn3 {
-        top: 147rem;
-    }
-
-    .contBtn4 {
-        top: 204rem;
-    }
-
 
     .pizza:hover + .infoPizza + .contBtn {
-        right: 20rem;
+        right: 6rem;
     }
 }
