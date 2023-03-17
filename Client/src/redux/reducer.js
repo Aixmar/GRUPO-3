@@ -5,12 +5,16 @@ import {
   PUSH_TO_CART,
   SORT_PIZZAS,
   POP_TO_CART,
+  FILTER_BY_VEGETARIAN
 } from "./actionTypes";
 
 const initialState = {
   ingredients: [],
   pizzas: [],
+  pizzasbackup: [],
   cart: [],
+
+
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -29,6 +33,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         pizzas: action.payload,
+        pizzasbackup: action.payload,
       };
     case PUSH_TO_CART:
       return {
@@ -45,6 +50,17 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         pizzas: action.payload,
       };
+
+      case FILTER_BY_VEGETARIAN:
+      //  if(action.payload === "all") return {...state}  
+      const filtrados = action.payload === "yes"? state.pizzasbackup.filter((pizz)=>pizz.vegetarian === true) : state.pizzasbackup.filter((pizz)=>pizz.vegetarian === false)              
+      // if(action.payload === "yes") {
+      //   const filtrado = state.pizzas.filter((pizz)=>pizz.vegetarian === true)
+      // } else {    
+      return {
+          ...state,
+         pizzas: filtrados,
+             };  
 
     default:
       return { ...state };

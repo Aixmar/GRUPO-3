@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import CardsContainer from "../../components/CardsContainer/CardsContainer";
 import SortSelect from "../../components/Sorters/SortSelect";
 import { useState } from "react";
+import Filters from "../../components/Filters/Filters";
 
 import { getPizzas } from "../../redux/actions";
 
@@ -23,6 +24,8 @@ const AllPizzas = () => {
         selectedSort={selectedSort}
         setSelectedSort={setSelectedSort}
       />
+
+      <Filters/>
       <CardsContainer selectedSort={selectedSort} />
     </>
   );

@@ -5,6 +5,7 @@ import {
   PUSH_TO_CART,
   SORT_PIZZAS,
   POP_TO_CART,
+  FILTER_BY_VEGETARIAN,
 } from "./actionTypes";
 import axios from "axios";
 
@@ -51,4 +52,8 @@ export const pushToCart = (form) => {
 
 export const popToCart = (sliceForm) => {
   return { type: POP_TO_CART, payload: sliceForm };
+};
+
+export const filterByVegetarian = (filterVege) => {
+  return {type:FILTER_BY_VEGETARIAN, payload: filterVege }
 };
