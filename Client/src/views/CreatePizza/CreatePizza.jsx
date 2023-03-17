@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getIngredients, pushToCart } from '../../redux/actions';
-import SearchBar from '../../components/SearchBar/SearchBar';
-import { Button, Text, Box } from "@chakra-ui/react";
-import styles from './CreatePizza.module.css';
+// import SearchBar from '../../components/SearchBar/SearchBar';
+import { Button, Text, Box, CheckboxGroup, Checkbox, FormLabel, Radio, RadioGroup } from "@chakra-ui/react";
+// import styles from './CreatePizza.module.css';
 
 const CreatePizza = () => {
 
@@ -128,122 +128,118 @@ const CreatePizza = () => {
       <Text fontSize='5xl'>CREATE NEW PIZZA</Text>
 
       <form onSubmit={handleSubmit}>
-        <div>
-          <label> Dough (1):</label>
-          <br></br>
-          {
+
+        <RadioGroup>
+          <FormLabel fontWeight="bold" color="gray.700"> Dough (1):</FormLabel>
+         {
             typesOfDough.map((dough) => {
               return (
-                <label> <input type="radio" name="dough" value={dough.name} onChange={handleRadio} />{dough.name} </label>
+                <Radio marginRight="3"  size="lg" type="radio" name="dough" value={dough.name} onChange={handleRadio}> {dough.name} </Radio>
               )
             })
           }
-          {/* <label> Dough (1):</label>
-          <br></br>
-          <label> <input type="radio" name="dough" value="wheat" onChange={handleRadio} /> Wheat </label>
-          <label> <input type="radio" name="dough" value="wholemeal flour" onChange={handleRadio} /> Wholemeal flour </label>
-          <label> <input type="radio" name="dough" value="gluten free" onChange={handleRadio} /> Gluten free </label> */}
-        </div>
+
+      </RadioGroup>
         {errors.dough && <span>{errors.dough}</span>}
+
         <br></br>
-        <div>
-          <label> Type (1):</label>
-          <br></br>
-          {
+
+        <RadioGroup>
+          <FormLabel fontWeight="bold" color="gray.700"> Type (1):</FormLabel>
+                {
             typesOfBaking.map((t) => {
               return (
-                <label> <input type="radio" name="type" value={t.name} onChange={handleRadio} />{t.name}</label>
+                 <Radio marginRight="3"  size="lg" type="radio" name="type" value={t.name} onChange={handleRadio}> {t.name} </Radio>
               )
             })
           }
-          {/* <label> Type (1):</label>
-          <br></br>
-          <label> <input type="radio" name="type" value="thin" onChange={handleRadio} /> Thin </label>
-          <label> <input type="radio" name="type" value="gross" onChange={handleRadio} /> Gross </label> */}
-        </div>
+          </RadioGroup>
         {errors.type && <span>{errors.type}</span>}
+
         <br></br>
-        <div>
-          <label> Base of (1):</label>
-          <br></br>
+
+        <RadioGroup>
+          <FormLabel fontWeight="bold" color="gray.700"> Base of (1):</FormLabel>
+        
           {
             sauceBases.map((base) => {
               return (
-                <label> <input type="radio" name="base" value={base.name} onChange={handleRadio} />{base.name} </label>
+                 <Radio marginRight="3"  size="lg" type="radio" name="base" value={base.name} onChange={handleRadio}>{base.name} </Radio>
               )
             })
           }
-          {/* <label> <input type="radio" name="base" value="tomato" onChange={handleRadio} /> Tomato </label>
-          <label> <input type="radio" name="base" value="milk cream" onChange={handleRadio} /> Milk cream </label>
-          <label> <input type="radio" name="base" value="white sauce" onChange={handleRadio} /> White sauce </label> */}
-        </div>
+       
+        </RadioGroup>
         {errors.base && <span>{errors.base}</span>}
         <br></br>
-        <div>
-          <label> Muzarella (1):</label>
-          <br></br>
+
+
+        <RadioGroup>
+          <FormLabel fontWeight="bold" color="gray.700"> Muzarella (1):</FormLabel>
+         
           {
             cheeseBases.map((base) => {
               return (
-                <label> <input type="radio" name="mozzarella" value={base.name} onChange={handleRadio} /> {base.name} </label>
+                 <Radio marginRight="3"  size="lg" type="radio" name="mozzarella" value={base.name} onChange={handleRadio}> {base.name} </Radio>
               )
             })
           }
-          {/* <label> Muzarella (1):</label>
-          <br></br>
-          <label> <input type="radio" name="mozzarella" value="mozarella" onChange={handleRadio} /> Mozzarella </label>
-          <label> <input type="radio" name="mozzarella" value="vegan mozarella" onChange={handleRadio} /> Vegan Mozzarella </label>
-          <label> <input type="radio" name="mozzarella" value="lactose-free mozarella" onChange={handleRadio} /> Lactose-free Mozzarella </label>
-          <label> <input type="radio" name="mozzarella" value="without mozarella" onChange={handleRadio} /> Without Mozzarella </label> */}
-        </div>
+       
+        </RadioGroup>
         {errors.mozzarella && <span>{errors.mozzarella}</span>}
         <br></br>
-        <div>
-          <label>Toppings list (2):</label>
+
+        <CheckboxGroup>
+          <FormLabel fontWeight="bold" color="gray.700">Toppings list (2):</FormLabel>
           {/* <SearchBar /> */}
           {
             !ingredients.length ? <p>no results</p> :
               toppings.map((ingr) => {
                 return (
                   <div>
-                    <input type="checkbox" id={ingr.id} name="toppingIngredients" value={ingr.name} key={ingr.id} checked={form.toppingIngredients.includes(ingr.name) ? true : false} onChange={handleOnChange} disabled={form.toppingIngredients.length === 2 && !form.toppingIngredients.includes(ingr.name) ? true : false}></input>
+                    <Checkbox marginRight="2" marginBottom="2" size="lg" bg="teal.200" type="checkbox" id={ingr.id} name="toppingIngredients" value={ingr.name} key={ingr.id} checked={form.toppingIngredients.includes(ingr.name) ? true : false} onChange={handleOnChange} disabled={form.toppingIngredients.length === 2 && !form.toppingIngredients.includes(ingr.name) ? true : false}></Checkbox>
                     <label htmlFor={ingr.id}>{ingr.name}</label>
                   </div>
                 )
               })
           }
           {errors.toppingIngredients && <span>{errors.toppingIngredients}</span>}
-        </div>
+        </CheckboxGroup>
+
         <br></br>
-        <div>
-          <label>Cheeses list (3): </label>
+
+        <CheckboxGroup>
+          <FormLabel>Cheeses list (3): </FormLabel>
           {
             cheeses.map((ingr) => {
               return (
                 <div>
-                  <input type="checkbox" key={ingr.id} id={ingr.id} name="cheeseIngredients" value={ingr.name} checked={form.cheeseIngredients.includes(ingr.name) ? true : false} onChange={handleOnChange} disabled={form.cheeseIngredients.length === 3 && !form.cheeseIngredients.includes(ingr.name) ? true : false}></input>
+                  <Checkbox marginRight="2" marginBottom="2" size="lg" bg="teal.200" type="checkbox" key={ingr.id} id={ingr.id} name="cheeseIngredients" value={ingr.name} checked={form.cheeseIngredients.includes(ingr.name) ? true : false} onChange={handleOnChange} disabled={form.cheeseIngredients.length === 3 && !form.cheeseIngredients.includes(ingr.name) ? true : false}></Checkbox>
                   <label htmlFor={ingr.id}>{ingr.name}</label>
                 </div>
               )
             })
           }
           {errors.cheeseIngredients && <span>{errors.cheeseIngredients}</span>}
-        </div>
+        </CheckboxGroup>
+
         <br></br>
 
-        <label>Meats list (3) :</label>
-        <div>
-          {
-            meats.map((ingr) => {
-              return (
-                <div>
-                  <input type="checkbox" key={ingr.id} id={ingr.id} name="meatIngredients" value={ingr.name} checked={form.meatIngredients.includes(ingr.name) ? true : false} onChange={handleOnChange} disabled={form.meatIngredients.length === 3 && !form.meatIngredients.includes(ingr.name) ? true : false}></input>
-                  <label htmlFor={ingr.id}>{ingr.name}</label>
-                </div>
-              )
-            })
-          }
-        </div>
+        <CheckboxGroup>  
+        <FormLabel>Meats list (3) :</FormLabel>
+          <div>
+            {
+              meats.map((ingr) => {
+                return (
+                  <div>
+                    <Checkbox marginRight="2" marginBottom="2" size="lg" bg="teal.200" type="checkbox" key={ingr.id} id={ingr.id} name="meatIngredients" value={ingr.name} checked={form.meatIngredients.includes(ingr.name) ? true : false} onChange={handleOnChange} disabled={form.meatIngredients.length === 3 && !form.meatIngredients.includes(ingr.name) ? true : false}></Checkbox>
+                    <label htmlFor={ingr.id}>{ingr.name}</label>
+                  </div>
+                )
+              })
+            }
+            </div>
+          </CheckboxGroup>       
 
         <Button
           type='submit'
@@ -260,8 +256,8 @@ const CreatePizza = () => {
 
         <dialog id='createPizzaModal' >
           <h2>Pizza created successfully!</h2>
-          <div className={styles.contButton} >
-            <Link to='/cart' className={styles.linkBtn} ><Button bg={'orange'} fontSize={'2rem'} width={'90%'} p={'1.6rem'} margin={'1.2rem 0 .8rem 0'} >Go to cart</Button></Link>
+          <div>
+            <Link to='/cart'  ><Button bg={'orange'} fontSize={'2rem'} width={'90%'} p={'1.6rem'} margin={'1.2rem 0 .8rem 0'} >Go to cart</Button></Link>
           </div>
         </dialog>
       </form>

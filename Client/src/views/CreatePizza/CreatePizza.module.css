@@ -1,9 +1,9 @@
-.contButton {
+/* .contButton {
     width: 100%;
     display: flex;
     justify-content: center;
-    /* align-items: end; */
-}
+     align-items: end; 
+
 
 .linkBtn {
     margin-top: 4rem;
@@ -28,4 +28,4 @@ dialog::backdrop {
 
 span {
     color: red;
-}
+} */
