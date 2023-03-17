@@ -3,6 +3,7 @@ import CardsContainer from "../../components/CardsContainer/CardsContainer";
 import SortSelect from "../../components/Sorters/SortSelect";
 import { useState } from "react";
 import Filters from "../../components/Filters/Filters";
+import DrinksContainer from "../../components/DrinksContainer/DrinksContainer";
 
 import { getPizzas } from "../../redux/actions";
 
@@ -26,6 +27,7 @@ const AllPizzas = () => {
       />
 
       <Filters/>
+      <DrinksContainer/>
       <CardsContainer selectedSort={selectedSort} />
     </>
   );
