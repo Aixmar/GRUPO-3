@@ -7,25 +7,26 @@ const AboutLyrics = () => {
         About Mix2Pizza
       </Heading>
       <Text fontSize="lg" mb={8} color="#272727">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui alias optio neque eligendi, id laborum accusamus fugiat vel sequi aspernatur voluptatem maiores? Quaerat fugiat placeat molestiae illum nulla eligendi fuga!
+      Mix2pizza was born from the love of many people for pizza, is it one of the best foods? What if you can create it with your favorite ingredients? The best experience ever.
       </Text>
       <Heading as="h3" fontSize="2xl" mb={6}>
-        Proposito
+        Purpose
       </Heading>
       <Text fontSize="lg" mb={8} color="#272727">
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Autem, unde velit. Ex accusantium libero voluptas ullam cumque debitis quaerat nesciunt inventore! Temporibus, dolore labore? Autem dolorem eaque cupiditate sed beatae?
+        
+       Our purpose is that the client can create the pizza of his dreams. Come and enjoy the best pizza you've ever tasted, because you made it!
       </Text>
       <Heading as="h3" fontSize="2xl" mb={6}>
-        Caracteristicas Principales
+      Main Features
       </Heading>
       <Text fontSize="lg" mb={8} color="#272727">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ab maiores debitis, amet quo vitae obcaecati aspernatur consectetur libero necessitatibus, enim repudiandae tempora ex illo delectus saepe culpa ipsam officiis cumque?
+        The answer is always pizza. Always.
       </Text>
       <Heading as="h3" fontSize="2xl" mb={6}>
-        Resumen de Desarrollo
+         Development summary
       </Heading>
       <Text fontSize="lg" mb={8} color="#272727">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem perspiciatis necessitatibus optio numquam amet eius in magni, earum rem. Minus laboriosam similique non numquam reiciendis error magni soluta a accusantium?
+        We started with a dream and ended with a wonderful creation. We are kidding. We are only hungry all the time.
       </Text>
       <Heading as="h2" fontSize="3xl" mb={6}>
         DETAILS
