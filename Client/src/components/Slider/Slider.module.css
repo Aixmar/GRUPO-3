@@ -8,14 +8,19 @@ body {
     position: relative;
     display: flex;
     flex-direction: column;
+    top: -1.2rem;
     gap: 2rem;
     width: 100%;
     height: 100vh;
     transform: scale(1.06);
+    transform-origin: top;
     animation: slides 1.2s forwards ease-in-out;
 }
     @keyframes slides {
-        to {transform: scale(1)}
+        to {
+            transform: scale(1);
+            transform-origin: top center;
+        }
     }
     
 
@@ -40,7 +45,10 @@ body {
         animation: zoom 1s alternate infinite ease-out;
     }
     @keyframes zoom {
-        to { transform: scale(1.016) };        
+        to {
+            transform: scale(1.016);
+            transform-origin: top;
+        };        
     }
         
     .pizza:hover + .infoPizza h3 {
@@ -210,10 +218,6 @@ body {
     }
 }
 @media (min-width: 1360px) {   
-   
-    body {
-        height: 410vh;
-    }
 
     .pizza:hover + .infoPizza + .contBtn {
         right: 6rem;
