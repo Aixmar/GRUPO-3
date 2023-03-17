@@ -6,6 +6,7 @@ import {
   SORT_PIZZAS,
   POP_TO_CART,
   FILTER_BY_VEGETARIAN,
+
 } from "./actionTypes";
 
 const initialState = {
@@ -13,6 +14,10 @@ const initialState = {
   pizzas: [],
   pizzasbackup: [],
   cart: [],
+  error_query: null
+
+
+
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -27,11 +32,25 @@ const rootReducer = (state = initialState, action) => {
 
 
     case GET_INGREDIENTS_QUERY:
-      return {
-        ...state,
-        ingredients: action.payload,
-      };
 
+      
+      if(Array.isArray(action.payload)){
+        let ingredientsQuery = action.payload.filter(ingre => ingre.category === "Toppings" || ingre.category === "Cheese" || ingre.category === "Meat")
+        let ingredientsTotal = state.ingredients.filter(ingre => ingre.category === "Dough" || ingre.category === "Type" || ingre.category === "Sauce base" || ingre.category === "Cheese base" )
+        return {
+          ...state,
+          ingredients: ingredientsTotal.concat(ingredientsQuery),
+          error_query:null,
+        };
+      }else{
+        return{
+          ...state,
+          error_query:action.payload
+      }
+      }
+      
+    
+      
 
     case GET_PIZZAS:
       return {

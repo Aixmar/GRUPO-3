@@ -4,5 +4,5 @@ export const GET_PIZZAS = "GET_PIZZAS";
 export const PUSH_TO_CART = "PUSH_TO_CART";
 export const SORT_PIZZAS = "SORT_PIZZAS";
 export const POP_TO_CART = "POP_TO_CART";
-
+export const ERROR_QUERY = "ERROR_QUERY"
 export const FILTER_BY_VEGETARIAN = "FILTER_BY_VEGETARIAN";
