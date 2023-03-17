@@ -6,6 +6,7 @@ import {
   SORT_PIZZAS,
   POP_TO_CART,
   FILTER_BY_VEGETARIAN,
+  ERROR_QUERY 
 } from "./actionTypes";
 import axios from "axios";
 
@@ -17,12 +18,11 @@ export const getIngredients = () => {
 };
 
 export const getIngredientsQuery = (name) => {
-  return async function (dispatch) {
-    let response = await axios(
-      `http://localhost:3001/ingredients?name=${name}`
-    );
-    return dispatch({ type: GET_INGREDIENTS_QUERY, payload: response.data });
-  };
+  return function(dispatch){
+    axios(`http://localhost:3001/ingredients?name=${name}`)
+    .then(res => res.data)
+    .then(data => dispatch({ type: GET_INGREDIENTS_QUERY, payload:data }))
+}
 };
 
 export const getPizzas = () => {

@@ -4,13 +4,14 @@ import { Link } from 'react-router-dom';
 import { getIngredients, pushToCart } from '../../redux/actions';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import { Button, Text, Box, CheckboxGroup, Checkbox, FormLabel, Radio, RadioGroup } from "@chakra-ui/react";
+import createdpizzas from '../../assets/createdpizzas.png';
 // import styles from './CreatePizza.module.css';
 
 const CreatePizza = () => {
 
   const [form, setForm] = useState({
     name: "Create your pizza",
-    image: "",
+    image: createdpizzas,
     dough: "",
     type: "",
     base: "",
@@ -39,6 +40,7 @@ const CreatePizza = () => {
   const dispatch = useDispatch();
   
   const ingredients = useSelector((state) => state.ingredients);
+  const error_query = useSelector((state) => state.error_query);
   
   const validate = (form) => {
     const newErrors = {};
@@ -81,10 +83,12 @@ const CreatePizza = () => {
     }
   }
   const handleRadio = (event) => {
+    const currentIngredientPrice = ingredients.filter(ingr => ingr.name === event.target.value)
     // validate({ ...form, [event.target.name]: event.target.value })
     setForm({
       ...form,
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
+      price: form.price + currentIngredientPrice[0].price
     })
   }
 
@@ -107,13 +111,13 @@ const CreatePizza = () => {
   }, []);
 
   useEffect(() => {
-    const typesOfDoughFilter = ingredients.length && ingredients.filter(i => i.category === "Dough")
-    const typesOfBakingFilter = ingredients.length && ingredients.filter(i => i.category === "Type")
-    const sauceBasesFilter = ingredients.length && ingredients.filter(i => i.category === "Sauce base")
-    const cheeseBasesFilter = ingredients.length && ingredients.filter(i => i.category === "Cheese base")
-    const toppingIngredientsFilter = ingredients.length && ingredients.filter(i => i.category === "Toppings")
-    const cheeseIngredientsFilter = ingredients.length && ingredients.filter(i => i.category === "Cheese")
-    const meatIngredientsFilter = ingredients.length && ingredients.filter(i => i.category === "Meat")
+    const typesOfDoughFilter = ingredients.filter(i => i.category === "Dough")
+    const typesOfBakingFilter =  ingredients.filter(i => i.category === "Type")
+    const sauceBasesFilter =  ingredients.filter(i => i.category === "Sauce base")
+    const cheeseBasesFilter = ingredients.filter(i => i.category === "Cheese base")
+    const toppingIngredientsFilter =  ingredients.filter(i => i.category === "Toppings")
+    const cheeseIngredientsFilter = ingredients.filter(i => i.category === "Cheese")
+    const meatIngredientsFilter =  ingredients.filter(i => i.category === "Meat")
     setTypesOfDough(typesOfDoughFilter)
     setTypesOfBanking(typesOfBakingFilter)
     setSauceBases(sauceBasesFilter)
@@ -122,6 +126,7 @@ const CreatePizza = () => {
     setCheeses(cheeseIngredientsFilter)
     setMeats(meatIngredientsFilter)
   }, [ingredients])
+ 
 
   return (
     <>
@@ -131,16 +136,14 @@ const CreatePizza = () => {
 
         <RadioGroup>
           <FormLabel fontWeight="bold" color="gray.700"> Dough (1):</FormLabel>
-         {/* {
+         {
             typesOfDough.map((dough) => {
               return (
                 <Radio marginRight="3"  size="lg" type="radio" name="dough" value={dough.name} onChange={handleRadio}> {dough.name} </Radio>
               )
             })
-          } */}
-          <label> <input type="radio" name="dough" value="wheat" onChange={handleRadio} /> Wheat </label>
-          <label> <input type="radio" name="dough" value="wholemeal flour" onChange={handleRadio} /> Wholemeal flour </label>
-          <label> <input type="radio" name="dough" value="gluten free" onChange={handleRadio} /> Gluten free </label>
+          } 
+          
 
       </RadioGroup>
         {errors.dough && <span>{errors.dough}</span>}
@@ -149,15 +152,15 @@ const CreatePizza = () => {
 
         <RadioGroup>
           <FormLabel fontWeight="bold" color="gray.700"> Type (1):</FormLabel>
-                {/* {
+                {
             typesOfBaking.map((t) => {
               return (
                  <Radio marginRight="3"  size="lg" type="radio" name="type" value={t.name} onChange={handleRadio}> {t.name} </Radio>
               )
             })
-          } */}
-          <label> <input type="radio" name="type" value="thin" onChange={handleRadio} /> Thin </label>
-          <label> <input type="radio" name="type" value="gross" onChange={handleRadio} /> Gross </label>
+          }
+          {/* <label> <input type="radio" name="type" value="thin" onChange={handleRadio} /> Thin </label>
+          <label> <input type="radio" name="type" value="gross" onChange={handleRadio} /> Gross </label> */}
           </RadioGroup>
         {errors.type && <span>{errors.type}</span>}
 
@@ -165,16 +168,16 @@ const CreatePizza = () => {
 
         <RadioGroup>
           <FormLabel fontWeight="bold" color="gray.700"> Base of (1):</FormLabel>
-          {/* {
+          {
             sauceBases.map((base) => {
               return (
                  <Radio marginRight="3"  size="lg" type="radio" name="base" value={base.name} onChange={handleRadio}>{base.name} </Radio>
               )
             })
-          } */}
-          <label> <input type="radio" name="base" value="tomato" onChange={handleRadio} /> Tomato </label>
+          }
+          {/* <label> <input type="radio" name="base" value="tomato" onChange={handleRadio} /> Tomato </label>
           <label> <input type="radio" name="base" value="milk cream" onChange={handleRadio} /> Milk cream </label>
-          <label> <input type="radio" name="base" value="white sauce" onChange={handleRadio} /> White sauce </label>
+          <label> <input type="radio" name="base" value="white sauce" onChange={handleRadio} /> White sauce </label> */}
        
         </RadioGroup>
         {errors.base && <span>{errors.base}</span>}
@@ -182,24 +185,25 @@ const CreatePizza = () => {
 
         <RadioGroup>
           <FormLabel fontWeight="bold" color="gray.700"> Muzarella (1):</FormLabel>
-         {/* {
+         {
             cheeseBases.map((base) => {
               return (
                  <Radio marginRight="3"  size="lg" type="radio" name="mozzarella" value={base.name} onChange={handleRadio}> {base.name} </Radio>
               )
             })
-          } */}
-          <label> <input type="radio" name="mozzarella" value="mozarella" onChange={handleRadio} /> Mozzarella </label>
+          }
+          {/* <label> <input type="radio" name="mozzarella" value="mozarella" onChange={handleRadio} /> Mozzarella </label>
           <label> <input type="radio" name="mozzarella" value="vegan mozarella" onChange={handleRadio} /> Vegan Mozzarella </label>
           <label> <input type="radio" name="mozzarella" value="lactose-free mozarella" onChange={handleRadio} /> Lactose-free Mozzarella </label>
-          <label> <input type="radio" name="mozzarella" value="without mozarella" onChange={handleRadio} /> Without Mozzarella </label>
+          <label> <input type="radio" name="mozzarella" value="without mozarella" onChange={handleRadio} /> Without Mozzarella </label> */}
        
         </RadioGroup>
         {errors.mozzarella && <span>{errors.mozzarella}</span>}
         <br></br>
-
-        <CheckboxGroup>
-          <SearchBar />
+        <SearchBar />
+        {error_query === null ? <div>
+          <CheckboxGroup>
+          
           <FormLabel fontWeight="bold" color="gray.700">Toppings list (2):</FormLabel>
           {
             // !toppings  ? <p>no results</p> :
@@ -250,7 +254,10 @@ const CreatePizza = () => {
               })
             }
             </div>
-          </CheckboxGroup>       
+          </CheckboxGroup>
+        </div> 
+        : <h1>{error_query.error}</h1>}
+               
 
         <Button
           type='submit'
