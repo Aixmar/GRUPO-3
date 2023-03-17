@@ -108,7 +108,7 @@ body {
 }
 
 .infoPizza4 {
-    top: 120rem;
+    top: 124rem;
 }
 
 
@@ -139,7 +139,6 @@ body {
     cursor: pointer;
     pointer-events: none;
     left: -36rem;
-    /* transform: scale(0); */
     opacity: 0;
     animation: infoPizza 1.2s forwards;
 }
@@ -178,4 +177,65 @@ body {
     padding: .4rem 1rem;
     transition: all .6s;
 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* media querie */
+
+@media (min-width: 1920px) {
+    
+    .infoPizza1 {
+        top: 3rem;
+    }
+
+    .infoPizza2 {
+        top: 59rem;
+    }
+
+    .infoPizza3 {
+        top: 116rem;
+    }
+
+    .infoPizza4 {
+        top: 172rem;
+    }
+
+
+
+    .contBtn {
+        height: 11%;
+    }
+
+
+    .contBtn1 {
+        top: 36rem;
+    }
+
+    .contBtn2 {
+        top: 92rem;   
+    }
+
+    .contBtn3 {
+        top: 147rem;
+    }
+
+    .contBtn4 {
+        top: 204rem;
+    }
+
+
+    .pizza:hover + .infoPizza + .contBtn {
+        right: 20rem;
+    }
 }
