@@ -5,7 +5,7 @@ import {
   PUSH_TO_CART,
   SORT_PIZZAS,
   POP_TO_CART,
-  FILTER_BY_VEGETARIAN
+  FILTER_BY_VEGETARIAN,
 } from "./actionTypes";
 
 const initialState = {
@@ -13,8 +13,6 @@ const initialState = {
   pizzas: [],
   pizzasbackup: [],
   cart: [],
-
-
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -46,21 +44,38 @@ const rootReducer = (state = initialState, action) => {
         cart: action.payload,
       };
     case SORT_PIZZAS:
+      let sortedPizzas;
+      if (action.payload === "A-Z") {
+        sortedPizzas = state.pizzas.sort((a, b) =>
+          a.name.localeCompare(b.name)
+        );
+      } else if (action.payload === "Z-A") {
+        sortedPizzas = state.pizzas.sort((a, b) =>
+          b.name.localeCompare(a.name)
+        );
+      } else if (action.payload === "Price: Low to high") {
+        sortedPizzas = state.pizzas.sort((a, b) => a.price - b.price);
+      } else if (action.payload === "Price: High to low") {
+        sortedPizzas = state.pizzas.sort((a, b) => b.price - a.price);
+      }
       return {
         ...state,
-        pizzas: action.payload,
+        pizzas: sortedPizzas,
       };
 
-      case FILTER_BY_VEGETARIAN:
-      //  if(action.payload === "all") return {...state}  
-      const filtrados = action.payload === "yes"? state.pizzasbackup.filter((pizz)=>pizz.vegetarian === true) : state.pizzasbackup.filter((pizz)=>pizz.vegetarian === false)              
+    case FILTER_BY_VEGETARIAN:
+      //  if(action.payload === "all") return {...state}
+      const filtrados =
+        action.payload === "yes"
+          ? state.pizzasbackup.filter((pizz) => pizz.vegetarian === true)
+          : state.pizzasbackup.filter((pizz) => pizz.vegetarian === false);
       // if(action.payload === "yes") {
       //   const filtrado = state.pizzas.filter((pizz)=>pizz.vegetarian === true)
-      // } else {    
+      // } else {
       return {
-          ...state,
-         pizzas: filtrados,
-             };  
+        ...state,
+        pizzas: filtrados,
+      };
 
     default:
       return { ...state };
