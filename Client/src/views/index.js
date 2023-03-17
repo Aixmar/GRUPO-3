@@ -9,6 +9,7 @@ import CreatePizza from "./CreatePizza/CreatePizza";
 import AllPizzas from "./AllPizzas/AllPizzas";
 import Cart from "./Cart/Cart";
 import UserLogin from "./UserLogin/UserLogin";
+import Error404 from "./Error404/error404";
 
 export {
   Landing,
@@ -22,4 +23,5 @@ export {
   AllPizzas,
   Cart,
   UserLogin,
+  Error404,
 };
