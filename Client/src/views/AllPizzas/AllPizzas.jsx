@@ -11,7 +11,7 @@ const AllPizzas = () => {
 
   return (
     <>
-      <p>SOY EL COMPONENTE ALLPIZZAS</p>
+
       <SortSelect
         Sort={[
           "A-Z",
