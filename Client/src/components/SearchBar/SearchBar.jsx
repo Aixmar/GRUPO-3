@@ -15,7 +15,7 @@ const SearchBar = () => {
       <input
         type="text"
         autoComplete="off"
-        name="ingredients"
+        name=""
         onChange={handlerQuery}
         placeholder="Search..."
       ></input>
