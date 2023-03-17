@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useDispatch } from "react-redux"
 import { pushToCart } from "../../redux/actions";
-import { Button } from "@chakra-ui/react";
+import { Button, Box, Image, Text } from "@chakra-ui/react";
 import axios from "axios";
-import styles from "./PizzaDetail.module.css";
+
 
 const PizzaDetail = () => {
   const { id } = useParams();
@@ -27,38 +27,44 @@ const PizzaDetail = () => {
       .then((pizza) => setPizza(pizza));
   }, []);
 
+
   return (
-    <div className={styles.container}>
-      <h1>PIZZA DETAIL</h1>
-      <h2>{pizza.name}</h2>
-      <img src={pizza.image} alt={pizza.name} className={styles.image} />
-      <span>Price: $ {pizza.price}</span>
-      <div className={styles.linkBtn}>
-        <Link to='/allpizzas'><Button hoverbg="white"
-          size="lg"
-          borderRadius="full"
-          padding="10px"
-          margin="30px"
-          background="linear-gradient(to right, #f27833, #eab830)" >Back to menu</Button>
-        </Link>
-        <Button
-          onClick={clickHandler}
-          hoverbg="white"
-          size="lg"
-          borderRadius="full"
-          padding="10px"
-          margin="30px"
-          background="linear-gradient(to right, #f27833, #eab830)"
-        >Add to cart</Button>
-      </div>
+    <Box display="flex" justifyContent="center" alignItems="center" width="1366px" height="768px" bgGradient="linear-gradient(to right, #f27825, #eab830)">
+    <Box maxW="xl" borderWidth="1px" borderRadius="lg" overflow="hidden" boxShadow="0 0 20px rgba(0, 0, 0, 0.1)" >
+      <Image src={pizza.image} alt={pizza.name} objectFit="cover" h="300px" w="100%" />
+      <Box p="6" bgGradient="linear(to-l,#000000, #272727)">
+        <Box d="flex" alignItems="baseline" >
+          <Text fontSize="2xl" fontWeight="semibold" mr="2" color="white">{pizza.name}</Text>
+          <Text fontSize="lg" color="white">$ {pizza.price}</Text>
+        </Box>
+        <Box mt="2" lineHeight="tall">
+          <Text fontSize="lg">{pizza.description}</Text>
+        </Box>
+        <Box mt="2" d="flex" justifyContent="space-between" alignItems="center">
+          <Link to='/allpizzas'><Button variantColor="teal"
+            borderRadius="full"
+            padding="10px"
+            background="linear-gradient(to right, #f27833, #eab830)" >Back to menu</Button>
+          </Link>
+          <Button
+            onClick={clickHandler}
+            variantColor="orange"
+            borderRadius="full"
+            padding="10px"
+            margin="10px"
+            background="linear-gradient(to right, #f27833, #eab830)"
+          >Add to cart</Button>
+        </Box>
+      </Box>
       <dialog id='createPizzaModal' >
         <h2>Pizza created succesfully!</h2>
-        <div className={styles.contButton}>
-          <Link to='/allpizzas' className={styles.linkBtn}><Button bg={'orange'} fontSize={'2rem'} width={'90%'} p={'1.6rem'} margin={'1.2rem 0 .8rem 0'} >Continue buying</Button></Link>
-          <Link to='/cart' className={styles.linkBtn}><Button bg={'orange'} fontSize={'2rem'} width={'90%'} p={'1.6rem'} margin={'1.2rem 0 .8rem 0'} >Go to cart</Button></Link>
+        <div >
+          <Link to='/allpizzas' ><Button variantColor="teal" fontSize={'2rem'} width={'90%'} p={'1.6rem'} margin={'1.2rem 0 .8rem 0'} >Continue buying</Button></Link>
+          <Link to='/cart' ><Button variantColor="orange" fontSize={'2rem'} width={'90%'} p={'1.6rem'} margin={'1.2rem 0 .8rem 0'} >Go to cart</Button></Link>
         </div>
       </dialog>
-    </div>
+    </Box>
+    </Box>
   );
 };
 
