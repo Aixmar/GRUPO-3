@@ -259,7 +259,7 @@ const CreatePizza = () => {
         </Button>
 
         <dialog id='createPizzaModal' >
-          <h2>Pizza created succesfully!</h2>
+          <h2>Pizza created successfully!</h2>
           <div className={styles.contButton} >
             <Link to='/cart' className={styles.linkBtn} ><Button bg={'orange'} fontSize={'2rem'} width={'90%'} p={'1.6rem'} margin={'1.2rem 0 .8rem 0'} >Go to cart</Button></Link>
           </div>
