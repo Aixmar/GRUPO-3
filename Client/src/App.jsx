@@ -12,6 +12,7 @@ import {
   Cart,
   UserLogin,
   Error404,
+  AllDrinks,
 } from "./views/index";
 
 function App() {
@@ -23,7 +24,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/home" element={<Home />} />
+        
         <Route path="/allpizzas" element={<AllPizzas />}></Route>
+        <Route path="/alldrinks" element={<AllDrinks />}></Route>
+
+        <Route path="/drinks" element={<AllPizzas />}></Route>
         <Route path="/createuser" element={<UserForm />} />
         <Route path="/login" element={<UserLogin />} />
         <Route path="/about" element={<About />} />

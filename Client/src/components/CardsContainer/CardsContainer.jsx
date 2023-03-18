@@ -7,6 +7,7 @@ import styles from "./CardsContainer.module.css";
 const CardsContainer = ({ selectedSort }) => {
   const dispatch = useDispatch();
   const pizzas = useSelector((state) => state.pizzas);
+  const OnlyPizzas = pizzas.filter((items) =>  items.category === 'pizza')
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -26,7 +27,7 @@ const CardsContainer = ({ selectedSort }) => {
   const [actualPizzas, setActualPizzas] = useState([]);
 
   useEffect(() => {
-    setActualPizzas(pizzas.slice(0, PizzasPerPage));
+    setActualPizzas(OnlyPizzas.slice(0, PizzasPerPage));
   }, [pizzas, PizzasPerPage]);
 
   useEffect(() => {
