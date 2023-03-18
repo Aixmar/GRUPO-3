@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getIngredients, pushToCart } from '../../redux/actions';
 import SearchBar from '../../components/SearchBar/SearchBar';
-import { Button, Text, Box, CheckboxGroup, Checkbox, FormLabel, Radio, RadioGroup } from "@chakra-ui/react";
+import { Button, Text, Box, CheckboxGroup, Checkbox, FormLabel, Radio, RadioGroup, Stack } from "@chakra-ui/react";
 import createdpizzas from '../../assets/createdpizzas.png';
 // import styles from './CreatePizza.module.css';
 
@@ -135,118 +135,124 @@ const CreatePizza = () => {
       <form onSubmit={handleSubmit}>
 
         <RadioGroup>
-          <FormLabel fontWeight="bold" color="gray.700"> Dough (1):</FormLabel>
-         {
+          <FormLabel fontWeight="bold" color="gray.700"> Dough (1 MAX Selection) :</FormLabel>
+          <Stack direction='column'>
+           {
             typesOfDough.map((dough) => {
               return (
-                <Radio marginRight="3"  size="lg" type="radio" name="dough" value={dough.name} onChange={handleRadio}> {dough.name} </Radio>
+                <Radio key={dough.id} marginRight="3"  size="lg" type="radio" name="dough" value={dough.name} onChange={handleRadio}> {dough.name} </Radio>
               )
             })
-          } 
-          
-
+           } 
+          </Stack>
       </RadioGroup>
-        {errors.dough && <span>{errors.dough}</span>}
+        {errors.dough && <Text color='red'>{errors.dough}</Text>}
 
         <br></br>
 
         <RadioGroup>
-          <FormLabel fontWeight="bold" color="gray.700"> Type (1):</FormLabel>
+          <FormLabel fontWeight="bold" color="gray.700"> Type (1 MAX Selection):</FormLabel>
+          <Stack direction='column'>    
                 {
             typesOfBaking.map((t) => {
               return (
-                 <Radio marginRight="3"  size="lg" type="radio" name="type" value={t.name} onChange={handleRadio}> {t.name} </Radio>
+                 <Radio key={t.id} marginRight="3"  size="lg" type="radio" name="type" value={t.name} onChange={handleRadio}> {t.name} </Radio>
               )
             })
           }
+          </Stack>
           {/* <label> <input type="radio" name="type" value="thin" onChange={handleRadio} /> Thin </label>
           <label> <input type="radio" name="type" value="gross" onChange={handleRadio} /> Gross </label> */}
           </RadioGroup>
-        {errors.type && <span>{errors.type}</span>}
+        {errors.type && <Text color='red'>{errors.type}</Text>}
 
         <br></br>
 
         <RadioGroup>
-          <FormLabel fontWeight="bold" color="gray.700"> Base of (1):</FormLabel>
+          <FormLabel fontWeight="bold" color="gray.700"> Base of (1 MAX Selection):</FormLabel>
+          <Stack direction='column'>
           {
             sauceBases.map((base) => {
               return (
-                 <Radio marginRight="3"  size="lg" type="radio" name="base" value={base.name} onChange={handleRadio}>{base.name} </Radio>
+                 <Radio key={base.id} marginRight="3"  size="lg" type="radio" name="base" value={base.name} onChange={handleRadio}>{base.name} </Radio>
               )
             })
           }
+          </Stack>
           {/* <label> <input type="radio" name="base" value="tomato" onChange={handleRadio} /> Tomato </label>
           <label> <input type="radio" name="base" value="milk cream" onChange={handleRadio} /> Milk cream </label>
           <label> <input type="radio" name="base" value="white sauce" onChange={handleRadio} /> White sauce </label> */}
        
         </RadioGroup>
-        {errors.base && <span>{errors.base}</span>}
+        {errors.base && <Text color='red'>{errors.base}</Text>}
         <br></br>
 
         <RadioGroup>
-          <FormLabel fontWeight="bold" color="gray.700"> Muzarella (1):</FormLabel>
+          <FormLabel fontWeight="bold" color="gray.700"> Muzarella (1 MAX Selection):</FormLabel>
+          <Stack direction='column'>
          {
             cheeseBases.map((base) => {
               return (
-                 <Radio marginRight="3"  size="lg" type="radio" name="mozzarella" value={base.name} onChange={handleRadio}> {base.name} </Radio>
+                 <Radio key={base.id} marginRight="3"  size="lg" type="radio" name="mozzarella" value={base.name} onChange={handleRadio}> {base.name} </Radio>
               )
             })
           }
+          </Stack>
           {/* <label> <input type="radio" name="mozzarella" value="mozarella" onChange={handleRadio} /> Mozzarella </label>
           <label> <input type="radio" name="mozzarella" value="vegan mozarella" onChange={handleRadio} /> Vegan Mozzarella </label>
           <label> <input type="radio" name="mozzarella" value="lactose-free mozarella" onChange={handleRadio} /> Lactose-free Mozzarella </label>
           <label> <input type="radio" name="mozzarella" value="without mozarella" onChange={handleRadio} /> Without Mozzarella </label> */}
        
         </RadioGroup>
-        {errors.mozzarella && <span>{errors.mozzarella}</span>}
+        {errors.mozzarella && <Text color='red'>{errors.mozzarella}</Text>}
         <br></br>
         <SearchBar />
         {error_query === null ? <div>
           <CheckboxGroup>
           
-          <FormLabel fontWeight="bold" color="gray.700">Toppings list (2):</FormLabel>
+          <FormLabel fontWeight="bold" color="gray.700">Toppings list (2 MAX Selection):</FormLabel>
           {
             // !toppings  ? <p>no results</p> :
               toppings && toppings.map((ingr) => {
                 return (
-                  <div>
+                  <div key={ingr.id}>
                     <Checkbox marginRight="2" marginBottom="2" size="lg" bg="teal.200" type="checkbox" id={ingr.id} name="toppingIngredients" value={ingr.name} key={ingr.id} checked={form.toppingIngredients.includes(ingr.name) ? true : false} onChange={handleOnChange} disabled={form.toppingIngredients.length === 2 && !form.toppingIngredients.includes(ingr.name) ? true : false}></Checkbox>
                     <label htmlFor={ingr.id}>{ingr.name}</label>
-                  </div>
+                  </div>  
                 )
               })
           }
-          {errors.toppingIngredients && <span>{errors.toppingIngredients}</span>}
+          {errors.toppingIngredients && <Text color='red'>{errors.toppingIngredients}</Text>}
         </CheckboxGroup>
 
         <br></br>
 
         <CheckboxGroup>
-          <FormLabel>Cheeses list (3): </FormLabel>
+          <FormLabel>Cheeses list (3 MAX Selection): </FormLabel>
           {
             // !cheeses  ? <p>no results</p> :
             cheeses && cheeses.map((ingr) => {
               return (
-                <div>
+                <div key={ingr.id}>
                   <Checkbox marginRight="2" marginBottom="2" size="lg" bg="teal.200" type="checkbox" key={ingr.id} id={ingr.id} name="cheeseIngredients" value={ingr.name} checked={form.cheeseIngredients.includes(ingr.name) ? true : false} onChange={handleOnChange} disabled={form.cheeseIngredients.length === 3 && !form.cheeseIngredients.includes(ingr.name) ? true : false}></Checkbox>
                   <label htmlFor={ingr.id}>{ingr.name}</label>
                 </div>
               )
             })
           }
-          {errors.cheeseIngredients && <span>{errors.cheeseIngredients}</span>}
+          {errors.cheeseIngredients && <Text>{errors.cheeseIngredients}</Text>}
         </CheckboxGroup>
 
         <br></br>
 
         <CheckboxGroup>  
-        <FormLabel>Meats list (3) :</FormLabel>
+        <FormLabel>Meats list (3 MAX Selection) :</FormLabel>
           <div>
             {
               // !meats ? <p>no results</p> :
               meats && meats.map((ingr) => {
                 return (
-                  <div>
+                  <div key={ingr.id}>
                     <Checkbox marginRight="2" marginBottom="2" size="lg" bg="teal.200" type="checkbox" key={ingr.id} id={ingr.id} name="meatIngredients" value={ingr.name} checked={form.meatIngredients.includes(ingr.name) ? true : false} onChange={handleOnChange} disabled={form.meatIngredients.length === 3 && !form.meatIngredients.includes(ingr.name) ? true : false}></Checkbox>
                     <label htmlFor={ingr.id}>{ingr.name}</label>
                   </div>
@@ -256,7 +262,7 @@ const CreatePizza = () => {
             </div>
           </CheckboxGroup>
         </div> 
-        : <h1>{error_query.error}</h1>}
+        : <Text color='red'>{error_query.error}</Text>}
                
 
         <Button
