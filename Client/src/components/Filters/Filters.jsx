@@ -20,6 +20,7 @@ const Filters = () => {
         name="vegetarian"
         onChange={handleInputChange}
         color="#f27825"
+        w="160px"
         borderColor="white"
         borderWidth="2px"
         borderRadius="full"

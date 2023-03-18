@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPizzas, sortPizzas } from "../../redux/actions";
 import Card from "../Card/Card";
-import styles from "./CardsContainer.module.css";
+import { SimpleGrid } from "@chakra-ui/react";
 
 const CardsContainer = ({ selectedSort }) => {
   const dispatch = useDispatch();
@@ -54,7 +54,7 @@ const CardsContainer = ({ selectedSort }) => {
         <p>Loading...</p>
       ) : (
         <>
-          <div className={styles.container}>
+          <SimpleGrid columns={[2, 2, 4]} spacing={10}>
             {actualPizzas?.map((pizza) => {
               return (
                 <Card
@@ -66,7 +66,7 @@ const CardsContainer = ({ selectedSort }) => {
                 />
               );
             })}
-          </div>
+          </SimpleGrid>
         </>
       )}
     </>
@@ -74,3 +74,4 @@ const CardsContainer = ({ selectedSort }) => {
 };
 
 export default CardsContainer;
+
