@@ -1,9 +1,10 @@
 import { useDispatch } from "react-redux";
 import CardsContainer from "../../components/CardsContainer/CardsContainer";
 import SortSelect from "../../components/Sorters/SortSelect";
+import SubNavBar from "../../components/SubNavBar/SubNavBar";
 import { useState } from "react";
 import Filters from "../../components/Filters/Filters";
-import { Link } from "react-router-dom";
+
 import { Box, Flex } from "@chakra-ui/react";
 
 const AllPizzas = () => {
@@ -12,12 +13,10 @@ const AllPizzas = () => {
 
   return (
     <Flex bgGradient="linear(to-l,#000000, #272727)">
-      <Box flex="0 0 auto" mr="1rem">
-        <div>
-          <h2>esto es la sub navbar</h2>
-          <Link to="/allpizzas">All Pizzas</Link>
-          <Link to="/alldrinks">All Drinks</Link>
-        </div>
+      <Box position="absolute" zIndex="10" w="100%">
+        <SubNavBar />
+      </Box>
+      <Box flex="0 0 auto" ml="2.5rem" pt="100px">
         <SortSelect
           Sort={[
             "A-Z",
@@ -29,10 +28,12 @@ const AllPizzas = () => {
           selectedSort={selectedSort}
           setSelectedSort={setSelectedSort}
         />
-        <Filters />
+        <Box mt="1rem">
+          <Filters />
+        </Box>
       </Box>
 
-      <Box flex="1 1 auto">
+      <Box flex="1 1 auto" pt="100px" mr="2rem" ml="2rem">
         <CardsContainer selectedSort={selectedSort} />
       </Box>
     </Flex>
