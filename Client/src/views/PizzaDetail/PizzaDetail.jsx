@@ -6,7 +6,7 @@ import { Button, Box, Image, Text } from "@chakra-ui/react";
 import axios from "axios";
 
 
-const PizzaDetail = () => {
+const ItemDetail = () => {
   const { id } = useParams();
   const dispatch = useDispatch()
   const [pizza, setPizza] = useState({});
@@ -68,4 +68,4 @@ const PizzaDetail = () => {
   );
 };
 
-export default PizzaDetail;
+export default ItemDetail;
