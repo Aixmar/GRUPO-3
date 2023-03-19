@@ -7,12 +7,12 @@ import { SimpleGrid } from "@chakra-ui/react";
 const CardsContainer = ({ selectedSort }) => {
   const dispatch = useDispatch();
   const pizzas = useSelector((state) => state.pizzas);
-  const OnlyPizzas = pizzas.filter((items) =>  items.category === 'pizza')
+  const onlyPizzas = pizzas.filter((items) =>  items.category === 'pizza');
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    dispatch(getPizzas());
-  }, [dispatch, selectedSort]);
+    !actualPizzas.length && dispatch(getPizzas());
+  }, [dispatch]); 
 
   useEffect(() => {
     pizzas.length && setIsLoading(false);
@@ -20,14 +20,16 @@ const CardsContainer = ({ selectedSort }) => {
 
   useEffect(() => {
     dispatch(sortPizzas(selectedSort));
-  }, [selectedSort, pizzas]);
+  }, [selectedSort]);
+
 
   //---------------INFINIT SCROLLING---------------
-  const [PizzasPerPage, setPizzasPerPage] = useState(10);
+  const [PizzasPerPage, setPizzasPerPage] = useState(8);
   const [actualPizzas, setActualPizzas] = useState([]);
 
+
   useEffect(() => {
-    setActualPizzas(OnlyPizzas.slice(0, PizzasPerPage));
+    setActualPizzas(onlyPizzas.slice(0, PizzasPerPage));
   }, [pizzas, PizzasPerPage]);
 
   useEffect(() => {
@@ -37,7 +39,7 @@ const CardsContainer = ({ selectedSort }) => {
         event.target.documentElement.scrollTop + window.innerHeight;
       if (currentHeight + 1 >= scrollHeight) {
         if (PizzasPerPage + 6 <= pizzas.length) {
-          setPizzasPerPage(PizzasPerPage + 6);
+          setPizzasPerPage(PizzasPerPage + 8);
         } else {
           setPizzasPerPage(pizzas.length);
         }

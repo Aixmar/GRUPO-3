@@ -9,7 +9,8 @@ import { Box, Flex } from "@chakra-ui/react";
 
 const AllPizzas = () => {
   const dispatch = useDispatch();
-  const [selectedSort, setSelectedSort] = useState("A-Z");
+  const [ selectedSort, setSelectedSort ] = useState("None");
+
 
   return (
     <Flex bgGradient="linear(to-l,#000000, #272727)">
@@ -18,13 +19,6 @@ const AllPizzas = () => {
       </Box>
       <Box flex="0 0 auto" ml="2.5rem" pt="100px">
         <SortSelect
-          Sort={[
-            "A-Z",
-            "Z-A",
-            "Price: Low to high",
-            "Price: High to low",
-            "Avg. customers reviews",
-          ]}
           selectedSort={selectedSort}
           setSelectedSort={setSelectedSort}
         />

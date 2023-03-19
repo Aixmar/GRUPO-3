@@ -75,6 +75,8 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case SORT_PIZZAS:
+      if (action.payload === "None") return { ...state };
+
       let sortedPizzas;
       if (action.payload === "A-Z") {
         sortedPizzas = state.pizzas.sort((a, b) =>
@@ -91,7 +93,7 @@ const rootReducer = (state = initialState, action) => {
       }
       return {
         ...state,
-        pizzas: sortedPizzas,
+        pizzas: [ ...sortedPizzas ],
       };
 
     case FILTER_BY_VEGETARIAN:

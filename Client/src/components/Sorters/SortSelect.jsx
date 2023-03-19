@@ -3,8 +3,11 @@ import { Select, FormControl, FormLabel } from "@chakra-ui/react";
 // Estados: Z-A, A-Z, Precio: Del mas bajo al mas alto, Precio: Del mas alto al mas bajo, Promedio opinion del cliente
 //   // States: Z-A, A-Z, Price: Low to high, Price: High to low, Avg. customers reviews
 
-const SortSelect = ({ Sort, selectedSort, setSelectedSort }) => {
-  const handleChange = (event) => {
+const SortSelect = ({ selectedSort, setSelectedSort }) => {
+
+  const sortOptions = [ "None", "A-Z", "Z-A", "Price: Low to high", "Price: High to low" ]
+  
+  const handleChange = (event) => {   
     setSelectedSort(event.target.value);
   };
 
@@ -32,9 +35,9 @@ const SortSelect = ({ Sort, selectedSort, setSelectedSort }) => {
           borderColor: "#f27825"
         }}
       >
-        {Sort.map((Sort) => (
-          <option key={Sort} value={Sort}>
-            {Sort}
+        {sortOptions.map((sort) => (
+          <option key={sort} value={sort}>
+            {sort}
           </option>
         ))}
       </Select>
