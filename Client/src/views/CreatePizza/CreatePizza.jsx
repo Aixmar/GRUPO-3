@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getIngredients, pushToCart } from '../../redux/actions';
 import SearchBar from '../../components/SearchBar/SearchBar';
-import { Button, Text, Box, CheckboxGroup, Checkbox, FormLabel, Radio, RadioGroup, Stack } from "@chakra-ui/react";
+import { Button, Text, Grid,GridItem, CheckboxGroup, Checkbox, FormLabel, Radio, RadioGroup, Stack, Box } from "@chakra-ui/react";
 import createdpizzas from '../../assets/createdpizzas.png';
 // import styles from './CreatePizza.module.css';
 
@@ -140,13 +140,17 @@ const CreatePizza = () => {
  
 
   return (
-    <>
-      <Text fontSize='5xl'>CREATE NEW PIZZA</Text>
+    <Box bgGradient="linear(to-l,#000000, #272727)" >
+      
+
+      <Text fontSize='5xl' color="#f27825" display="flex" ml="150px" pt="20px" pb="20px">CREATE NEW PIZZA</Text>
+      <Box display="flex" justifyContent="center" alignItems="center">
 
       <form onSubmit={handleSubmit}>
-
+      <Grid templateColumns="repeat(4, 1fr)" gap={4}>
+        <GridItem>
         <RadioGroup>
-          <FormLabel fontWeight="bold" color="gray.700"> Dough (1 MAX Selection) :</FormLabel>
+          <FormLabel fontWeight="bold" color="white"> Dough (1 MAX Selection) :</FormLabel>
           <Stack direction='column'>
            {
             typesOfDough.map((dough) => {
@@ -158,11 +162,12 @@ const CreatePizza = () => {
           </Stack>
       </RadioGroup>
         {errors.dough && <Text color='red'>{errors.dough}</Text>}
+        </GridItem>
 
         <br></br>
-
+        <GridItem>
         <RadioGroup>
-          <FormLabel fontWeight="bold" color="gray.700"> Type (1 MAX Selection):</FormLabel>
+          <FormLabel fontWeight="bold" color="white"> Type (1 MAX Selection):</FormLabel>
           <Stack direction='column'>    
                 {
             typesOfBaking.map((t) => {
@@ -176,11 +181,12 @@ const CreatePizza = () => {
           <label> <input type="radio" name="type" value="gross" onChange={handleRadio} /> Gross </label> */}
           </RadioGroup>
         {errors.type && <Text color='red'>{errors.type}</Text>}
+        </GridItem>
 
         <br></br>
-
+         <GridItem>
         <RadioGroup>
-          <FormLabel fontWeight="bold" color="gray.700"> Base of (1 MAX Selection):</FormLabel>
+          <FormLabel fontWeight="bold" color="white"> Base of (1 MAX Selection):</FormLabel>
           <Stack direction='column'>
           {
             sauceBases.map((base) => {
@@ -196,10 +202,11 @@ const CreatePizza = () => {
        
         </RadioGroup>
         {errors.base && <Text color='red'>{errors.base}</Text>}
+        </GridItem>
         <br></br>
-
+        <GridItem>
         <RadioGroup>
-          <FormLabel fontWeight="bold" color="gray.700"> Muzarella (1 MAX Selection):</FormLabel>
+          <FormLabel fontWeight="bold" color="white"> Muzarella (1 MAX Selection):</FormLabel>
           <Stack direction='column'>
          {
             cheeseBases.map((base) => {
@@ -216,12 +223,16 @@ const CreatePizza = () => {
        
         </RadioGroup>
         {errors.mozzarella && <Text color='red'>{errors.mozzarella}</Text>}
+        </GridItem>
+        </Grid>
         <br></br>
         <SearchBar />
         {error_query === null ? <div>
+          <Grid templateColumns="repeat(4, 1fr)" gap={4}>
+            <GridItem>
           <CheckboxGroup>
           
-          <FormLabel fontWeight="bold" color="gray.700">Toppings list (2 MAX Selection):</FormLabel>
+          <FormLabel fontWeight="bold" color="white">Toppings list (2 MAX Selection):</FormLabel>
           {
             // !toppings  ? <p>no results</p> :
               toppings && toppings.map((ingr) => {
@@ -235,11 +246,12 @@ const CreatePizza = () => {
           }
           {errors.toppingIngredients && <Text color='red'>{errors.toppingIngredients}</Text>}
         </CheckboxGroup>
+        </GridItem>
 
         <br></br>
-
+        <GridItem>
         <CheckboxGroup>
-          <FormLabel>Cheeses list (3 MAX Selection): </FormLabel>
+          <FormLabel fontWeight="bold" color="white">Cheeses list (3 MAX Selection): </FormLabel>
           {
             // !cheeses  ? <p>no results</p> :
             cheeses && cheeses.map((ingr) => {
@@ -253,11 +265,11 @@ const CreatePizza = () => {
           }
           {errors.cheeseIngredients && <Text>{errors.cheeseIngredients}</Text>}
         </CheckboxGroup>
-
+        </GridItem>
         <br></br>
-
+        <GridItem>
         <CheckboxGroup>  
-        <FormLabel>Meats list (3 MAX Selection) :</FormLabel>
+        <FormLabel fontWeight="bold" color="white">Meats list (3 MAX Selection) :</FormLabel>
           <div>
             {
               // !meats ? <p>no results</p> :
@@ -272,6 +284,8 @@ const CreatePizza = () => {
             }
             </div>
           </CheckboxGroup>
+          </GridItem>
+          </Grid>
         </div> 
         : <Text color='red'>{error_query.error}</Text>}
                
@@ -296,8 +310,8 @@ const CreatePizza = () => {
           </div>
         </dialog>
       </form>
-
-    </>
+      </Box>
+    </Box>
 
 
   )
