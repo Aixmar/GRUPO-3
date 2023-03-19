@@ -11,6 +11,8 @@ import Cart from "./Cart/Cart";
 import UserLogin from "./UserLogin/UserLogin";
 import Error404 from "./Error404/error404";
 import AllDrinks from "./AllDrinks/AllDrinks";
+import AllSides from "./AllSides/AllSides";
+import SideDetail from "./SideDetail/SideDetail";
 
 export {
   Landing,
@@ -26,4 +28,6 @@ export {
   UserLogin,
   Error404,
   AllDrinks,
+  AllSides,
+  SideDetail
 };

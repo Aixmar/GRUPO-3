@@ -84,16 +84,27 @@ const CreatePizza = () => {
   }
   const handleRadio = (event) => {
     const currentIngredientPrice = ingredients.filter(ingr => ingr.name === event.target.value)
-    // validate({ ...form, [event.target.name]: event.target.value })
-    setForm({
-      ...form,
-      [event.target.name]: event.target.value,
-      price: form.price + currentIngredientPrice[0].price
-    })
+    if(form[event.target.name]){
+      const findIngredientChecked = form[event.target.name]
+      const ingredientToRest = ingredients.filter(ingr => ingr.name === findIngredientChecked)
+      const priceToRest = ingredientToRest[0].price
+      setForm({
+        ...form,
+        [event.target.name]: event.target.value,
+        price: (form.price - priceToRest) + currentIngredientPrice[0].price
+      })
+    }
+    else{
+      setForm({
+        ...form,
+        [event.target.name]: event.target.value,
+        price: form.price + currentIngredientPrice[0].price
+      })
+    }
   }
 
 
-
+  
   const handleSubmit = (e) => {
     e.preventDefault()
     validate(form)
