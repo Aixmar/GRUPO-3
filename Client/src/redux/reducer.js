@@ -6,7 +6,7 @@ import {
   SORT_PIZZAS,
   POP_TO_CART,
   FILTER_BY_VEGETARIAN,
-
+  FILTER_DRINKS_TERMS,
 } from "./actionTypes";
 
 const initialState = {
@@ -14,43 +14,46 @@ const initialState = {
   pizzas: [],
   pizzasbackup: [],
   cart: [],
-  error_query: null
-
-
-
+  error_query: null,
+  //-peruano3000--------
+  filterDrinksTerms: {},
+  //--------------------
 };
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-
-
     case GET_INGREDIENTS:
       return {
         ...state,
         ingredients: action.payload,
       };
 
-
     case GET_INGREDIENTS_QUERY:
-
-      
-      if(Array.isArray(action.payload)){
-        let ingredientsQuery = action.payload.filter(ingre => ingre.category === "Toppings" || ingre.category === "Cheese" || ingre.category === "Meat")
-        let ingredientsTotal = state.ingredients.filter(ingre => ingre.category === "Dough" || ingre.category === "Type" || ingre.category === "Sauce base" || ingre.category === "Cheese base" )
+      if (Array.isArray(action.payload)) {
+        let ingredientsQuery = action.payload.filter(
+          (ingre) =>
+            ingre.category === "Toppings" ||
+            ingre.category === "Cheese" ||
+            ingre.category === "Meat"
+        );
+        let ingredientsTotal = state.ingredients.filter(
+          (ingre) =>
+            ingre.category === "Dough" ||
+            ingre.category === "Type" ||
+            ingre.category === "Sauce base" ||
+            ingre.category === "Cheese base"
+        );
         return {
           ...state,
           ingredients: ingredientsTotal.concat(ingredientsQuery),
-          error_query:null,
+          error_query: null,
         };
-      }else{
-        return{
+      } else {
+        return {
           ...state,
-          error_query:action.payload
+          error_query: action.payload,
+        };
       }
-      }
-      
-    
-      
 
     case GET_PIZZAS:
       return {
@@ -59,20 +62,17 @@ const rootReducer = (state = initialState, action) => {
         pizzasbackup: action.payload,
       };
 
-
     case PUSH_TO_CART:
       return {
         ...state,
         cart: [...state.cart, action.payload],
       };
 
-
     case POP_TO_CART:
       return {
         ...state,
         cart: action.payload,
       };
-
 
     case SORT_PIZZAS:
       let sortedPizzas;
@@ -94,11 +94,12 @@ const rootReducer = (state = initialState, action) => {
         pizzas: sortedPizzas,
       };
 
-      
     case FILTER_BY_VEGETARIAN:
-       if(action.payload === "all") return { ...state, pizzas: state.pizzasbackup };
+      if (action.payload === "all")
+        return { ...state, pizzas: state.pizzasbackup };
 
-      const filtrados = action.payload === "yes"
+      const filtrados =
+        action.payload === "yes"
           ? state.pizzasbackup.filter((pizz) => pizz.vegetarian === true)
           : state.pizzasbackup.filter((pizz) => pizz.vegetarian === false);
 
@@ -106,6 +107,9 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         pizzas: filtrados,
       };
+
+    case FILTER_DRINKS_TERMS:
+      return { ...state, filterDrinksTerms: action.payload };
 
     default:
       return { ...state };

@@ -6,7 +6,8 @@ import {
   SORT_PIZZAS,
   POP_TO_CART,
   FILTER_BY_VEGETARIAN,
-  ERROR_QUERY 
+  ERROR_QUERY,
+  FILTER_DRINKS_TERMS,
 } from "./actionTypes";
 import axios from "axios";
 
@@ -47,3 +48,7 @@ export const popToCart = (sliceForm) => {
 export const filterByVegetarian = (filterVege) => {
   return { type: FILTER_BY_VEGETARIAN, payload: filterVege };
 };
+
+export const filterDrinksTerms = (filterTerms) => {
+  return { type: FILTER_DRINKS_TERMS, payload: filterTerms}
+}
