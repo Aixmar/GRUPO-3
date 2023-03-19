@@ -1,43 +1,39 @@
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import SubNavBar from "../../components/SubNavBar/SubNavBar";
+import FilterDrinks from "../../components/FilterDrinks/FilterDrinks";
 import DrinksContainer from "../../components/DrinksContainer/DrinksContainer";
-import { Flex, Box } from "@chakra-ui/layout";
-import SortSelect from "../../components/Sorters/SortSelect";
-import { useState } from "react";
-import Filters from "../../components/Filters/Filters";
+import { useEffect } from "react";
 
+import { Box, Flex } from "@chakra-ui/react";
+import { getPizzas } from "../../redux/actions";
 
+import { peruanoFiltrador } from "../../Utils/peruano3000";
 const AllDrinks = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getPizzas());
+  }, [dispatch]);
 
-  const [selectedSort, setSelectedSort] = useState("A-Z");
+  const filterDrinksTerms = useSelector((state) => state.filterDrinksTerms);
+  const items = useSelector((state) => state.pizzas);
+  const drinks = items.filter((drink) => drink.category === "drinks");
+
+  const drinksFiltered = peruanoFiltrador({ drinks, filterDrinksTerms });
 
   return (
     <Flex bgGradient="linear(to-l,#000000, #272727)">
-      <Box flex="0 0 auto" mr="1rem">
-        <div>
-          <h2>esto es la sub navbar</h2>
-          <Link to="/allpizzas">All Pizzas</Link>
-          <Link to="/alldrinks">All Drinks</Link>
-        </div>
-        <SortSelect
-          Sort={[
-            "A-Z",
-            "Z-A",
-            "Price: Low to high",
-            "Price: High to low",
-            "Avg. customers reviews",
-          ]}
-          selectedSort={selectedSort}
-          setSelectedSort={setSelectedSort}
-        />
-        <Filters />
+      <Box position="absolute" zIndex="10" w="100%">
+        <SubNavBar />
       </Box>
 
-      <Box flex="1 1 auto">
-        <DrinksContainer selectedSort={selectedSort} />
+      <Box flex="0 0 auto" ml="2.5rem" pt="100px">
+        <FilterDrinks />
+      </Box>
+
+      <Box flex="1 1 auto" pt="100px" mr="2rem" ml="2rem">
+        <DrinksContainer drinks={drinksFiltered} />
       </Box>
     </Flex>
-
   );
 };
-
 export default AllDrinks;
