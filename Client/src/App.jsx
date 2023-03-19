@@ -6,7 +6,7 @@ import {
   NavBar,
   UserForm,
   UserProfile,
-  PizzaDetail,
+  ItemDetail,
   CreatePizza,
   AllPizzas,
   Cart,
@@ -32,7 +32,7 @@ function App() {
         <Route path="/createuser" element={<UserForm />} />
         <Route path="/login" element={<UserLogin />} />
         <Route path="/about" element={<About />} />
-        <Route path="/pizzadetail/:id" element={<PizzaDetail />} />
+        <Route path="/itemdetail/:id" element={<ItemDetail />} />
         <Route path="/profile/:id" element={<UserProfile />} />
         <Route path="/createpizza" element={<CreatePizza />} />
         <Route path="/cart" element={<Cart />} />
