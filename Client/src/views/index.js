@@ -4,7 +4,7 @@ import UserForm from "./UserForm/UserForm";
 import UserProfile from "./UserProfile/UserProfile";
 import NavBar from "../components/NavBar/NavBar";
 import About from "./About/About";
-import ItemDetail from "./PizzaDetail/PizzaDetail";
+import ItemDetail from "./ItemDetail/ItemDetail";
 import CreatePizza from "./CreatePizza/CreatePizza";
 import AllPizzas from "./AllPizzas/AllPizzas";
 import Cart from "./Cart/Cart";

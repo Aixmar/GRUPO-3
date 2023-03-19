@@ -35,7 +35,7 @@ function App() {
         <Route path="/login" element={<UserLogin />} />
         <Route path="/about" element={<About />} />
 
-        <Route path="/pizzadetail/:id" element={<PizzaDetail />} />
+        <Route path="/itemdetail/:id" element={<ItemDetail/>} />
         <Route path="/sidedetail/:id" element={<SideDetail />} />
 
         <Route path="/profile/:id" element={<UserProfile />} />

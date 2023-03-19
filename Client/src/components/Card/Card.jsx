@@ -12,20 +12,27 @@ const Card = (props) => {
   };
 
   return (
-
-    <div className={styles.container}>
+    <Box
+      bgGradient="linear-gradient(to right, #f27825, #eab830)"
+      borderRadius="md"
+      boxShadow="md"
+      overflow="hidden"
+      maxW="sm"
+    >
       <Link to={`/itemdetail/${props.id}`}>
-        <div >
-          <h1>{props.name}</h1>
-          <img src={props.image} alt="" className={styles.image}></img>
-          <h1>${props.price}</h1>
-        </div>
+        <Image
+          src={props.image}
+          alt={props.name}
+          w="full"
+          h="300px"
+          objectFit="cover"
+        />
       </Link>
       <Grid templateColumns="1fr" templateRows="1fr 50px" p="4">
         <Text fontSize="lg" fontWeight="semibold" color="white">
           {props.name}
         </Text>
-        <Flex justifyContent="space-between" alignItems="center" pt="10px">
+        <Flex justifyContent="space-between" alignItems="center">
           <Text fontSize="2xl" fontWeight="bold" color="#272727" mr="2">
             ${props.price}
           </Text>

@@ -16,7 +16,7 @@ function SubNavbar() {
         <ChakraLink as={Link} to="/allpizzas" mr={6}>
           All Pizzas
         </ChakraLink>
-        <ChakraLink as={Link} to="/alldrinks">
+        <ChakraLink as={Link} to="/alldrinks" mr={6}>
           All Drinks
         </ChakraLink>
         <ChakraLink as={Link} to="/allsides" mr={6}>
