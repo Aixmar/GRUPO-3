@@ -1,11 +1,15 @@
-import { Box, Flex, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Spacer, ChakraProvider, Image, Link } from "@chakra-ui/react";
+import { Box, Flex, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Spacer, ChakraProvider, Image, Link , Badge} from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
 import { motion } from "framer-motion";
 import logopizza from "../../assets/logo-pizza-app.png";
 import cart from "../../assets/cart.png";
+import { useSelector } from "react-redux";
 
 
 const NavBar = () => {
+
+  const cartItems = useSelector(state => state.cart);
+  
   return (
     
       <Box bgGradient="linear(to-l,#000000, #272727)" color="white" py={0} px={8}>
@@ -59,7 +63,24 @@ const NavBar = () => {
               <Link as={RouterLink} to="/cart">
               <img src={cart} alt="Logo" width="50px" height="50px" />
                 </Link>
+                <Badge
+                    className="cart-icon"
+                    borderRadius="full"
+                    px={2}
+                    py={1}
+                    colorScheme="orange"
+                    border="2px"
+                    borderColor="orange.500"
+                    position="relative"
+                    transform="translateX(-60%)"
+                    >
+                    
+                    <span >{cartItems.length}</span>
+                  </Badge>
+                
               </BreadcrumbItem>
+              
+
             </Breadcrumb>
           </Box>
         </Flex>
