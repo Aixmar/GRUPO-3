@@ -78,17 +78,17 @@ const rootReducer = (state = initialState, action) => {
       if (action.payload === "None") return { ...state };
 
       let sortedPizzas;
-      if (action.payload === "A-Z") {
+      if (action.payload === "From A to Z") {
         sortedPizzas = state.pizzas.sort((a, b) =>
           a.name.localeCompare(b.name)
         );
-      } else if (action.payload === "Z-A") {
+      } else if (action.payload === "From Z to A") {
         sortedPizzas = state.pizzas.sort((a, b) =>
           b.name.localeCompare(a.name)
         );
-      } else if (action.payload === "Price: Low to high") {
+      } else if (action.payload === "Low to high") {
         sortedPizzas = state.pizzas.sort((a, b) => a.price - b.price);
-      } else if (action.payload === "Price: High to low") {
+      } else if (action.payload === "High to low") {
         sortedPizzas = state.pizzas.sort((a, b) => b.price - a.price);
       }
       return {
