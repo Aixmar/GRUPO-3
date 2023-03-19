@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { getIngredients, getIngredientsQuery } from "../../redux/actions";
+import { useEffect } from "react";
 
 
 const SearchBar = () => {
@@ -8,6 +9,10 @@ const SearchBar = () => {
   const handlerQuery = (e) => {
     dispatch(getIngredientsQuery(e.target.value));
   };
+
+  useEffect(() => {
+    return () => dispatch(getIngredientsQuery(""))
+  },[])
 
   return (
     <div>
