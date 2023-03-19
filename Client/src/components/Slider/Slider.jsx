@@ -17,7 +17,7 @@ const Slider = () => {
 
     const redirectToDetail = (event) => {
         const { id } = event.target;
-        navigate(`/pizzadetail/${id}`)
+        navigate(`/itemdetail/${id}`)
     };
 
 
