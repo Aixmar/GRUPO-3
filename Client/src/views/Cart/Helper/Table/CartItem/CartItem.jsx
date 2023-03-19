@@ -3,6 +3,7 @@ import {
   Flex,
   Link,
   Select,
+  Spacer,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { PriceTag } from "../PriceTag/PriceTag";
@@ -68,13 +69,15 @@ export const CartItem = (props) => {
         justify="space-between"
         display={{ base: "none", md: "flex" }}
       >
-        <QuantitySelect
+        <Spacer></Spacer>
+        {/* <QuantitySelect
           value={quantity}
           onChange={(e) => {
             onChangeQuantity?.(+e.currentTarget.value);
           }}
-        />
+        /> */}
         <PriceTag price={price} currency={currency} />
+        <Spacer></Spacer>
         <CloseButton
           aria-label={`Delete ${name} from cart`}
           onClick={() => onClickDelete(index)}
@@ -96,12 +99,14 @@ export const CartItem = (props) => {
           aria-label={`Delete ${name} from cart`}
           onClick={() => onClickDelete(index)}
         />
-        <QuantitySelect
+        <Spacer></Spacer>
+        {/* <QuantitySelect
           value={quantity}
           onChange={(e) => {
             onChangeQuantity?.(+e.currentTarget.value);
           }}
-        />
+        /> */}
+        <Spacer></Spacer>
         <PriceTag price={price} currency={currency} />
       </Flex>
     </Flex>
