@@ -8,7 +8,7 @@ const Card = (props) => {
   const dispatch = useDispatch();
 
   const handleAddToCart = () => {
-    dispatch(pushToCart(props.id));
+    dispatch(pushToCart(props));
   };
 
   return (
