@@ -18,7 +18,7 @@ const Drinks = (props) => {
       overflow="hidden"
       maxW="sm"
     >
-      <Link to={`/pizzadetail/${props.id}`}>
+      <Link to={`/itemdetail/${props.id}`}>
         <Image
           src={props.image}
           alt={props.name}
