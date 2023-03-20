@@ -4,6 +4,7 @@ import { useState } from 'react';
 import styles from "./DrinksContainer.module.css";
 import { useDispatch, useSelector } from 'react-redux';
 import { getPizzas } from '../../redux/actions';
+import { Box } from '@chakra-ui/react';
 
 const DrinksContainer = (props) => {
 const {drinks} = props
@@ -13,7 +14,7 @@ console.log(props);
     <>
   
     <div className={styles.container} >
-      {drinks.map(bebida => (
+      { drinks.length ? drinks.map(bebida => (
         <Drinks 
         key={bebida.name} 
         id={bebida.id}
@@ -23,7 +24,10 @@ console.log(props);
         rating={bebida.rating}
         stock={bebida.stock}
         />
-      ))}
+      )): <Box fontFamily="sans-serif"
+      fontSize="xl"
+      color="white"
+      >No results</Box>}
     </div>
 
    

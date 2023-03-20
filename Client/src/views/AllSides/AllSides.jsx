@@ -1,36 +1,38 @@
 import { Box, Flex } from "@chakra-ui/react";
 import SidesContainer from "../../components/SidesContainer/SidesContainer";
 import SubNavBar from "../../components/SubNavBar/SubNavBar";
-import SortSelect from "../../components/Sorters/SortSelect";
-import Filters from "../../components/Filters/Filters";
+import { sidesTermsFilter } from "../../Utils/sidesTermsFilters";
+import FilterSides from "../../components/FilterSides/FilterSides";
+import { useDispatch, useSelector } from "react-redux";
+import { getPizzas } from "../../redux/actions";
+import { useEffect } from "react";
+
 
 const AllSides = () => {
+    const dispatch = useDispatch()
+
+    const filterSidesTerms = useSelector((state) => state.filterSidesTerms)
+    const items = useSelector((state) => state.pizzas)
+    const sides = items.filter(i => i.category === 'sides')
+    const sidesFiltered = sidesTermsFilter({sides,filterSidesTerms})
+
+    useEffect(() => {
+        dispatch(getPizzas());
+    }, [dispatch]);
+    
     return (
         <Flex bgGradient="linear(to-l,#000000, #272727)">
             <Box position="absolute" zIndex="10" w="100%">
                 <SubNavBar />
             </Box>
-            
+
             {/* ACA NO VAN ESTOS FILTROS, LOS PUSE COMO EJEMPLO PARA CUANDO PONGAMOS LOS QUE SI VAN! */}
             {/* ACA NO VAN ESTOS FILTROS, LOS PUSE COMO EJEMPLO PARA CUANDO PONGAMOS LOS QUE SI VAN! */}
             <Box flex="0 0 auto" ml="2.5rem" pt="100px">
-                <SortSelect
-                    Sort={[
-                        "A-Z",
-                        "Z-A",
-                        "Price: Low to high",
-                        "Price: High to low",
-                        "Avg. customers reviews",
-                    ]}
-                    // selectedSort={selectedSort}
-                    // setSelectedSort={setSelectedSort}
-                />
-                <Box mt="1rem">
-                    <Filters />
-                </Box>
+                <FilterSides />
             </Box>
             <Box flex="1 1 auto" pt="100px" mr="2rem" ml="2rem">
-                <SidesContainer />
+                <SidesContainer sides={sidesFiltered} />
             </Box>
         </Flex>
     );

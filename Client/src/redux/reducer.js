@@ -7,6 +7,7 @@ import {
   POP_TO_CART,
   FILTER_BY_VEGETARIAN,
   FILTER_DRINKS_TERMS,
+  FILTER_SIDES_TERMS
 } from "./actionTypes";
 
 const initialState = {
@@ -18,6 +19,7 @@ const initialState = {
   //-peruano3000--------
   filterDrinksTerms: {},
   //--------------------
+  filterSidesTerms:{},
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -113,6 +115,11 @@ const rootReducer = (state = initialState, action) => {
     case FILTER_DRINKS_TERMS:
       return { ...state, filterDrinksTerms: action.payload };
 
+    case FILTER_SIDES_TERMS:
+      return{
+        ...state,
+        filterSidesTerms: action.payload
+      }
     default:
       return { ...state };
   }

@@ -1,32 +1,29 @@
-import { useEffect } from "react";
 import Sides from "../Sides/Sides";
-import { useDispatch, useSelector } from "react-redux";
-import { getPizzas } from "../../redux/actions";
 import { SimpleGrid } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 
-const SidesContainer = () => {
-
-    const dispatch = useDispatch()
-    useEffect(() => {
-        dispatch(getPizzas());
-    }, [dispatch]);
-
-    const sides = useSelector((state) => state.pizzas);
-    const OnlySides = sides.filter((items) => items.category === 'sides')
+const SidesContainer = (props) => {
+    const { sides } = props
 
     return (
         <>
 
-            <SimpleGrid columns={[2, 2, 4]} spacing={10}>
-                {OnlySides.map(side => (
+            <SimpleGrid columns={[2, 2, 4]} spacing={10} marginBottom="45px">
+
+                {sides.length ? sides.map(side => (
                     <Sides
                         key={side.name}
                         id={side.id}
                         name={side.name}
                         image={side.image}
                         price={side.price}
+                        rating={side.rating}
+                        stock={side.stock}
                     />
-                ))}
+                )) : <Box fontFamily="sans-serif"
+                    fontSize="xl"
+                    color="white"
+                    >No results</Box>}
             </SimpleGrid>
 
         </>

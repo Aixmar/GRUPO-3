@@ -18,10 +18,10 @@ const AllPizzas = () => {
         <SubNavBar />
       </Box>
       <Box flex="0 0 auto" ml="2.5rem" pt="100px">
-        <SortSelect
+        {/* <SortSelect
           selectedSort={selectedSort}
           setSelectedSort={setSelectedSort}
-        />
+        /> */}
         <Box mt="1rem">
           <Filters />
         </Box>

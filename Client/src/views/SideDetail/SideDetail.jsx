@@ -47,6 +47,7 @@ const SideDetail = () => {
                 background="linear-gradient(to right, #f27833, #eab830)" >Back to menu</Button>
               </Link>
               <Button
+                isDisabled={side.stock === 0 ? true : false}
                 onClick={clickHandler}
                 variantColor="orange"
                 borderRadius="full"
