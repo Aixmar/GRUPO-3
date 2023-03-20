@@ -1,4 +1,4 @@
-export const peruanoFiltrador = (props) => {
+export const drinksTermsFilters = (props) => {
   const { drinks, filterDrinksTerms } = props;
   const {
     filterSugar,

@@ -53,7 +53,7 @@ const FilterSides = () => {
     }
 
     return (
-        <Flex direction='column' gap='3'>
+        <Flex direction='column' gap='3' marginBottom='20px'>
 
             <SearchBarSides
                 handleInputChange={handleInputChange}

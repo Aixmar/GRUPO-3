@@ -1,41 +1,39 @@
 import { Button, Flex, FormControl, Spacer } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useDispatch} from "react-redux";
-import { filterDrinksTerms } from "../../redux/actions";
-import SearchBarDrinks from "./SearchBarDrinks/SearchBarDrinks";
-import FilterSugar from "./SelectSugar/FilterSugar";
+import { filterPizzasTerms } from "../../redux/actions";
+import SearchBarPizzas from "./SearchBarPizzas/SearchBarPizzas";
 import SelectOrderName from "./SelectOrderName/SelectOrderName";
-import SelectOrderVolumen from "./SelectOrderVolumen/SelectOrderVolumen";
 import SelectOrderPrice from "./SelectOrderPrice/SelectOrderPrice";
 import SelectStock from "./SelectStock/SelectStock";
 import SelectOrderRating from "./SelectOrderRating/SelectOrderRating";
+import SelectByType from "./SelectByType/SelectByType";
 
-const FilterDrinks = () => {
+const FilterPizzas = () => {
   
   const [filterTerms, setFilterTerms] = useState({
-    searchBarDrinks: "",
-    filterSugar: "",
+    searchBarPizzas: "",
+    selectByType: "",
     selectStock: "",
     selectOrderRating: "",
     selectOrderName: "",
-    selectOrderVolumen: "",
     selectOrderPrice: "",
   });
   
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(filterDrinksTerms(filterTerms));
+    dispatch(filterPizzasTerms(filterTerms));
   }, [filterTerms]);
-
+  
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    if (name === "searchBarDrinks") {
-      setFilterTerms({ ...filterTerms, [name]: value });
-    }
-    if (name === "filterSugar") {
+    if (name === "searchBarPizzas") {
       setFilterTerms({ ...filterTerms, [name]: value });
     }
     if (name === "selectStock") {
+      setFilterTerms({ ...filterTerms, [name]: value});
+    }
+    if (name === "selectByType") {
       setFilterTerms({ ...filterTerms, [name]: value});
     }
     if (name === "selectOrderRating") {
@@ -44,9 +42,6 @@ const FilterDrinks = () => {
     if (name === "selectOrderName") {
       setFilterTerms({ ...filterTerms, [name]: value, selectOrderVolumen: "" , selectOrderPrice: "", selectOrderRating: ""});
     }
-    if (name === "selectOrderVolumen") {
-      setFilterTerms({ ...filterTerms, [name]: value, selectOrderName: "", selectOrderPrice: "", selectOrderRating: ""});
-    }
     if (name === "selectOrderPrice") {
       setFilterTerms({ ...filterTerms, [name]: value, selectOrderName: "", selectOrderVolumen: "", selectOrderRating: ""});
     }
@@ -54,25 +49,24 @@ const FilterDrinks = () => {
 
   const handleOnClick = () => {
     setFilterTerms({
-      searchBarDrinks: "",
-      filterSugar: "",
+      searchBarPizzas: "",
+      selectByType: "",
       selectStock: "",
       selectOrderRating: "",
       selectOrderName: "",
-      selectOrderVolumen: "",
       selectOrderPrice: "",
     })
   }
   return (
     <Flex direction='column' gap='3' marginBottom='20px'>
-      <SearchBarDrinks 
+      <SearchBarPizzas 
       handleInputChange={handleInputChange} 
-      valueState={filterTerms.searchBarDrinks}
+      valueState={filterTerms.searchBarPizzas}
       />
       <Spacer />
-      <FilterSugar 
-      handleInputChange={handleInputChange} 
-      valueState={filterTerms.filterSugar}
+      <SelectByType
+        handleInputChange={handleInputChange}
+        valueState={filterTerms.selectByType}
       />
       <SelectStock
         handleInputChange={handleInputChange}
@@ -87,10 +81,6 @@ const FilterDrinks = () => {
         handleInputChange={handleInputChange}
         valueState={filterTerms.selectOrderName}
       />
-      <SelectOrderVolumen
-        handleInputChange={handleInputChange}
-        valueState={filterTerms.selectOrderVolumen}
-      />
       <SelectOrderPrice
         handleInputChange={handleInputChange}
         valueState={filterTerms.selectOrderPrice}
@@ -101,4 +91,4 @@ const FilterDrinks = () => {
   );
 };
 
-export default FilterDrinks;
+export default FilterPizzas;

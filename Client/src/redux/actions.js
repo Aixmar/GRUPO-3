@@ -8,7 +8,8 @@ import {
   FILTER_BY_VEGETARIAN,
   ERROR_QUERY,
   FILTER_DRINKS_TERMS,
-  FILTER_SIDES_TERMS
+  FILTER_SIDES_TERMS,
+  FILTER_PIZZAS_TERMS,
 } from "./actionTypes";
 import axios from "axios";
 
@@ -20,11 +21,11 @@ export const getIngredients = () => {
 };
 
 export const getIngredientsQuery = (name) => {
-  return function(dispatch){
+  return function (dispatch) {
     axios(`http://localhost:3001/ingredients?name=${name}`)
-    .then(res => res.data)
-    .then(data => dispatch({ type: GET_INGREDIENTS_QUERY, payload:data }))
-}
+      .then((res) => res.data)
+      .then((data) => dispatch({ type: GET_INGREDIENTS_QUERY, payload: data }));
+  };
 };
 
 export const getPizzas = () => {
@@ -51,9 +52,13 @@ export const filterByVegetarian = (filterVege) => {
 };
 
 export const filterDrinksTerms = (filterTerms) => {
-  return { type: FILTER_DRINKS_TERMS, payload: filterTerms}
-}
+  return { type: FILTER_DRINKS_TERMS, payload: filterTerms };
+};
 
 export const filterSidesTerms = (sidesTerms) => {
-  return{type: FILTER_SIDES_TERMS, payload: sidesTerms}
-}
+  return { type: FILTER_SIDES_TERMS, payload: sidesTerms };
+};
+
+export const filterPizzasTerms = (pizzasTerms) => {
+  return { type: FILTER_PIZZAS_TERMS, payload: pizzasTerms };
+};
