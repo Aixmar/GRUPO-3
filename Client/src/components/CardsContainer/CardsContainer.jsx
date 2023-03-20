@@ -56,7 +56,7 @@ const CardsContainer = ({ selectedSort }) => {
         <p>Loading...</p>
       ) : (
         <>
-          <SimpleGrid columns={[2, 2, 4]} spacing={10}>
+          <SimpleGrid columns={[2, 2, 4]} spacing={10} marginBottom="45px">
             {actualPizzas?.map((pizza) => {
               return (
                 <Card

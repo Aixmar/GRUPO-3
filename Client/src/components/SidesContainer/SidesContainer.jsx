@@ -8,7 +8,7 @@ const SidesContainer = (props) => {
     return (
         <>
 
-            <SimpleGrid columns={[2, 2, 4]} spacing={10}>
+            <SimpleGrid columns={[2, 2, 4]} spacing={10} marginBottom="45px">
 
                 {sides.length ? sides.map(side => (
                     <Sides
