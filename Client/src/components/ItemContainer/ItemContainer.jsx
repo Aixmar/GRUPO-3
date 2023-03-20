@@ -31,7 +31,7 @@ const ItemContainer = (props) => {
   // --------------------------------------------------------------
 
   return (
-    <Box id="itemContainer" overflowY="auto" height="600px" marginBottom='20px'>
+    <Box id="itemContainer" overflowY="auto" height="600px" marginBottom='20px' >
       <SimpleGrid columns={[2, 2, 4]} spacing={10} marginBottom="45px">
         {items.length ? (
           items.map((bebida) => (
