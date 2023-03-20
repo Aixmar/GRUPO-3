@@ -8,6 +8,7 @@ import {
   FILTER_BY_VEGETARIAN,
   ERROR_QUERY,
   FILTER_DRINKS_TERMS,
+  FILTER_SIDES_TERMS
 } from "./actionTypes";
 import axios from "axios";
 
@@ -51,4 +52,8 @@ export const filterByVegetarian = (filterVege) => {
 
 export const filterDrinksTerms = (filterTerms) => {
   return { type: FILTER_DRINKS_TERMS, payload: filterTerms}
+}
+
+export const filterSidesTerms = (sidesTerms) => {
+  return{type: FILTER_SIDES_TERMS, payload: sidesTerms}
 }

@@ -43,7 +43,7 @@ const Drinks = (props) => {
           <Text fontSize="2xl" fontWeight="bold" color="#272727" mr="2">
             ${props.price}
           </Text>
-          <Button colorScheme="red" onClick={handleAddToCart}>
+          <Button isDisabled={props.stock === 0 ? true : false} colorScheme="red" onClick={handleAddToCart}>
             Add to cart
           </Button>
         </Flex>

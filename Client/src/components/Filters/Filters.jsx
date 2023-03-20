@@ -34,7 +34,7 @@ const Filters = () => {
           borderColor: "#f27825"
         }}
       >
-        <option value="all">All Pizzas</option>
+        <option value="all">None</option>
         <option value="yes">✓ Vegetarian</option>
         <option value="no">X Non-Vegetarian</option>
       </Select>
