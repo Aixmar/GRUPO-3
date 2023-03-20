@@ -7,7 +7,8 @@ import {
   POP_TO_CART,
   FILTER_BY_VEGETARIAN,
   FILTER_DRINKS_TERMS,
-  FILTER_SIDES_TERMS
+  FILTER_SIDES_TERMS,
+  FILTER_PIZZAS_TERMS,
 } from "./actionTypes";
 
 const initialState = {
@@ -19,7 +20,9 @@ const initialState = {
   //-peruano3000--------
   filterDrinksTerms: {},
   //--------------------
-  filterSidesTerms:{},
+  filterSidesTerms: {},
+  //--------------------
+  filterPizzasTerms: {},
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -95,7 +98,7 @@ const rootReducer = (state = initialState, action) => {
       }
       return {
         ...state,
-        pizzas: [ ...sortedPizzas ],
+        pizzas: [...sortedPizzas],
       };
 
     case FILTER_BY_VEGETARIAN:
@@ -116,10 +119,11 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, filterDrinksTerms: action.payload };
 
     case FILTER_SIDES_TERMS:
-      return{
-        ...state,
-        filterSidesTerms: action.payload
-      }
+      return { ...state, filterSidesTerms: action.payload };
+
+    case FILTER_PIZZAS_TERMS:
+      return { ...state, filterPizzasTerms: action.payload };
+
     default:
       return { ...state };
   }

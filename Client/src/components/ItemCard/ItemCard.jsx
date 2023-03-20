@@ -4,7 +4,7 @@ import { Box, Flex, Grid, Image, Text } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/button";
 import { pushToCart } from "../../redux/actions";
 
-const Drinks = (props) => {
+const ItemCard = (props) => {
   const dispatch = useDispatch();
   const handleAddToCart = () => {
     dispatch(pushToCart(props));
@@ -52,4 +52,4 @@ const Drinks = (props) => {
   );
 };
 
-export default Drinks;
+export default ItemCard;
