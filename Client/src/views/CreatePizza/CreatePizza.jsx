@@ -227,6 +227,7 @@ const CreatePizza = () => {
                               disabled={ form.detail.cheeseIngredients.length === 3 && !form.detail.cheeseIngredients.includes(ingr.name) ? true : false }
                               onChange={handleOnChange}
                               marginRight="2"
+                              marginLeft="20"
                               marginBottom="2"
                               size="lg"
                               bg="teal.200"
