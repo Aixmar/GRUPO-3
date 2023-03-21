@@ -1,15 +1,22 @@
 import { Box, Flex, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Spacer, ChakraProvider, Image, Link , Badge} from "@chakra-ui/react";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink,useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import logopizza from "../../assets/logo-pizza-app.png";
 import cart from "../../assets/cart.png";
 import { useSelector } from "react-redux";
+import useLogout from "../../Utils/useLogout";
 
 
-const NavBar = () => {
+const NavBar = ({user}) => {
 
   const cartItems = useSelector(state => state.cart);
-  
+  const navigate = useNavigate();
+  const logout = useLogout();
+
+  const signOut = async () => {
+    await logout();
+    navigate('/home');
+}
   return (
     
       <Box bgGradient="linear(to-l,#000000, #272727)" color="white" py={0} px={8}>
@@ -51,13 +58,26 @@ const NavBar = () => {
                 <BreadcrumbLink as={RouterLink} to="/allpizzas" _hover={{ color: "#f27825" }}>TRADITIONAL MENU</BreadcrumbLink>
               </BreadcrumbItem>
 
-              <BreadcrumbItem>
+
+              
+            {user?.email ?  (
+              <div>
+                <p>{user?.email}</p>
+                <button onClick={signOut}>Sign Out</button>
+              </div>
+            )
+              : (
+              <div>
+                <BreadcrumbItem>
                 <BreadcrumbLink as={RouterLink} to="/createuser" _hover={{ color: "#f27825" }}>SIGN IN</BreadcrumbLink>
+
               </BreadcrumbItem>
 
               <BreadcrumbItem>
                 <BreadcrumbLink as={RouterLink} to="/login" _hover={{ color: "#f27825" }}>LOGIN</BreadcrumbLink>
               </BreadcrumbItem>
+              </div>
+            )}
 
               <BreadcrumbItem>
                 <BreadcrumbLink as={RouterLink} to="/profile" _hover={{ color: "#f27825" }}>PROFILE</BreadcrumbLink>
