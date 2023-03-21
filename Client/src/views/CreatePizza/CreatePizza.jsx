@@ -127,8 +127,8 @@ const CreatePizza = () => {
                         <Radio key={t.id} onChange={handleRadio} size="lg" type="radio" name="type" value={t.name} >
                           {t.name}
                         </Radio>
-                        ))
-                    }
+                      }
+
                   </Stack>               
                 </RadioGroup>
                 {errors.type && <Text color="red">{errors.type}</Text>}

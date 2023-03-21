@@ -1,11 +1,18 @@
 import { Button, FormControl, FormLabel, Input, Box, Text } from "@chakra-ui/react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import useAuth from "../../Utils/useAuth";
+import { useNavigate,useLocation } from "react-router-dom";
 import axios from "axios";
 
+
 const UserLogin = () => {
+  const {setAuth} = useAuth()
+  const navigate = useNavigate()
+  const location = useLocation()
+  const from = location.state?.from?.pathname || "/home"
+  const [err,setErr] = useState('')
+
   const [form, setForm] = useState({ email: "", password: "" });
-  const [backResponse, setBackResponse] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
   const inputChangeHandler = (event) => {
@@ -15,20 +22,22 @@ const UserLogin = () => {
 
   const submitHandler = async (event) => {
     event.preventDefault();
-    setIsLoading(true);
-    try {
-      const response = await axios.post("/api/login", form);
-      setBackResponse(response.data);
-      const modal = document.querySelector("#registerModal");
-      modal.showModal();
+    try { 
+      const response = await axios.post("http://localhost:3001/users/login", form,{headers : {'Content-Type' : 'application/json'},withCredentials:true});
+      setIsLoading(true)
+      const accessToken = response?.data
+      setAuth({...form,accessToken})
+      navigate(from,{replace:true})
+      setErr('')
     } catch (error) {
-      console.error(error);
+      setErr(error.response.data)
     } finally {
       setIsLoading(false);
     }
   };
-
+  
   return (
+    
     <Box
       bgGradient="linear(to-l,#000000, #272727)"
       minH="100vh"
@@ -36,9 +45,13 @@ const UserLogin = () => {
       justifyContent="center"
       alignItems="center"
     >
+      
       <form onSubmit={submitHandler}>
+      
         <Box bgGradient="linear-gradient(to right, #f27825, #eab830)" w="333px"p="10" rounded="md" boxShadow="lg" >
+        
           <FormControl id="email">
+          {err !== '' && <p>{err.error}</p>}
             <FormLabel color="white">Email:</FormLabel>
             <Input
               type="email"
@@ -78,25 +91,10 @@ const UserLogin = () => {
             <Text>Login</Text>
           </Button>
         </Box>
-        <dialog id="registerModal">
-          <Box bg="gray.700" p="10" rounded="md" boxShadow="lg">
-            <h2>Welcome {backResponse.name}!</h2>
-            <Box mt="6">
-              <Link to="/home">
-                <Button
-                  bg={"orange.500"}
-                  fontSize={"2xl"}
-                  w={"full"}
-                  _hover={{ bg: "orange.600" }}
-                >
-                  Go to home
-                </Button>
-              </Link>
-            </Box>
-          </Box>
-        </dialog>
+        
       </form>
     </Box>
+    
   );
 };
 

@@ -33,6 +33,8 @@ const ItemDetail = () => {
   }, []);
   console.log('pizza------->', pizza)
 
+// console.log('HOLA SOY LOS TOPPINGS', pizza.detail.toppingIngredients)
+
   return (
     <Box display="flex" justifyContent="center" alignItems='start' width="100%" height="100vh"bgGradient="linear(to-l,#000000, #272727)">
     <Box display='flex' borderWidth="1px" borderRadius="lg" width="100%" margin='2rem 4rem 0' boxShadow="0 0 20px rgba(0, 0, 0, 0.1)" height='80vh' >
@@ -40,17 +42,21 @@ const ItemDetail = () => {
       <Box p="6" bgGradient="linear(to-l,#000000, #272727)" borderBottomRightRadius='8px' borderBottomLeftRadius='8px' width='100%' >
         <Box d="flex" alignItems="baseline" >
           <Text fontSize="3.2rem" fontWeight="semibold" color="white" mb='2rem' >{pizza.name}</Text>
-          <Text fontSize="1.2rem" fontWeight="semibold" color="white"><Text color='#f27825' display='inline' >Dough:</Text> {pizza?.detail?.dough}</Text>
-          <Text fontSize="1.2rem" fontWeight="semibold" color="white"><Text color='#f27825' display='inline' >Base:</Text> {pizza?.detail?.base}</Text>
-          <Text fontSize="1.2rem" fontWeight="semibold" color="white"><Text color='#f27825' display='inline' >Mozzarella:</Text> {pizza?.detail?.mozzarella}</Text>
-          <Text fontSize="1.2rem" fontWeight="semibold" color="white"><Text color='#f27825' display='inline' >Cheese ingredients:</Text> {pizza?.detail?.cheeseIngredients?.join(', ')}</Text>
-          <Text fontSize="1.2rem" fontWeight="semibold" color="white"><Text color='#f27825' display='inline' >Meat ingredients:</Text> {pizza?.detail?.meatIngredients?.join(', ')}</Text>
-          <Text fontSize="1.2rem" fontWeight="semibold" color="white" mb='1rem' ><Text color='#f27825' display='inline' >Topping ingredients:</Text> {pizza?.detail?.toppingIngredients?.join(', ')}</Text>
+
+  
+          { pizza.category === "pizza" && <Text fontSize="1.2rem" fontWeight="semibold" color="white"><Text color='#f27825' display='inline' >Dough:</Text> {pizza?.detail?.dough}</Text>}
+          { pizza.category === "pizza" && <Text fontSize="1.2rem" fontWeight="semibold" color="white"><Text color='#f27825' display='inline' >Base:</Text> {pizza?.detail?.base}</Text>}
+          { pizza.category !== "pizza" && <Text fontSize="1.2rem" fontWeight="semibold" color="white"><Text color='#f27825' display='inline' >Description:</Text> {pizza?.detail?.description}</Text>}
+          { pizza.category === "pizza" && <Text fontSize="1.2rem" fontWeight="semibold" color="white"><Text color='#f27825' display='inline' >Mozzarella:</Text> {pizza?.detail?.mozzarella}</Text>}     
+          { pizza.category === "pizza" && pizza.detail.meatIngredients.length !== 0 && <Text fontSize="1.2rem" fontWeight="semibold" color="white"><Text color='#f27825' display='inline' >Meat ingredients:</Text> {pizza?.detail?.meatIngredients?.join(', ')}</Text>} 
+          { pizza.category === "pizza" && pizza.detail.cheeseIngredients.length !== 0 && <Text fontSize="1.2rem" fontWeight="semibold" color="white"><Text color='#f27825' display='inline' >Cheese ingredients:</Text> {pizza?.detail?.cheeseIngredients?.join(', ')}</Text>}
+          { pizza.category === "pizza" && pizza.detail.toppingIngredients.length !== 0 && <Text fontSize="1.2rem" fontWeight="semibold" color="white" mb='1rem' ><Text color='#f27825' display='inline' >Topping ingredients:</Text> {pizza?.detail?.toppingIngredients?.join(', ')}</Text>}
+         
         </Box>
 
         <Box width='100%'>
           <Text fontSize="4rem" color="white">$ {pizza.price}</Text>
-          <Link to='/allpizzas'><Button variantColor="teal"
+          <Link to='/allpizzas'><Button variantcolor="teal"
             borderRadius="full"
             padding="10px"
             background="linear-gradient(to right, #f27833, #eab830)" >Back to menu</Button>
@@ -58,7 +64,7 @@ const ItemDetail = () => {
           <Button
             isDisabled={pizza.stock === 0 ? true : false}
             onClick={clickHandler}
-            variantColor="orange"
+            variantcolor="orange"
             borderRadius="full"
             padding="10px"
             margin="10px"

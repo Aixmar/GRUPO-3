@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUser } from "../../redux/actions";
+// import { getUser } from "../../redux/actions";
 //import { Link } from "react-router-dom";
 import user from "./json";
 
