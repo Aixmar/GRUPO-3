@@ -60,6 +60,10 @@ const NavBar = () => {
               </BreadcrumbItem>
 
               <BreadcrumbItem>
+                <BreadcrumbLink as={RouterLink} to="/profile" _hover={{ color: "#f27825" }}>PROFILE</BreadcrumbLink>
+              </BreadcrumbItem>
+
+              <BreadcrumbItem>
               <Link as={RouterLink} to="/cart">
               <img src={cart} alt="Logo" width="50px" height="50px" />
                 </Link>

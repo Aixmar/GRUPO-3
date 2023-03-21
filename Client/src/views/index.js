@@ -13,7 +13,11 @@ import Error404 from "./Error404/error404";
 import AllDrinks from "./AllDrinks/AllDrinks";
 import AllSides from "./AllSides/AllSides";
 import SideDetail from "./SideDetail/SideDetail";
-
+import UserAccount from "./UserProfile/UserAccount";
+import UserSettings from "./UserProfile/UserSettings";
+import UserStars from "./UserProfile/UserStars";
+import UserHistory from "./UserProfile/UserHistory";
+import UserHistoryDetail from "./UserProfile/UserHistoryDetail";
 export {
   Landing,
   Home,
@@ -29,5 +33,10 @@ export {
   Error404,
   AllDrinks,
   AllSides,
-  SideDetail
+  SideDetail,
+  UserAccount,
+  UserSettings,
+  UserStars,
+  UserHistory,
+  UserHistoryDetail,
 };
