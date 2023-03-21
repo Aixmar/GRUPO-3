@@ -25,6 +25,7 @@ const UserForm = () => {
   const submitHandler = async (event) => {
     event.preventDefault();
     const { data } = await axios.post("http://localhost:3001/users", form);
+    alert('registrado con exito')
     setBackResponse(data);
     setForm({ email: "", password: "" });
   };
