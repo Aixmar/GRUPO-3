@@ -3,6 +3,7 @@ import SelectOrderName from "./SelectOrderName/SelectOrderName"
 import SelectOrderRating from "./SelectOrderRating/SelectOrderRating";
 import SelectOrderPrice from "./SelectOrderPrice/SelectOrderPrice";
 import FilterStock from "./FilterStock/FilterStock";
+import FilterTaste from "./FilterTaste/FilterTaste";
 import SearchBarSides from "./SearchBarSides/SearchBarSides";
 import { useDispatch } from "react-redux";
 import { filterSidesTerms } from "../../redux/actions";
@@ -14,6 +15,7 @@ const FilterSides = () => {
 
     const [sidesTerms, setSidesTerms] = useState({
         searchBarSides: "",
+        filterTaste: "",
         filterStock: "",
         selectOrderName: "",
         selectOrderPrice: "",
@@ -26,6 +28,9 @@ const FilterSides = () => {
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         if (name === "searchBarSides") {
+            setSidesTerms({ ...sidesTerms, [name]: value })
+        }
+        if (name === "filterTaste") {
             setSidesTerms({ ...sidesTerms, [name]: value })
         }
         if (name === "filterStock") {
@@ -45,6 +50,7 @@ const FilterSides = () => {
     const handleOnClick = () => {
         setSidesTerms({
             searchBarSides: "",
+            filterTaste: "",
             filterStock: "",
             selectOrderName: "",
             selectOrderPrice: "",
@@ -60,6 +66,10 @@ const FilterSides = () => {
                 valueState={sidesTerms.searchBarSides}
             />
             <Spacer />
+            <FilterTaste 
+                handleInputChange={handleInputChange}
+                valueState={sidesTerms.filterTaste}
+            />
             <FilterStock
                 handleInputChange={handleInputChange}
                 valueState={sidesTerms.filterStock}
