@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import PizzaCreated from "./PizzaCreated";
+import IngredientSelector from "./IngredientSelector";
 import { getIngredients, pushToCart } from "../../redux/actions";
-import SearchBar from "../../components/SearchBar/SearchBar";
-import { Button, Text, Grid, GridItem, CheckboxGroup, Checkbox, FormLabel, Radio, RadioGroup, Stack, Box, FormControl } from "@chakra-ui/react";
+import { Button, Text, Grid, GridItem, FormLabel, Radio, RadioGroup, Stack, Box } from "@chakra-ui/react";
 import createdpizzas from "../../assets/createdpizzas.png";
 import validate from "./validate";
 import css from './CreatePizza.module.css';
@@ -78,19 +79,6 @@ const CreatePizza = () => {
   };
 
 
-  const handleOnChange = (event) => {
-    const { name, value, checked } = event.target;    
-    const currentIngredient = ingredients.filter((ingr) => ingr.name === value);
-
-    if (checked) {
-      setForm({ ...form, detail: { ...form.detail, [name]: [ ...form.detail[name], value ]}, price: form.price + currentIngredient[0].price });
-    } else {
-      const ingredientsChecked = form.detail[name].filter((ingre) => ingre !== value);
-      setForm({ ...form, detail: { ...form.detail, [name]: ingredientsChecked }, price: form.price - currentIngredient[0].price });
-    };
-  };
-
-
   const handleSubmit = (e) => {
     e.preventDefault();
     const hasErrors = validate(form);
@@ -101,184 +89,103 @@ const CreatePizza = () => {
       dispatch(pushToCart(form));
       setForm(initialStateForm);
       modal.showModal();
-    } else {
-      window.scrollTo(0, 0);
-    };    
+    }; 
   };
 
 
 
   return (
-    <Box bgGradient="linear(to-l,#000000, #272727)">
-      <Text fontSize="5xl" color="#f27825" display="flex" ml="150px" pt="20px" pb="20px" >CREATE NEW PIZZA</Text>
-
-      <Box display="flex" justifyContent="center" alignItems="center">        
-        <form onSubmit={handleSubmit}>
-          <Grid templateColumns="repeat(4, 1fr)" gap={4} color="white">
-
-            <GridItem>
-              <RadioGroup>
-                <FormLabel fontWeight="bold">Dough (1 MAX Selection):</FormLabel>
-                <Stack direction="column">
-                  {
-                    typesOfDough.map((dough) => (
-                      <Radio key={dough.id} onChange={handleRadio} marginRight="3" size="lg" type="radio" name="dough" value={dough.name} >
-                        {dough.name}
-                      </Radio>
-                      ))
-                  }
-                </Stack>
-              </RadioGroup>
-              {errors.dough && <Text color="red">{errors.dough}</Text>}
-            </GridItem>
-
-            <GridItem>
-              <RadioGroup>
-                <FormLabel fontWeight="bold">Type (1 MAX Selection):</FormLabel>
-                <Stack direction="column">
-                  {
-                    typesOfBaking.map((t) => (
-                      <Radio key={t.id} onChange={handleRadio} marginRight="3" size="lg" type="radio" name="type" value={t.name} >
-                        {t.name}
-                      </Radio>
-                      ))
-                  }
-                </Stack>               
-              </RadioGroup>
-              {errors.type && <Text color="red">{errors.type}</Text>}
-            </GridItem>
-
-            <GridItem>
-              <RadioGroup>
-                <FormLabel fontWeight="bold">Base of (1 MAX Selection):</FormLabel>
-                <Stack direction="column">
-                  {
-                  sauceBases.map((base) => (
-                      <Radio key={base.id} onChange={handleRadio} marginRight="3" size="lg" type="radio"  name="base" value={base.name} >
-                        {base.name}
-                      </Radio>
-                    ))
-                  }
-                </Stack>                
-              </RadioGroup>
-              {errors.base && <Text color="red">{errors.base}</Text> }
-            </GridItem>
-
-            <GridItem>              
-              <RadioGroup>
-                <FormLabel fontWeight="bold">Muzarella (1 MAX Selection):</FormLabel>                
-                <Stack direction="column">
-                  {
-                    cheeseBases.map((base) => (
-                      <Radio key={base.id} onChange={handleRadio} marginRight="3" size="lg" type="radio" name="mozzarella" value={base.name} >
-                        {base.name}
-                      </Radio>
-                      ))
-                  }
-                </Stack>                
-              </RadioGroup>
-              {errors.mozzarella && ( <Text color="red">{errors.mozzarella}</Text> )}
-            </GridItem>
-          </Grid>
+    <>
+    <Box bgGradient="linear(to-l,#000000, #272727)"  height='100vh'>
+      <Text fontSize="3.6rem" color="#f27825" width='60%' display="flex" justifyContent='center' mb='1rem' >CREATE NEW PIZZA</Text>
       
-          <Box mb='2rem' >
-            <SearchBar />
+      <Box display='flex' heigth='100vh' width='96%' margin='0 auto' border='1px solid #fff' borderRadius='6px' >
+        <Box display="flex" width='64%' mt='1.2rem'>        
+            <Grid templateColumns="repeat(4, 1fr)" templateRows='50% 50%' width='100%' color="white"  >
+              <GridItem ml='2.2rem' >
+                <RadioGroup>
+                  <FormLabel fontWeight="bold">Dough type (Select 1):</FormLabel>
+                  <Stack >
+                    {
+                      typesOfDough.map((dough) => (
+                        <Radio key={dough.id} onChange={handleRadio} size="lg" type="radio" name="dough" value={dough.name} >
+                          {dough.name}
+                        </Radio>
+                        ))
+                    }
+                  </Stack>
+                </RadioGroup>
+                {errors.dough && <Text color="red">{errors.dough}</Text>}
+              </GridItem>
+
+              <GridItem ml='1rem' >
+                <RadioGroup>
+                  <FormLabel fontWeight="bold">Choose the bake (Select 1):</FormLabel>
+                  <Stack >
+                    {
+                      typesOfBaking.map((t) => (
+                        <Radio key={t.id} onChange={handleRadio} size="lg" type="radio" name="type" value={t.name} >
+                          {t.name}
+                        </Radio>
+                        ))
+                    }
+                  </Stack>               
+                </RadioGroup>
+                {errors.type && <Text color="red">{errors.type}</Text>}
+              </GridItem>
+
+              <GridItem ml='1rem' >
+                <RadioGroup>
+                  <FormLabel fontWeight="bold">Choose the base (Select 1):</FormLabel>
+                  <Stack direction="column">
+                    {
+                    sauceBases.map((base) => (
+                        <Radio key={base.id} onChange={handleRadio} size="lg" type="radio"  name="base" value={base.name} >
+                          {base.name}
+                        </Radio>
+                      ))
+                    }
+                  </Stack>                
+                </RadioGroup>
+                {errors.base && <Text color="red">{errors.base}</Text> }
+              </GridItem>
+
+              <GridItem ml='2rem' >              
+                <RadioGroup>
+                  <FormLabel fontWeight="bold">Mozarella? (Select 1):</FormLabel>                
+                  <Stack direction="column">
+                    {
+                      cheeseBases.map((base) => (
+                        <Radio key={base.id} onChange={handleRadio} size="lg" type="radio" name="mozzarella" value={base.name} >
+                          {base.name}
+                        </Radio>
+                        ))
+                    }
+                  </Stack>                
+                </RadioGroup>
+                {errors.mozzarella && ( <Text color="red">{errors.mozzarella}</Text> )}
+              </GridItem>
+
+              <GridItem gridColumn='1/-1' gridRow='2/3' >                
+                <Box width='100%' borderTop='1px solid #fff' height='100%' >
+                  <IngredientSelector toppings={toppings} setToppings={setToppings} cheeses={cheeses} setCheeses={setCheeses} meats={meats} setMeats={setMeats} form={form} setForm={setForm} ></IngredientSelector>
+                </Box>   
+              </GridItem>
+
+            </Grid>
           </Box>
-
-          {
-            error_query === null ? (
-              <Box>
-                <Grid templateColumns="repeat(4, 1fr)" gap={4} color="white">
-
-                  <GridItem gridColumn='1/3' display='flex' flexDirection='column' height='30rem' flexWrap='wrap' >
-                    <CheckboxGroup>
-                      <FormLabel fontWeight="bold">Toppings list (2 MAX Selection):</FormLabel>
-                      {
-                        toppings && toppings.map((ingr) => (
-                          <Box key={ingr.id}>
-                            <Checkbox
-                              checked={ form.detail.toppingIngredients.includes(ingr.name) ? true : false }
-                              disabled={ form.detail.toppingIngredients.length === 2 && !form.detail.toppingIngredients.includes(ingr.name) ? true : false }
-                              onChange={handleOnChange}
-                              marginRight="2"
-                              marginBottom="2"
-                              size="lg"
-                              bg="teal.200"
-                              type="checkbox"
-                              name="toppingIngredients"
-                              value={ingr.name} >
-                            </Checkbox>
-                            <FormLabel htmlFor={ingr.id} display='inline' >{ingr.name}</FormLabel>
-                          </Box>
-                        ))
-                      }
-                      {errors.toppingIngredients && ( <Text color="red">{errors.toppingIngredients}</Text> )}
-                    </CheckboxGroup>
-                  </GridItem>
-
-                  <GridItem>
-                    <CheckboxGroup>
-                      <FormLabel fontWeight="bold">Cheeses list (3 MAX Selection):</FormLabel>
-                      {
-                        cheeses && cheeses.map((ingr) => (
-                          <Box key={ingr.id} >
-                            <Checkbox
-                              checked={ form.detail.cheeseIngredients.includes(ingr.name) ? true : false }
-                              disabled={ form.detail.cheeseIngredients.length === 3 && !form.detail.cheeseIngredients.includes(ingr.name) ? true : false }
-                              onChange={handleOnChange}
-                              marginRight="2"
-                              marginBottom="2"
-                              size="lg"
-                              bg="teal.200"
-                              type="checkbox"
-                              name="cheeseIngredients"
-                              value={ingr.name} >                                  
-                            </Checkbox>
-                            <FormLabel htmlFor={ingr.id} display='inline' >{ingr.name}</FormLabel>
-                          </Box>
-                        ))
-                      }
-                      {errors.cheeseIngredients && ( <Text>{errors.cheeseIngredients}</Text> )}
-                    </CheckboxGroup>
-                  </GridItem>
-
-                  <GridItem>
-                    <CheckboxGroup>
-                      <FormLabel fontWeight="bold"> Meats list (3 MAX Selection):</FormLabel>
-                      <Box>                  
-                        {
-                          meats && meats.map((ingr) => (
-                            <Box key={ingr.id}>
-                              <Checkbox
-                                checked={ form.detail.meatIngredients.includes(ingr.name) ? true : false }
-                                disabled={ form.detail.meatIngredients.length === 3 && !form.detail.meatIngredients.includes(ingr.name) ? true : false } 
-                                onChange={handleOnChange}
-                                marginRight="2"
-                                marginBottom="2"
-                                size="lg"
-                                bg="teal.200"
-                                type="checkbox"
-                                name="meatIngredients"
-                                value={ingr.name} >                                    
-                                </Checkbox>
-                              <FormLabel htmlFor={ingr.id} display='inline' >{ingr.name}</FormLabel>
-                            </Box>
-                          ))
-                        }
-                      </Box>
-                    </CheckboxGroup>
-                  </GridItem>
-                </Grid>
-              </Box>
-
-          ) : ( <Text color="red">{error_query.error}</Text> )}
-
-          <Button type="submit" hoverbg="white" size="lg" borderRadius="full" padding="10px" margin="30px" background="linear-gradient(to right, #f27833, #eab830)" >
-            Add to cart
-          </Button>
-        </form>
-
+          
+        <Box width='36%' height='70vh' display='flex' flexDirection='column' borderLeft='1px solid #fff' >
+          <PizzaCreated form={form} setForm={setForm} toppings={toppings} setToppings={setToppings} cheeses={cheeses} setCheeses={setCheeses} meats={meats} setMeats={setMeats} ></PizzaCreated>
+          <Box display='flex' justifyContent='space-around' alignItems='center' mb='2rem' >
+            <Box><Text color='#fff' fontSize='1.4rem' width='14rem' >Total price: {form.price.toFixed(2)}</Text></Box>
+            <Button onClick={handleSubmit} type="submit" hoverbg="white" borderRadius="full" fontSize='2rem' padding="2rem 1.4rem" background="linear-gradient(to right, #f27833, #eab830)" >
+              Add to cart
+            </Button>
+          </Box>
+        </Box>
       </Box>
+         
 
           <dialog id="createPizzaModal" className={css.modalCreatePizza} >
             <img src={okIco} alt="nice" className={css.okIco} />
@@ -292,6 +199,7 @@ const CreatePizza = () => {
             </div>
           </dialog>
     </Box>
+    </>
   );
 };
 
