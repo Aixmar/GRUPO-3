@@ -1,10 +1,11 @@
 export const sidesTermsFilter = (props) => {
     const { sides, filterSidesTerms } = props
-    const { searchBarSides,filterStock, selectOrderName, selectOrderRating, selectOrderPrice } = filterSidesTerms
+    const { searchBarSides,filterTaste,filterStock, selectOrderName, selectOrderRating, selectOrderPrice } = filterSidesTerms
     console.log(selectOrderRating);
 
     const FoundBySearchBar = FilterBySearchBar(sides,searchBarSides)
-    const filteredByStock = FilterByStock(FoundBySearchBar, filterStock)
+    const FilteredByTaste = FilterByTaste(FoundBySearchBar,filterTaste)
+    const filteredByStock = FilterByStock(FilteredByTaste, filterStock)
     const orderedSidesBySort = OrderBySort(filteredByStock, selectOrderName)
     const orderedSidesByRating = OrderByRating(orderedSidesBySort, selectOrderRating)
     const orderedByPrice = OrderByPrice(orderedSidesByRating, selectOrderPrice)
@@ -20,6 +21,14 @@ const FilterBySearchBar = (sides,valueOfSearchBar) => {
         const searchValue = valueOfSearchBar?.trim().toLowerCase();
         return sideName.includes(searchValue)
     })
+    return sidesFiltered
+}
+
+const FilterByTaste = (sides,valueToFilter) => {
+    const sidesFiltered = valueToFilter === "Sweet" ?
+        sides.filter(s => s.detail.subcategory === "sweet") :
+        valueToFilter === "Salad" ?  sides.filter(s => s.detail.subcategory === "salad") : 
+        valueToFilter === "Dips" ? sides.filter(s => s.detail.subcategory === "dip") : sides
     return sidesFiltered
 }
 
