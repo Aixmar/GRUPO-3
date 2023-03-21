@@ -69,12 +69,12 @@ const NavBar = ({user}) => {
               : (
               <div>
                 <BreadcrumbItem>
-                <BreadcrumbLink as={RouterLink} to="/createuser" _hover={{ color: "#f27825" }}>SIGN IN</BreadcrumbLink>
+                <BreadcrumbLink marginRight="3" as={RouterLink} to="/createuser" _hover={{ color: "#f27825" }}>REGISTER</BreadcrumbLink>
 
               </BreadcrumbItem>
 
               <BreadcrumbItem>
-                <BreadcrumbLink as={RouterLink} to="/login" _hover={{ color: "#f27825" }}>LOGIN</BreadcrumbLink>
+                <BreadcrumbLink marginRight="3" as={RouterLink} to="/login" _hover={{ color: "#f27825" }}>LOGIN</BreadcrumbLink>
               </BreadcrumbItem>
               </div>
             )}
