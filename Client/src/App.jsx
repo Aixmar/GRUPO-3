@@ -18,7 +18,12 @@ import {
   AllDrinks,
   AllSides,
   SideDetail,
-  RequireAuth
+  RequireAuth,
+  UserAccount,
+  UserSettings,
+  UserStars,
+  UserHistory,
+  UserHistoryDetail,
 
 } from "./views/index";
 
@@ -34,7 +39,7 @@ function App() {
         
         <Route path="/" element={<Landing />} />
         <Route path="/home" element={<Home />} />
-        
+
         <Route path="/allpizzas" element={<AllPizzas />}></Route>
         <Route path="/alldrinks" element={<AllDrinks />}></Route>
         <Route path="/allsides" element={<AllSides />}></Route>
@@ -51,11 +56,18 @@ function App() {
         
         
 
-        <Route path="/itemdetail/:id" element={<ItemDetail/>} />
+        <Route path="/itemdetail/:id" element={<ItemDetail />} />
         <Route path="/sidedetail/:id" element={<SideDetail />} />
 
-        
-        
+
+        <Route path="/profile" element={<UserProfile />} />
+        <Route path="/profile/settings" element={<UserSettings />} />
+        <Route path="/profile/account" element={<UserAccount />} />
+        <Route path="/profile/stars" element={<UserStars />} />
+        <Route path="/profile/history" element={<UserHistory />} />
+        <Route path="/profile/history/:id" element={<UserHistoryDetail />} />
+        <Route path="/createpizza" element={<CreatePizza />} />
+
         <Route path="/cart" element={<Cart />} />
         <Route path="*" element={<Error404 />} />
       </Routes>

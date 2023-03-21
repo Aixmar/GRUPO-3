@@ -14,7 +14,11 @@ import AllDrinks from "./AllDrinks/AllDrinks";
 import AllSides from "./AllSides/AllSides";
 import SideDetail from "./SideDetail/SideDetail";
 import RequireAuth from "../components/RequireAuth/RequireAuth";
-
+import UserAccount from "./UserProfile/UserAccount";
+import UserSettings from "./UserProfile/UserSettings";
+import UserStars from "./UserProfile/UserStars";
+import UserHistory from "./UserProfile/UserHistory";
+import UserHistoryDetail from "./UserProfile/UserHistoryDetail";
 
 export {
   Landing,
@@ -32,5 +36,11 @@ export {
   AllDrinks,
   AllSides,
   SideDetail,
-  RequireAuth
+  RequireAuth,
+  UserAccount,
+  UserSettings,
+  UserStars,
+  UserHistory,
+  UserHistoryDetail,
+
 };
