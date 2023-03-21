@@ -28,7 +28,8 @@ const FilterByTaste = (sides,valueToFilter) => {
     const sidesFiltered = valueToFilter === "Sweet" ?
         sides.filter(s => s.detail.subcategory === "sweet") :
         valueToFilter === "Salad" ?  sides.filter(s => s.detail.subcategory === "salad") : 
-        valueToFilter === "Dips" ? sides.filter(s => s.detail.subcategory === "dip") : sides
+        valueToFilter === "Dips" ? sides.filter(s => s.detail.subcategory === "dip") : 
+        valueToFilter === "Ice Cream" ? sides.filter(s => s.detail.subcategory === "icecream") : sides
     return sidesFiltered
 }
 

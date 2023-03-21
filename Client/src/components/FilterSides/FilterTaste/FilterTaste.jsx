@@ -35,8 +35,10 @@ const FilterTaste = (props) => {
       >
         <option value="">None</option>
         <option value="Sweet">Sweet</option>
+        <option value="Ice Cream">Ice Cream</option>
         <option value="Salad">Salad</option>
         <option value="Dips">Dips</option>
+
       </Select>
     </Box>
   );
