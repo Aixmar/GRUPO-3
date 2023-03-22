@@ -8,7 +8,7 @@ const useLogout = () => {
         setAuth({});
         window.localStorage.removeItem('loggedUser')
         try {
-            const response = await axios('http://localhost:3001/users/logout', {
+            const response = await axios('/users/logout', {
                 withCredentials: true
             });
         } catch (err) {

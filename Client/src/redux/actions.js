@@ -15,14 +15,14 @@ import axios from "axios";
 
 export const getIngredients = () => {
   return async function (dispatch) {
-    let response = await axios(`http://localhost:3001/ingredients`);
+    let response = await axios(`/ingredients`);
     return dispatch({ type: GET_INGREDIENTS, payload: response.data });
   };
 };
 
 export const getIngredientsQuery = (name) => {
   return function (dispatch) {
-    axios(`http://localhost:3001/ingredients?name=${name}`)
+    axios(`/ingredients?name=${name}`)
       .then((res) => res.data)
       .then((data) => dispatch({ type: GET_INGREDIENTS_QUERY, payload: data }));
   };
@@ -30,7 +30,7 @@ export const getIngredientsQuery = (name) => {
 
 export const getPizzas = () => {
   return async function (dispatch) {
-    let response = await axios.get(`http://localhost:3001/pizzas`);
+    let response = await axios.get(`/pizzas`);
     return dispatch({ type: GET_PIZZAS, payload: response.data });
   };
 };

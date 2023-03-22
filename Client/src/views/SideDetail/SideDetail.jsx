@@ -23,7 +23,7 @@ const SideDetail = () => {
 
     useEffect(() => {
         axios
-            .get(`http://localhost:3001/pizzas/${id}`)
+            .get(`/pizzas/${id}`)
             .then((data) => data.data)
             .then((side) => setSide(side));
     }, []);

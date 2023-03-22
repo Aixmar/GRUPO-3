@@ -23,7 +23,7 @@ const UserLogin = () => {
   const submitHandler = async (event) => {
     event.preventDefault();
     try { 
-      const response = await axios.post("http://localhost:3001/users/login", form,{headers : {'Content-Type' : 'application/json'},withCredentials:true});
+      const response = await axios.post("/users/login", form,{headers : {'Content-Type' : 'application/json'},withCredentials:true});
       setIsLoading(true)
       const accessToken = response?.data
       setAuth({...form,accessToken})
