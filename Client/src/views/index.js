@@ -9,7 +9,7 @@ import CreatePizza from "./CreatePizza/CreatePizza";
 import AllPizzas from "./AllPizzas/AllPizzas";
 import Cart from "./Cart/Cart";
 import UserLogin from "./UserLogin/UserLogin";
-import Error404 from "./Error404/error404";
+import Error404 from "./Error404/Error404";
 import AllDrinks from "./AllDrinks/AllDrinks";
 import AllSides from "./AllSides/AllSides";
 import SideDetail from "./SideDetail/SideDetail";
