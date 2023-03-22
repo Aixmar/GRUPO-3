@@ -9,10 +9,15 @@ import {
   FormLabel,
   Checkbox,
 } from "@chakra-ui/react";
+import UpdateAddressForm from "./Updates/UpdateAdress";
 import { useState } from "react";
 const UserSettings = () => {
   const [notificationsByEmail, setNotificationsByEmail] = useState(false);
-
+  const [isUpdateAddressFormVisible, setIsUpdateAddressFormVisible] =
+    useState(false);
+  const toggleUpdateAddressForm = () => {
+    setIsUpdateAddressFormVisible(!isUpdateAddressFormVisible);
+  };
   return (
     <div>
       <UserProfile />
@@ -25,10 +30,15 @@ const UserSettings = () => {
         </Heading>
         <Text>
           {user[0].address}
-          <Button size="sm" colorScheme="teal">
+          <Button
+            size="sm"
+            colorScheme="teal"
+            onClick={toggleUpdateAddressForm}
+          >
             Update
           </Button>
         </Text>
+        {isUpdateAddressFormVisible && <UpdateAddressForm />}
         <Heading as="h2" size="md" marginTop="4">
           Payment method
         </Heading>

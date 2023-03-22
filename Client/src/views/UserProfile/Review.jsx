@@ -22,13 +22,20 @@ const Review = () => {
     setRating(value);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
     console.log(`Puntuación: ${rating}, Reseña: ${review}`);
   };
 
   return (
-    <Box borderWidth="1px" borderRadius="lg" p={4} mt={4}>
-      <form>
+    <Box
+      borderWidth="1px"
+      borderRadius="lg"
+      p={4}
+      mt={4}
+      onSubmit={handleSubmit}
+    >
+      <form onSubmit={handleSubmit}>
         <FormControl id="rating" mb={4}>
           <FormLabel>Puntuación</FormLabel>
           <Flex alignItems="center">
@@ -62,7 +69,7 @@ const Review = () => {
             />
           </FormControl>
 
-          <Button mt="4" onSubmit={handleSubmit}>
+          <Button type="submit" mt="4" onSubmit={handleSubmit}>
             Submit Review
           </Button>
         </Box>

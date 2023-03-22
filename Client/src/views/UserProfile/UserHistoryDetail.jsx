@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import UserProfile from "./UserProfile";
 import user from "./json";
-import Star from "./Star";
+import Star from "./Review";
 
 const UserHistoryDetail = () => {
   const [emailNotification, setEmailNotification] = useState(false);
