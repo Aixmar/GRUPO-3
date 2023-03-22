@@ -1,0 +1,54 @@
+/* CreatePizza component */
+
+.modalCreatePizza {
+    width: 30%;
+    text-align: center;
+    border-radius: 20px;
+}
+
+.modalCreatePizza h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.727);
+}
+dialog::backdrop {
+    background-color: #545454b9;
+}
+
+.okIco {
+    width: 4rem;
+    height: 4rem;
+    object-fit: cover;
+    margin: .6rem auto 0;
+}
+
+
+
+
+
+
+/* IngredientSelector component */
+
+.contSelect {
+    color: #fff;
+}
+
+.contSelect Select option {
+    background: #272727;
+}
+
+
+
+
+
+
+
+/* PizzaCreated component */
+
+
+.contSelectedToppings Image {
+    background-color: crimson;
+}

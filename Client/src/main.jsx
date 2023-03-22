@@ -9,6 +9,8 @@ import {
   ChakraProvider,
   theme as chakraTheme,
 } from '@chakra-ui/react';
+import { AuthProvider } from "./context/AuthProvider";
+import axios from "axios";
 
 const colors = {
   brand: {
@@ -24,13 +26,17 @@ const theme = extendTheme({
   colors,
   ...chakraTheme
 });
-
+axios.defaults.baseURL = `https://grupo-3-back-production.up.railway.app`;
+//axios.defaults.baseURL = `http://localhost:3001`;
 ReactDOM.createRoot(document.getElementById("root")).render(
   <ChakraProvider theme={theme}>
-    <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Provider>
+      <Provider store={store}>
+        <BrowserRouter>
+          <AuthProvider>
+            <App />
+          </AuthProvider>
+        </BrowserRouter>
+      </Provider>
+    
   </ChakraProvider>
 );

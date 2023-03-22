@@ -1,14 +1,18 @@
 import { useDispatch, useSelector } from "react-redux";
 import { getIngredients, getIngredientsQuery } from "../../redux/actions";
+import { useEffect } from "react";
 
 
 const SearchBar = () => {
   const dispatch = useDispatch();
-  let ingredients = useSelector((state) => state.ingredients);
 
   const handlerQuery = (e) => {
     dispatch(getIngredientsQuery(e.target.value));
   };
+
+  useEffect(() => {
+    return () => dispatch(getIngredientsQuery(""))
+  },[])
 
   return (
     <div>
@@ -16,13 +20,10 @@ const SearchBar = () => {
       <input
         type="text"
         autoComplete="off"
-        name="ingredients"
+        name=""
         onChange={handlerQuery}
         placeholder="Search..."
       ></input>
-      {ingredients.map((ingr) => (
-        <h1>{ingr.name}</h1>
-      ))}
     </div>
   );
 };

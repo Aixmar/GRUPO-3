@@ -1,0 +1,225 @@
+body {
+    overflow-x: hidden;
+}
+
+
+.contSlides {
+    /* background-color: aqua; */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    top: -1.2rem;
+    gap: 2rem;
+    width: 100%;
+    height: 100vh;
+    transform: scale(1.06);
+    transform-origin: top;
+    animation: slides 1.2s forwards ease-in-out;
+}
+    @keyframes slides {
+        to {
+            transform: scale(1);
+            transform-origin: top center;
+        }
+    }
+    
+
+.contSlides img {
+    position: relative;
+    cursor: pointer;
+
+    /* z-index: 2 ; */
+    width: 100vw;
+    height: 80vh;
+    object-fit: cover;
+
+}
+
+.pizza {
+    transform: scale(1);
+    opacity: 1;
+    transition: transform 1s, opacity .6s;
+}
+    .pizza:hover {
+        opacity: .6;
+        animation: zoom 1s alternate infinite ease-out;
+    }
+    @keyframes zoom {
+        to {
+            transform: scale(1.016);
+            transform-origin: top;
+        };        
+    }
+        
+    .pizza:hover + .infoPizza h3 {
+        font-size: 8rem;
+        color: #fff;
+        font-weight: 700;
+        
+    }
+    
+    .pizza:hover + .infoPizza h2 {
+        font-size: 8rem;
+        color: #fff;
+        font-weight: 700;
+    }
+    
+    .pizza:hover + .infoPizza p {
+        font-size: 1.8rem;
+        font-weight: 700;
+        text-align: center;
+        color: #fff;
+        background-color: #f27825;
+        border-radius: 12px;
+        padding: .4rem 1rem;
+    }
+
+    .pizza:hover + .infoPizza + .contBtn {
+        right: 4rem;
+    }
+    
+    
+
+.infoPizza {
+    /* position: absolute; */
+    position: relative;
+    margin-top: 2rem;
+}
+
+
+
+.contBtn {
+    
+    background-color: #f27825;
+    position: absolute;
+    right: -40%;
+    color: #fff;
+    font-size: 4.2rem;
+    width: auto;
+    /* height: 14%; */
+    height: 7.4rem;
+    border-radius: 20rem;
+    padding: 0 2rem;
+    transition: all .6s;
+    pointer-events: none;
+}
+
+
+.contPizza {
+    width: 100%;
+    height: auto;
+    position: relative;
+}
+
+
+
+.infoPizza1 {
+    top: 0;
+}
+
+.infoPizza2 {
+    top: 0;
+}
+
+.infoPizza3 {
+    top: 0;
+}
+
+.infoPizza4 {
+    top: 0;
+}
+
+
+.contBtn1 {
+    bottom: 20%;
+}
+
+.contBtn2 {
+    bottom: 20%;
+}
+
+.contBtn3 {
+    bottom: 20%;
+}
+
+.contBtn4 {
+    bottom: 20%;
+}
+
+
+
+
+.infoPizza {
+    position: absolute;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: #121212;
+    margin-left: 2rem;
+    cursor: pointer;
+    pointer-events: none;
+    left: -36rem;
+    opacity: 0;
+    animation: infoPizza 1.2s forwards;
+}
+
+    @keyframes infoPizza {
+        to { 
+            left: 2rem;
+            opacity: 1;
+            /* transform: scale(1); */
+        }
+    }
+
+
+.contSlides h3 {
+    font-size: 4rem;
+    font-weight: 700;
+    transition: all .6s;
+
+}
+
+.contSlides h2 {
+    font-size: 4rem;
+    font-weight: 700;
+    transition: all .6s;
+
+
+}
+
+.contSlides p {
+    font-size: .8rem;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    background-color: #f27825;
+    border-radius: 12px;
+    padding: .4rem 1rem;
+    transition: all .6s;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+/* media queries */
+
+
+
+@media (min-width: 1920px) {    
+    
+    .pizza:hover + .infoPizza + .contBtn {
+        right: 14rem;
+    }
+}
+@media (min-width: 1360px) {   
+
+    .pizza:hover + .infoPizza + .contBtn {
+        right: 6rem;
+    }
+}
