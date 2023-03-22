@@ -1,10 +1,6 @@
 import { Box , Flex, Image, Text, Divider} from "@chakra-ui/react";
 import {cartFooterStyles, titleStyles, textStyles, secondFooter} from './cartFooterStyles'
-import phone2 from "../../../../assets/phone2.gif";
-import mp2 from "../../../../assets/mp2.png";
-import pizza from "../../../../assets/pizza.gif";
-import lock from "../../../../assets/lock.gif";
-import tic from "../../../../assets/tic.gif";
+import { tel, mp, pizza, lock, tic } from "../../../../assets/CloudinaryImg";
 
 const CartFooter = () => {
   return (
@@ -16,14 +12,14 @@ const CartFooter = () => {
           
             <Box flex="1" align="center" >
                  <Text {...titleStyles}>Contact Us</Text> 
-                 <Image boxSize="40px"  src={phone2} mr={2}  align="center"/>
+                 <Image boxSize="40px"  src={tel} mr={2}  align="center"/>
                  <Text {...textStyles}>+025 455 665</Text>
                  <Text {...textStyles}>support@mix2pizza.app</Text>
             </Box>
 
             <Box flex="1" align="center">
                 <Text {...titleStyles}>Payment</Text>
-                <Image  src={mp2} boxSize="60px" objectFit="contain" />
+                <Image  src={mp} boxSize="60px" objectFit="contain" />
                
               </Box>
 

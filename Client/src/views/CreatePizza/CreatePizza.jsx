@@ -4,14 +4,13 @@ import { Link } from "react-router-dom";
 import { getIngredients, pushToCart } from "../../redux/actions";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import { Button, Text, Grid, GridItem, CheckboxGroup, Checkbox, FormLabel, Radio, RadioGroup, Stack, Box, FormControl } from "@chakra-ui/react";
-import createdpizzas from "../../assets/createdpizzas.png";
 import validate from "./validate";
 import css from './CreatePizza.module.css';
-import okIco from "../../assets/nice.png";
+import {ok, createpizza} from "../../assets/CloudinaryImg";
 
 const initialStateForm = {
   name: "Create your pizza",
-  image: createdpizzas,
+  image: createpizza,
   price: 0,
   detail: {
     dough: "",
@@ -282,7 +281,7 @@ const CreatePizza = () => {
       </Box>
 
           <dialog id="createPizzaModal" className={css.modalCreatePizza} >
-            <img src={okIco} alt="nice" className={css.okIco} />
+            <img src={ok} alt="ok" className={css.ok} />
             <h2>Pizza created successfully!</h2>
             <div>
               <Link to="/cart">

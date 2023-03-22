@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import validate from "./validate";
-import okIco from "../../assets/nice.png";
+import { ok } from "../../assets/CloudinaryImg";
 
 const UserForm = () => {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -80,7 +80,7 @@ const UserForm = () => {
       </Button>
       <Link to="/forgot-password">Forgot Password</Link>
       <dialog id="signinModal">
-        <img src={okIco} alt="nice" />
+        <img src={ok} alt="nice" />
         <h2>Welcome back, {backResponse.name}!</h2>
         <div>
           <Link to="/home">
