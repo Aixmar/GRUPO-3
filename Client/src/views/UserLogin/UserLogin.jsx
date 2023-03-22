@@ -27,6 +27,9 @@ const UserLogin = () => {
       setIsLoading(true)
       const accessToken = response?.data
       setAuth({...form,accessToken})
+      window.localStorage.setItem(
+        'loggedUser' , JSON.stringify({...form,accessToken})
+      )
       navigate(from,{replace:true})
       setErr('')
     } catch (error) {
