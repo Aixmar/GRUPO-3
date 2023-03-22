@@ -1,8 +1,22 @@
 import user from "./json";
 import UserProfile from "./UserProfile";
 import { Box, Heading, Text, Button } from "@chakra-ui/react";
+import UpdateEmailForm from "./Updates/UpdateEmail";
+import UpdatePasswordForm from "./Updates/UpdatePassword";
+import { useState } from "react";
 
 const UserAccount = () => {
+  const [isUpdateEmailFormVisible, setIsUpdateEmailFormVisible] =
+    useState(false);
+  const toggleUpdateEmailForm = () => {
+    setIsUpdateEmailFormVisible(!isUpdateEmailFormVisible);
+  };
+  const [isUpdatePasswordFormVisible, setIsUpdatePasswordFormVisible] =
+    useState(false);
+  const toggleUpdatePasswordForm = () => {
+    setIsUpdatePasswordFormVisible(!isUpdatePasswordFormVisible);
+  };
+
   return (
     <div>
       <UserProfile />
@@ -27,19 +41,28 @@ const UserAccount = () => {
         </Heading>
         <Text>
           {user[0].email}
-          <Button size="sm" colorScheme="teal">
+          <Button size="sm" colorScheme="teal" onClick={toggleUpdateEmailForm}>
             Update
           </Button>
         </Text>
+        {isUpdateEmailFormVisible && <UpdateEmailForm formType="email" />}
+
         <Heading as="h2" size="md" marginTop="4">
           Password
         </Heading>
         <Text>
           {user[0].password}
-          <Button size="sm" colorScheme="teal">
-            Change
+          <Button
+            size="sm"
+            colorScheme="teal"
+            onClick={toggleUpdatePasswordForm}
+          >
+            Update
           </Button>
         </Text>
+        {isUpdatePasswordFormVisible && (
+          <UpdatePasswordForm formType="password" />
+        )}
       </Box>
     </div>
   );
