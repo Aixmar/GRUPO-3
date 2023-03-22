@@ -23,7 +23,7 @@ const ItemDetail = () => {
   }
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/pizzas/${id}`)
+      .get(`/pizzas/${id}`)
       .then((data) => data.data)
       .then((pizza) => setPizza(pizza));
 

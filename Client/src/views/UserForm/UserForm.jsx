@@ -38,7 +38,7 @@ const UserForm = () => {
 
   const submitHandler = async (event) => {
     event.preventDefault();
-    const { data } = await axios.post("http://localhost:3001/users", form);
+    const { data } = await axios.post("/users", form);
     const modal = document.querySelector("#signUpModal")
     modal.showModal();
     setBackResponse(data);
