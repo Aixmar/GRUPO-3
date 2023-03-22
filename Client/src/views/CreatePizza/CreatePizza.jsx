@@ -126,7 +126,7 @@ const CreatePizza = () => {
                       typesOfBaking.map((t) => (
                         <Radio key={t.id} onChange={handleRadio} size="lg" type="radio" name="type" value={t.name} >
                           {t.name}
-                        </Radio>
+                        </Radio>))
                       }
 
                   </Stack>               

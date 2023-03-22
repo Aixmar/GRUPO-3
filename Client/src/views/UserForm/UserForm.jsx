@@ -12,9 +12,15 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import validate from "./validate";
 import okIco from "../../assets/nice.png";
-
+import styles from "./UserForm.module.css"
 const UserForm = () => {
-  const [form, setForm] = useState({ email: "", password: "" });
+  const [form, setForm] = useState({
+    name: "",
+    lastName: "",
+    birthday: "",
+    email: "",
+    password: "",
+  });
   const [errors, setErrors] = useState({});
   const [backResponse, setBackResponse] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -32,18 +38,11 @@ const UserForm = () => {
 
   const submitHandler = async (event) => {
     event.preventDefault();
-    try {
-      const { data } = await axios.post("http://localhost:3001/users", form);
-      const email = await axios.post(
-        "http://localhost:3001/sendmail/register",
-        { email: form.email }
-      );
-      alert("registrado con exito");
-      setBackResponse(data);
-      setForm({ email: "", password: "" });
-    } catch (error) {
-      console.log(error);
-    }
+    const { data } = await axios.post("http://localhost:3001/users", form);
+    const modal = document.querySelector("#signUpModal")
+    modal.showModal();
+    setBackResponse(data);
+    setForm({ email: "", password: "" });
   };
 
   return (
@@ -65,6 +64,30 @@ const UserForm = () => {
         onSubmit={submitHandler}
       >
         <FormControl isRequired>
+          <FormLabel>Name</FormLabel>
+          <Input
+            type="text"
+            name="name"
+            value={form.name}
+            onChange={inputChangeHandler}
+          />
+          {errors.name && (
+            <FormHelperText color="red.500">{errors.name}</FormHelperText>
+          )}
+        </FormControl>
+        <FormControl isRequired>
+          <FormLabel>Last Name</FormLabel>
+          <Input
+            type="text"
+            name="lastName"
+            value={form.lastName}
+            onChange={inputChangeHandler}
+          />
+          {errors.lastName && (
+            <FormHelperText color="red.500">{errors.lastName}</FormHelperText>
+          )}
+        </FormControl>
+        <FormControl isRequired>
           <FormLabel>Email</FormLabel>
           <Input
             type="email"
@@ -75,6 +98,19 @@ const UserForm = () => {
           />
           {errors.email && (
             <FormHelperText color="red.500">{errors.email}</FormHelperText>
+          )}
+        </FormControl>
+        <FormControl isRequired>
+          <FormLabel>Date of birth</FormLabel>
+          <Input
+            type="date"
+            name="birthday"
+            value={form.birthday}
+            onChange={inputChangeHandler}
+            placeholder="05/19/2002"
+          />
+          {errors.birthday && (
+            <FormHelperText color="red.500">{errors.birthday}</FormHelperText>
           )}
         </FormControl>
         <FormControl isRequired>
@@ -98,10 +134,10 @@ const UserForm = () => {
         >
           Sign In
         </Button>
-        <Link to="/forgot-password">Forgot Password</Link>
-        <dialog id="signinModal">
+        {/* <Link to="/forgot-password">Forgot Password</Link> */}
+        <dialog id="signUpModal">
           <img src={okIco} alt="nice" />
-          <h2>Welcome back, {backResponse.name}!</h2>
+          <h2>Register succesfully, {backResponse.name}!</h2>
           <div>
             <Link to="/home">
               <Button
