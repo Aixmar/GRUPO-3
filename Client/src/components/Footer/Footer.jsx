@@ -1,8 +1,6 @@
 import {footerStyles, titleStyles, textStyles} from './footerStyles'
 import { Box , Flex, Image, Text} from "@chakra-ui/react";
-import fbIco from '../../assets/facebook.png'
-import igIco from '../../assets/instagram.png'
-import twIco from '../../assets/twitter.png'
+import { insta, twitter, fb } from '../../assets/CloudinaryImg';
 
 const Footer = () => {
     return (
@@ -14,9 +12,9 @@ const Footer = () => {
             <Text {...titleStyles}>Contact</Text>
             <Text {...textStyles}>support@mix2pizza.app</Text>
             <Flex mt={4}>
-              <Image boxSize="30px" src={fbIco} mr={4} />
-              <Image boxSize="30px" src={igIco} mr={4} />
-              <Image boxSize="30px" src={twIco} />
+              <Image boxSize="30px" src={fb} mr={4} />
+              <Image boxSize="30px" src={insta} mr={4} />
+              <Image boxSize="30px" src={twitter} />
             </Flex>
           </Box>
           <Box flex="1">

@@ -1,10 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import css from './Slider.module.css';
-import pizza1 from '../../assets/slidePizza1.jpeg';
-import pizza2 from '../../assets/slidePizza2.jpg';
-import pizza3 from '../../assets/slidePizza3.jpg';
-import pizza4 from '../../assets/slidePizza4.jpg';
-
+import { meatlovers, supreme, hawaiian, pepperoni } from '../../assets/CloudinaryImg';
 
 const Slider = () => {
 
@@ -28,7 +24,7 @@ const Slider = () => {
                 <div className={css.contSlides} >
 
                 <div className={css.contPizza} >
-                        <img src={pizza1} alt='pizza' className={`pizza`} onClick={redirectToDetail} id={3}  />
+                        <img src={meatlovers} alt='pizza' className={`pizza`} onClick={redirectToDetail} id={3}  />
                         <div className={`${css.infoPizza1} ${css.infoPizza}`} >
                             <h3 className={css.pizzaName} >Meat lovers</h3>
                             <p>Mozzarella Cheese - Pepperoni - Bacon - York Ham</p>
@@ -40,7 +36,7 @@ const Slider = () => {
                 </div>
 
                 <div className={css.contPizza} >
-                        <img src={pizza2} alt='pizza' className={`pizza`} onClick={redirectToDetail} id={31} />
+                        <img src={supreme} alt='pizza' className={`pizza`} onClick={redirectToDetail} id={31} />
                         <div className={`${css.infoPizza2} ${css.infoPizza}`} >
                             <h3 className={css.pizzaName} >Supreme</h3>
                             <p>Pepperoni - Black Olives - Onions - Sausage - Bell peppers</p>
@@ -52,7 +48,7 @@ const Slider = () => {
                 </div>
 
                 <div className={css.contPizza} >
-                        <img src={pizza3} alt='pizza' className={`pizza`} onClick={redirectToDetail} id={4}  />
+                        <img src={hawaiian} alt='pizza' className={`pizza`} onClick={redirectToDetail} id={4}  />
                         <div className={`${css.infoPizza3} ${css.infoPizza}`} >
                             <h3 className={css.pizzaName} >Hawaiian</h3>
                             <p>Mozzarella Cheese - Pineapple - Cooked Ham</p>
@@ -64,7 +60,7 @@ const Slider = () => {
                 </div>
 
                 <div className={css.contPizza} >
-                        <img src={pizza4} alt='pizza' className={`pizza`} onClick={redirectToDetail} id={2}  />
+                        <img src={pepperoni} alt='pizza' className={`pizza`} onClick={redirectToDetail} id={2}  />
                         <div className={`${css.infoPizza4} ${css.infoPizza}`} >
                             <h3 className={css.pizzaName} >Pepperoni</h3>
                             <p>Mozzarella Cheese - Pepperoni</p>

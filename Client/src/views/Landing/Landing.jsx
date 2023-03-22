@@ -1,8 +1,8 @@
 import React from "react";
 import { Box, Button, Heading, Image, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import pizza from "../../assets/pizza-app.png";
 import { landingStyles } from "./landingStyles";
+import { pizzaland } from "../../assets/CloudinaryImg";
 
 
 
@@ -11,7 +11,7 @@ const Landing = () => {
   return (
     <Box {...box}>
       <Box {...imageBox}>
-        <Image src={pizza} alt="Pizza" borderRadius="20px" />
+        <Image src={pizzaland} alt="Pizza" borderRadius="20px" />
       </Box>
       <Box ml="20px" mr="250px" textAlign="left">
         <Heading as="h1" {...heading}>

@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import validate from "./validate";
-import okIco from "../../assets/nice.png";
+import { ok } from "../../assets/CloudinaryImg";
 import styles from "./UserForm.module.css"
 const UserForm = () => {
   const [form, setForm] = useState({
@@ -136,7 +136,7 @@ const UserForm = () => {
         </Button>
         {/* <Link to="/forgot-password">Forgot Password</Link> */}
         <dialog id="signUpModal">
-          <img src={okIco} alt="nice" />
+          <img src={ok} alt="ok" />
           <h2>Register succesfully, {backResponse.name}!</h2>
           <div>
             <Link to="/home">
