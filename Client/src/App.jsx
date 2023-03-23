@@ -24,7 +24,7 @@ import {
   UserStars,
   UserHistory,
   UserHistoryDetail,
-
+  CheckOut,
 } from "./views/index";
 
 function App() {
@@ -32,9 +32,10 @@ function App() {
   const {auth} = useAuth();
   const [path,setPath] = useState('')
   return (
-    <>
+    <>  
 
-      {location.pathname !== "/" && <NavBar user={auth} />}
+      {location.pathname !== "/" && location.pathname !== "/checkout" && <NavBar user={auth} />}
+
       <Routes>
         
         <Route path="/" element={<Landing />} />
@@ -67,8 +68,10 @@ function App() {
         <Route path="/profile/history" element={<UserHistory />} />
         <Route path="/profile/history/:id" element={<UserHistoryDetail />} />
         <Route path="/createpizza" element={<CreatePizza />} />
-
+        CheckOut
         <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<CheckOut />} />
+
         <Route path="*" element={<Error404 />} />
       </Routes>
     </>
