@@ -1,6 +1,5 @@
 import { Routes, Route, useLocation } from "react-router-dom";
-import { useState } from "react";
-import useAuth from "./Utils/useAuth";
+import { useState, useEffect } from "react";
 
 import {
   Landing,
@@ -28,17 +27,18 @@ import {
   Users,
   Products,
   NewProduct
-
+  CheckOut,
 } from "./views/index";
 
 function App() {
   const location = useLocation();
-  const {auth} = useAuth();
   const [path,setPath] = useState('')
-  return (
-    <>
 
-      {location.pathname !== "/" && <NavBar user={auth} />}
+
+  return (
+    <>  
+      {location.pathname !== "/" && location.pathname !== "/checkout" && <NavBar />}
+
       <Routes>
         
         <Route path="/" element={<Landing />} />
@@ -76,8 +76,10 @@ function App() {
         <Route path="/profile/history" element={<UserHistory />} />
         <Route path="/profile/history/:id" element={<UserHistoryDetail />} />
         <Route path="/createpizza" element={<CreatePizza />} />
-
+        CheckOut
         <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<CheckOut />} />
+
         <Route path="*" element={<Error404 />} />
       </Routes>
     </>

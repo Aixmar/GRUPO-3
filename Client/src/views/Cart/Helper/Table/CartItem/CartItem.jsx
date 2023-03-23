@@ -1,21 +1,10 @@
-import {
-  CloseButton,
-  Flex,
-  Link,
-  Select,
-  Spacer,
-  useColorModeValue,
-} from "@chakra-ui/react";
+import {CloseButton, Flex, Link, Select, Spacer, useColorModeValue } from "@chakra-ui/react";
 import { PriceTag } from "../PriceTag/PriceTag";
 import { CartProductMeta } from "../CartProductMeta/CartProductMeta";
-import { useDispatch } from "react-redux";
 
 const QuantitySelect = (props) => {
   return (
-    <Select
-      maxW="64px"
-      aria-label="Select quantity"
-      focusBorderColor={useColorModeValue("blue.500", "blue.200")}
+    <Select SmaxW="64px" aria-label="Select quantity" focusBorderColor={useColorModeValue("blue.500", "blue.200")}
       {...props}
     >
       <option value="1">1</option>
@@ -28,7 +17,6 @@ const QuantitySelect = (props) => {
       <option value="8">8</option>
       <option value="9">9</option>
       <option value="10">10</option>
-
     </Select>
   );
 };
@@ -47,15 +35,9 @@ export const CartItem = (props) => {
     onClickDelete,
     index,
   } = props;
-  
- 
 
   return (
-    <Flex
-      direction={{ base: "column", md: "row" }}
-      justify="space-between"
-      align="center"
-    >
+    <Flex direction={{ base: "column", md: "row" }} justify="space-between" align="center">
       <CartProductMeta
         name={name}
         description={description}
@@ -64,11 +46,7 @@ export const CartItem = (props) => {
       />
 
       {/* Desktop */}
-      <Flex
-        width="full"
-        justify="space-between"
-        display={{ base: "none", md: "flex" }}
-      >
+      <Flex width="full" justify="space-between" display={{ base: "none", md: "flex" }}>
         <Spacer></Spacer>
         {/* <QuantitySelect
           value={quantity}
@@ -85,16 +63,7 @@ export const CartItem = (props) => {
       </Flex>
 
       {/* Mobile */}
-      <Flex
-        mt="4"
-        align="center"
-        width="full"
-        justify="space-between"
-        display={{
-          base: "flex",
-          md: "none",
-        }}
-      >
+      <Flex mt="4" align="center" width="full" justify="space-between" display={{base: "flex", md: "none",}}>
         <CloseButton
           aria-label={`Delete ${name} from cart`}
           onClick={() => onClickDelete(index)}

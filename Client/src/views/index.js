@@ -23,6 +23,7 @@ import AdminDashboard from "./AdminDashboard/AdminDashboard";
 import Users from "./AdminDashboard/Users/Users";
 import Products from "./AdminDashboard/Products/Products";
 import NewProduct from "./AdminDashboard/NewProduct/NewProduct";
+import CheckOut from "./CheckOut/CheckOut";
 
 export {
   Landing,
@@ -50,5 +51,5 @@ export {
   Users,
   Products,
   NewProduct
-
+  CheckOut,
 };
