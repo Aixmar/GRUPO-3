@@ -23,7 +23,7 @@ import {
   UserStars,
   UserHistory,
   UserHistoryDetail,
-
+  CheckOut,
 } from "./views/index";
 
 function App() {
@@ -32,9 +32,9 @@ function App() {
 
 
   return (
-    <>
+    <>  
+      {location.pathname !== "/" && location.pathname !== "/checkout" && <NavBar />}
 
-      {location.pathname !== "/" && <NavBar />}
       <Routes>
         
         <Route path="/" element={<Landing />} />
@@ -67,8 +67,10 @@ function App() {
         <Route path="/profile/history" element={<UserHistory />} />
         <Route path="/profile/history/:id" element={<UserHistoryDetail />} />
         <Route path="/createpizza" element={<CreatePizza />} />
-
+        CheckOut
         <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<CheckOut />} />
+
         <Route path="*" element={<Error404 />} />
       </Routes>
     </>

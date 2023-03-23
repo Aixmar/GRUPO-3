@@ -19,6 +19,7 @@ import UserSettings from "./UserProfile/UserSettings";
 import UserStars from "./UserProfile/UserStars";
 import UserHistory from "./UserProfile/UserHistory";
 import UserHistoryDetail from "./UserProfile/UserHistoryDetail";
+import CheckOut from "./CheckOut/CheckOut";
 
 export {
   Landing,
@@ -42,5 +43,5 @@ export {
   UserStars,
   UserHistory,
   UserHistoryDetail,
-
+  CheckOut,
 };
