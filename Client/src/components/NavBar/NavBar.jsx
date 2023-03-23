@@ -74,7 +74,7 @@ const NavBar = () => {
                 </div>
               )
                 : (
-                <div>
+                <>
                   {/* <BreadcrumbItem>
                   <BreadcrumbLink marginRight="3" as={RouterLink} to="/createuser" _hover={{ color: "#f27825" }}>REGISTER</BreadcrumbLink>
                 </BreadcrumbItem> */}
@@ -82,7 +82,7 @@ const NavBar = () => {
                 <BreadcrumbItem>
                   <BreadcrumbLink marginRight="3" as={RouterLink} to="/login" _hover={{ color: "#f27825" }}>LOGIN</BreadcrumbLink>
                 </BreadcrumbItem>
-                </div>
+                </>
               )
             }
 
