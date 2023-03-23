@@ -23,7 +23,7 @@ export const landingStyles = {
     my: "20px",
   },
   button: {
-    hoverBg: "white",
+    hoverbg: "white",
     size: "lg",
     borderRadius: "full",
     background: "linear-gradient(to right, #f27825, #eab830)",
