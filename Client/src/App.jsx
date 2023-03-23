@@ -23,6 +23,10 @@ import {
   UserStars,
   UserHistory,
   UserHistoryDetail,
+  AdminDashboard,
+  Users,
+  Products,
+  NewProduct
   CheckOut,
 } from "./views/index";
 
@@ -54,7 +58,12 @@ function App() {
           <Route path="/profile/:id" element={<UserProfile />} />
         </Route>
         
-        
+        <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/users" element={<Users />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/newproduct" element={<NewProduct />} />
+          
+
 
         <Route path="/itemdetail/:id" element={<ItemDetail />} />
         <Route path="/sidedetail/:id" element={<SideDetail />} />
