@@ -1,6 +1,5 @@
 import { Routes, Route, useLocation } from "react-router-dom";
-import { useState } from "react";
-import useAuth from "./Utils/useAuth";
+import { useState, useEffect } from "react";
 
 import {
   Landing,
@@ -29,12 +28,13 @@ import {
 
 function App() {
   const location = useLocation();
-  const {auth} = useAuth();
   const [path,setPath] = useState('')
+
+
   return (
     <>
 
-      {location.pathname !== "/" && <NavBar user={auth} />}
+      {location.pathname !== "/" && <NavBar />}
       <Routes>
         
         <Route path="/" element={<Landing />} />

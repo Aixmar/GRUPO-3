@@ -4,18 +4,26 @@ import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 import useLogout from "../../Utils/useLogout";
 import { cartlogo, pizzalogo } from "../../assets/CloudinaryImg";
+import { useAuthProv } from "../../context/AuthProvider";
 
 
-const NavBar = ({user}) => {
+
+const NavBar = () => {
 
   const cartItems = useSelector(state => state.cart);
   const navigate = useNavigate();
-  const logout = useLogout();
+  const logout = useLogout();  
+  const { user, googleLogout } = useAuthProv();
 
   const signOut = async () => {
+    if (user.displayName) {
+    googleLogout();
+    };
     await logout();
     navigate('/home');
-}
+};
+
+
   return (
     
       <Box bgGradient="linear(to-l,#000000, #272727)" color="white" py={0} px={8}>
@@ -59,24 +67,24 @@ const NavBar = ({user}) => {
 
 
               
-            {user?.email ?  (
-              <div>
-                <p>{user?.email}</p>
-                <button onClick={signOut}>Sign Out</button>
-              </div>
-            )
-              : (
-              <div>
+            {
+              user.email ? (<div>
+                  <p>{ user.displayName ? user.displayName : user.name }</p>
+                  <button onClick={signOut}>Sign Out</button>
+                </div>
+              )
+                : (
+                <div>
+                  {/* <BreadcrumbItem>
+                  <BreadcrumbLink marginRight="3" as={RouterLink} to="/createuser" _hover={{ color: "#f27825" }}>REGISTER</BreadcrumbLink>
+                </BreadcrumbItem> */}
+
                 <BreadcrumbItem>
-                <BreadcrumbLink marginRight="3" as={RouterLink} to="/createuser" _hover={{ color: "#f27825" }}>REGISTER</BreadcrumbLink>
-
-              </BreadcrumbItem>
-
-              <BreadcrumbItem>
-                <BreadcrumbLink marginRight="3" as={RouterLink} to="/login" _hover={{ color: "#f27825" }}>LOGIN</BreadcrumbLink>
-              </BreadcrumbItem>
-              </div>
-            )}
+                  <BreadcrumbLink marginRight="3" as={RouterLink} to="/login" _hover={{ color: "#f27825" }}>LOGIN</BreadcrumbLink>
+                </BreadcrumbItem>
+                </div>
+              )
+            }
 
               <BreadcrumbItem>
                 <BreadcrumbLink as={RouterLink} to="/profile" _hover={{ color: "#f27825" }}>PROFILE</BreadcrumbLink>
