@@ -35,6 +35,7 @@ const ItemContainer = (props) => {
       <SimpleGrid columns={[2, 2, 4]} spacing={10} marginBottom="45px">
         {items.length ? (
           items.map((bebida) => (
+            bebida.active &&
             <ItemCard
               key={bebida.name}
               id={bebida.id}
