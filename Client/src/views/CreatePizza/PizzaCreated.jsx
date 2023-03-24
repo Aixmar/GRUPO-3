@@ -42,18 +42,18 @@ const PizzaCreated = ({ form, setForm, toppings, setToppings, cheeses, setCheese
     return(
         <>
             <Box width='100%' height='100%' color='#fff' >
-                <Box display='flex' height='6rem' justifyContent='space-around' mt='.4rem' ml='5rem' alignItems='center' >
-                    <Text color='orange' fontSize='2.6rem' >Your pizza..</Text>
+                <Box display='flex' height='6rem' justifyContent='flex-start' mt='.4rem' ml='2rem' alignItems='center' >
+                    <Text color='white' fontSize='2.6rem' >Your pizza..</Text>
                     <Image src={cookingpizza} alt='pizza' height='8.6rem' />
                 </Box>
 
-                <Box ml='2rem' height='1.6rem' ><Text color='orange' display='inline' >Dough: </Text><Text display='inline' ></Text>{form.detail.dough || <Text mr='12em' borderBottom='1px dashed #545454b9'></Text>}</Box>
-                <Box ml='2rem' height='1.6rem' ><Text color='orange' display='inline' >Bake: </Text><Text display='inline' ></Text>{form.detail.type || <Text mr='12rem' borderBottom='1px dashed #545454b9' /> }</Box>
-                <Box ml='2rem' height='1.6rem' ><Text color='orange' display='inline' >Base: </Text><Text display='inline' ></Text>{form.detail.base || <Text mr='12rem' borderBottom='1px dashed #545454b9' />}</Box>
-                <Box ml='2rem' height='1.6rem' ><Text color='orange' display='inline' >Mozzarella: </Text><Text display='inline' ></Text>{form.detail.mozzarella || <Text mr='12rem' borderBottom='1px dashed #545454b9' />}</Box>
+                <Box ml='2rem' height='1.6rem' ><Text color='#f27825' display='inline' >Dough: </Text><Text display='inline' ></Text>{form.detail.dough || <Text mr='12em' borderBottom='1px dashed #545454b9'></Text>}</Box>
+                <Box ml='2rem' height='1.6rem' ><Text color='#f27825' display='inline' >Bake: </Text><Text display='inline' ></Text>{form.detail.type || <Text mr='12rem' borderBottom='1px dashed #545454b9' /> }</Box>
+                <Box ml='2rem' height='1.6rem' ><Text color='#f27825' display='inline' >Base: </Text><Text display='inline' ></Text>{form.detail.base || <Text mr='12rem' borderBottom='1px dashed #545454b9' />}</Box>
+                <Box ml='2rem' height='1.6rem' ><Text color='#f27825' display='inline' >Mozzarella: </Text><Text display='inline' ></Text>{form.detail.mozzarella || <Text mr='12rem' borderBottom='1px dashed #545454b9' />}</Box>
                 
                 <Box ml='2rem' mb='rem' >
-                    <Text color='orange' mb='.4rem' >Toppings:</Text>
+                    <Text color='#f27825' mb='.4rem' >Toppings:</Text>
                     {
                         !detail.toppingIngredients.length && <Text mr='12rem' borderBottom='1px dashed #545454b9' height='2.4rem' /> ||
                         <Box display='flex' color='#fff' height='2.4rem' gap='10px' flexWrap='wrap' className={css.contSelectedToppings} >
@@ -68,7 +68,7 @@ const PizzaCreated = ({ form, setForm, toppings, setToppings, cheeses, setCheese
                 </Box>
 
                 <Box ml='2rem' mb='rem' >
-                    <Text color='orange' mb='.4rem' >Cheeses:</Text>
+                    <Text color='#f27825' mb='.4rem' >Cheeses:</Text>
                     {
                         !detail.cheeseIngredients.length && <Text mr='12rem' borderBottom='1px dashed #545454b9' height='2.4rem' /> ||
                         <Box display='flex' color='#fff' minHeight='2.4rem' gap='10px' flexWrap='wrap' className={css.contSelectedToppings} >
@@ -83,7 +83,7 @@ const PizzaCreated = ({ form, setForm, toppings, setToppings, cheeses, setCheese
                 </Box>
 
                 <Box ml='2rem' mb='rem' >
-                    <Text color='orange' mb='.4rem' >Meats:</Text>
+                    <Text color='#f27825' mb='.4rem' >Meats:</Text>
                     
                     {    
                         !detail.meatIngredients.length && <Text mr='12rem' borderBottom='1px dashed #545454b9' height='2.4rem' /> ||
