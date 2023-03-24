@@ -7,8 +7,14 @@ const AdminDashboard = () => {
 
     return (
         <Flex>
+            <Flex>
             <SideBar />
-            <MainPage></MainPage>
+            </Flex>
+
+        <Flex >
+            <MainPage/>
+        </Flex>
+
         </Flex>
         
     )

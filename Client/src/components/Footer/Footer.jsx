@@ -7,7 +7,7 @@ const Footer = () => {
   
       //aplicamos estilos a los componentes utilizando la sintaxis de spread operator {...estilos}.
       <Box {...footerStyles}>
-        <Flex justifyContent="space-between" mb={8}>
+        <Flex wrap="wrap" justifyContent="space-between" mb={8}>
           <Box flex="1">
             <Text {...titleStyles}>Contact</Text>
             <Text {...textStyles}>support@mix2pizza.app</Text>
