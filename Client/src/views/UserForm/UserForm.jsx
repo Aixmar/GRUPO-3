@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import validate from "./validate";
 import { ok } from "../../assets/CloudinaryImg";
-import styles from "./UserForm.module.css"
+import styles from "./UserForm.module.css";
 const UserForm = () => {
   const [form, setForm] = useState({
     name: "",
@@ -39,9 +39,10 @@ const UserForm = () => {
   const submitHandler = async (event) => {
     event.preventDefault();
     const { data } = await axios.post("/users", form);
-    const modal = document.querySelector("#signUpModal")
+    const modal = document.querySelector("#signUpModal");
     modal.showModal();
     setBackResponse(data);
+    const email = await axios.post("/sendmail/register", { email: form.email }); // ENVIA EMAIL CUANDO SE REGISTRA EL USUARIO
     setForm({ email: "", password: "" });
   };
 
