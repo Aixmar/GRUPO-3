@@ -7,7 +7,7 @@ import {
   About,
   NavBar,
   UserForm,
-  UserProfile,
+  UserNavBar,
   ItemDetail,
   CreatePizza,
   AllPizzas,
@@ -51,7 +51,7 @@ function App() {
         <Route element={<RequireAuth />}>
           
           <Route path="/createpizza" element={<CreatePizza />} />
-          <Route path="/profile/:id" element={<UserProfile />} />
+          <Route path="/profile" element={<UserNavBar />} />
         </Route>
         
         
@@ -60,7 +60,7 @@ function App() {
         <Route path="/sidedetail/:id" element={<SideDetail />} />
 
 
-        <Route path="/profile" element={<UserProfile />} />
+        <Route path="/profile" element={<UserNavBar/>} />
         <Route path="/profile/settings" element={<UserSettings />} />
         <Route path="/profile/account" element={<UserAccount />} />
         <Route path="/profile/stars" element={<UserStars />} />

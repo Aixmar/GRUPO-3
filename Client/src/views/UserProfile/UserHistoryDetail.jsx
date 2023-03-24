@@ -9,7 +9,7 @@ import {
   Textarea,
   Input,
 } from "@chakra-ui/react";
-import UserProfile from "./UserProfile";
+import UserNavBar from "./UserNavBar";
 import user from "./json";
 import Star from "./Review";
 
@@ -22,7 +22,7 @@ const UserHistoryDetail = () => {
 
   return (
     <div>
-      <UserProfile />
+      <UserNavBar />
       <Box p="6" bg="gray.50" rounded="md">
         <Heading as="h3" size="lg" mb="4">
           {user[0].Orders.name}
