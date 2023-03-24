@@ -25,7 +25,7 @@ const NavBar = () => {
     };
     await logout();
     navigate('/home');
-};
+  };
 
   const openModal = () => onOpen();
 
@@ -82,11 +82,6 @@ const NavBar = () => {
                 {/* <BreadcrumbItem>
                   <BreadcrumbLink marginRight="3" as={RouterLink} to="/login" _hover={{ color: "#f27825" }}>LOGIN</BreadcrumbLink>
                 </BreadcrumbItem> */}
-
-                </BreadcrumbItem>
-                </>
-              )
-            }
 
               <BreadcrumbItem>
               <Link as={RouterLink} to="/cart"><img src={cartlogo} alt="Logo" width="50px" height="50px" /></Link>

@@ -55,7 +55,6 @@ function App() {
           <Route path="/createpizza" element={<CreatePizza />} />
         
         <Route element={<RequireAuth />}>         
-          <Route path="/profile/:id" element={<UserProfile />} />
           <Route path="/profile" element={<UserNavBar />} />
 
         </Route>
