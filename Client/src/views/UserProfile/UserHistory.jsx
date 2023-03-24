@@ -1,11 +1,12 @@
-import UserProfile from "./UserProfile";
+import UserNavBar from "./UserNavBar";
 import { Box, Grid, GridItem, Text, Link } from "@chakra-ui/react";
 import user from "./json";
-
+import { useAuthProv } from "../../context/AuthProvider";
 const UserHistory = () => {
+  // const { user } = useAuthProv();
   return (
     <div>
-      <UserProfile />
+      <UserNavBar />
       <Box mt="4">
         <Text fontSize="xl" fontWeight="bold" mb="4">
           Purchase History

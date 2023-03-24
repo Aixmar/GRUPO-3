@@ -1,9 +1,9 @@
 import user from "./json";
-import UserProfile from "./UserProfile";
+import UserNavBar from "./UserNavBar";
 const UserStars = () => {
   return (
     <div>
-      <UserProfile />
+      <UserNavBar />
     </div>
   );
 };

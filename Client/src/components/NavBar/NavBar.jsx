@@ -87,7 +87,7 @@ const NavBar = () => {
             }
 
               <BreadcrumbItem>
-                <BreadcrumbLink as={RouterLink} to="/profile" _hover={{ color: "#f27825" }}>PROFILE</BreadcrumbLink>
+                <BreadcrumbLink as={RouterLink} to="/profile/account" _hover={{ color: "#f27825" }}>PROFILE</BreadcrumbLink>
               </BreadcrumbItem>
 
               <BreadcrumbItem>
