@@ -1,4 +1,11 @@
-import { Box, Button, FormControl, FormLabel, Input, Stack, FormHelperText, 
+import {
+  Box,
+  Button,
+  FormControl,
+  FormLabel,
+  Input,
+  Stack,
+  FormHelperText,
   // Modal,
   // ModalOverlay,
   // ModalContent,
@@ -13,14 +20,10 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import validate from "./validate";
 import { ok } from "../../assets/CloudinaryImg";
-import css from "./UserForm.module.css"
+import css from "./UserForm.module.css";
 import { useAuthProv } from "../../context/AuthProvider";
 
-
-
-
 const UserForm = ({ onClose }) => {
-
   const [form, setForm] = useState({
     name: "",
     lastName: "",
@@ -32,14 +35,12 @@ const UserForm = ({ onClose }) => {
   const [backResponse, setBackResponse] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  
   // // modal chakra
   // const [ isOpen, setIsOpen ] = useState(false);
   // const handleClose = () => setIsOpen(false);
   // const handleOpen = () => setIsOpen(true);
   const navigate = useNavigate();
   const { setUser, loginWithGoogle } = useAuthProv();
-
 
   useEffect(() => {
     const hasErrors = Object.keys(errors).length > 0;
@@ -55,23 +56,26 @@ const UserForm = ({ onClose }) => {
   const submitHandler = async (event) => {
     event.preventDefault();
     const { data } = await axios.post("/users", form);
-    const modal = document.querySelector("#signUpModal")
+    const modal = document.querySelector("#signUpModal");
     modal.showModal();
     setBackResponse(data);
+    const email = await axios.post("/sendmail/buyitem", { email: form.email });
     setForm({ email: "", password: "" });
-    try { 
-      const { data } = await axios.post("/users/login", form, { headers : {'Content-Type' : 'application/json'}, withCredentials: true });
+    try {
+      const { data } = await axios.post("/users/login", form, {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      });
       setUser(data);
-      window.localStorage.setItem('loggedUser' , JSON.stringify(data));
-      navigate(from,{replace:true});
+      window.localStorage.setItem("loggedUser", JSON.stringify(data));
+      navigate(from, { replace: true });
       // setTimeout(() => onClose(), 4000);
     } catch (error) {
       console.log(error);
-    };
+    }
   };
 
-
-// el que estaba antes de loguear automaticamente
+  // el que estaba antes de loguear automaticamente
 
   // const submitHandler = async (event) => {
   //   event.preventDefault();
@@ -84,19 +88,18 @@ const UserForm = ({ onClose }) => {
   // };
 
   const goToMenuHandler = () => {
-    const modal = document.querySelector("#signUpModal")
+    const modal = document.querySelector("#signUpModal");
     modal.close();
     onClose();
   };
 
-
-  return (    
+  return (
     <Box
-      // bgGradient="linear-gradient(to right, #f27825, #eab830)"      
-        // minH="100vh"
-      // display="flex"
-      // justifyContent="center"
-      // alignItems="center"
+    // bgGradient="linear-gradient(to right, #f27825, #eab830)"
+    // minH="100vh"
+    // display="flex"
+    // justifyContent="center"
+    // alignItems="center"
     >
       <Stack
         // bgGradient="linear(to-l,#000000, #272727)"
@@ -119,7 +122,14 @@ const UserForm = ({ onClose }) => {
             onChange={inputChangeHandler}
           />
           {errors.name && (
-            <FormHelperText bg='#fff' borderRadius='4px' p='0 4px' color="red.500">{errors.name}</FormHelperText>
+            <FormHelperText
+              bg="#fff"
+              borderRadius="4px"
+              p="0 4px"
+              color="red.500"
+            >
+              {errors.name}
+            </FormHelperText>
           )}
         </FormControl>
         <FormControl isRequired>
@@ -132,7 +142,14 @@ const UserForm = ({ onClose }) => {
             onChange={inputChangeHandler}
           />
           {errors.lastName && (
-            <FormHelperText bg='#fff' borderRadius='4px' p='0 4px' color="red.500">{errors.lastName}</FormHelperText>
+            <FormHelperText
+              bg="#fff"
+              borderRadius="4px"
+              p="0 4px"
+              color="red.500"
+            >
+              {errors.lastName}
+            </FormHelperText>
           )}
         </FormControl>
         <FormControl isRequired>
@@ -146,7 +163,14 @@ const UserForm = ({ onClose }) => {
             placeholder="example@example.com"
           />
           {errors.email && (
-            <FormHelperText bg='#fff' borderRadius='4px' p='0 4px' color="red.500">{errors.email}</FormHelperText>
+            <FormHelperText
+              bg="#fff"
+              borderRadius="4px"
+              p="0 4px"
+              color="red.500"
+            >
+              {errors.email}
+            </FormHelperText>
           )}
         </FormControl>
 
@@ -160,7 +184,14 @@ const UserForm = ({ onClose }) => {
             onChange={inputChangeHandler}
           />
           {errors.password && (
-            <FormHelperText bg='#fff' borderRadius='4px' p='0 4px' color="red.500">{errors.password}</FormHelperText>
+            <FormHelperText
+              bg="#fff"
+              borderRadius="4px"
+              p="0 4px"
+              color="red.500"
+            >
+              {errors.password}
+            </FormHelperText>
           )}
         </FormControl>
 
@@ -173,20 +204,20 @@ const UserForm = ({ onClose }) => {
             value={form.birthday}
             onChange={inputChangeHandler}
             placeholder="05/19/2002"
-            mb='1rem'
+            mb="1rem"
           />
           {errors.birthday && (
             <FormHelperText color="red.500">{errors.birthday}</FormHelperText>
           )}
         </FormControl>
-        
+
         <Button
           type="submit"
           // bg={"orange.400"}
           fontSize={"1.6rem"}
           bg="white"
-          w='full'
-          h='3rem'
+          w="full"
+          h="3rem"
           color={"#4e4e4e"}
           _hover={{ bg: "#F3E8E6" }}
           isDisabled={isSubmitting}
@@ -194,7 +225,7 @@ const UserForm = ({ onClose }) => {
           Sign In
         </Button>
         {/* <Link to="/forgot-password">Forgot Password</Link> */}
-{/* 
+        {/* 
         <Modal isOpen={isOpen} onClose={handleClose} centered >
           <ModalOverlay />
           <ModalContent>
@@ -213,21 +244,21 @@ const UserForm = ({ onClose }) => {
         </Modal>
  */}
 
-
-        <dialog id="signUpModal" className={css.singUpDialog} >
+        <dialog id="signUpModal" className={css.singUpDialog}>
           <img src={ok} alt="ok" />
           <h2>Successful registered, welcome {backResponse.name}!</h2>
           <div>
             <Link to="/allpizzas">
               <Button
-                m='1rem 0'
-                p='1.6rem 2rem 1.6rem'
-                fontSize='1.6rem'
+                m="1rem 0"
+                p="1.6rem 2rem 1.6rem"
+                fontSize="1.6rem"
                 bg={"orange.400"}
                 color={"white"}
                 _hover={{ bg: "orange.500" }}
                 onClick={goToMenuHandler}
-              >Go to menu
+              >
+                Go to menu
               </Button>
             </Link>
           </div>
