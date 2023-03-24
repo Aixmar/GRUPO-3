@@ -3,13 +3,16 @@ import {
   GET_INGREDIENTS_QUERY,
   GET_PIZZAS,
   PUSH_TO_CART,
-  SORT_PIZZAS,
+  CLEAR_CART_LOGOUT,
   POP_TO_CART,
+  SORT_PIZZAS,
   FILTER_BY_VEGETARIAN,
   FILTER_DRINKS_TERMS,
   FILTER_SIDES_TERMS,
   FILTER_PIZZAS_TERMS,
-  GET_DATA_USERS
+  GET_DATA_USERS,
+  GET_USER_BY_ID,
+  UPDATE_CART_USER,
 } from "./actionTypes";
 
 const initialState = {
@@ -34,6 +37,9 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         ingredients: action.payload,
       };
+
+    case GET_USER_BY_ID:
+      return { ...state, user: action.payload };
 
     case GET_INGREDIENTS_QUERY:
       if (Array.isArray(action.payload)) {
@@ -63,11 +69,17 @@ const rootReducer = (state = initialState, action) => {
       }
 
     case GET_PIZZAS:
-      const orderedById = OrderById(action.payload)
+      const orderedById = OrderById(action.payload);
       return {
         ...state,
         pizzas: orderedById,
         pizzasbackup: orderedById,
+      };
+
+    case UPDATE_CART_USER:
+      return {
+        ...state,
+        cart: [...state.cart, ...action.payload],
       };
 
     case PUSH_TO_CART:
@@ -77,6 +89,12 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case POP_TO_CART:
+      return {
+        ...state,
+        cart: action.payload,
+      };
+
+    case CLEAR_CART_LOGOUT:
       return {
         ...state,
         cart: action.payload,
@@ -127,22 +145,22 @@ const rootReducer = (state = initialState, action) => {
     case FILTER_PIZZAS_TERMS:
       return { ...state, filterPizzasTerms: action.payload };
     case GET_DATA_USERS:
-        return {
-          ...state,
-          user: action.payload,
-        };
+      return {
+        ...state,
+        user: action.payload,
+      };
     default:
       return { ...state };
   }
 };
 
 const OrderById = (items) => {
-    items.sort(function (a,b){
-        if(a.id > b.id) return 1
-        if(b.id > a.id) return -1  
-        return 0 
-    })
-    return items
-}
+  items.sort(function (a, b) {
+    if (a.id > b.id) return 1;
+    if (b.id > a.id) return -1;
+    return 0;
+  });
+  return items;
+};
 
 export default rootReducer;

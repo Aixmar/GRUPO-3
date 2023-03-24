@@ -14,9 +14,13 @@ const ItemCard = (props) => {
     setQuantity(value)
   }
 
+  const itemCart = {...props , quantity: parseInt(quantity)}
+
+
+  console.log(itemCart);
   const dispatch = useDispatch();
   const handleAddToCart = () => {
-    dispatch(pushToCart({...props , quantity: parseInt(quantity)}));
+    dispatch(pushToCart(itemCart));
   };
 
   return (

@@ -30,6 +30,7 @@ const UserForm = ({ onClose }) => {
     birthday: "",
     email: "",
     password: "",
+    cart:[],
   });
   const [errors, setErrors] = useState({});
   const [backResponse, setBackResponse] = useState({});
