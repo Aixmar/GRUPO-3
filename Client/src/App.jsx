@@ -26,7 +26,7 @@ import {
   AdminDashboard,
   Users,
   Products,
-  NewProduct
+  NewProduct,
   CheckOut,
 } from "./views/index";
 

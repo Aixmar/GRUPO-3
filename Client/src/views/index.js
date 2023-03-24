@@ -50,6 +50,6 @@ export {
   AdminDashboard,
   Users,
   Products,
-  NewProduct
+  NewProduct,
   CheckOut,
 };
