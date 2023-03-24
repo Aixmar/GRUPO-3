@@ -7,7 +7,7 @@ const RequireAuth = ()=>{
     // const {auth} = useAuth();
     const { user } = useAuthProv();
     return(
-        user?.email ? (<Outlet />) : <Navigate to="/login"  state={{from:location}} replace={true}/>
+        user?.email ? (<Outlet />) : <Navigate to="/home"  state={{from:location}} replace={true}/>
     )
 }
 export default RequireAuth
