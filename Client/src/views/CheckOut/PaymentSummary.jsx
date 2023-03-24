@@ -24,7 +24,7 @@ const OrderSummaryItem = (props) => {
 
 export const PaymentSummary = () => {
   const cart = useSelector((state) => state.cart) || [];
-  const totalPrice = cart.reduce((total, item) => total + item.price, 0) || 0;
+  const totalPrice = cart.reduce((total, item) => total + item.price, 0).toFixed(2) || 0;
 
   return (
     <Stack spacing="8" borderWidth="1px" rounded="lg" padding="8" width="full">
