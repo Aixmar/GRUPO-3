@@ -1,6 +1,6 @@
 
 import UserNavBar from "./UserNavBar";
-import { Box, useToast, Tooltip, Heading, Text, Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
+import { Box, useToast, Tooltip, Heading, Text, Button, FormControl, FormLabel, Input, Image } from "@chakra-ui/react";
 import UpdateEmailForm from "./Updates/UpdateEmail";
 import UpdatePasswordForm from "./Updates/UpdatePassword";
 import { useState } from "react";
