@@ -10,6 +10,7 @@ import {
   FILTER_DRINKS_TERMS,
   FILTER_SIDES_TERMS,
   FILTER_PIZZAS_TERMS,
+  GET_DATA_USERS
 } from "./actionTypes";
 import axios from "axios";
 
@@ -34,7 +35,12 @@ export const getPizzas = () => {
     return dispatch({ type: GET_PIZZAS, payload: response.data });
   };
 };
-
+export const getDataUsers = () => {
+  return async function (dispatch) {
+    let response = await axios.get("/users");
+    return dispatch({ type: GET_DATA_USERS, payload: response.data });
+  };
+};
 export const sortPizzas = (selectedSort) => {
   return { type: SORT_PIZZAS, payload: selectedSort };
 };

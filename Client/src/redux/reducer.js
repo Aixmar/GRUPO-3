@@ -9,6 +9,7 @@ import {
   FILTER_DRINKS_TERMS,
   FILTER_SIDES_TERMS,
   FILTER_PIZZAS_TERMS,
+  GET_DATA_USERS
 } from "./actionTypes";
 
 const initialState = {
@@ -23,6 +24,7 @@ const initialState = {
   filterSidesTerms: {},
   //--------------------
   filterPizzasTerms: {},
+  user: {},
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -124,7 +126,11 @@ const rootReducer = (state = initialState, action) => {
 
     case FILTER_PIZZAS_TERMS:
       return { ...state, filterPizzasTerms: action.payload };
-
+    case GET_DATA_USERS:
+        return {
+          ...state,
+          user: action.payload,
+        };
     default:
       return { ...state };
   }
