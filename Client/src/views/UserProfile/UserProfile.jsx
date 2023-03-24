@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // import { getUser } from "../../redux/actions";
-//import { Link } from "react-router-dom";
+import { Link  as RouterLink} from "react-router-dom";
 import user from "./json";
 
 import { Box, Flex, Text, Link } from "@chakra-ui/react";
@@ -16,7 +16,7 @@ const UserProfile = () => {
   return (
     <Flex bg="orange" p={2} alignItems="center">
       <Box mr={4}>
-        <Link href="/profile/account">
+        <Link to="/profile/account" as={RouterLink}>
           <Text as="span" fontSize="2xl" color="black">
             <span className="icon fontawesome-user scnd-font-color"></span>
             Account
