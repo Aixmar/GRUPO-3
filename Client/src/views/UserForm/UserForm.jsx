@@ -188,7 +188,7 @@ const UserForm = ({ onClose }) => {
           w='full'
           h='3rem'
           color={"#4e4e4e"}
-          _hover={{ bg: "orange.500" }}
+          _hover={{ bg: "#F3E8E6" }}
           isDisabled={isSubmitting}
         >
           Sign In
