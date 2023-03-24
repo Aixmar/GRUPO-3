@@ -19,7 +19,6 @@ export const AuthProvider = ({children}) =>{
 
     useEffect(() => {
         const logged = onAuthStateChanged(authProv, (currentUser) => {
-
             if(user.name) return;
             if (!currentUser) {
                 console.log('no user logged in');

@@ -1,5 +1,5 @@
-import user from "./json";
-import UserProfile from "./UserProfile";
+
+import UserNavBar from "./UserNavBar";
 import {
   Box,
   Heading,
@@ -11,7 +11,9 @@ import {
 } from "@chakra-ui/react";
 import UpdateAddressForm from "./Updates/UpdateAdress";
 import { useState } from "react";
+import { useAuthProv } from "../../context/AuthProvider";
 const UserSettings = () => {
+  const { user } = useAuthProv();
   const [notificationsByEmail, setNotificationsByEmail] = useState(false);
   const [isUpdateAddressFormVisible, setIsUpdateAddressFormVisible] =
     useState(false);
@@ -20,7 +22,7 @@ const UserSettings = () => {
   };
   return (
     <div>
-      <UserProfile />
+      <UserNavBar />
       <Box className="profile">
         <Heading as="h1" size="lg">
           Settings
@@ -29,7 +31,7 @@ const UserSettings = () => {
           Address
         </Heading>
         <Text>
-          {user[0].address}
+          {/* {user.address} */}
           <Button
             size="sm"
             colorScheme="teal"
@@ -43,7 +45,7 @@ const UserSettings = () => {
           Payment method
         </Heading>
         <Text>
-          {user[0].Payment}
+          {/* {user.Payment} */}
           <Button size="sm" colorScheme="teal">
             Update
           </Button>

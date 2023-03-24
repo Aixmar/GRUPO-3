@@ -1,16 +1,17 @@
-import user from "./json";
-import UserProfile from "./UserProfile";
+
+import UserNavBar from "./UserNavBar";
 import { Box, useToast, Tooltip, Heading, Text, Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
 import UpdateEmailForm from "./Updates/UpdateEmail";
 import UpdatePasswordForm from "./Updates/UpdatePassword";
 import { useState } from "react";
 import Axios from 'axios';
 import {updatePicture} from "./updatePicture";
-
+import { useAuthProv } from "../../context/AuthProvider";
 const UserAccount = () => {
 
   const toast = useToast()
-
+  const { user } = useAuthProv();
+  console.log(user);
   const [isUpdateEmailFormVisible, setIsUpdateEmailFormVisible] =
     useState(false);
   const toggleUpdateEmailForm = () => {
@@ -24,7 +25,7 @@ const UserAccount = () => {
 
   return (
     <div>
-      <UserProfile />
+      <UserNavBar />
       <Box className="profile">
         <Heading as="h1" size="lg">
           Personal Info
@@ -65,20 +66,20 @@ const UserAccount = () => {
           Name
         </Heading>
 
-        <Text>{user[0].name}</Text>
+        <Text>{user.name || user.displayName}</Text>
         <Heading as="h2" size="md" marginTop="4">
           Lastname
         </Heading>
-        <Text>{user[0].lastname}</Text>
+        <Text>{user.lastName}</Text>
         <Heading as="h2" size="md" marginTop="4">
           Birthday
         </Heading>
-        <Text>{user[0].birthday}</Text>
+        <Text>{user.birthday}</Text>
         <Heading as="h2" size="md" marginTop="4">
           Email
         </Heading>
         <Text>
-          {user[0].email}
+          {user.email}
           <Button size="sm" colorScheme="teal" onClick={toggleUpdateEmailForm}>
             Update
           </Button>
@@ -89,7 +90,7 @@ const UserAccount = () => {
           Password
         </Heading>
         <Text>
-          {user[0].password}
+       
           <Button
             size="sm"
             colorScheme="teal"
