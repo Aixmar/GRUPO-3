@@ -96,14 +96,14 @@ const CreatePizza = () => {
   return (
     <>
     <Box bgGradient="linear(to-l,#000000, #272727)"  height='100vh'>
-      <Text fontSize="3.6rem" color="#f27825" width='60%' display="flex" justifyContent='center' mb='1rem' >CREATE NEW PIZZA</Text>
+      <Text fontSize="3.6rem" color="#f27825" width='60%' display="flex" justifyContent='flex-start' ml="2rem" mb='1rem' >CREATE NEW PIZZA</Text>
       
       <Box display='flex' heigth='100vh' width='96%' margin='0 auto' border='1px solid #fff' borderRadius='6px' >
         <Box display="flex" width='64%' mt='1.2rem'>        
             <Grid templateColumns="repeat(4, 1fr)" templateRows='50% 50%' width='100%' color="white"  >
               <GridItem ml='2.2rem' >
-                <RadioGroup>
-                  <FormLabel fontWeight="bold">Dough type (Select 1):</FormLabel>
+                <RadioGroup colorScheme="orange">
+                  <FormLabel fontWeight="bold" >Dough type (Select 1):</FormLabel>
                   <Stack >
                     {
                       typesOfDough.map((dough) => (
@@ -118,7 +118,7 @@ const CreatePizza = () => {
               </GridItem>
 
               <GridItem ml='1rem' >
-                <RadioGroup>
+                <RadioGroup colorScheme="orange">
                   <FormLabel fontWeight="bold">Choose the bake (Select 1):</FormLabel>
                   <Stack >
                     {
@@ -134,12 +134,12 @@ const CreatePizza = () => {
               </GridItem>
 
               <GridItem ml='1rem' >
-                <RadioGroup>
+                <RadioGroup colorScheme="orange">
                   <FormLabel fontWeight="bold">Choose the base (Select 1):</FormLabel>
                   <Stack direction="column">
                     {
                     sauceBases.map((base) => (
-                        <Radio key={base.id} onChange={handleRadio} size="lg" type="radio"  name="base" value={base.name} >
+                        <Radio key={base.id} onChange={handleRadio} size="lg" type="radio"  name="base"  value={base.name} >
                           {base.name}
                         </Radio>
                       ))
@@ -150,12 +150,12 @@ const CreatePizza = () => {
               </GridItem>
 
               <GridItem ml='2rem' >              
-                <RadioGroup>
+                <RadioGroup colorScheme="orange">
                   <FormLabel fontWeight="bold">Mozarella? (Select 1):</FormLabel>                
                   <Stack direction="column">
                     {
                       cheeseBases.map((base) => (
-                        <Radio key={base.id} onChange={handleRadio} size="lg" type="radio" name="mozzarella" value={base.name} >
+                        <Radio key={base.id} onChange={handleRadio} size="lg" type="radio" name="mozzarella"  value={base.name} >
                           {base.name}
                         </Radio>
                         ))
@@ -176,7 +176,7 @@ const CreatePizza = () => {
           
         <Box width='36%' height='70vh' display='flex' flexDirection='column' borderLeft='1px solid #fff' >
           <PizzaCreated form={form} setForm={setForm} toppings={toppings} setToppings={setToppings} cheeses={cheeses} setCheeses={setCheeses} meats={meats} setMeats={setMeats} ></PizzaCreated>
-          <Box display='flex' justifyContent='space-around' alignItems='center' mb='2rem' >
+          <Box display='flex' justifyContent='space-around' alignItems='center' ml="2rem" mr="2rem" mb='2rem' >
             <Box><Text color='#fff' fontSize='1.4rem' width='14rem' >Total price: {form.price.toFixed(2)}</Text></Box>
             <Button onClick={handleSubmit} type="submit" hoverbg="white" borderRadius="full" fontSize='2rem' padding="2rem 1.4rem" background="linear-gradient(to right, #f27833, #eab830)" >
               Add to cart

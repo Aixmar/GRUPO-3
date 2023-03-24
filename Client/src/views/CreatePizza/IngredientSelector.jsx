@@ -33,7 +33,9 @@ const IngredientSelector = ({ toppings, setToppings, cheeses, setCheeses, meats,
                         name='toppingIngredients'
                         onChange={handleOnChange}
                         width='15rem'
-                        cursor='pointer' >
+                        cursor='pointer'
+                        color="#f27825"
+                        >
                         <option>Select Toppings</option>
                         {
                             toppings?.map((topping) => (
@@ -50,7 +52,8 @@ const IngredientSelector = ({ toppings, setToppings, cheeses, setCheeses, meats,
                         name='cheeseIngredients'
                         onChange={handleOnChange}
                         width='15rem'
-                        cursor='pointer' >
+                        cursor='pointer'
+                        color="#f27825" >
                         <option>Select Cheeses</option>
                         {
                             cheeses?.map((cheese) => (
@@ -67,7 +70,8 @@ const IngredientSelector = ({ toppings, setToppings, cheeses, setCheeses, meats,
                     name='meatIngredients' 
                     onChange={handleOnChange}
                     width='15rem'
-                    cursor='pointer' >
+                    cursor='pointer'
+                    color="#f27825" >
                         <option>Select Meats</option>
                         {
                             meats?.map((meat) => (
