@@ -1,16 +1,22 @@
-import { Box, Button, Flex, Grid, IconButton, Image, Text } from "@chakra-ui/react"
+import { Flex, IconButton, Image, Text,Button } from "@chakra-ui/react"
 import { FcApproval, FcCancel } from "react-icons/fc"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import axios from "axios"
 
 const ProductCard = (props) => {
 
     const [active, setActive] = useState(props.active)
+    
     const clickHandlerDisable = async() => {
-        console.log(active);
-        active === true ? setActive(false) : setActive(true)
-        await axios.put(`/pizzas/${props.id}`, active)
+        if(!active) setActive(true)
+        else{setActive(false)}
+
     }
+
+    useEffect(  ()=> {
+        axios.put(`/pizzas/${props.id}`, {active:active})
+        .then()
+    },[active])
     return (
         <Flex padding="20px" border="1px solid black">
             <Text>{props.id}</Text>
@@ -22,6 +28,7 @@ const ProductCard = (props) => {
                 active === false ? <IconButton icon={<FcApproval />} onClick={clickHandlerDisable}></IconButton> :
                     <IconButton icon={<FcCancel />} onClick={clickHandlerDisable}></IconButton>
             }
+           
 
         </Flex>
     )
