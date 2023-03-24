@@ -8,7 +8,7 @@ import { CartOrderSummary } from "./CartOrderSummary/CartOrderSummary";
 
 const Table = () => {
   const cart = useSelector((state) => state.cart) || [];
-
+ 
   const dispatch = useDispatch();
 
   const onClickDelete = (index) => {

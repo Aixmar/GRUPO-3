@@ -23,6 +23,10 @@ import {
   UserStars,
   UserHistory,
   UserHistoryDetail,
+  AdminDashboard,
+  Users,
+  Products,
+  NewProduct,
   CheckOut,
 } from "./views/index";
 
@@ -44,17 +48,23 @@ function App() {
         <Route path="/alldrinks" element={<AllDrinks />}></Route>
         <Route path="/allsides" element={<AllSides />}></Route>
         <Route path="/drinks" element={<AllPizzas />}></Route>
-        <Route path="/createuser" element={<UserForm />} />
-        <Route path="/login" element={<UserLogin path={path}/>} />
+        {/* <Route path="/createuser" element={<UserForm />} /> */}
+        {/* <Route path="/login" element={<UserLogin path={path}/>} /> */}
         <Route path="/about" element={ <About /> } />
         {/* Todo lo que esue dentro de la ruta RequireAuth esta protegido para que solo pueda acceder un usuario logueado */}
-        <Route element={<RequireAuth />}>
-          
           <Route path="/createpizza" element={<CreatePizza />} />
+        
+        <Route element={<RequireAuth />}>         
           <Route path="/profile" element={<UserNavBar />} />
+
         </Route>
         
-        
+        <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/users" element={<Users />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/newproduct" element={<NewProduct />} />
+          
+
 
         <Route path="/itemdetail/:id" element={<ItemDetail />} />
         <Route path="/sidedetail/:id" element={<SideDetail />} />

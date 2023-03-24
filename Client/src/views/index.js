@@ -19,6 +19,10 @@ import UserSettings from "./UserProfile/UserSettings";
 import UserStars from "./UserProfile/UserStars";
 import UserHistory from "./UserProfile/UserHistory";
 import UserHistoryDetail from "./UserProfile/UserHistoryDetail";
+import AdminDashboard from "./AdminDashboard/AdminDashboard";
+import Users from "./AdminDashboard/Users/Users";
+import Products from "./AdminDashboard/Products/Products";
+import NewProduct from "./AdminDashboard/NewProduct/NewProduct";
 import CheckOut from "./CheckOut/CheckOut";
 
 export {
@@ -43,5 +47,9 @@ export {
   UserStars,
   UserHistory,
   UserHistoryDetail,
+  AdminDashboard,
+  Users,
+  Products,
+  NewProduct,
   CheckOut,
 };

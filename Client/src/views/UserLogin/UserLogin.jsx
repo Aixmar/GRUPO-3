@@ -6,7 +6,7 @@ import { useAuthProv } from "../../context/AuthProvider";
 import logoG from '../../assets/logoGoogle.png'
 
 
-const UserLogin = () => {
+const UserLogin = ({ onClose }) => {
   const navigate = useNavigate()
   const location = useLocation()
   const from = location.state?.from?.pathname || "/home"
@@ -28,6 +28,7 @@ const UserLogin = () => {
       setUser(data);
       window.localStorage.setItem('loggedUser' , JSON.stringify(data));
       navigate(from,{replace:true});
+      setTimeout(() => onClose(), 1500);
       // const accessToken = response?.data;
       // setAuth({...form, accessToken})
       // window.localStorage.setItem('loggedUser' , JSON.stringify({...form,accessToken}));
@@ -41,6 +42,7 @@ const UserLogin = () => {
   
   const handleLoginGoogle = () => {
       loginWithGoogle();
+      setTimeout(() => onClose(), 4000);
   };
 
 
@@ -48,11 +50,11 @@ const UserLogin = () => {
   return (
     
     <Box
-      bgGradient="linear(to-l,#000000, #272727)"
-      minH="100vh"
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
+      // bgGradient="linear(to-l,#000000, #272727)"
+      // minH="100vh"
+      // display="flex"
+      // justifyContent="center"
+      // alignItems="center"
     >
       
       <form onSubmit={submitHandler}>
@@ -90,16 +92,18 @@ const UserLogin = () => {
           <Button
             type="submit"
             bg={"white"}
-            fontSize={"2xl"}
+            fontSize={"1.6rem"}
             color={"#1B1B1B"} 
             w={"full"}
             h='3rem'
-            mt={8}
+            mt='2rem'
+            mb='1rem'
             isLoading={isLoading}
             _hover={{ bg: "#F3E8E6" }}
           >
             <Text>Login</Text>
           </Button>
+          <Text textAlign='center' color='#fff' >or</Text>
           <Button
             bg={"white"}
             fontSize={"1.2rem"}
@@ -107,7 +111,7 @@ const UserLogin = () => {
             color={"#4e4e4e"} 
             w={"full"}
             h='3rem'
-            mt={8}
+            mt='1rem'
             _hover={{ bg: "#F3E8E6" }}
             onClick={handleLoginGoogle}
             display='flex'

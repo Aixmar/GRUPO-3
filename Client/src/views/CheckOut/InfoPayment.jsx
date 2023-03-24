@@ -3,17 +3,46 @@ import { useState } from "react";
 import StatusScreen from "./StatusScreen";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import axios from 'axios'
+import { useAuthProv } from "../../context/AuthProvider";
+
 
 const InfoPayment = () => {
   const mp = new MercadoPago("TEST-8b8bf3cf-ef4b-4d5d-b043-44e85e071a79");
   const bricksBuilder = mp.bricks();
 
   const cart = useSelector((state) => state.cart) || [];
+  const cartMail = cart.map((product) => {
+    return {
+      name: product.name,
+      price: product.price,
+      quantity: product.quantity,
+    };
+  });
+
+  const { user } = useAuthProv();
+
+  const formMail = {
+      items: cartMail,
+      name: user.name || user.displayName,
+      email: user.email,
+    }
+
   const totalPrice = cart.reduce((total, item) => total + item.price, 0) || 0;
 
-  console.log(totalPrice);
+
   const [paymentId, setPaymentId] = useState("111111111");
   const [showStatusScreen, setShowStatusScreen] = useState(false);
+  const [statusPayment, setStatusPayment] = useState('');
+  const [ dataResponse, setdataResponse] = useState();
+
+    console.log(dataResponse);
+
+  useEffect(() => {
+        if (statusPayment === 'approved') {
+          axios.post('http://localhost:3001/sendmail/buyitem', formMail )
+        }
+  },[statusPayment])
 
   const renderCardPaymentBrick = async (bricksBuilder) => {
     const settings = {
@@ -45,7 +74,9 @@ const InfoPayment = () => {
                 response.json().then((data) => {
                   console.log("Datos de respuesta:", data);
                   setPaymentId(data.id);
-                  setShowStatusScreen(true);
+                  setShowStatusScreen(true)
+                  setStatusPayment(data.status);
+                  setdataResponse(data)
                   resolve();
                 });
               })

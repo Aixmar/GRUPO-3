@@ -1,7 +1,12 @@
-dialog {
-    width: 30%;
+
+.singUpDialog {
     text-align: center;
-    border-radius: 20px;
+    border-radius: 20px; 
+    
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 dialog h2 {
@@ -9,10 +14,14 @@ dialog h2 {
 }
 
 
-dialog::backdrop {
-    background-color: rgba(0, 0, 0, 0.687);
-    
+.singUpDialog::backdrop {
+    backdrop-filter: blur(4px);
+    background-color: rgba(0, 0, 0, 0.712);  
 }
+/* 
+.singUpDialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.697);    
+} */
 dialog img {
     width: 4rem;
     height: 4rem;

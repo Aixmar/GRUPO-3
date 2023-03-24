@@ -63,10 +63,11 @@ const rootReducer = (state = initialState, action) => {
       }
 
     case GET_PIZZAS:
+      const orderedById = OrderById(action.payload)
       return {
         ...state,
-        pizzas: action.payload,
-        pizzasbackup: action.payload,
+        pizzas: orderedById,
+        pizzasbackup: orderedById,
       };
 
     case PUSH_TO_CART:
@@ -134,5 +135,14 @@ const rootReducer = (state = initialState, action) => {
       return { ...state };
   }
 };
+
+const OrderById = (items) => {
+    items.sort(function (a,b){
+        if(a.id > b.id) return 1
+        if(b.id > a.id) return -1  
+        return 0 
+    })
+    return items
+}
 
 export default rootReducer;
