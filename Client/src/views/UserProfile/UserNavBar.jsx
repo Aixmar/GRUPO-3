@@ -3,9 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 // import { getUser } from "../../redux/actions";
 import { Link as RouterLink } from "react-router-dom";
 import { Box, Flex, Text, Link} from "@chakra-ui/react";  
+import { useAuthProv } from '../../context/AuthProvider';
 
 const UserProfile = () => {
   const dispatch = useDispatch();
+  const { user } = useAuthProv();
   //const user = useSelector((state) => state.user);
 
   // useEffect(() => {
@@ -22,6 +24,14 @@ const UserProfile = () => {
           </Text>
         </Link>
       </Box>
+      { user.email === 'mix2pizza@gmail.com' && <Box mr={4}>
+        <Link to="/admin" as={RouterLink}>
+          <Text as="span" fontSize="2xl" color="black">
+            <span className="icon entypo-cog scnd-font-color"></span>
+            Dashboard
+          </Text>
+        </Link>
+      </Box> }
       <Box mr={4}>
         <Link to="/profile/settings" as={RouterLink}>
           <Text as="span" fontSize="2xl" color="black">
