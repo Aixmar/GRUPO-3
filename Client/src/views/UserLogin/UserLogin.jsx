@@ -4,8 +4,10 @@ import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import { useAuthProv } from "../../context/AuthProvider";
 import logoG from '../../assets/logoGoogle.png'
-
-
+//------------------------------------------------------
+import { updateCartUser } from "../../redux/actions";
+import { useDispatch } from "react-redux";
+//------------------------------------------------------
 const UserLogin = ({ onClose }) => {
   const navigate = useNavigate()
   const location = useLocation()
@@ -14,6 +16,7 @@ const UserLogin = ({ onClose }) => {
   const [form, setForm] = useState({ email: "", password: "" });
   const [isLoading, setIsLoading] = useState(false);
   const { setUser, loginWithGoogle } = useAuthProv();
+  const dispatch = useDispatch() 
 
   const inputChangeHandler = (event) => {
     const { name, value } = event.target;
@@ -26,6 +29,12 @@ const UserLogin = ({ onClose }) => {
       const { data } = await axios.post("/users/login", form,{headers : {'Content-Type' : 'application/json'},withCredentials:true});
       setIsLoading(true)
       setUser(data);
+      console.log("ESTO ES LO QUE QUIERO", data.cart);
+      
+      //------------------------------------------------------
+      dispatch(updateCartUser(data.cart));
+      //------------------------------------------------------
+
       window.localStorage.setItem('loggedUser' , JSON.stringify(data));
       navigate(from,{replace:true});
       setTimeout(() => onClose(), 1500);

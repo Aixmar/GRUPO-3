@@ -10,7 +10,11 @@ import {
   FILTER_DRINKS_TERMS,
   FILTER_SIDES_TERMS,
   FILTER_PIZZAS_TERMS,
-  GET_DATA_USERS
+  GET_DATA_USERS,
+  GET_USER_BY_ID,
+  UPDATE_CART_USER,
+  PUT_CART_USER,
+  CLEAR_CART_LOGOUT,
 } from "./actionTypes";
 import axios from "axios";
 
@@ -18,6 +22,13 @@ export const getIngredients = () => {
   return async function (dispatch) {
     let response = await axios(`/ingredients`);
     return dispatch({ type: GET_INGREDIENTS, payload: response.data });
+  };
+};
+
+export const getUserById = (id) => {
+  return async function (dispatch) {
+    let response = await axios.get(`/users/${id}`);
+    return dispatch({ type: GET_USER_BY_ID, payload: response.data });
   };
 };
 
@@ -45,13 +56,25 @@ export const sortPizzas = (selectedSort) => {
   return { type: SORT_PIZZAS, payload: selectedSort };
 };
 
-export const pushToCart = (form) => {
-  return { type: PUSH_TO_CART, payload: form };
+export const pushToCart = (itemCart) => {
+  return { type: PUSH_TO_CART, payload: itemCart };
 };
 
 export const popToCart = (sliceForm) => {
   return { type: POP_TO_CART, payload: sliceForm };
 };
+
+export const putCartUser = (updateCartUser) => {
+
+  return async function (dispatch) {
+    await axios.put(`/users/updateCart`, updateCartUser );
+    return;
+  };
+};
+
+export const clearCartUser = () => {
+    return { type: CLEAR_CART_LOGOUT, payload: [] };
+  };
 
 export const filterByVegetarian = (filterVege) => {
   return { type: FILTER_BY_VEGETARIAN, payload: filterVege };
@@ -67,4 +90,8 @@ export const filterSidesTerms = (sidesTerms) => {
 
 export const filterPizzasTerms = (pizzasTerms) => {
   return { type: FILTER_PIZZAS_TERMS, payload: pizzasTerms };
+};
+
+export const updateCartUser = (cartUser) => {
+  return { type: UPDATE_CART_USER, payload: cartUser };
 };
