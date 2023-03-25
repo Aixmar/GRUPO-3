@@ -1,5 +1,6 @@
 import {
   Box,
+
   Heading,
   UnorderedList,
   ListItem,
@@ -28,6 +29,7 @@ import {
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useSelector, useDispatch } from "react-redux";
+
 import useLogout from "../../Utils/useLogout";
 import { cartlogo, pizzalogo } from "../../assets/CloudinaryImg";
 import { useAuthProv } from "../../context/AuthProvider";
@@ -36,19 +38,19 @@ import UserForm from "../../views/UserForm/UserForm";
 import UserLogin from "../../views/UserLogin/UserLogin";
 import profImg from "../../assets/profileImage.png";
 import React from "react";
-import { popToCart } from "../../redux/actions";
+import { popToCart,  clearCartUser, putCartUser } from "../../redux/actions";
 // import CartDrawer from "../../views/Cart/Helper/CartDrawer";
 import { useState } from "react";
 
 const NavBar = () => {
   const cartItems = useSelector((state) => state.cart);
-  console.log("SOY LOS COMPONENTES DEL CART", cartItems);
   const navigate = useNavigate();
   const logout = useLogout();
   const { user, googleLogout } = useAuthProv();
 
   ///////////////DRAWER CART 
   const { isOpen, onOpen, onClose } = useDisclosure();
+
   const btnRef = React.useRef();
   const dispatch = useDispatch();
   const[openDrawCart1, setopenDrawCart1] = useState(false);
@@ -69,10 +71,15 @@ const NavBar = () => {
   };
   ///////////////////
 
+  const updateCartUser = { cart: cart, userId: user.id };
+
+
   const signOut = async () => {
     if (user.displayName) {
       googleLogout();
     }
+    dispatch(putCartUser(updateCartUser));
+    dispatch(clearCartUser(clearCartUser));
     await logout();
     navigate("/home");
   };
@@ -114,6 +121,7 @@ const NavBar = () => {
                 HOME
               </BreadcrumbLink>
             </BreadcrumbItem>
+
             <BreadcrumbItem>
               <BreadcrumbLink
                 as={RouterLink}
@@ -123,6 +131,7 @@ const NavBar = () => {
                 CREATE PIZZA
               </BreadcrumbLink>
             </BreadcrumbItem>
+
             <BreadcrumbItem>
               <BreadcrumbLink
                 as={RouterLink}
@@ -132,6 +141,7 @@ const NavBar = () => {
                 TRADITIONAL MENU
               </BreadcrumbLink>
             </BreadcrumbItem>
+
             <BreadcrumbItem>
               <BreadcrumbLink
                 as={RouterLink}
@@ -141,6 +151,7 @@ const NavBar = () => {
                 ABOUT
               </BreadcrumbLink>
             </BreadcrumbItem>
+
             {user.email && (
               <BreadcrumbItem>
                 <BreadcrumbLink
@@ -162,9 +173,9 @@ const NavBar = () => {
             //////////////////////////////////////////////////// DRAWER CART ///////////////////////////////////////
             
               <BreadcrumbItem>
-                {/* <Button ref={btnRef} colorScheme="orange" onClick={onOpen}> */}
+                
                   <Image onClick={handleopenDrawCart1}  src={cartlogo} width="50px" height="50px" />
-                {/* </Button> */}
+                
                 <Drawer
                   isOpen={openDrawCart1}
                   placement="right"
@@ -196,7 +207,7 @@ const NavBar = () => {
                               onClick={() => onClickDelete(index)}
                               ml="4"
                             >
-                              Eliminar
+                              Delete
                             </CloseButton>
                           </ListItem>
                         ))}
@@ -217,10 +228,7 @@ const NavBar = () => {
                   </DrawerContent>
                 </Drawer>
 
-                {/* <Button onClick={handleClick}>
-                  <img src={cartlogo} alt="Logo" width="50px" height="50px" />
-                </Button> */}
-
+         
                 <Badge
                   className="cart-icon"
                   borderRadius="full"
@@ -238,6 +246,8 @@ const NavBar = () => {
               </BreadcrumbItem>
            
             /////////////////////////////////////////////////////////
+
+     
             {user.email ? (
               <Box ml="1rem" textAlign="center" display="flex" flexDir="column">
                 <Box display="flex" alignItems="center">
@@ -252,6 +262,7 @@ const NavBar = () => {
               </Box>
             ) : (
               <>
+
                 <BreadcrumbItem w="5rem">
                   <Link _hover={{ color: "#f27825" }} onClick={openModal}>
                     LOGIN
