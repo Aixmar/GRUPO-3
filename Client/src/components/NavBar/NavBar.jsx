@@ -1,8 +1,14 @@
 import {
   Box,
+
+  Heading,
+  UnorderedList,
+  ListItem,
   Flex,
+  Input,
   Text,
   Breadcrumb,
+  Radio,
   BreadcrumbItem,
   BreadcrumbLink,
   Spacer,
@@ -15,12 +21,15 @@ import {
   DrawerCloseButton,
   DrawerHeader,
   DrawerBody,
+  DrawerFooter,
   Button,
   Image,
+  CloseButton,
 } from "@chakra-ui/react";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
 import useLogout from "../../Utils/useLogout";
 import { cartlogo, pizzalogo } from "../../assets/CloudinaryImg";
 import { useAuthProv } from "../../context/AuthProvider";
@@ -28,18 +37,42 @@ import useAuth from "../../Utils/useAuth";
 import UserForm from "../../views/UserForm/UserForm";
 import UserLogin from "../../views/UserLogin/UserLogin";
 import profImg from "../../assets/profileImage.png";
-import { clearCartUser, putCartUser } from "../../redux/actions";
+import React from "react";
+import { popToCart,  clearCartUser, putCartUser } from "../../redux/actions";
+// import CartDrawer from "../../views/Cart/Helper/CartDrawer";
+import { useState } from "react";
 
 const NavBar = () => {
-  const dispatch = useDispatch();
-  // const cartItems = useSelector(state => state.cart);
+  const cartItems = useSelector((state) => state.cart);
   const navigate = useNavigate();
   const logout = useLogout();
   const { user, googleLogout } = useAuthProv();
+
+  ///////////////DRAWER CART 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const cart = useSelector((state) => state.cart);
+
+  const btnRef = React.useRef();
+  const dispatch = useDispatch();
+  const[openDrawCart1, setopenDrawCart1] = useState(false);
+ 
+  const handleopenDrawCart1 = () => {
+    setopenDrawCart1(true);
+    }
+
+  const handleCloseDrawCart1 = () => {
+    setopenDrawCart1(false);
+    }
+
+
+
+  const onClickDelete = (index) => {
+    const newCart = cartItems.filter((item, i) => i !== index);
+    dispatch(popToCart(newCart));
+  };
+  ///////////////////
 
   const updateCartUser = { cart: cart, userId: user.id };
+
 
   const signOut = async () => {
     if (user.displayName) {
@@ -130,7 +163,6 @@ const NavBar = () => {
                 </BreadcrumbLink>
               </BreadcrumbItem>
             )}
-
             {/* <Button onClick={onOpen}>Login</Button> */}
             {/* <BreadcrumbItem>
                   <BreadcrumbLink marginRight="3" as={RouterLink} to="/createuser" _hover={{ color: "#f27825" }}>REGISTER</BreadcrumbLink>
@@ -138,27 +170,84 @@ const NavBar = () => {
             {/* <BreadcrumbItem>
                   <BreadcrumbLink marginRight="3" as={RouterLink} to="/login" _hover={{ color: "#f27825" }}>LOGIN</BreadcrumbLink>
                 </BreadcrumbItem> */}
+            //////////////////////////////////////////////////// DRAWER CART ///////////////////////////////////////
+            
+              <BreadcrumbItem>
+                
+                  <Image onClick={handleopenDrawCart1}  src={cartlogo} width="50px" height="50px" />
+                
+                <Drawer
+                  isOpen={openDrawCart1}
+                  placement="right"
+                  onClose={handleCloseDrawCart1}
+                  finalFocusRef={btnRef}
+                >
+                  <DrawerOverlay />
+                  <DrawerContent>
+                    <DrawerCloseButton />
+                    <DrawerHeader>CART</DrawerHeader>
 
-            <BreadcrumbItem>
-              <Link as={RouterLink} to="/cart">
-                <img src={cartlogo} alt="Logo" width="50px" height="50px" />
-              </Link>
-              <Badge
-                className="cart-icon"
-                borderRadius="full"
-                px={2}
-                py={1}
-                cursor="pointer"
-                colorScheme="orange"
-                border="2px"
-                borderColor="orange.500"
-                position="relative"
-                transform="translateX(-60%)"
-              >
-                <span >{cart.length}</span>
-              </Badge>
-            </BreadcrumbItem>
+                    <DrawerBody>
+                      <Heading>Selected products </Heading>
 
+                      <UnorderedList listStyleType="none">
+                        {cartItems.map((item, index) => (
+                          <ListItem key={item.name}>
+                            <Image
+                              src={item.image}
+                              alt={item.name}
+                              boxSize="50px"
+                              mr="4"
+                            />
+                            <span>{item.name}</span>
+                            <span style={{ marginLeft: "1rem" }}>
+                              ${item.price}
+                            </span>
+                            <CloseButton
+                              onClick={() => onClickDelete(index)}
+                              ml="4"
+                            >
+                              Delete
+                            </CloseButton>
+                          </ListItem>
+                        ))}
+                      </UnorderedList>
+                    </DrawerBody>
+
+                    <DrawerFooter>
+                      <Button variant="outline" mr={3} onClick={handleCloseDrawCart1}>
+                        Continue shopping
+                      </Button>
+
+
+                      <Link as={RouterLink} to='/cart'>
+                        <Button colorScheme="blue">Go to Cart</Button>
+                      </Link>
+
+                    </DrawerFooter>
+                  </DrawerContent>
+                </Drawer>
+
+         
+                <Badge
+                  className="cart-icon"
+                  borderRadius="full"
+                  px={2}
+                  py={1}
+                  cursor="pointer"
+                  colorScheme="orange"
+                  border="2px"
+                  borderColor="orange.500"
+                  position="relative"
+                  transform="translateX(-60%)"
+                >
+                  <span>{cartItems.length}</span>
+                </Badge>
+              </BreadcrumbItem>
+           
+            /////////////////////////////////////////////////////////
+
+     
             {user.email ? (
               <Box ml="1rem" textAlign="center" display="flex" flexDir="column">
                 <Box display="flex" alignItems="center">
@@ -173,7 +262,8 @@ const NavBar = () => {
               </Box>
             ) : (
               <>
-                <BreadcrumbItem>
+
+                <BreadcrumbItem w="5rem">
                   <Link _hover={{ color: "#f27825" }} onClick={openModal}>
                     LOGIN
                   </Link>
