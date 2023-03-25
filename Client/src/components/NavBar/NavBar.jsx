@@ -71,7 +71,7 @@ const NavBar = () => {
   };
   ///////////////////
 
-  const updateCartUser = { cart: cart, userId: user.id };
+  const updateCartUser = { cart: cartItems, userId: user.id };
 
 
   const signOut = async () => {
