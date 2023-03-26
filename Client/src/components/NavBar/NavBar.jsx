@@ -192,7 +192,7 @@ const NavBar = () => {
                     <DrawerHeader>CART</DrawerHeader>
 
                     <DrawerBody>
-                      <Heading>Selected products </Heading>
+                      <Heading color="#f27825" pb="20px">Selected products </Heading>
 
                       <UnorderedList listStyleType="none">
                         {cartItems.map((item, index) => (
@@ -209,7 +209,9 @@ const NavBar = () => {
                             </span>
                             <CloseButton
                               onClick={() => onClickDelete(index)}
-                              ml="4"
+                              
+                              w="4rem"
+                              color="red"
                             >
                               Delete
                             </CloseButton>
@@ -225,7 +227,8 @@ const NavBar = () => {
 
 
                       <Link as={RouterLink} to='/cart' onClick={handleNavigate}>
-                        <Button colorScheme="blue">Go to Cart</Button>
+                        <Button colorScheme="orange">Go to Cart</Button>
+
                       </Link>
 
                     </DrawerFooter>
