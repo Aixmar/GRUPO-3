@@ -27,7 +27,7 @@ const SideBar = () => {
                 <Link to= "/admin" ><Button>Main Page</Button></Link>
                 <Link to= "/users" ><IconButton mt='1rem' icon={<FiUser/>}/></Link>                
                 <Link to= "/products" ><IconButton mt='1rem' icon={<RiShoppingBasketFill />} /></Link>
-                <Link to= "/newproduct" ><IconButton mt='1rem' icon={<RiShoppingBasketFill />} /></Link>                
+                <Link to= "/createProduct" ><IconButton mt='1rem' icon={<RiShoppingBasketFill />} /></Link>                
             </Flex>
 
             <Flex

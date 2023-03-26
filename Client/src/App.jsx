@@ -26,7 +26,7 @@ import {
   AdminDashboard,
   Users,
   Products,
-  NewProduct,
+  CreateProduct,
   CheckOut,
 } from "./views/index";
 
@@ -62,7 +62,7 @@ function App() {
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/users" element={<Users />} />
         <Route path="/products" element={<Products />} />
-        <Route path="/newproduct" element={<NewProduct />} />
+        <Route path="/createProduct" element={<CreateProduct />} />
           
 
 

@@ -22,7 +22,7 @@ import UserHistoryDetail from "./UserProfile/UserHistoryDetail";
 import AdminDashboard from "./AdminDashboard/AdminDashboard";
 import Users from "./AdminDashboard/Users/Users";
 import Products from "./AdminDashboard/Products/Products";
-import NewProduct from "./AdminDashboard/NewProduct/NewProduct";
+import CreateProduct from './AdminDashboard/NewProduct/CreateProduct/CreateProduct';
 import CheckOut from "./CheckOut/CheckOut";
 
 export {
@@ -50,6 +50,6 @@ export {
   AdminDashboard,
   Users,
   Products,
-  NewProduct,
+  CreateProduct,
   CheckOut,
 };
