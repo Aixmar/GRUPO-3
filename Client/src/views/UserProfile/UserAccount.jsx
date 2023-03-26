@@ -3,15 +3,24 @@ import UserNavBar from "./UserNavBar";
 import { Box, useToast, Tooltip, Heading, Text, Button, FormControl, FormLabel, Input, Image } from "@chakra-ui/react";
 import UpdateEmailForm from "./Updates/UpdateEmail";
 import UpdatePasswordForm from "./Updates/UpdatePassword";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Axios from 'axios';
 import {updatePicture} from "./updatePicture";
 import { useAuthProv } from "../../context/AuthProvider";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { getUserById } from "../../redux/actions";
+import axios from "axios";
 const UserAccount = () => {
+  const dispatch = useDispatch();
   const userData = useSelector((state)=> state.user);
- 
   const { user } = useAuthProv();
+
+
+  useEffect(() => {
+    dispatch(getUserById(user.id));
+  }, [dispatch]); 
+
+ console.log(userData);
   const [previewSource, setPreviewSource] = useState('');
   const [isUpdateEmailFormVisible, setIsUpdateEmailFormVisible] =
     useState(false);
@@ -29,7 +38,9 @@ const UserAccount = () => {
     setSelectedFile(file);
     setFileInputState(e.target.value);
 };
-
+const onClose = () => {
+ setIsUpdateEmailFormVisible(false)
+}
 
   const previewFile = (file) => {
     const reader = new FileReader();
@@ -103,12 +114,12 @@ const UserAccount = () => {
           Email
         </Heading>
         <Text>
-          {user.email}
+        {userData.email}
           <Button size="sm" colorScheme="teal" onClick={toggleUpdateEmailForm}>
             Update
           </Button>
+        {isUpdateEmailFormVisible && <UpdateEmailForm onClose formtype="email" {...user}/>}
         </Text>
-        {isUpdateEmailFormVisible && <UpdateEmailForm formtype="email" />}
 
         <Heading as="h2" size="md" marginTop="4">
           Password
@@ -124,7 +135,7 @@ const UserAccount = () => {
           </Button>
         </Text>
         {isUpdatePasswordFormVisible && (
-          <UpdatePasswordForm formType="password" />
+          <UpdatePasswordForm formType="password" {...user}/>
         )}
       </Box>
     </div>
