@@ -78,7 +78,7 @@ export const CartOrderSummary = (props) => {
         </Flex>
         
       </Stack>
-        <Button onClick={() => navigate('/checkout')} colorScheme="orange" size="lg" fontSize="md" isDisabled={cart.length > 0 ? false: true}>
+        <Button onClick={handleCheckout} colorScheme="orange" size="lg" fontSize="md" isDisabled={cart.length > 0 ? false: true}>
           Checkout
         </Button>
     </Stack>
