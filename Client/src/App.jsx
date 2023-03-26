@@ -56,6 +56,7 @@ function App() {
 {/* Todo lo que esue dentro de la ruta RequireAuth esta protegido para que solo pueda acceder un usuario logueado con el rol asignado */}
         <Route element={<RequireAuth allowedRol={'user'}/>}>         
           <Route path="/profile" element={<UserNavBar />} />
+          <Route path="/checkout" element={<CheckOut />} />
         </Route>
         
         <Route element={<RequireAuth allowedRol={'admin'}/>}>         

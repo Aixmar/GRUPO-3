@@ -7,7 +7,9 @@ import {
   Text,
   useColorModeValue as mode,
 } from "@chakra-ui/react";
-import { useDispatch } from "react-redux";
+
+import { useSelector, useDispatch } from "react-redux";
+
 import { useNavigate} from "react-router-dom";
 import { openSignupDrawer } from "../../../../../redux/actions";
 import { useAuthProv } from "../../../../../context/AuthProvider";
@@ -28,6 +30,9 @@ const OrderSummaryItem = (props) => {
 
 export const CartOrderSummary = (props) => {
   
+  const cart = useSelector(state => state.cart)
+  const navigate = useNavigate()
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useAuthProv();
@@ -39,6 +44,7 @@ export const CartOrderSummary = (props) => {
   useEffect(() => {
     return () => dispatch(openSignupDrawer(false));
   }, []);
+
 
   return (
     <Stack spacing="8" borderWidth="1px" rounded="lg" padding="8" width="full">
@@ -74,7 +80,7 @@ export const CartOrderSummary = (props) => {
         </Flex>
         
       </Stack>
-        <Button onClick={handleCheckout} colorScheme="orange" size="lg" fontSize="md">
+        <Button onClick={() => navigate('/checkout')} colorScheme="orange" size="lg" fontSize="md" isDisabled={cart.length > 0 ? false: true}>
           Checkout
         </Button>
     </Stack>

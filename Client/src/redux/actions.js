@@ -15,6 +15,7 @@ import {
   UPDATE_CART_USER,
   PUT_CART_USER,
   CLEAR_CART_LOGOUT,
+  UPDATE_CART_ITEM_QUANTITY,
   OPEN_SIGNUP_DRAWER
 } from "./actionTypes";
 import axios from "axios";
@@ -65,6 +66,11 @@ export const popToCart = (sliceForm) => {
   return { type: POP_TO_CART, payload: sliceForm };
 };
 
+export const updateCartItemQuantity = (itemId, quantity) => {
+  return {type: UPDATE_CART_ITEM_QUANTITY, payload: { itemId, quantity }}
+}
+
+
 export const putCartUser = (updateCartUser) => {
 
   return async function (dispatch) {
@@ -72,6 +78,8 @@ export const putCartUser = (updateCartUser) => {
     return;
   };
 };
+
+
 
 export const clearCartUser = () => {
     return { type: CLEAR_CART_LOGOUT, payload: [] };
