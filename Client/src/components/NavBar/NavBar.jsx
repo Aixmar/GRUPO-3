@@ -63,6 +63,10 @@ const NavBar = () => {
     setopenDrawCart1(false);
     }
 
+    function handleNavigate() {
+      onClose();
+      history.push("/cart");
+    }
 
 
   const onClickDelete = (index) => {
@@ -220,7 +224,7 @@ const NavBar = () => {
                       </Button>
 
 
-                      <Link as={RouterLink} to='/cart'>
+                      <Link as={RouterLink} to='/cart' onClick={handleNavigate}>
                         <Button colorScheme="blue">Go to Cart</Button>
                       </Link>
 
