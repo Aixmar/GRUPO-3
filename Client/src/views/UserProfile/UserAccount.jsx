@@ -55,16 +55,18 @@ const onClose = () => {
     Axios.put("http://localhost:3001/users/image", putImage);
     }
   return (
-    <div>
+    <Box  bgGradient="linear(to-l,#000000, #272727)" w="auto" h="1080px">
       <UserNavBar />
-      <Box className="profile">
-        <Heading as="h1" size="lg">
+      <Box ml="2rem"  className="profile">
+        <Heading pt="10px" pb="20px" color="white" as="h1" size="lg">
           Personal Info
         </Heading>
         <Image src={user.image}/>
         <Input 
         id="inputTag"
-        type="file" 
+        type="file"
+        color="white"
+        pt="5px" 
         onChange={ async (event) => {
           {()=> handleFileInputChange(file)}
         // toast({
@@ -90,59 +92,60 @@ const onClose = () => {
           }}/>
             {previewSource && (
               <img src={previewSource} alt="chosen" style={{height:'300px'}} />)} 
-  
-            <Button size="sm" colorScheme="teal" onClick={updateImageHandleClick}>
+            <Box pt="10px">
+            <Button size="sm" colorScheme="orange" onClick={updateImageHandleClick}>
               Update
-            </Button> 
+            </Button>
+            </Box>
 
 
 
-        <Heading as="h2" size="md" marginTop="4">
+        <Heading  color="white" as="h2" size="md" marginTop="4">
           Name
         </Heading>
 
-        <Text>{user.name || user.displayName}</Text>
-        <Heading as="h2" size="md" marginTop="4">
+        <Text color="white">{user.name || user.displayName}</Text>
+        <Heading color="white" as="h2" size="md" marginTop="4">
           Lastname
         </Heading>
-        <Text>{user.lastName}</Text>
-        <Heading as="h2" size="md" marginTop="4">
+        <Text color="white">{user.lastName}</Text>
+        <Heading color="white" as="h2" size="md" marginTop="4">
           Birthday
         </Heading>
-        <Text>{user.birthday}</Text>
-        <Heading as="h2" size="md" marginTop="4">
+        <Text color="white">{user.birthday}</Text>
+        <Heading  color="white" as="h2" size="md" marginTop="4">
           Email
         </Heading>
-        <Text>
+        <Text color="white">
         {userData.email}
-          <Button size="sm" colorScheme="teal" onClick={toggleUpdateEmailForm}>
+          <Box pt="10px">
+          <Button size="sm" colorScheme="orange" onClick={toggleUpdateEmailForm}>
             Update
           </Button>
+          </Box>
         {isUpdateEmailFormVisible && <UpdateEmailForm onClose formtype="email" {...user}/>}
         </Text>
 
-        <Heading as="h2" size="md" marginTop="4">
+        <Heading color="white"  as="h2" size="md" marginTop="4">
           Password
         </Heading>
         <Text>
-       
+          <Box pt="10px">
           <Button
             size="sm"
-            colorScheme="teal"
+            colorScheme="orange"
             onClick={toggleUpdatePasswordForm}
           >
             Update
           </Button>
+          </Box>
         </Text>
         {isUpdatePasswordFormVisible && (
           <UpdatePasswordForm formType="password" {...user}/>
         )}
       </Box>
-    </div>
+    </Box>
   );
 };
 
 export default UserAccount;
-
-
-

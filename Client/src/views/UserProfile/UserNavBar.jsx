@@ -15,10 +15,10 @@ const UserProfile = () => {
   // }, []);
 
   return (
-    <Flex bg="orange" p={2} alignItems="center">
-      <Box mr={4}>
+    <Flex bgGradient="linear-gradient(to right, #f27825, #eab830)" p={2} alignItems="center">
+      <Box mr={2}>
         <Link to="/profile/account" as={RouterLink}>
-          <Text as="span" fontSize="2xl" color="black">
+          <Text ml="2rem" as="span" fontSize="2xl" color="white">
             <span className="icon fontawesome-user scnd-font-color"></span>
             Account
           </Text>
@@ -26,31 +26,31 @@ const UserProfile = () => {
       </Box>
       { user.email === 'mix2pizza@gmail.com' && <Box mr={4}>
         <Link to="/admin" as={RouterLink}>
-          <Text as="span" fontSize="2xl" color="black">
+          <Text ml="2rem" as="span" fontSize="2xl" color="white">
             <span className="icon entypo-cog scnd-font-color"></span>
             Dashboard
           </Text>
         </Link>
       </Box> }
-      <Box mr={4}>
+      <Box mr={2}>
         <Link to="/profile/settings" as={RouterLink}>
-          <Text as="span" fontSize="2xl" color="black">
+          <Text ml="1rem" as="span" fontSize="2xl" color="white">
             <span className="icon entypo-cog scnd-font-color"></span>
             Settings
           </Text>
         </Link>
       </Box>
-       <Box mr={4}>
+       <Box mr={2}>
         <Link to="/profile/stars" as={RouterLink}>
-          <Text as="span" fontSize="2xl" color="black">
+          <Text ml="1rem" as="span" fontSize="2xl" color="white">
             <span className="icon fontawesome-star-empty scnd-font-color"></span>
             Favorites
           </Text>
         </Link>
       </Box> 
-      <Box mr={4}>
+      <Box mr={2}>
         <Link to="/profile/history" as={RouterLink}>
-          <Text as="span" fontSize="2xl" color="black">
+          <Text ml="1rem" as="span" fontSize="2xl" color="white">
             <span className="icon fontawesome-star-empty scnd-font-color"></span>
             History
           </Text>
