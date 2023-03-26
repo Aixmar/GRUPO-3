@@ -16,6 +16,7 @@ import {
   PUT_CART_USER,
   CLEAR_CART_LOGOUT,
   UPDATE_CART_ITEM_QUANTITY,
+  OPEN_SIGNUP_DRAWER
 } from "./actionTypes";
 import axios from "axios";
 
@@ -102,4 +103,8 @@ export const filterPizzasTerms = (pizzasTerms) => {
 
 export const updateCartUser = (cartUser) => {
   return { type: UPDATE_CART_USER, payload: cartUser };
+};
+
+export const openSignupDrawer = (boolean) => {
+  return { type: OPEN_SIGNUP_DRAWER, payload: boolean };
 };

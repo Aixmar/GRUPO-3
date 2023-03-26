@@ -7,8 +7,14 @@ import {
   Text,
   useColorModeValue as mode,
 } from "@chakra-ui/react";
-import { useSelector } from "react-redux";
+
+import { useSelector, useDispatch } from "react-redux";
+
 import { useNavigate} from "react-router-dom";
+import { openSignupDrawer } from "../../../../../redux/actions";
+import { useAuthProv } from "../../../../../context/AuthProvider";
+import { useEffect } from "react";
+
 
 const OrderSummaryItem = (props) => {
   const { label, value, children } = props;
@@ -26,6 +32,19 @@ export const CartOrderSummary = (props) => {
   
   const cart = useSelector(state => state.cart)
   const navigate = useNavigate()
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { user } = useAuthProv();
+
+  const handleCheckout = () => {
+    user.email ? navigate('/checkout') : dispatch(openSignupDrawer(true));
+  };
+
+  useEffect(() => {
+    return () => dispatch(openSignupDrawer(false));
+  }, []);
+
 
   return (
     <Stack spacing="8" borderWidth="1px" rounded="lg" padding="8" width="full">

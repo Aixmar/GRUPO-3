@@ -26,8 +26,9 @@ import {
   AdminDashboard,
   Users,
   Products,
-  NewProduct,
+  CreateProduct,
   CheckOut,
+  Unauthorized
 } from "./views/index";
 
 function App() {
@@ -51,18 +52,20 @@ function App() {
         {/* <Route path="/createuser" element={<UserForm />} /> */}
         {/* <Route path="/login" element={<UserLogin path={path}/>} /> */}
         <Route path="/about" element={ <About /> } />
-        {/* Todo lo que esue dentro de la ruta RequireAuth esta protegido para que solo pueda acceder un usuario logueado */}
           <Route path="/createpizza" element={<CreatePizza />} />
-        
-        <Route element={<RequireAuth />}>         
+{/* Todo lo que esue dentro de la ruta RequireAuth esta protegido para que solo pueda acceder un usuario logueado con el rol asignado */}
+        <Route element={<RequireAuth allowedRol={'user'}/>}>         
           <Route path="/profile" element={<UserNavBar />} />
           <Route path="/checkout" element={<CheckOut />} />
         </Route>
         
-        <Route path="/admin" element={<AdminDashboard />} />
+        <Route element={<RequireAuth allowedRol={'admin'}/>}>         
+          <Route path="/admin" element={<AdminDashboard />} />
+        </Route>
+        
         <Route path="/users" element={<Users />} />
         <Route path="/products" element={<Products />} />
-        <Route path="/newproduct" element={<NewProduct />} />
+        <Route path="/createProduct" element={<CreateProduct />} />
           
 
 
@@ -80,7 +83,7 @@ function App() {
         CheckOut
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<CheckOut />} />
-
+        <Route path="/unauthorized" element={<Unauthorized />}></Route>
         <Route path="*" element={<Error404 />} />
       </Routes>
     </>

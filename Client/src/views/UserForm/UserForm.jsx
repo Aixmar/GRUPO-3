@@ -30,7 +30,8 @@ const UserForm = ({ onClose }) => {
     birthday: "",
     email: "",
     password: "",
-    cart:[],
+    cart: [],
+    rol:'user'
   });
   const [errors, setErrors] = useState({});
   const [backResponse, setBackResponse] = useState({});
@@ -60,7 +61,7 @@ const UserForm = ({ onClose }) => {
     const modal = document.querySelector("#signUpModal");
     modal.showModal();
     setBackResponse(data);
-    const email = await axios.post("/sendmail/buyitem", { email: form.email });
+    const email = await axios.post("/sendmail/register", { email: form.email });
     setForm({ email: "", password: "" });
     try {
       const { data } = await axios.post("/users/login", form, {

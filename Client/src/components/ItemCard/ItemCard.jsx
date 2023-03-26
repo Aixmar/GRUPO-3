@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { Box, Flex, Grid, Image, Text, Select } from "@chakra-ui/react";
+import { Box, Flex, Grid, Image, Text, Select, useToast } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/button";
 import { pushToCart } from "../../redux/actions";
 import { useEffect, useState } from "react";
@@ -11,17 +11,33 @@ const ItemCard = (props) => {
   const found = cart.filter(item => item.id === props.id)
 
   const[quantity , setQuantity] = useState(1)
+
   const itemCart = {...props , quantity: parseInt(quantity)}
+
+  const toast = useToast();
+
 
   const handleInputChange = (e) => {
     const { value } = e.target;
-    setQuantity(value)
-  }
+    setQuantity(value);
+    }
 
   const dispatch = useDispatch();
 
   const handleAddToCart = () => {
     dispatch(pushToCart(itemCart));
+    toast({
+      title: "Item added",
+      position: 'top-center',
+      status: "success",
+      duration: 2000,
+      isClosable: true,
+      variant: "subtle",
+      style: {
+        backgroundColor: "white",
+        color: "orange",
+      },
+    });
   };
 
   return (

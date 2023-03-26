@@ -14,6 +14,7 @@ import {
   GET_DATA_USERS,
   GET_USER_BY_ID,
   UPDATE_CART_USER,
+  OPEN_SIGNUP_DRAWER
 } from "./actionTypes";
 
 const initialState = {
@@ -29,6 +30,7 @@ const initialState = {
   //--------------------
   filterPizzasTerms: {},
   user: {},
+  signupDrawer: false
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -160,6 +162,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         user: action.payload,
       };
+
+    case OPEN_SIGNUP_DRAWER:
+      return { ...state, signupDrawer: action.payload };
+
+
     default:
       return { ...state };
   }
