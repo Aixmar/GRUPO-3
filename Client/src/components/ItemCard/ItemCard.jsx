@@ -1,24 +1,25 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Box, Flex, Grid, Image, Text, Select } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/button";
 import { pushToCart } from "../../redux/actions";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const ItemCard = (props) => {
 
+  const cart = useSelector(state => state.cart)
+  const found = cart.filter(item => item.id === props.id)
+
   const[quantity , setQuantity] = useState(1)
+  const itemCart = {...props , quantity: parseInt(quantity)}
 
   const handleInputChange = (e) => {
     const { value } = e.target;
     setQuantity(value)
   }
 
-  const itemCart = {...props , quantity: parseInt(quantity)}
-
-
-  console.log(itemCart);
   const dispatch = useDispatch();
+
   const handleAddToCart = () => {
     dispatch(pushToCart(itemCart));
   };
@@ -32,6 +33,7 @@ const ItemCard = (props) => {
       maxW="sm"
     >
       <Link to={`/itemdetail/${props.id}`}>
+        
         <Image
           src={props.image}
           alt={props.name}
@@ -65,7 +67,8 @@ const ItemCard = (props) => {
           </Text>
 
           <Button
-            isDisabled={props.stock === 0 ? true : false}
+            id="addcart"
+            isDisabled={ found.length ? true : false }
             colorScheme="red"
             onClick={handleAddToCart}
           >

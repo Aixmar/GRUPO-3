@@ -7,6 +7,7 @@ import {
   Text,
   useColorModeValue as mode,
 } from "@chakra-ui/react";
+import { useSelector } from "react-redux";
 import { useNavigate} from "react-router-dom";
 
 const OrderSummaryItem = (props) => {
@@ -23,6 +24,7 @@ const OrderSummaryItem = (props) => {
 
 export const CartOrderSummary = (props) => {
   
+  const cart = useSelector(state => state.cart)
   const navigate = useNavigate()
 
   return (
@@ -59,7 +61,7 @@ export const CartOrderSummary = (props) => {
         </Flex>
         
       </Stack>
-        <Button onClick={() => navigate('/checkout')} colorScheme="orange" size="lg" fontSize="md">
+        <Button onClick={() => navigate('/checkout')} colorScheme="orange" size="lg" fontSize="md" isDisabled={cart.length > 0 ? false: true}>
           Checkout
         </Button>
     </Stack>

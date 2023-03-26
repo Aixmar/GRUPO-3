@@ -2,6 +2,7 @@ import {
   GET_INGREDIENTS,
   GET_INGREDIENTS_QUERY,
   GET_PIZZAS,
+  UPDATE_CART_ITEM_QUANTITY,
   PUSH_TO_CART,
   CLEAR_CART_LOGOUT,
   POP_TO_CART,
@@ -75,6 +76,16 @@ const rootReducer = (state = initialState, action) => {
         pizzas: orderedById,
         pizzasbackup: orderedById,
       };
+
+    case UPDATE_CART_ITEM_QUANTITY:
+      const updatedCart = state.cart.map((item) => {
+        if (item.id === action.payload.itemId) {
+          return { ...item, quantity: parseInt(action.payload.quantity) };
+        } else {
+          return item;
+        }
+      });
+      return { ...state, cart: updatedCart };
 
     case UPDATE_CART_USER:
       return {

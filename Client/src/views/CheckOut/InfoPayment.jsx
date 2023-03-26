@@ -8,7 +8,7 @@ import { useAuthProv } from "../../context/AuthProvider";
 
 
 const InfoPayment = () => {
-  const mp = new MercadoPago("TEST-8b8bf3cf-ef4b-4d5d-b043-44e85e071a79");
+  const mp = new MercadoPago("TEST-70064824-0e86-4690-a60d-7c2ff56441f8");
   const bricksBuilder = mp.bricks();
 
   const cart = useSelector((state) => state.cart) || [];
@@ -36,7 +36,7 @@ const InfoPayment = () => {
   const [statusPayment, setStatusPayment] = useState('');
   const [ dataResponse, setdataResponse] = useState();
 
-    console.log(dataResponse);
+    console.log('AQUI QUIERO EL ID PAY', paymentId);
 
   useEffect(() => {
         if (statusPayment === 'approved') {

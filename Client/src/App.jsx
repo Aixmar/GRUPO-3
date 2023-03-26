@@ -56,7 +56,7 @@ function App() {
         
         <Route element={<RequireAuth />}>         
           <Route path="/profile" element={<UserNavBar />} />
-
+          <Route path="/checkout" element={<CheckOut />} />
         </Route>
         
         <Route path="/admin" element={<AdminDashboard />} />
