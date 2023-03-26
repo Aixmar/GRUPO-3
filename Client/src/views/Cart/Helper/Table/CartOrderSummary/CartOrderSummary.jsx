@@ -31,8 +31,6 @@ const OrderSummaryItem = (props) => {
 export const CartOrderSummary = (props) => {
   
   const cart = useSelector(state => state.cart)
-  const navigate = useNavigate()
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useAuthProv();
