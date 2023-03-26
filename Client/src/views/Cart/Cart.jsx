@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useAuthProv } from "../../context/AuthProvider";
 import { getUserById } from "../../redux/actions";
 import { updateCartUser } from "../../redux/actions";
+import CartExtras from "./Helper/CartExtras/CartExtras";
 
 const Cart = () => {
   const { user } = useAuthProv();
@@ -20,7 +21,7 @@ const Cart = () => {
   return (
     <div>
       <Table />
-      {/* <CartExtras /> */}
+      <CartExtras />
       <CartFooter width="100%" />
     </div>
   );
