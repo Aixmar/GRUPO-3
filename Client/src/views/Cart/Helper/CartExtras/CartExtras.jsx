@@ -54,22 +54,22 @@ const CartExtras = () => {
 
     return (
       <>
-      <Heading textAlign="center" mt="8">
-        Add Extras!
+      <Heading color="#f27825" ml="90px" mt="8">
+        Add Extras:
       </Heading>
-      <Wrap justify="center" mt="8">
+      <Wrap  ml="90px" mt="8">
         {currentItems.map((drink) => (
           <WrapItem key={drink.id}>
             <Box width="200px">
               <Image src={drink.image} alt={drink.name} />
-              <Heading as="h3" size="md" mb="8">
+              <Heading color="white" as="h3" size="md" pt="10px" mb="8">
                 {drink.name}
               </Heading>
-              <Text fontSize="lg" color="gray.600">
+              <Text fontSize="lg" color="white">
                 Price: {drink.price}
               </Text>
               <Button
-                colorScheme="green"
+                colorScheme="orange"
                 mt="4"
                 onClick={() => handleAddToCart({... drink, quantity: 1})}
               >
@@ -79,7 +79,7 @@ const CartExtras = () => {
           </WrapItem>
         ))}
       </Wrap>
-      <HStack justify="center" mt="8">
+      <HStack ml="90px" mt="8">
         <Tooltip label="Previous Page" hasArrow>
           <IconButton
             icon={<ChevronLeftIcon />}

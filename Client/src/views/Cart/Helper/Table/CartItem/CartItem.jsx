@@ -45,12 +45,14 @@ export const CartItem = (props) => {
       <Flex width="full" justify="space-between" display={{ base: "none", md: "flex" }}>
         <Spacer></Spacer>
         <QuantitySelect
+        color="#f27825"
           value={quantity}
           onChange={(e) => onChangeQuantity(e.target.value ,itemId)}
         />
         <PriceTag price={price} currency={currency} />
         <Spacer></Spacer>
         <CloseButton
+          color="#f27825"
           aria-label={`Delete ${name} from cart`}
           onClick={() => onClickDelete(index)}
         />

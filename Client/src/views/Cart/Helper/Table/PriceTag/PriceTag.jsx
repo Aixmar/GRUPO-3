@@ -12,8 +12,8 @@ export function formatPrice(value, opts = {}) {
 
 const Price = (props) => {
   const { isOnSale, children, textProps } = props
-  const defaultColor = mode('gray.700', 'gray.400')
-  const onSaleColor = mode('gray.400', 'gray.700')
+  const defaultColor = mode('white', 'white')
+  const onSaleColor = mode('gwhite', 'white')
   const color = isOnSale ? onSaleColor : defaultColor
   return (
     <Text
