@@ -4,6 +4,7 @@ import { Link as RouterLink } from "react-router-dom";
 import {Box, Flex, Heading, HStack, Link, Stack, useColorModeValue as mode, useDisclosure,} from "@chakra-ui/react";
 import { CartItem } from "./CartItem/CartItem";
 import { CartOrderSummary } from "./CartOrderSummary/CartOrderSummary";
+import { updateCartItemQuantity } from "../../../../redux/actions";
 // import { cartData } from './_data'
 
 const Table = () => {
@@ -16,7 +17,14 @@ const Table = () => {
     dispatch(popToCart(newCart));
   };
 
-  const totalPrice = cart.reduce((total, item) => total + item.price, 0);
+  const onChangeQuantity = (quantity, itemId) => {
+    console.log(quantity, itemId);
+    dispatch(updateCartItemQuantity(itemId, quantity));
+  };
+
+  const totalPrice = cart.reduce((total, item) => total + item.price*item.quantity, 0);
+  
+  
 
   return (
     <Box maxW={{ base: "3xl", lg: "7xl" }} mx="auto" px={{ base: "4", md: "8", lg: "12" }} py={{ base: "6", md: "8", lg: "12" }}>
@@ -32,7 +40,9 @@ const Table = () => {
                 key={index}
                 {...item}
                 index={index}
+                itemId={item.id}
                 onClickDelete={onClickDelete}
+                onChangeQuantity={onChangeQuantity}
               />
             ))}
             {cart.length < 1 && <Box>NO ITEMS TO DISPLAY</Box> }

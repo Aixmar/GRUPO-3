@@ -2,7 +2,7 @@ import { Box } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
 const StatusScreen = ({ payment_id, showStatusScreen }) => {
-  const mp = new MercadoPago("TEST-8b8bf3cf-ef4b-4d5d-b043-44e85e071a79");
+  const mp = new MercadoPago("TEST-70064824-0e86-4690-a60d-7c2ff56441f8");
   const bricksBuilder = mp.bricks();
 
   const renderStausScreenBrick = async (bricksBuilder) => {

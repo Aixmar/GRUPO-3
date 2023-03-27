@@ -37,13 +37,14 @@ import useAuth from "../../Utils/useAuth";
 import UserForm from "../../views/UserForm/UserForm";
 import UserLogin from "../../views/UserLogin/UserLogin";
 import profImg from "../../assets/profileImage.png";
-import React from "react";
-import { popToCart,  clearCartUser, putCartUser } from "../../redux/actions";
+import React, { useEffect } from "react";
+import { popToCart,  clearCartUser, putCartUser, openSignupDrawer } from "../../redux/actions";
 // import CartDrawer from "../../views/Cart/Helper/CartDrawer";
 import { useState } from "react";
 
 const NavBar = () => {
   const cartItems = useSelector((state) => state.cart);
+  const { signupDrawer } = useSelector((state) => state);
   const navigate = useNavigate();
   const logout = useLogout();
   const { user, googleLogout } = useAuthProv();
@@ -66,6 +67,7 @@ const NavBar = () => {
     function handleNavigate() {
       onClose();
       history.push("/cart");
+      dispatch(openSignupDrawer(false));
     }
 
 
@@ -86,6 +88,15 @@ const NavBar = () => {
     dispatch(clearCartUser(clearCartUser));
     await logout();
     navigate("/home");
+  };
+
+  useEffect(() => {
+    signupDrawer && openModal();
+  }, [signupDrawer]);
+
+  const handleCloseDrawer = () => {
+    onClose();
+    dispatch(openSignupDrawer(false));
   };
 
   const openModal = () => onOpen();
@@ -228,7 +239,6 @@ const NavBar = () => {
 
                       <Link as={RouterLink} to='/cart' onClick={handleNavigate}>
                         <Button colorScheme="orange">Go to Cart</Button>
-
                       </Link>
 
                     </DrawerFooter>
@@ -284,7 +294,7 @@ const NavBar = () => {
         </Box>
       </Flex>
 
-      <Drawer isOpen={isOpen} placement="right" onClose={onClose} size="xl">
+      <Drawer isOpen={isOpen} placement="right" onClose={handleCloseDrawer} size="xl">
         <DrawerOverlay>
           <DrawerContent bgGradient="linear(to-l,#000000, #272727)">
             <DrawerCloseButton color="#fff" />
