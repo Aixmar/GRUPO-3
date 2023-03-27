@@ -15,6 +15,7 @@ import {
   UPDATE_CART_USER,
   PUT_CART_USER,
   CLEAR_CART_LOGOUT,
+  GET_ALL_USERS
 } from "./actionTypes";
 import axios from "axios";
 
@@ -52,6 +53,13 @@ export const getDataUsers = () => {
     return dispatch({ type: GET_DATA_USERS, payload: response.data });
   };
 };
+
+export const getAllUsers = () => {
+  return async function (dispatch) {
+    let response = await axios.get("/users");
+    return dispatch({ type: GET_ALL_USERS, payload: response.data });
+  };
+}
 export const sortPizzas = (selectedSort) => {
   return { type: SORT_PIZZAS, payload: selectedSort };
 };

@@ -14,3 +14,4 @@ export const GET_USER_BY_ID = 'GET_USER_BY_ID'
 export const UPDATE_CART_USER = 'UPDATE_CART_USER'
 export const PUT_CART_USER = 'PUT_CART_USER'
 export const CLEAR_CART_LOGOUT = 'CLEAR_CART_LOGOUT'
+export const GET_ALL_USERS = "GET_ALL_USERS"

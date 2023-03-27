@@ -13,7 +13,7 @@ const ProductCard = (props) => {
 
     }
 
-    useEffect(  ()=> {
+    useEffect(()=> {
         axios.put(`/pizzas/${props.id}`, {active:active})
         .then()
     },[active])

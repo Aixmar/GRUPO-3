@@ -13,6 +13,7 @@ import {
   GET_DATA_USERS,
   GET_USER_BY_ID,
   UPDATE_CART_USER,
+  GET_ALL_USERS,
 } from "./actionTypes";
 
 const initialState = {
@@ -28,6 +29,7 @@ const initialState = {
   //--------------------
   filterPizzasTerms: {},
   user: {},
+  users:[]
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -149,6 +151,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         user: action.payload,
       };
+    case GET_ALL_USERS:
+      return{
+        ...state,
+        users:action.payload
+      }
     default:
       return { ...state };
   }
