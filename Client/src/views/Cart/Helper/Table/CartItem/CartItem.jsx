@@ -45,6 +45,8 @@ export const CartItem = (props) => {
       <Flex width="full" justify="space-between" display={{ base: "none", md: "flex" }}>
         <Spacer></Spacer>
         <QuantitySelect
+        w="88px"
+        mr="20px"
         color="#f27825"
           value={quantity}
           onChange={(e) => onChangeQuantity(e.target.value ,itemId)}
