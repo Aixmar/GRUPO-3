@@ -12,7 +12,7 @@ const Products = () => {
 
     useEffect(() => {
         dispatch(getPizzas())
-    }, [dispatch])
+    }, [products])
     return (
         <>
             <Flex>
