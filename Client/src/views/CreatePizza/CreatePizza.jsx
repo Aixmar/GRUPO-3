@@ -22,6 +22,7 @@ const initialStateForm = {
     cheeseIngredients: [],
     meatIngredients: [],
   },
+  quantity: 1,
   category: 'pizza'
 }
 
@@ -70,12 +71,14 @@ const CreatePizza = () => {
 
     if (form.detail[name]) {
       const priceToRest = (ingredients.filter((ingr) => ingr.name === form.detail[name]))[0].price;
-      setForm({ ...form, detail: { ...form.detail, [name]: value }, price: (form.price - priceToRest) + currentIngredient[0].price });
+          setForm({ ...form, detail: { ...form.detail, [name]: value }, price: (form.price - priceToRest) + currentIngredient[0].price });
+          
     } else {
       setForm({ ...form, detail: { ...form.detail, [name]: value }, price: form.price + currentIngredient[0].price });
       errors[name] && setErrors(validate({ ...form, detail: { ...form.detail, [name]: value } }));
     };
   };
+
 
 
   const handleSubmit = (e) => {
@@ -177,7 +180,7 @@ const CreatePizza = () => {
         <Box width='36%' height='70vh' display='flex' flexDirection='column' borderLeft='1px solid #fff' >
           <PizzaCreated form={form} setForm={setForm} toppings={toppings} setToppings={setToppings} cheeses={cheeses} setCheeses={setCheeses} meats={meats} setMeats={setMeats} ></PizzaCreated>
           <Box display='flex' justifyContent='space-around' alignItems='center' ml="2rem" mr="2rem" mb='2rem' >
-            <Box><Text color='#fff' fontSize='1.4rem' width='14rem' >Total price: {form.price.toFixed(2)}</Text></Box>
+            <Box><Text color='#fff' fontSize='1.4rem' width='14rem' >Total price: {form.price}</Text></Box>
             <Button onClick={handleSubmit} type="submit" hoverbg="white" borderRadius="full" fontSize='2rem' padding="2rem 1.4rem" background="linear-gradient(to right, #f27833, #eab830)" >
               Add to cart
             </Button>
