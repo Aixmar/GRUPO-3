@@ -83,14 +83,14 @@ const CartExtras = () => {
         <Tooltip label="Previous Page" hasArrow>
           <IconButton
             icon={<ChevronLeftIcon />}
-            disabled={currentPage === 1}
+            isDisabled={currentPage === 1}
             onClick={handleClickPrevious}
           />
         </Tooltip>
         <Tooltip label="Next Page" hasArrow>
           <IconButton
             icon={<ChevronRightIcon />}
-            disabled={currentPage === numPages || numPages === 0}
+            isDisabled={currentPage === numPages || numPages === 0}
             onClick={handleClickNext}
           />
         </Tooltip>
