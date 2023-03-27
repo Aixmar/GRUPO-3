@@ -26,9 +26,11 @@ const StatusScreen = ({ payment_id, showStatusScreen }) => {
     );
   };
 
-  if (showStatusScreen) {
-    renderStausScreenBrick(bricksBuilder);
-  }
+  useEffect(() => {
+    if (showStatusScreen) {
+      renderStausScreenBrick(bricksBuilder);
+    }
+  }, [showStatusScreen]);
 
   return <Box id="statusScreenBrick_container" />;
 };
