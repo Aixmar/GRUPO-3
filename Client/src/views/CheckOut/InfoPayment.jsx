@@ -39,15 +39,16 @@ const InfoPayment = () => {
   console.log('AQUI QUIERO EL ID PAY', paymentId);
 
   const updateCartUser = { cart: cart , userId: user.id };
-  console.log(updateCartUser);
+  console.log(statusPayment);
 
   const dispatch = useDispatch()
   useEffect(() => {
         if (statusPayment === 'approved') {
           axios.post('http://localhost:3001/sendmail/buyitem', formMail )
           axios.put('http://localhost:3001/users/updateCartPurchase', updateCartUser )
+          dispatch(clearCartUser())
         }
-  },[showStatusScreen])
+  },[paymentId])
   
 
   const renderCardPaymentBrick = async (bricksBuilder) => {
