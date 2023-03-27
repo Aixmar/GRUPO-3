@@ -17,13 +17,13 @@ export const CartProductMeta = (props) => {
       />
       <Box pt="4">
         <Stack spacing="0.5">
-          <Text fontWeight="medium">{name}</Text>
-          <Text color={mode('gray.600', 'gray.400')} fontSize="sm">
+          <Text color="white" fontWeight="medium">{name}</Text>
+          <Text color="white" fontSize="sm">
             {description}
           </Text>
         </Stack>
         {isGiftWrapping && (
-          <HStack spacing="1" mt="3" color={mode('gray.600', 'gray.400')}>
+          <HStack spacing="1" mt="3" color="white">
             {/* <Icon as={FiGift} boxSize="4" /> */}
             <Link fontSize="sm" textDecoration="underline">
               Add gift wrapping

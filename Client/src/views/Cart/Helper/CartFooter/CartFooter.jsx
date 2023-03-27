@@ -5,7 +5,7 @@ import { tel, mp, pizza,lock, tic } from "../../../../assets/CloudinaryImg";
 const CartFooter = () => {
   return (
     <>
-          <Box {...cartFooterStyles } >
+          <Box {...cartFooterStyles } bgGradient="linear-gradient(to right, #f27825, #eab830)" >
 
        <Flex justifyContent="space-between" mb="2" mt="0">
 
@@ -52,13 +52,14 @@ const CartFooter = () => {
 
       </Box>
 
-      <Divider color="green.500" mt="4" mb="0" />
+      <Divider color="white" mt="4" mb="0" />
      
-        <Box {...secondFooter } textAlign="center" padding="8">
-          <Text fontSize="sm" color="#fcfaf7">
+          <Box justifyContent="center" alignItems="center" pt="20px">
+          <Text justifyContent="center"  fontSize="sm" color="#fcfaf7">
               © 2023 Mix2Pizza Todos los derechos reservados.
           </Text>
-        </Box>
+          </Box>
+        
 
       </Box>
       </>
