@@ -45,12 +45,13 @@ const UpdateEmailForm = (props) => {
   };
 
   return (
-    <div>
+    <Box color='#fff' >
       {showForm && (
         <form onSubmit={handleSubmit}>
           <FormControl id="newEmail">
             <FormLabel>New Email:</FormLabel>
             <Input
+              w='40%'
               type="email"
               value={newEmail}
               onChange={handleEmailChange}
@@ -76,7 +77,7 @@ const UpdateEmailForm = (props) => {
           </Alert>
         </motion.div>
       )}
-    </div>
+    </Box>
   );
 };
 

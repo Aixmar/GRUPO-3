@@ -67,59 +67,61 @@ const UpdatePasswordForm = (props) => {
   //   }
   // };
   return (
-    <div>
-      {!isPasswordUpdated && (
-        <form onSubmit={handleSubmit}>
-          <FormControl id="newPassword">
-            <FormLabel>New Password:</FormLabel>
-            <InputGroup size="md">
+    <>
+      <Box w='40%' color='#fff' >
+        {!isPasswordUpdated && (
+          <form onSubmit={handleSubmit}>
+            <FormControl id="newPassword">
+              <FormLabel>New Password:</FormLabel>
+              <InputGroup size="md">
+                <Input
+                  pr="4.5rem"
+                  type={show ? "text" : "password"}
+                  placeholder="Enter password"
+                  value={newPassword}
+                  onChange={handlePasswordChange}
+                  required
+                />
+                <InputRightElement width="4.5rem">
+                  <Button h="1.75rem" size="sm" onClick={handleClickShow}>
+                    {show ? "Hide" : "Show"}
+                  </Button>
+                </InputRightElement>
+              </InputGroup>
+            </FormControl>
+            <FormControl id="confirmNewPassword">
+              <FormLabel>Confirm New Password:</FormLabel>
               <Input
                 pr="4.5rem"
                 type={show ? "text" : "password"}
-                placeholder="Enter password"
-                value={newPassword}
-                onChange={handlePasswordChange}
+                placeholder="Confirm password"
+                value={confirmNewPassword}
+                onChange={handleConfirmPasswordChange}
                 required
               />
-              <InputRightElement width="4.5rem">
-                <Button h="1.75rem" size="sm" onClick={handleClickShow}>
-                  {show ? "Hide" : "Show"}
-                </Button>
-              </InputRightElement>
-            </InputGroup>
-          </FormControl>
-          <FormControl id="confirmNewPassword">
-            <FormLabel>Confirm New Password:</FormLabel>
-            <Input
-              pr="4.5rem"
-              type={show ? "text" : "password"}
-              placeholder="Confirm password"
-              value={confirmNewPassword}
-              onChange={handleConfirmPasswordChange}
-              required
-            />
-          </FormControl>
-          {error && <Text>{error}</Text>}
-          <Button mt={4} colorScheme="teal" type="submit">
-            Save
-          </Button>
-        </form>
-      )}
+            </FormControl>
+            {error && <Text>{error}</Text>}
+            <Button mt={4} colorScheme="teal" type="submit">
+              Save
+            </Button>
+          </form>
+        )}
 
-      <motion.div
-        initial={{ opacity: 0, y: -50 }}
-        animate={
-          isPasswordUpdated ? { opacity: 1, y: 0 } : { opacity: 0, y: -50 }
-        }
-        transition={{ duration: 0.5 }}
-        style={{ position: "fixed", top: "20px", right: "20px" }}
-      >
-        <Alert status="success" variant="subtle" alignItems="center">
-          <AlertIcon />
-          Password updated succesfully
-        </Alert>
-      </motion.div>
-    </div>
+        <motion.div
+          initial={{ opacity: 0, y: -50 }}
+          animate={
+            isPasswordUpdated ? { opacity: 1, y: 0 } : { opacity: 0, y: -50 }
+          }
+          transition={{ duration: 0.5 }}
+          style={{ position: "fixed", top: "20px", right: "20px" }}
+        >
+          <Alert status="success" variant="subtle" alignItems="center">
+            <AlertIcon />
+            Password updated succesfully
+          </Alert>
+        </motion.div>
+      </Box>
+    </>
   );
 };
 
