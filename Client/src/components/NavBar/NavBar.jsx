@@ -1,14 +1,11 @@
 import {
   Box,
-
   Heading,
   UnorderedList,
   ListItem,
   Flex,
-  Input,
   Text,
   Breadcrumb,
-  Radio,
   BreadcrumbItem,
   BreadcrumbLink,
   Spacer,
@@ -26,20 +23,18 @@ import {
   Image,
   CloseButton,
 } from "@chakra-ui/react";
-import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { Link as RouterLink, useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useSelector, useDispatch } from "react-redux";
 
 import useLogout from "../../Utils/useLogout";
 import { cartlogo, pizzalogo } from "../../assets/CloudinaryImg";
 import { useAuthProv } from "../../context/AuthProvider";
-import useAuth from "../../Utils/useAuth";
 import UserForm from "../../views/UserForm/UserForm";
 import UserLogin from "../../views/UserLogin/UserLogin";
 import profImg from "../../assets/profileImage.png";
 import React, { useEffect } from "react";
 import { popToCart,  clearCartUser, putCartUser, openSignupDrawer } from "../../redux/actions";
-// import CartDrawer from "../../views/Cart/Helper/CartDrawer";
 import { useState } from "react";
 
 const NavBar = () => {
@@ -55,6 +50,9 @@ const NavBar = () => {
   const btnRef = React.useRef();
   const dispatch = useDispatch();
   const[openDrawCart1, setopenDrawCart1] = useState(false);
+  const { pathname } = useLocation();
+
+  console.log('pathnameeeeeeeeeEE------>', pathname)
  
   const handleopenDrawCart1 = () => {
     setopenDrawCart1(true);
@@ -132,6 +130,7 @@ const NavBar = () => {
                 as={RouterLink}
                 to="/home"
                 _hover={{ color: "#f27825" }}
+                color={pathname === '/home' ? '#f27825' : '#fff'}
               >
                 HOME
               </BreadcrumbLink>
@@ -142,6 +141,7 @@ const NavBar = () => {
                 as={RouterLink}
                 to="/createpizza"
                 _hover={{ color: "#f27825" }}
+                color={pathname === '/createpizza' ? '#f27825' : '#fff'}
               >
                 CREATE PIZZA
               </BreadcrumbLink>
@@ -152,6 +152,7 @@ const NavBar = () => {
                 as={RouterLink}
                 to="/allpizzas"
                 _hover={{ color: "#f27825" }}
+                color={pathname === '/allpizzas' ? '#f27825' : '#fff'}
               >
                 TRADITIONAL MENU
               </BreadcrumbLink>
@@ -162,6 +163,7 @@ const NavBar = () => {
                 as={RouterLink}
                 to="/about"
                 _hover={{ color: "#f27825" }}
+                color={pathname === '/about' ? '#f27825' : '#fff'}
               >
                 ABOUT
               </BreadcrumbLink>
@@ -173,7 +175,9 @@ const NavBar = () => {
                   <BreadcrumbLink
                     as={RouterLink}
                     to="/admin"
-                    _hover={{ color: "#f27825" }} >
+                    _hover={{ color: "#f27825" }}
+                    color={pathname === '/admin' ? '#f27825' : '#fff'}
+                    >
                     ADMIN
                   </BreadcrumbLink>
                 </BreadcrumbItem>
@@ -183,6 +187,7 @@ const NavBar = () => {
                     as={RouterLink}
                     to="/profile/account"
                     _hover={{ color: "#f27825" }}
+                    color={pathname.includes('/profile/') ? '#f27825' : '#fff'}
                   >
                     PROFILE
                   </BreadcrumbLink>
