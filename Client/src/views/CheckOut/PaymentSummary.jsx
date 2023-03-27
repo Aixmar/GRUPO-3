@@ -12,7 +12,7 @@ import { useSelector } from "react-redux";
 
 export const PaymentSummary = () => {
   const cart = useSelector((state) => state.cart) || [];
-  const totalPrice = cart.reduce((total, item) => total + item.price, 0) || 0;
+  const totalPrice = cart.reduce((total, item) => total + item.price*item.quantity, 0) || 0;
 
  
 
