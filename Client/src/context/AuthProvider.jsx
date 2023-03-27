@@ -2,7 +2,7 @@ import { auth as authProv } from '../firebase/firebase.config';
 import { GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
-
+import axios from 'axios';
 const AuthContext = createContext({})
 
 export const useAuthProv = () => {
@@ -31,12 +31,28 @@ export const AuthProvider = ({children}) =>{
     }, []);
 
     const loginWithGoogle = async () => {
-        const responseGoogle = new GoogleAuthProvider();
+        const googleResponse = new GoogleAuthProvider();
         try {
-            const response = await signInWithPopup(authProv, responseGoogle);
-            if (!response) throw Error('something went wrong');
-            navigate('/allpizzas');
-            setUser(response.user)
+            const { user } = await signInWithPopup(authProv, googleResponse);
+            if (!user.email) throw Error('something went wrong');
+            
+            const getUsers = await axios.get('/users');
+            const userLogin = getUsers.data.filter((userDb) => userDb.email === user.email);
+
+            if (!userLogin.length) {    
+                const userName = user?.displayName?.split(' ')[0];
+                const userLastName = user?.displayName?.split(' ')[1];            
+                const userGoogle = { name: userName, lastName: userLastName, email: user?.email, password: user?.uid, image: user?.photoURL, birthday: '00-00-00', cart: [], rol: 'user'  };
+                const { data } = await axios.post("/users", userGoogle);
+                window.localStorage.setItem('loggedUser' , JSON.stringify(data));
+                setUser(data);
+            } else {
+                const userGoogle = { email: user?.email, password: user?.uid };
+                const { data } = await axios.post("/users/login", userGoogle, { headers : { 'Content-Type' : 'application/json' }, withCredentials: true });
+                setUser(data);
+                window.localStorage.setItem('loggedUser' , JSON.stringify(data));
+            };            
+            // navigate('/allpizzas');
         } catch (error) {
             console.error(error.message);
         };
