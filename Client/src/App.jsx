@@ -1,5 +1,6 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
+import "./App.css"
 
 import {
   Landing,
@@ -37,7 +38,7 @@ function App() {
 
 
   return (
-    <>  
+    <div className="App">  
       {location.pathname !== "/" && location.pathname !== "/checkout" && <NavBar />}
 
       <Routes>
@@ -86,7 +87,7 @@ function App() {
         <Route path="/unauthorized" element={<Unauthorized />}></Route>
         <Route path="*" element={<Error404 />} />
       </Routes>
-    </>
+    </div>
   );
 }
 
