@@ -85,7 +85,7 @@ const NavBar = () => {
       googleLogout();
     }
     dispatch(putCartUser(updateCartUser));
-    dispatch(clearCartUser(clearCartUser));
+    dispatch(clearCartUser());
     await logout();
     navigate("/home");
   };

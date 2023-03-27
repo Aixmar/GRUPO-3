@@ -2,10 +2,10 @@ import { Box } from "@chakra-ui/react";
 import { useState } from "react";
 import StatusScreen from "./StatusScreen";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from 'axios'
 import { useAuthProv } from "../../context/AuthProvider";
-
+import { clearCartUser } from "../../redux/actions";
 
 const InfoPayment = () => {
   const mp = new MercadoPago("TEST-70064824-0e86-4690-a60d-7c2ff56441f8");
@@ -31,18 +31,24 @@ const InfoPayment = () => {
   const totalPrice = cart.reduce((total, item) => total + item.price, 0) || 0;
 
 
-  const [paymentId, setPaymentId] = useState("111111111");
+  const [paymentId, setPaymentId] = useState("123456789");
   const [showStatusScreen, setShowStatusScreen] = useState(false);
   const [statusPayment, setStatusPayment] = useState('');
   const [ dataResponse, setdataResponse] = useState();
 
-    console.log('AQUI QUIERO EL ID PAY', paymentId);
+  console.log('AQUI QUIERO EL ID PAY', paymentId);
 
+  const updateCartUser = { cart: cart , userId: user.id };
+  console.log(updateCartUser);
+
+  const dispatch = useDispatch()
   useEffect(() => {
         if (statusPayment === 'approved') {
           axios.post('http://localhost:3001/sendmail/buyitem', formMail )
+          axios.put('http://localhost:3001/users/updateCartPurchase', updateCartUser )
         }
-  },[statusPayment])
+  },[showStatusScreen])
+  
 
   const renderCardPaymentBrick = async (bricksBuilder) => {
     const settings = {
