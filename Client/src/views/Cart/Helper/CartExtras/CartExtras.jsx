@@ -12,7 +12,7 @@ const CartExtras = () => {
   const drinks = items.filter((drink) => drink.category === "drinks");
   const toast = useToast();
 
-  ////////////PAGINADO 
+  ////////////PAGINADO /////////////////////////////////////////////////
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4;
   const numPages = Math.ceil(drinks.length / itemsPerPage);
@@ -28,7 +28,7 @@ const CartExtras = () => {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = drinks.slice(indexOfFirstItem, indexOfLastItem);
-  ///////////////////////
+  ///////////////////////////////////////////////////////////////////////////
 
     const dispatch = useDispatch();
     useEffect(() => {
@@ -71,7 +71,7 @@ const CartExtras = () => {
               <Button
                 colorScheme="green"
                 mt="4"
-                onClick={() => handleAddToCart(drink)}
+                onClick={() => handleAddToCart({... drink, quantity: 1})}
               >
                 Add to Cart
               </Button>
