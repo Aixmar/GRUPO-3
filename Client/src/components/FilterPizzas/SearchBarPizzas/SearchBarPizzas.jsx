@@ -11,8 +11,8 @@ const SearchBarPizzas = (props) => {
       borderRadius="md"
       border="2px solid"
       borderColor="gray.100"
-      color='white'
-      _hover={{ borderColor: "gray.500" }}
+      color="#f27825"
+      _hover={{ borderColor: "#f27825" }}
       _focus={{ outline: "none", boxShadow: "outline" }}
       name="searchBarPizzas"
       value={valueState}

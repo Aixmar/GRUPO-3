@@ -1,27 +1,42 @@
-import { Flex, Box, Link as ChakraLink } from "@chakra-ui/react";
+import { Flex, Button, Box, Link as ChakraLink } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
 function SubNavbar() {
   return (
     <Flex
       as="nav"
-      align="center"
-      justify="space-between"
-      wrap="wrap"
       padding="1rem"
       bgGradient="linear-gradient(to right, #f27825, #eab830)"
       color="white"
     >
-      <Box ml={8}>
-        <ChakraLink as={Link} to="/allpizzas" mr={6}>
-          All Pizzas
-        </ChakraLink>
-        <ChakraLink as={Link} to="/alldrinks" mr={6}>
+      <Box >
+        
+        <Button
+          bgGradient="linear(to-l,#000000, #272727)"
+          borderRadius="full"
+          mr="165px"
+          ml="275px"
+        >
+          <ChakraLink as={Link} to="/allpizzas" color="#f27825">
+            All Pizzas
+          </ChakraLink>
+        </Button>
+        
+        
+        <Button bgGradient="linear(to-l,#000000, #272727)"
+          borderRadius="full" mr="165px">
+        <ChakraLink as={Link} to="/alldrinks" color="#f27825" >
           All Drinks
         </ChakraLink>
-        <ChakraLink as={Link} to="/allsides" mr={6}>
+        </Button>
+       
+        
+        <Button bgGradient="linear(to-l,#000000, #272727)"
+          borderRadius="full">
+        <ChakraLink as={Link} to="/allsides" color="#f27825">
           Sides
         </ChakraLink>
+        </Button>
       </Box>
     </Flex>
   );
