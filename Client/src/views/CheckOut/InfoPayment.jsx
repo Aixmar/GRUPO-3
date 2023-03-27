@@ -44,8 +44,8 @@ const InfoPayment = () => {
   const dispatch = useDispatch()
   useEffect(() => {
         if (statusPayment === 'approved') {
-          axios.post('/sendmail/buyitem', formMail )
-          axios.put('/users/updateCartPurchase', updateCartUser )
+          axios.post('https://grupo-3-back-production.up.railway.app/sendmail/buyitem', formMail )
+          axios.put('https://grupo-3-back-production.up.railway.app/users/updateCartPurchase', updateCartUser )
           dispatch(clearCartUser())
         }
   },[paymentId])
@@ -68,7 +68,7 @@ const InfoPayment = () => {
           console.log(JSON.stringify(cardFormData));
           // ejemplo de envío de los datos recolectados por el Brick a su servidor
           return new Promise((resolve, reject) => {
-            fetch("/process_payment", {
+            fetch("https://grupo-3-back-production.up.railway.app/process_payment", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
