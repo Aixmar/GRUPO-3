@@ -1,6 +1,4 @@
 const cartFooterStyles = {
-    // bgGradient: "linear-gradient(to right, #8a7c71, #47392e)",
-    bg: "#bdb8b3",
     color: "white",
     px: 6,
     py: 6,
@@ -24,7 +22,7 @@ const cartFooterStyles = {
   };
   
  const secondFooter = {
-  bg: "#302c28",
+  bg: "white",
   
  };
 
