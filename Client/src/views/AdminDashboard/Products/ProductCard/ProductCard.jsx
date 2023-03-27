@@ -19,11 +19,11 @@ const ProductCard = (props) => {
     },[active])
     return (
         <Flex padding="20px" border="1px solid black">
-            <Text>{props.id}</Text>
-            <Image w="45px" src={props.image} alt={props.name} />
-            <Text>{props.name}</Text>
-            <Text>{props.price}</Text>
-            <Text paddingLeft="10px">{props.stock}</Text>
+            <Text marginRight={10}>{props.id}</Text>
+            <Image w="45px" src={props.image} marginRight={5} alt={props.name} />
+            <Text marginRight={10}>{props.name}</Text>
+            <Text marginRight={5}>${props.price}</Text>
+            <Text paddingLeft="10px" marginRight={5}>{props.stock} prod.</Text>
             {
                 active === false ? <IconButton icon={<FcApproval />} onClick={clickHandlerDisable}></IconButton> :
                     <IconButton icon={<FcCancel />} onClick={clickHandlerDisable}></IconButton>

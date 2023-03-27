@@ -15,7 +15,7 @@ import {
   GET_USER_BY_ID,
   UPDATE_CART_USER,
   GET_ALL_USERS,
-  OPEN_SIGNUP_DRAWER
+  OPEN_SIGNUP_DRAWER,
 } from "./actionTypes";
 
 const initialState = {
@@ -31,7 +31,7 @@ const initialState = {
   //--------------------
   filterPizzasTerms: {},
   user: {},
-  users:[]
+  users:[],
   signupDrawer: false
 
 };
