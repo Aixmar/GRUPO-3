@@ -28,7 +28,7 @@ const InfoPayment = () => {
       email: user.email,
     }
 
-  const totalPrice = cart.reduce((total, item) => total + item.price, 0) || 0;
+  const totalPrice = cart.reduce((total, item) => total + item.price*item.quantity, 0) || 0;
 
 
   const [paymentId, setPaymentId] = useState("123456789");
