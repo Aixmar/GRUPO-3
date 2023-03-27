@@ -167,17 +167,29 @@ const NavBar = () => {
               </BreadcrumbLink>
             </BreadcrumbItem>
 
-            {user.email && (
-              <BreadcrumbItem>
-                <BreadcrumbLink
-                  as={RouterLink}
-                  to="/profile/account"
-                  _hover={{ color: "#f27825" }}
-                >
-                  PROFILE
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-            )}
+            { 
+              user.rol === 'admin' ? (
+                <BreadcrumbItem>
+                  <BreadcrumbLink
+                    as={RouterLink}
+                    to="/admin"
+                    _hover={{ color: "#f27825" }} >
+                    ADMIN
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+              ) : user.email && (
+                <BreadcrumbItem>
+                  <BreadcrumbLink
+                    as={RouterLink}
+                    to="/profile/account"
+                    _hover={{ color: "#f27825" }}
+                  >
+                    PROFILE
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+            )
+            
+            }
             {/* <Button onClick={onOpen}>Login</Button> */}
             {/* <BreadcrumbItem>
                   <BreadcrumbLink marginRight="3" as={RouterLink} to="/createuser" _hover={{ color: "#f27825" }}>REGISTER</BreadcrumbLink>
