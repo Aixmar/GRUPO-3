@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Button, Link, Text } from "@chakra-ui/react"
 
 const ProductsPaginated = ({products,productsPerPage,paginated}) => {
 
@@ -41,16 +42,16 @@ const ProductsPaginated = ({products,productsPerPage,paginated}) => {
         <>
         <div>
             {
-                current > 1 && <button onClick={clickHandlerPrevious}>Previous</button>
+                current > 1 && <Button onClick={clickHandlerPrevious}>Previous</Button>
             }
             {
                 pageNumber.length && <a>{current} of {pageNumber.length}</a>
             }
             {
-                current < pageNumber.length && <button onClick={clickHandlerNext}>Next</button>
+                current < pageNumber.length && <Button onClick={clickHandlerNext}>Next</Button>
             }
             {
-                pageNumber.length > 2 && current < pageNumber.length - 1 && <button onClick={clickHandlerLast}>Last</button>
+                pageNumber.length > 2 && current < pageNumber.length - 1 && <Button onClick={clickHandlerLast}>Last</Button>
             }
         </div>
         </>

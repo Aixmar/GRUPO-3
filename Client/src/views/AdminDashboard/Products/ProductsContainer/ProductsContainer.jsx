@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react"
+import { Box, Heading, Flex, Text } from "@chakra-ui/react"
 import ProductCard from "../ProductCard/ProductCard"
 import ProductsPaginated from "../ProductsPaginated/ProductsPaginated"
 import { useState } from "react"
@@ -19,7 +19,37 @@ const ProductsContainer = (props) => {
     }
 
     return (
-        <Box>
+        <Box width="100%" maxWidth="1500px">
+            <Heading marginBottom={5} marginTop={10}>Products</Heading>
+            
+             <Flex py="4" borderBottom="1px solid gray">
+
+        <Flex marginLeft={5}>
+          <Box flex="1"><Text fontWeight="bold" color="orange.500">ID</Text></Box>
+        </Flex>
+
+        <Flex marginLeft={7}>
+          <Box flex="2"><Text fontWeight="bold" color="orange.500" >IMAGE</Text></Box>
+        </Flex>
+
+        <Flex marginLeft={5}>
+          <Box flex="3"><Text fontWeight="bold" color="orange.500" >NAME</Text></Box>
+        </Flex>
+
+         <Flex marginLeft={20}>
+          <Box flex="4"><Text fontWeight="bold" color="orange.500" >PRICE</Text></Box>
+          </Flex>
+
+          <Flex marginLeft={5}>
+          <Box flex="5"><Text fontWeight="bold" color="orange.500">QUANT.</Text></Box>
+          </Flex>
+
+          <Flex marginLeft={3}>
+          <Box flex="6"><Text fontWeight="bold" color="orange.500">AVAIL.</Text></Box>
+          </Flex>
+
+        </Flex>
+            
             {
                 currentProducts?.map(p => (
                     <ProductCard

@@ -15,9 +15,9 @@ import {
   UPDATE_CART_USER,
   PUT_CART_USER,
   CLEAR_CART_LOGOUT,
-  GET_ALL_USERS
+  GET_ALL_USERS,
   UPDATE_CART_ITEM_QUANTITY,
-  OPEN_SIGNUP_DRAWER
+  OPEN_SIGNUP_DRAWER,
 
 } from "./actionTypes";
 import axios from "axios";
