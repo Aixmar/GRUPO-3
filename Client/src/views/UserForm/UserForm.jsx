@@ -31,7 +31,8 @@ const UserForm = ({ onClose }) => {
     email: "",
     password: "",
     cart: [],
-    rol:'user'
+    rol:'user',
+    previusPurchase: [],
   });
   const [errors, setErrors] = useState({});
   const [backResponse, setBackResponse] = useState({});
