@@ -22,7 +22,8 @@ const Table = () => {
     dispatch(updateCartItemQuantity(itemId, quantity));
   };
 
-  const totalPrice = cart.reduce((total, item) => total + item.price, 0);
+  const totalPrice = cart.reduce((total, item) => total + item.price*item.quantity, 0);
+  
 
   return (
     <Box maxW={{ base: "3xl", lg: "7xl" }} mx="auto" px={{ base: "4", md: "8", lg: "12" }} py={{ base: "6", md: "8", lg: "12" }}>
