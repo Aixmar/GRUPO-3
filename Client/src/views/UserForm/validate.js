@@ -2,10 +2,11 @@ const regExNames = /^(?![_.])(?!.*[_.]{2})[A-Za-z\s_]+(?<![_.])$/;
 // const regExNames = /^[a-zA-Z]{2,}$/;
 const regExEmail = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
 const regExPassword = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/;
+/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/
 
 
 
-const validate = ({ name, lastName, email, password }) => {
+const validate = ({ name, lastName, email, password,confirmPassword }) => {
 
     const errors = {}
 
@@ -18,7 +19,9 @@ const validate = ({ name, lastName, email, password }) => {
         if (lastName && !regExNames.test(lastName)) errors.lastName = "The last name can't contain symbols";
 
         if (email && !regExEmail.test(email)) errors.email = 'Invalid email';
-        if (password && !regExPassword.test(password)) errors.password = 'Invalid password';
+        if (password && !regExPassword.test(password)) errors.password = 'Invalid password.The password has to contain at least  one number,one upper case \n letter,one lower case letter and must be between 8 and 16 characters';
+
+        if(password !== confirmPassword) errors.confirmPassword = 'Passwords are not the same'
 
     return errors;
 };
