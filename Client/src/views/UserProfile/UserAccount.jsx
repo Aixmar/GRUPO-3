@@ -46,7 +46,7 @@ const UserAccount = () => {
       putImage
     );
     setUser(data);
-    setCurrentImage(false);
+    setLoadingImage(false);
   };
 
   return (
