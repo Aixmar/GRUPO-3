@@ -36,7 +36,7 @@ const UserAccount = () => {
     const { data } = await axios.post('https://api.cloudinary.com/v1_1/dozwiqjh1/image/upload', formData);
     setCurrentImage(data.secure_url);
   };
-
+console.log(user);
 
   const handleUpdateImage = async () => {
     const putImage = { urlImage: currentImage, userId: user.id }
@@ -95,7 +95,7 @@ const UserAccount = () => {
           <Button size="sm" colorScheme="orange" onClick={toggleUpdateEmailForm}>Update</Button>
         </Box>
 
-        { isUpdateEmailFormVisible && <UpdateEmailForm onClose formtype="email" { ...user } />}
+        { isUpdateEmailFormVisible && <UpdateEmailForm onClose formtype="email" { ...user } setUser={setUser} toggleUpdateEmailForm = {toggleUpdateEmailForm}/>}
 
         <Box display='flex' color="white" as="h2" fontSize='1.6rem' size="md" >
           <Text color="white" fontWeight='bold' as="h2" size="md" >Password:</Text>
@@ -105,7 +105,7 @@ const UserAccount = () => {
           <Button size="sm" colorScheme="orange" onClick={toggleUpdatePasswordForm} >Update</Button>
         </Box>
 
-        { isUpdatePasswordFormVisible && ( <UpdatePasswordForm formType="password" { ...user }/> )}
+        { isUpdatePasswordFormVisible && ( <UpdatePasswordForm formType="password" { ...user } setUser={setUser} toggleUpdatePasswordForm = {toggleUpdatePasswordForm}/> )}
 
       </Box>
     </Box>
