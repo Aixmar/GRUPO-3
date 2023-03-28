@@ -4,8 +4,9 @@ import SubNavBar from "../../components/SubNavBar/SubNavBar";
 import { sidesTermsFilter } from "../../Utils/sidesTermsFilters";
 import FilterSides from "../../components/FilterSides/FilterSides";
 import { useDispatch, useSelector } from "react-redux";
-import { getPizzas } from "../../redux/actions";
+import { getPizzas, getUserById } from "../../redux/actions";
 import { useEffect } from "react";
+import { useAuthProv } from "../../context/AuthProvider";
 
 const AllSides = () => {
   const dispatch = useDispatch();
@@ -15,8 +16,10 @@ const AllSides = () => {
   const sides = items.filter((i) => i.category === "sides");
   const sidesFiltered = sidesTermsFilter({ sides, filterSidesTerms });
 
+  const { user } = useAuthProv();
   useEffect(() => {
-    dispatch(getPizzas());
+    dispatch(getPizzas());+
+    dispatch(getUserById(user.id))
   }, [dispatch]);
 
   return (

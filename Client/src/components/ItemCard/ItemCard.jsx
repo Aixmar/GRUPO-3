@@ -1,26 +1,36 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { Box, Flex, Grid, Image, Text, Select, useToast } from "@chakra-ui/react";
-import { Button } from "@chakra-ui/button";
-import { pushToCart } from "../../redux/actions";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import {
+  Box,
+  Flex,
+  Grid,
+  Image,
+  Text,
+  Select,
+  useToast,
+  Alert,
+  AlertDialog,
+} from "@chakra-ui/react";
+import { Button, IconButton } from "@chakra-ui/button";
+import { pushToCart, addFavorite, getUserById } from "../../redux/actions";
 import { useEffect, useState } from "react";
+import { useAuthProv } from "../../context/AuthProvider";
 
 const ItemCard = (props) => {
+  const cart = useSelector((state) => state.cart);
+  const found = cart.filter((item) => item.id === props.id);
 
-  const cart = useSelector(state => state.cart)
-  const found = cart.filter(item => item.id === props.id)
+  const [quantity, setQuantity] = useState(1);
 
-  const[quantity , setQuantity] = useState(1)
-
-  const itemCart = {...props , quantity: parseInt(quantity)}
+  const itemCart = { ...props, quantity: parseInt(quantity) };
 
   const toast = useToast();
-
 
   const handleInputChange = (e) => {
     const { value } = e.target;
     setQuantity(value);
-    }
+  };
 
   const dispatch = useDispatch();
 
@@ -28,7 +38,7 @@ const ItemCard = (props) => {
     dispatch(pushToCart(itemCart));
     toast({
       title: "Item added",
-      position: 'top-center',
+      position: "top-center",
       status: "success",
       duration: 2000,
       isClosable: true,
@@ -40,6 +50,19 @@ const ItemCard = (props) => {
     });
   };
 
+  const { user } = useAuthProv();
+
+  const handleClickFavorite = () => {
+    const itemFav = { productId: props.id, userId: user.id };
+    dispatch(addFavorite(itemFav));
+  };
+
+  const USUARIOAESCUCHAR = useSelector((state) => state.user);
+  const isFavorite = USUARIOAESCUCHAR.favorites.some(
+    (favorite) => favorite.id === props.id
+  );
+  // console.log(isFavorite);
+
   return (
     <Box
       bgGradient="linear-gradient(to right, #f27825, #eab830)"
@@ -47,9 +70,9 @@ const ItemCard = (props) => {
       boxShadow="md"
       overflow="hidden"
       maxW="sm"
+      position="relative"
     >
       <Link to={`/itemdetail/${props.id}`}>
-        
         <Image
           src={props.image}
           alt={props.name}
@@ -59,16 +82,24 @@ const ItemCard = (props) => {
         />
       </Link>
       <Grid templateColumns="1fr" templateRows="1fr 50px" p="4">
-        <Flex direction="row" justify="space-between" m='10px'>
+        <Flex direction="row" justify="space-between" my="5px">
           <Text fontSize="lg" fontWeight="semibold" color="white">
             {props.name}
           </Text>
-          <Text fontSize="lg" fontWeight="semibold" color="white">
-            Stock: {props.stock}
-          </Text>
+          
+          <IconButton
+            icon={isFavorite ? <AiFillHeart /> : <AiOutlineHeart />}
+            bg='transparent'
+            class="favorite-button"
+            zIndex="1"
+            bottom="0.5rem"
+            fontSize="3xl"
+            onClick={handleClickFavorite}
+          />  
+
         </Flex>
-        <Flex direction="row" justify="space-between" >
-          <Text fontSize="lg" fontWeight="semibold" color="white" >
+        <Flex direction="row" justify="space-between">
+          <Text fontSize="lg" fontWeight="semibold" color="white">
             ⭐ {props.rating}
           </Text>
           <Select w="5rem" value={quantity} onChange={handleInputChange}>
@@ -84,7 +115,7 @@ const ItemCard = (props) => {
 
           <Button
             id="addcart"
-            isDisabled={ found.length ? true : false }
+            isDisabled={found.length ? true : false}
             colorScheme="red"
             onClick={handleAddToCart}
           >

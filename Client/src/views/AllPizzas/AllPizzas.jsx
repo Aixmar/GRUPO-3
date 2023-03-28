@@ -4,16 +4,18 @@ import SubNavBar from "../../components/SubNavBar/SubNavBar";
 import { useEffect } from "react";
 import FilterPizzas from "../../components/FilterPizzas/FilterPizzas";
 import { Box, Flex } from "@chakra-ui/react";
-import { getPizzas } from "../../redux/actions";
+import { getPizzas, getUserById } from "../../redux/actions";
 import { pizzasTermsFilters } from "../../Utils/pizzasTermsFilters";
-
+import { useAuthProv } from "../../context/AuthProvider";
 
 const AllPizzas = () => {
 
+  const { user } = useAuthProv();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getPizzas());
-  }, [dispatch]);
+    dispatch(getUserById(user.id))
+  }, []);
 
   const filterPizzasTerms = useSelector((state) => state.filterPizzasTerms);
   const items = useSelector((state) => state.pizzas);
