@@ -25,9 +25,9 @@ export const CartProductMeta = (props) => {
         {isGiftWrapping && (
           <HStack spacing="1" mt="3" color="white">
             {/* <Icon as={FiGift} boxSize="4" /> */}
-            <Link fontSize="sm" textDecoration="underline">
+            {/* <Link fontSize="sm" textDecoration="underline">
               Add gift wrapping
-            </Link>
+            </Link> */}
           </HStack>
         )}
       </Box>

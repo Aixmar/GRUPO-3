@@ -18,7 +18,7 @@ import {
   GET_ALL_USERS,
   UPDATE_CART_ITEM_QUANTITY,
   OPEN_SIGNUP_DRAWER,
-
+  USER_FAVORITES,
 } from "./actionTypes";
 import axios from "axios";
 
@@ -116,4 +116,11 @@ export const updateCartUser = (cartUser) => {
 
 export const openSignupDrawer = (boolean) => {
   return { type: OPEN_SIGNUP_DRAWER, payload: boolean };
+};
+
+export const addFavorite = (itemFav) => {
+  return async function (dispatch) {
+    const user = await axios.put(`/users/favorites`, itemFav);
+    return dispatch({type: USER_FAVORITES, payload: user.data});
+  };
 };

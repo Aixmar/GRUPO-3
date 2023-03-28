@@ -195,7 +195,7 @@ const NavBar = () => {
             {/* //////////////////////////////////////////////////// DRAWER CART /////////////////////////////////////// */}
             
               <BreadcrumbItem>                
-                  <Image onClick={handleopenDrawCart1}  src={cartlogo} width="50px" height="50px" />
+                  <Image onClick={handleopenDrawCart1}  cursor="pointer" src={cartlogo} width="50px" height="50px" />
                 
                 <Drawer
                   isOpen={openDrawCart1}

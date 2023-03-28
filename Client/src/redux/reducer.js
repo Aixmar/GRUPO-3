@@ -16,6 +16,7 @@ import {
   UPDATE_CART_USER,
   GET_ALL_USERS,
   OPEN_SIGNUP_DRAWER,
+  USER_FAVORITES,
 } from "./actionTypes";
 
 const initialState = {
@@ -175,7 +176,9 @@ const rootReducer = (state = initialState, action) => {
     case OPEN_SIGNUP_DRAWER:
       return { ...state, signupDrawer: action.payload };
 
-
+    case USER_FAVORITES:
+      return { ...state, user: action.payload };
+      
     default:
       return { ...state };
   }
