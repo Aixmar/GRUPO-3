@@ -17,6 +17,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { getUserById } from "../../../redux/actions";
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 //import validatePassword from "../../UserForm/validate"
 const UpdatePasswordForm = (props) => {
   const [newPassword, setNewPassword] = useState("");
@@ -34,38 +35,40 @@ const UpdatePasswordForm = (props) => {
 
   const handleConfirmPasswordChange = (event) => {
     setConfirmNewPassword(event.target.value);
+    setError(validate(newPassword, confirmNewPassword))
+    console.log(event.target.value);
+  };
+useEffect(() => {
+  setError(validate(newPassword, confirmNewPassword))
+}, [confirmNewPassword, newPassword]);
+
+  console.log(error.length);
+
+  const validate = ( password, confirmPassword ) => {
+    const regExPassword = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/;
+    if (password !== confirmPassword) return("The passwords does not match");
+    
+    if (password && !regExPassword.test(password)) return ("Invalid password")
+    
+   return ("")
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    if (newPassword !== confirmNewPassword) {
-      // Comprobar si las contraseñas son iguales
-      setError("The passwords does not match");
-      return;
-    }
-
+    if (error.length) return;
     const putPassword = { password: newPassword, userId: props.id };
     await axios.put("http://localhost:3001/users/password", putPassword); // Esperar a que la actualización se complete
     dispatch(getUserById(props.id));
     setNewPassword("");
     setConfirmNewPassword("");
     setIsPasswordUpdated(true);
+    setTimeout(() => {
+      setIsPasswordUpdated(false); // Oculta el alert después de 5 segundos
+      props.toggleUpdatePasswordForm(false)
+    }, 5000);
   };
 
-  const validate = ({ password, confirmPassword }) => {
-    if (newPassword !== confirmNewPassword) {
-      setError("The passwords does not match");
-    }
-    if (password && !regExPassword.test(password)) setError("Invalid password");
-  };
-  // const validatePassword = () => {
-  //     if (newPassword !== confirmNewPassword) {
-  //     // Comprobar si las contraseñas son iguales
-  //     setError("The passwords does not match");
-  //     return;
-  //   }
-  // };
+ 
   return (
     <>
       <Box w='40%' color='#fff' >
@@ -83,7 +86,7 @@ const UpdatePasswordForm = (props) => {
                   required
                 />
                 <InputRightElement width="4.5rem">
-                  <Button h="1.75rem" size="sm" onClick={handleClickShow}>
+                  <Button h="1.75rem" size="sm" onClick={handleClickShow} color='black'>
                     {show ? "Hide" : "Show"}
                   </Button>
                 </InputRightElement>
@@ -115,7 +118,7 @@ const UpdatePasswordForm = (props) => {
           transition={{ duration: 0.5 }}
           style={{ position: "fixed", top: "20px", right: "20px" }}
         >
-          <Alert status="success" variant="subtle" alignItems="center">
+          <Alert status="success" variant="subtle" alignItems="center" color='black'>
             <AlertIcon />
             Password updated succesfully
           </Alert>
