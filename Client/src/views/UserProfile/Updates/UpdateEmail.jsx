@@ -35,12 +35,14 @@ const UpdateEmailForm = (props) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const putEmail = { email: newEmail, userId: props.id };
-    await axios.put("http://localhost:3001/users/email", putEmail); // Esperar a que la actualización se complete
+    const { data }= await axios.put("http://localhost:3001/users/email", putEmail);  // Esperar a que la actualización se complete
     dispatch(getUserById(props.id));
+    props.setUser(data);
     setIsEmailUpdated(true); // Actualiza el estado para indicar que el correo electrónico se ha actualizado
     setShowForm(false); // Oculta el formulario
     setTimeout(() => {
-      setIsEmailUpdated(false); // Oculta el alert después de 3 segundos
+      setIsEmailUpdated(false); // Oculta el alert después de 5 segundos
+      props.toggleUpdateEmailForm(false)
     }, 5000);
   };
 
@@ -71,7 +73,7 @@ const UpdateEmailForm = (props) => {
           transition={{ duration: 0.5 }}
           style={{ position: "fixed", top: "20px", right: "20px" }}
         >
-          <Alert status="success" variant="subtle" alignItems="center">
+          <Alert status="success" variant="subtle" alignItems="center" color='black'>
             <AlertIcon />
             Email updated successfully
           </Alert>
