@@ -28,7 +28,7 @@ const Slider = () => {
                         <div className={`${css.infoPizza1} ${css.infoPizza}`} >
                             <h3 className={css.pizzaName} >Meat lovers</h3>
                             <p>Mozzarella Cheese - Pepperoni - Bacon - York Ham</p>
-                            <h2 className={css.pizzaName} >$14.99</h2>
+                            <h2 className={css.pizzaName} >$1499</h2>
                         </div>
                         <div className={`${css.contBtn1} ${css.contBtn}`} >
                             <button className={css.orderBtn} >Order now!</button>
@@ -40,7 +40,7 @@ const Slider = () => {
                         <div className={`${css.infoPizza2} ${css.infoPizza}`} >
                             <h3 className={css.pizzaName} >Supreme</h3>
                             <p>Pepperoni - Black Olives - Onions - Sausage - Bell peppers</p>
-                            <h2 className={css.pizzaName} >$14.99</h2>
+                            <h2 className={css.pizzaName} >$1499</h2>
                         </div>
                         <div className={`${css.contBtn2} ${css.contBtn}`} >
                             <button className={css.orderBtn} >Order now!</button>
@@ -52,7 +52,7 @@ const Slider = () => {
                         <div className={`${css.infoPizza3} ${css.infoPizza}`} >
                             <h3 className={css.pizzaName} >Hawaiian</h3>
                             <p>Mozzarella Cheese - Pineapple - Cooked Ham</p>
-                            <h2 className={css.pizzaName} >$12.99</h2>
+                            <h2 className={css.pizzaName} >$1299</h2>
                         </div>
                         <div className={`${css.contBtn3} ${css.contBtn}`} >
                             <button className={css.orderBtn} >Order now!</button>
@@ -64,7 +64,7 @@ const Slider = () => {
                         <div className={`${css.infoPizza4} ${css.infoPizza}`} >
                             <h3 className={css.pizzaName} >Pepperoni</h3>
                             <p>Mozzarella Cheese - Pepperoni</p>
-                            <h2 className={css.pizzaName} >$12.99</h2>
+                            <h2 className={css.pizzaName} >$1299</h2>
                         </div>
                         <div className={`${css.contBtn4} ${css.contBtn}`} >
                             <button className={css.orderBtn} >Order now!</button>
