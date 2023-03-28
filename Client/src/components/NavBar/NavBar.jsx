@@ -32,7 +32,7 @@ import { cartlogo, pizzalogo } from "../../assets/CloudinaryImg";
 import { useAuthProv } from "../../context/AuthProvider";
 import UserForm from "../../views/UserForm/UserForm";
 import UserLogin from "../../views/UserLogin/UserLogin";
-import profImg from "../../assets/profileImage.png";
+import profImg from "../../assets/userProfile.png";
 import React, { useEffect } from "react";
 import { popToCart,  clearCartUser, putCartUser, openSignupDrawer } from "../../redux/actions";
 import { useState } from "react";
@@ -51,8 +51,6 @@ const NavBar = () => {
   const dispatch = useDispatch();
   const[openDrawCart1, setopenDrawCart1] = useState(false);
   const { pathname } = useLocation();
-
-  console.log('pathnameeeeeeeeeEE------>', pathname)
  
   const handleopenDrawCart1 = () => {
     setopenDrawCart1(true);
@@ -191,21 +189,12 @@ const NavBar = () => {
                   >
                     PROFILE
                   </BreadcrumbLink>
-                </BreadcrumbItem>
-            )
-            
+                </BreadcrumbItem> )            
             }
-            {/* <Button onClick={onOpen}>Login</Button> */}
-            {/* <BreadcrumbItem>
-                  <BreadcrumbLink marginRight="3" as={RouterLink} to="/createuser" _hover={{ color: "#f27825" }}>REGISTER</BreadcrumbLink>
-                </BreadcrumbItem> */}
-            {/* <BreadcrumbItem>
-                  <BreadcrumbLink marginRight="3" as={RouterLink} to="/login" _hover={{ color: "#f27825" }}>LOGIN</BreadcrumbLink>
-                </BreadcrumbItem> */}
-            //////////////////////////////////////////////////// DRAWER CART ///////////////////////////////////////
+           
+            {/* //////////////////////////////////////////////////// DRAWER CART /////////////////////////////////////// */}
             
-              <BreadcrumbItem>
-                
+              <BreadcrumbItem>                
                   <Image onClick={handleopenDrawCart1}  src={cartlogo} width="50px" height="50px" />
                 
                 <Drawer
@@ -304,9 +293,12 @@ const NavBar = () => {
                 </BreadcrumbItem>
               </>
             )}
-            {user.email && (
-              <Image src={profImg} alt="profile" h="2.6rem" ml="2rem" />
-            )}
+
+            { user?.email && user?.image ? (
+              <Image src={user.image} alt="profile" h="3rem" w='3rem' ml="2rem" objectFit='cover' borderRadius='50%' /> 
+              ) : user.email && ( <Image src={profImg} alt="profile" h="3rem" w='3rem' ml="2rem" objectFit='cover' borderRadius='50%' /> )
+              
+            }
           </Breadcrumb>
         </Box>
       </Flex>
