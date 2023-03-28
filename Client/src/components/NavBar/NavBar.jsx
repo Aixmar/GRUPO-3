@@ -263,6 +263,7 @@ const NavBar = () => {
                   borderColor="orange.500"
                   position="relative"
                   transform="translateX(-60%)"
+                  onClick={handleopenDrawCart1}
                 >
                   <span>{cartItems.length}</span>
                 </Badge>
