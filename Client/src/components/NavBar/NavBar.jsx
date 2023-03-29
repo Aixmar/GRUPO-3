@@ -60,11 +60,11 @@ const NavBar = () => {
     setopenDrawCart1(false);
     }
 
-    function handleNavigate() {
-      onClose();
-      history.push("/cart");
-      dispatch(openSignupDrawer(false));
-    }
+  function handleNavigate() {
+    onClose();
+    history.push("/cart");
+    dispatch(openSignupDrawer(false));
+  }
 
 
   const onClickDelete = (index) => {
@@ -97,6 +97,7 @@ const NavBar = () => {
   };
 
   const openModal = () => onOpen();
+
 
   return (
     <Box bgGradient="linear(to-l,#000000, #272727)" color="white" py={0} px={8}>
@@ -272,7 +273,7 @@ const NavBar = () => {
             {user.email ? (
               <Box ml="1rem" textAlign="center" display="flex" flexDir="column">
                 <Box display="flex" alignItems="center">
-                  <Text>{user.displayName ? user.displayName : user.name}</Text>
+                  <Text>{user.name && user.name}</Text>
                 </Box>
                 {/* <Button onClick={signOut} >SIGN OUT</Button> */}
                 <BreadcrumbItem>
@@ -292,9 +293,8 @@ const NavBar = () => {
               </>
             )}
 
-            { user?.email && user?.image ? (
-              <Image src={user.image} alt="profile" h="3rem" w='3rem' ml="2rem" objectFit='cover' borderRadius='50%' /> 
-              ) : user.email && ( <Image src={profImg} alt="profile" h="3rem" w='3rem' ml="2rem" objectFit='cover' borderRadius='50%' /> )
+            { user?.image ? ( <Image src={user.image} alt="profile" h="3rem" w='3rem' ml="2rem" objectFit='cover' borderRadius='50%' /> )
+            : user.email && ( <Image src={profImg} alt="profile" h="3rem" w='3rem' ml="2rem" objectFit='cover' borderRadius='50%' /> )
               
             }
           </Breadcrumb>
