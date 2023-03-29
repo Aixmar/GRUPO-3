@@ -198,6 +198,11 @@ const CreatePizza = () => {
                   Go to cart
                 </Button>
               </Link>
+              <Link to="/allpizzas">
+                <Button bg={"orange"} fontSize={"2rem"} width={"90%"} p={"1.6rem"} margin={"1.2rem 0 .8rem 0"} >
+                  Continue shopping
+                </Button>
+              </Link>
             </div>
           </dialog>
     </Box>
