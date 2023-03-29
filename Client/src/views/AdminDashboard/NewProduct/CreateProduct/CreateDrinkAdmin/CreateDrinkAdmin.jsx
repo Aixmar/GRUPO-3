@@ -49,6 +49,16 @@ const CreateDrinkAdmin = () => {
   };
 
 
+  const handleUpdateImage = async (event) => {
+    const { files } = event.target;
+    const formData = new FormData();
+    formData.append('file', files[0]);
+    formData.append('upload_preset', 'users_photo');
+    const { data } = await axios.post(`https://api.cloudinary.com/v1_1/dozwiqjh1/image/upload`, formData);
+    setForm({ ...form, image: data.secure_url });
+  };
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     
@@ -76,7 +86,7 @@ const CreateDrinkAdmin = () => {
                     <Input type='text' name='name' onChange={handleInputChange} w='40%' border='1px solid #545454b9' mr='1rem' />
                     {errors.name && <Text color="red">{errors.name}</Text>}
                     <FormLabel w='3.4rem' fontWeight="bold" >Drink image:</FormLabel>
-                    <Input type='file' name='image' onChange={handleInputChange} w='40%' border='1px solid #545454b9' h='2.6rem' pt='4px' cursor='pointer' />
+                    <Input type='file' name='image' onChange={handleUpdateImage} w='40%' border='1px solid #545454b9' h='2.6rem' pt='4px' cursor='pointer' />
                     {errors.image && <Text color="red" ml='1rem' >{errors.image}</Text>}
                 </Box>
                 
@@ -101,7 +111,7 @@ const CreateDrinkAdmin = () => {
 
                     <GridItem >
                         <RadioGroup>
-                            <FormLabel fontWeight="bold">Type:</FormLabel>
+                            <FormLabel fontWeight="bold" >Type:</FormLabel>
                             <Stack>
                                 <Radio onChange={handleDetail} name="onSugar" size="lg" border='1px solid #545454b9' value='sugar'>With sugar</Radio>
                                 <Radio onChange={handleDetail} name="onSugar" size="lg" border='1px solid #545454b9' value='nosugar'>No sugar</Radio>
@@ -148,7 +158,7 @@ const CreateDrinkAdmin = () => {
                         <Input type='number' name='price' value={form.price} onChange={handleInputChange} border='1px solid #545454b9' htmlSize={2} width='50%' />
                           {errors.price && <Text color="red" mb='1rem' >{errors.price}</Text>}
                     </Box>
-                    <Button onClick={handleSubmit} type="submit" hoverbg="black" borderRadius="full" fontSize='2rem' padding="2rem 1.4rem" background="linear-gradient(to right, #f27833, #eab830)" >
+                    <Button onClick={handleSubmit} type="submit" hoverbg="black" borderRadius="full" mt='1.4rem' fontSize='2rem' padding="2rem 1.4rem" background="linear-gradient(to right, #f27833, #eab830)" >
                         Create new drink
                     </Button>
                 </Box>

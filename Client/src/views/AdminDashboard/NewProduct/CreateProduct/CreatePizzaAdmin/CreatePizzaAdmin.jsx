@@ -41,7 +41,6 @@ const CreatePizzaAdmin = () => {
   const [meats, setMeats] = useState([]);  
   const [errors, setErrors] = useState({});
   const [form, setForm] = useState(initialStateForm);
-  // const [ isCheked, setIsChek] = useState(initialStateForm);
 
 
   useEffect(() => {
@@ -90,6 +89,14 @@ const CreatePizzaAdmin = () => {
     setForm({ ...form, [name]: checked });
   };
 
+  const handleUpdateImage = async (event) => {
+    const { files } = event.target;
+    const formData = new FormData();
+    formData.append('file', files[0]);
+    formData.append('upload_preset', 'users_photo');
+    const { data } = await axios.post(`https://api.cloudinary.com/v1_1/dozwiqjh1/image/upload`, formData);
+    setForm({ ...form, image: data.secure_url });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -106,7 +113,6 @@ const CreatePizzaAdmin = () => {
 
 
 
-
   return (
     <>
     <Box bgGradient="linear(to-l,#000000, #272727)"  height='100vh'>
@@ -116,7 +122,7 @@ const CreatePizzaAdmin = () => {
                     <FormLabel htmlFor='name' w='3.4rem' h='auto' fontWeight="bold" >Pizza name:</FormLabel>
                     <Input type='text' name='name' value={form.name} onChange={handleInputChange} w='40%' border='1px solid #545454b9' mr='1rem' />
                     <FormLabel htmlFor='image' w='3.4rem' fontWeight="bold" >Pizza image:</FormLabel>
-                    <Input type='file' name='image' value={form.image} onChange={handleInputChange} w='40%' border='1px solid #545454b9' h='2.6rem' pt='4px' cursor='pointer' />
+                    <Input type='file' name='image' onChange={handleUpdateImage} w='40%' border='1px solid #545454b9' h='2.6rem' pt='4px' cursor='pointer' />
                 </Box>
                 
                 <Grid templateColumns="repeat(4, 1fr)" templateRows='78% 4rem 1fr' width='100%' h='60%' color="black" >
@@ -216,7 +222,7 @@ const CreatePizzaAdmin = () => {
                     <FormLabel htmlFor='price' fontWeight="bold" >Suggested price:</FormLabel>
                     <Input type='number' name='price' value={form.price} onChange={handleInputChange} border='1px solid #545454b9' htmlSize={2} width='50%' />
                   </Box>
-                  <Button onClick={handleSubmit} type="submit" hoverbg="black" borderRadius="full" fontSize='2rem' padding="2rem 1.4rem" background="linear-gradient(to right, #f27833, #eab830)" >
+                  <Button onClick={handleSubmit} type="submit" hoverbg="black" borderRadius="full" fontSize='2rem' mt='1.4rem' padding="2rem 1.4rem" background="linear-gradient(to right, #f27833, #eab830)" >
                     Create new pizza
                   </Button>
                 </Box>
