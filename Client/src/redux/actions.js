@@ -18,6 +18,7 @@ import {
   GET_ALL_USERS,
   UPDATE_CART_ITEM_QUANTITY,
   OPEN_SIGNUP_DRAWER,
+  GET_ITEM_DETAIL
 
 } from "./actionTypes";
 import axios from "axios";
@@ -50,6 +51,13 @@ export const getPizzas = () => {
     return dispatch({ type: GET_PIZZAS, payload: response.data });
   };
 };
+export const getItemDetail = (id) => {
+  return async function (dispatch) {
+    let response = await axios.get(`/pizzas/${id}`);
+    return dispatch({ type: GET_ITEM_DETAIL, payload: response.data });
+  };
+};
+
 export const getDataUsers = () => {
   return async function (dispatch) {
     let response = await axios.get("/users");

@@ -16,11 +16,13 @@ import {
   UPDATE_CART_USER,
   GET_ALL_USERS,
   OPEN_SIGNUP_DRAWER,
+  GET_ITEM_DETAIL
 } from "./actionTypes";
 
 const initialState = {
   ingredients: [],
   pizzas: [],
+  itemDetail:{},
   pizzasbackup: [],
   cart: [],
   error_query: null,
@@ -81,7 +83,11 @@ const rootReducer = (state = initialState, action) => {
         pizzas: orderedById,
         pizzasbackup: orderedById,
       };
-
+    case GET_ITEM_DETAIL:
+      return{
+        ...state,
+        itemDetail:action.payload
+      }
     case UPDATE_CART_ITEM_QUANTITY:
       const updatedCart = state.cart.map((item) => {
         if (item.id === action.payload.itemId) {

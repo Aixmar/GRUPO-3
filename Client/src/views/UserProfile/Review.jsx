@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Box,
   Flex,
@@ -10,22 +11,40 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
+import { useAuthProv } from "../../context/AuthProvider";
+import axios from "axios";
+import { getItemDetail } from "../../redux/actions";
 
-const Review = () => {
-  const [rating, setRating] = useState(0);
-  const [review, setReview] = useState("");
-  const handleReviewChange = (event) => {
-    setReview(event.target.value);
+const Review = (props) => {
+  // const dispatch = useDispatch()
+  const item = useSelector((state) => state.itemDetail)
+  // const [current,setCurrent] = useState({})
+  const { user } = useAuthProv()
+  const [form, setForm] = useState({
+      name: user.name,
+      image: user.image,
+      rating: null,
+      review: ""
+  })
+  // const [rating, setRating] = useState(0);
+  // const [review, setReview] = useState("");
+  const handleReviewChange = (e) => {
+    // setReview(event.target.value);
+    setForm({ ...form, review: e.target.value })
   };
 
   const handleRating = (value) => {
-    setRating(value);
+    setForm({ ...form,  rating: value })
   };
-
+  // item.reviews = item.reviews || {}
+  // item.reviews = {...item.reviews,...form}
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(`Puntuación: ${rating}, Reseña: ${review}`);
+    axios.put(`/pizzas/${item.id}`, {reviews:{...item.reviews,...form}})
   };
+  // useEffect(() => {
+  //   setCurrent(item)
+  // },[item])
 
   return (
     <Box
@@ -49,7 +68,7 @@ const Review = () => {
                   onClick={() => handleRating(value)}
                 >
                   <StarIcon
-                    color={value <= rating ? "#FFD700" : "gray.300"}
+                    color={value <= form.rating ? "#FFD700" : "gray.300"}
                     transition="color 0.2s"
                     _hover={{ color: "#FFD700" }}
                   />
@@ -57,13 +76,13 @@ const Review = () => {
               );
             })}
           </Flex>
-          <Input type="hidden" name="rating" value={rating} required />
+          <Input type="hidden" name="rating" value="" required />
         </FormControl>
         <Box mt="8">
           <FormControl>
             <FormLabel>Review</FormLabel>
             <Textarea
-              value={review}
+              value={form.review}
               onChange={handleReviewChange}
               placeholder="Write a review"
             />
