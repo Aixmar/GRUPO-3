@@ -1,13 +1,20 @@
 import UserNavBar from "./UserNavBar";
 import { Box, Grid, GridItem, Text, Link } from "@chakra-ui/react";
-import { useAuthProv } from "../../context/AuthProvider";
+// import { useAuthProv } from "../../context/AuthProvider";
+import {  useSelector } from "react-redux";
 
 
 const UserHistory = () => {
 
-  const { user } = useAuthProv();
-  const prevPurchase = user.previusPurchase;
+  // const dispatch = useDispatch();
+  // const { user } = useAuthProv();
   
+  const user1 = useSelector((state) => state.user);
+  
+  const prevPurchase = user1.previusPurchase;
+
+
+
   return (
     <div>
    
