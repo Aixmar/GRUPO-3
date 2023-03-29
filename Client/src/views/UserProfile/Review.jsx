@@ -9,6 +9,7 @@ import {
   Text,
   Textarea,
   Button,
+  useToast
 } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
 import { useAuthProv } from "../../context/AuthProvider";
@@ -16,36 +17,61 @@ import axios from "axios";
 import { getItemDetail } from "../../redux/actions";
 
 const Review = (props) => {
-  // const dispatch = useDispatch()
+  const toast = useToast()
   const item = useSelector((state) => state.itemDetail)
-  // const [current,setCurrent] = useState({})
   const { user } = useAuthProv()
   const [form, setForm] = useState({
+      userId: user.id,
       name: user.name,
       image: user.image,
       rating: null,
       review: ""
   })
-  // const [rating, setRating] = useState(0);
-  // const [review, setReview] = useState("");
+  const [reviewFound,setReviewFound] = useState(false)
+  
   const handleReviewChange = (e) => {
-    // setReview(event.target.value);
     setForm({ ...form, review: e.target.value })
   };
 
   const handleRating = (value) => {
     setForm({ ...form,  rating: value })
   };
-  // item.reviews = item.reviews || {}
-  // item.reviews = {...item.reviews,...form}
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    axios.put(`/pizzas/${item.id}`, {reviews:{...item.reviews,...form}})
-  };
-  // useEffect(() => {
-  //   setCurrent(item)
-  // },[item])
 
+  const reviewFound2 = item.reviews?.find(r => r.userId === user.id)
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+      if(reviewFound || reviewFound2){
+        toast({
+          title: "Review not added",
+          description: "You have already done a review",
+          position: "top-center",
+          status: "error",
+          duration: 2000,
+          isClosable: true,
+          variant: "subtle",
+          style: {
+            backgroundColor: "white",
+            color: "orange",
+          },
+        });
+      }
+      else{
+        await axios.put(`/pizzas/reviews/${item.id}`, form)
+        setReviewFound(true)
+        toast({
+          title: "Item added",
+          position: "top-center",
+          status: "success",
+          duration: 2000,
+          isClosable: true,
+          variant: "subtle",
+          style: {
+            backgroundColor: "white",
+            color: "orange",
+          },
+        });
+    } 
+  };
   return (
     <Box
       borderWidth="1px"
@@ -75,6 +101,7 @@ const Review = (props) => {
                 </Box>
               );
             })}
+
           </Flex>
           <Input type="hidden" name="rating" value="" required />
         </FormControl>
