@@ -42,7 +42,7 @@ export const AuthProvider = ({children}) =>{
             if (!userLogin.length) {    
                 const userName = user?.displayName?.split(' ')[0];
                 const userLastName = user?.displayName?.split(' ')[1];            
-                const userGoogle = { name: userName, lastName: userLastName, email: user?.email, password: user?.uid, image: user?.photoURL, birthday: '00-00-00', cart: [], rol: 'user'  };
+                const userGoogle = { name: userName, lastName: userLastName, email: user?.email, password: user?.uid, image: user?.photoURL, birthday: '00-00-00', cart: [], rol: 'user', favorites: [] };
                 const { data } = await axios.post("/users", userGoogle);
                 window.localStorage.setItem('loggedUser' , JSON.stringify(data));
                 setUser(data);

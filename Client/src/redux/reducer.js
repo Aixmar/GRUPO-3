@@ -17,6 +17,7 @@ import {
   GET_ALL_USERS,
   OPEN_SIGNUP_DRAWER,
   USER_FAVORITES,
+  CLEAR_USER,
 } from "./actionTypes";
 
 const initialState = {
@@ -178,6 +179,9 @@ const rootReducer = (state = initialState, action) => {
 
     case USER_FAVORITES:
       return { ...state, user: action.payload };
+
+    case CLEAR_USER:
+      return {...state, user:{}}
       
     default:
       return { ...state };
