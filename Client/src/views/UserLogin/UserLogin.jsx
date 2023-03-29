@@ -1,4 +1,4 @@
-import { Button, FormControl, FormLabel, Input, Box, Text, Image } from "@chakra-ui/react";
+import { Button, FormControl, FormLabel, Input, Box, Text, Image,FormHelperText } from "@chakra-ui/react";
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
@@ -43,7 +43,8 @@ const UserLogin = ({ onClose }) => {
       // window.localStorage.setItem('loggedUser' , JSON.stringify({...form,accessToken}));
       setErr('')
     } catch (error) {
-      setErr(error)
+      console.log(error.response.data.error);
+      setErr(error.response.data.error)
     } finally {
       setIsLoading(false);
     }
@@ -71,7 +72,15 @@ const UserLogin = ({ onClose }) => {
         <Box bgGradient="linear-gradient(to right, #f27825, #eab830)" w="333px"p="10" rounded="md" boxShadow="lg" >
         
           <FormControl id="email">
-          {err !== '' && <p>{err.error}</p>}
+          {err !== '' && (
+            <FormHelperText
+              bg="#fff"
+              borderRadius="4px"
+              p="0 4px"
+              color="red.500"
+            >
+              {err}
+            </FormHelperText>)}
             <FormLabel color="white">Email:</FormLabel>
             <Input
               type="email"
@@ -84,6 +93,7 @@ const UserLogin = ({ onClose }) => {
               _placeholder={{ color: "gray.400" }}
               required
             />
+            
           </FormControl>
           <FormControl mt="6" id="password">
             <FormLabel color="white">Password:</FormLabel>

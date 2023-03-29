@@ -30,6 +30,7 @@ const UserForm = ({ onClose }) => {
     birthday: "",
     email: "",
     password: "",
+    confirmPassword:"",
     cart: [],
     rol:'user',
     previusPurchase: [],
@@ -38,6 +39,7 @@ const UserForm = ({ onClose }) => {
   const [errors, setErrors] = useState({});
   const [backResponse, setBackResponse] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [emailRegistered,setEmailRegistered] = useState('')
 
   // // modal chakra
   // const [ isOpen, setIsOpen ] = useState(false);
@@ -59,13 +61,15 @@ const UserForm = ({ onClose }) => {
 
   const submitHandler = async (event) => {
     event.preventDefault();
-    const { data } = await axios.post("/users", form);
-    const modal = document.querySelector("#signUpModal");
-    modal.showModal();
-    setBackResponse(data);
-    const email = await axios.post("/sendmail/register", { email: form.email });
-    setForm({ email: "", password: "" });
+   
     try {
+      const response = await axios.post("/users", form);
+      console.log(response.data);
+      const modal = document.querySelector("#signUpModal");
+      modal.showModal();
+      setBackResponse(response.data);
+      const email = await axios.post("/sendmail/register", { email: form.email });
+      setForm({ email: "", password: "" });
       const { data } = await axios.post("/users/login", form, {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
@@ -76,6 +80,7 @@ const UserForm = ({ onClose }) => {
       // setTimeout(() => onClose(), 4000);
     } catch (error) {
       console.log(error);
+      if(error.response) setEmailRegistered(error.response.data.error)
     }
   };
 
@@ -117,6 +122,15 @@ const UserForm = ({ onClose }) => {
         onSubmit={submitHandler}
       >
         <FormControl isRequired>
+        {emailRegistered !== '' && (
+            <FormHelperText
+              bg="#fff"
+              borderRadius="4px"
+              p="0 4px"
+              color="red.500"
+            >
+              {emailRegistered}
+            </FormHelperText>)}
           <FormLabel>Name</FormLabel>
           <Input
             bg="#272727"
@@ -198,7 +212,26 @@ const UserForm = ({ onClose }) => {
             </FormHelperText>
           )}
         </FormControl>
-
+        <FormControl isRequired>
+          <FormLabel>Confirm Password</FormLabel>
+          <Input
+            bg="#272727"
+            type="password"
+            name="confirmPassword"
+            value={form.confirmPassword}
+            onChange={inputChangeHandler}
+          />
+          {errors.confirmPassword && (
+            <FormHelperText
+              bg="#fff"
+              borderRadius="4px"
+              p="0 4px"
+              color="red.500"
+            >
+              {errors.confirmPassword}
+            </FormHelperText>
+          )}
+        </FormControl>
         <FormControl>
           <FormLabel>Date of birth</FormLabel>
           <Input
