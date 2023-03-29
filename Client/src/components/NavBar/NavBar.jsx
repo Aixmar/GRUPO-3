@@ -195,80 +195,76 @@ const NavBar = () => {
            
             {/* //////////////////////////////////////////////////// DRAWER CART /////////////////////////////////////// */}
             
-              <BreadcrumbItem>                
-                  <Image onClick={handleopenDrawCart1}  cursor="pointer" src={cartlogo} width="50px" height="50px" />
-                
-                <Drawer
-                  isOpen={openDrawCart1}
-                  placement="right"
-                  onClose={handleCloseDrawCart1}
-                  finalFocusRef={btnRef}
-                >
-                  <DrawerOverlay />
-                  <DrawerContent>
-                    <DrawerCloseButton />
-                    <DrawerHeader>CART</DrawerHeader>
-
-                    <DrawerBody>
-                      <Heading color="#f27825" pb="20px">Selected products </Heading>
-
-                      <UnorderedList listStyleType="none">
-                        {cartItems.map((item, index) => (
-                          <ListItem key={item.name}>
-                            <Image
-                              src={item.image}
-                              alt={item.name}
-                              boxSize="50px"
-                              mr="4"
-                            />
-                            <span>{item.name}</span>
-                            <span style={{ marginLeft: "1rem" }}>
-                              ${item.price}
-                            </span>
-                            <CloseButton
-                              onClick={() => onClickDelete(index)}
-                              
-                              w="4rem"
-                              color="red"
-                            >
-                              Delete
-                            </CloseButton>
-                          </ListItem>
-                        ))}
-                      </UnorderedList>
-                    </DrawerBody>
-
-                    <DrawerFooter>
-                      <Button variant="outline" mr={3} onClick={handleCloseDrawCart1}>
-                        Continue shopping
-                      </Button>
-
-
-                      <Link as={RouterLink} to='/cart' onClick={handleNavigate}>
-                        <Button colorScheme="orange">Go to Cart</Button>
-                      </Link>
-
-                    </DrawerFooter>
-                  </DrawerContent>
-                </Drawer>
-
-         
-                <Badge
-                  className="cart-icon"
-                  borderRadius="full"
-                  px={2}
-                  py={1}
-                  cursor="pointer"
-                  colorScheme="orange"
-                  border="2px"
-                  borderColor="orange.500"
-                  position="relative"
-                  transform="translateX(-60%)"
-                  onClick={handleopenDrawCart1}
-                >
-                  <span>{cartItems.length}</span>
-                </Badge>
-              </BreadcrumbItem>
+            <BreadcrumbItem>                
+  <Image onClick={handleopenDrawCart1}  cursor="pointer" src={cartlogo} width="50px" height="50px" />
+  <Drawer
+    isOpen={openDrawCart1}
+    placement="right"
+    onClose={handleCloseDrawCart1}
+    finalFocusRef={btnRef}
+  >
+    <DrawerOverlay />
+    <DrawerContent>
+      <DrawerCloseButton />
+      <DrawerHeader>CART</DrawerHeader>
+      <DrawerBody>
+        {cartItems.length === 0 ? (
+          <Text>There are no items in the cart</Text>
+        ) : (
+          <>
+            <Heading color="#f27825" pb="20px">Selected products </Heading>
+            <UnorderedList listStyleType="none">
+              {cartItems.map((item, index) => (
+                <ListItem key={item.name}>
+                  <Image
+                    src={item.image}
+                    alt={item.name}
+                    boxSize="50px"
+                    mr="4"
+                  />
+                  <span>{item.name}</span>
+                  <span style={{ marginLeft: "1rem" }}>
+                    ${item.price}
+                  </span>
+                  <CloseButton
+                    onClick={() => onClickDelete(index)}
+                    w="4rem"
+                    color="red"
+                  >
+                    Delete
+                  </CloseButton>
+                </ListItem>
+              ))}
+            </UnorderedList>
+          </>
+        )}
+      </DrawerBody>
+      <DrawerFooter>
+        <Button variant="outline" mr={3} onClick={handleCloseDrawCart1}>
+          Continue shopping
+        </Button>
+        <Link as={RouterLink} to='/cart' onClick={handleNavigate}>
+          <Button colorScheme="orange">Go to Cart</Button>
+        </Link>
+      </DrawerFooter>
+    </DrawerContent>
+  </Drawer>
+  <Badge
+    className="cart-icon"
+    borderRadius="full"
+    px={2}
+    py={1}
+    cursor="pointer"
+    colorScheme="orange"
+    border="2px"
+    borderColor="orange.500"
+    position="relative"
+    transform="translateX(-60%)"
+    onClick={handleopenDrawCart1}
+  >
+    <span>{cartItems.length}</span>
+  </Badge>
+</BreadcrumbItem>
            
             /////////////////////////////////////////////////////////
 
