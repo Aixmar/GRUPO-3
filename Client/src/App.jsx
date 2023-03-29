@@ -29,7 +29,9 @@ import {
   Products,
   CreateProduct,
   CheckOut,
-  Unauthorized
+  Unauthorized,
+  ForgottenPassword,
+  ResetPassword
 } from "./views/index";
 
 function App() {
@@ -68,8 +70,8 @@ function App() {
         <Route path="/products" element={<Products />} />
         <Route path="/createProduct" element={<CreateProduct />} />
           
-
-
+        <Route  path="/forgot" element={<ForgottenPassword />}/>
+        <Route path="/resetPassword/:id/:tokenResetPassword" element={<ResetPassword />} />
         <Route path="/itemdetail/:id" element={<ItemDetail />} />
         <Route path="/sidedetail/:id" element={<SideDetail />} />
 
