@@ -15,6 +15,7 @@ const UserHistory = () => {
 
 
 
+
   return (
     <div>
    
@@ -27,25 +28,25 @@ const UserHistory = () => {
         <Box borderWidth="1px" borderRadius="lg" p="4">
 
         <Grid templateColumns="repeat(3, 1fr)" gap="4">
-      	  {prevPurchase.map((item)=>(
-            <GridItem key={item.id}>
-               <Box borderWidth="1px" borderRadius="lg" p="4">
-                  <Box w="48px" h="48px" mr="4">
-                      <img src={item.image} alt={item.name}/>
-                  </Box>
-                  <Text fontSize="lg" fontWeight="bold" mb="2">
-                  {item.name}
-                </Text>
-             
-                <Text mb="2">${item.price}</Text>
-                <Link href={`/profile/history/${item.id}`}>
-                    View details
-                  </Link>
-                </Box>
-                         
-            </GridItem>
-          ))},
-           </Grid>
+  {prevPurchase?.length > 0 ? (
+    prevPurchase.map((item) => (
+      <GridItem key={item.id}>
+        <Box borderWidth="1px" borderRadius="lg" p="4">
+          <Box w="48px" h="48px" mr="4">
+            <img src={item.image} alt={item.name} />
+          </Box>
+          <Text fontSize="lg" fontWeight="bold" mb="2">
+            {item.name}
+          </Text>
+          <Text mb="2">${item.price}</Text>
+          <Link href={`/profile/history/${item.id}`}>View details</Link>
+        </Box>
+      </GridItem>
+    ))
+  ) : (
+    <Box p="4">No previus purchase</Box>
+  )}
+</Grid>
            </Box>
         </div>
   );
