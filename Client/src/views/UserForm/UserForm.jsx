@@ -34,6 +34,7 @@ const UserForm = ({ onClose }) => {
     cart: [],
     rol:'user',
     previusPurchase: [],
+    favorites: [],
   });
   const [errors, setErrors] = useState({});
   const [backResponse, setBackResponse] = useState({});

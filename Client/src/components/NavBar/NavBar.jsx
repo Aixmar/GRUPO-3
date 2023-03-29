@@ -34,7 +34,7 @@ import UserForm from "../../views/UserForm/UserForm";
 import UserLogin from "../../views/UserLogin/UserLogin";
 import profImg from "../../assets/userProfile.png";
 import React, { useEffect } from "react";
-import { popToCart,  clearCartUser, putCartUser, openSignupDrawer } from "../../redux/actions";
+import { popToCart,  clearCartUser, putCartUser, openSignupDrawer, getUserById, clearUser} from "../../redux/actions";
 import { useState } from "react";
 
 const NavBar = () => {
@@ -82,6 +82,7 @@ const NavBar = () => {
     }
     dispatch(putCartUser(updateCartUser));
     dispatch(clearCartUser());
+    dispatch(clearUser())
     await logout();
     navigate("/home");
   };
@@ -195,7 +196,7 @@ const NavBar = () => {
             {/* //////////////////////////////////////////////////// DRAWER CART /////////////////////////////////////// */}
             
               <BreadcrumbItem>                
-                  <Image onClick={handleopenDrawCart1}  src={cartlogo} width="50px" height="50px" />
+                  <Image onClick={handleopenDrawCart1}  cursor="pointer" src={cartlogo} width="50px" height="50px" />
                 
                 <Drawer
                   isOpen={openDrawCart1}

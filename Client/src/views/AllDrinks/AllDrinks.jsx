@@ -5,14 +5,18 @@ import ItemContainer from "../../components/ItemContainer/ItemContainer";
 import { useEffect } from "react";
 
 import { Box, Flex } from "@chakra-ui/react";
-import { getPizzas } from "../../redux/actions";
+import { getPizzas, getUserById } from "../../redux/actions";
 
 import { drinksTermsFilters } from "../../Utils/drinksTermsFilters";
+import { useAuthProv } from "../../context/AuthProvider";
 
 const AllDrinks = () => {
+  
+  const { user } = useAuthProv();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getPizzas());
+    dispatch(getUserById(user.id))
   }, [dispatch]);
 
   const filterDrinksTerms = useSelector((state) => state.filterDrinksTerms);
