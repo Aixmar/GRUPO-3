@@ -12,9 +12,13 @@ import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 import axios from "axios";
 import userProfile from "../../assets/userProfile.png";
+import { useToast } from "@chakra-ui/react";
+
 
 registerPlugin(FilePondPluginFileValidateType, FilePondPluginImagePreview);
 const UserAccount = () => {
+  const toast = useToast();
+
   const { user, setUser } = useAuthProv();
   const [currentImage, setCurrentImage] = useState("");
   const [isUpdateEmailFormVisible, setIsUpdateEmailFormVisible] =
@@ -40,6 +44,8 @@ const UserAccount = () => {
       formData
     );
     setCurrentImage(data.secure_url);
+ 
+    
   };
 
   const handleUpdateImage = async () => {
@@ -50,6 +56,18 @@ const UserAccount = () => {
       putImage
     );
     setUser(data);
+    toast({
+      title: "Image has been changed",
+      position: "top-center",
+      status: "success",
+      duration: 2000,
+      isClosable: true,
+      variant: "subtle",
+      style: {
+        backgroundColor: "white",
+        color: "orange",
+      },
+    });
     setLoadingImage(false);
   };
   const pond = useRef(null);
