@@ -3,12 +3,17 @@ import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import { Box, Heading, Text, Button, Input, Image } from "@chakra-ui/react";
 import UpdateEmailForm from "./Updates/UpdateEmail";
 import UpdatePasswordForm from "./Updates/UpdatePassword";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useAuthProv } from "../../context/AuthProvider";
-
+import { FilePond, registerPlugin } from 'react-filepond'
+import 'filepond/dist/filepond.min.css'
+import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css'
+import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
+import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 import axios from "axios";
 import userProfile from "../../assets/userProfile.png";
 
+registerPlugin(FilePondPluginFileValidateType, FilePondPluginImagePreview);
 const UserAccount = () => {
   const { user, setUser } = useAuthProv();
   const [currentImage, setCurrentImage] = useState("");
@@ -25,11 +30,10 @@ const UserAccount = () => {
   const toggleUpdatePasswordForm = () => {
     setIsUpdatePasswordFormVisible(!isUpdatePasswordFormVisible);
   };
-
-  const uploadImage = async (event) => {
-    const { files } = event.target;
+// console.log(currentImage[0].file);
+  const uploadImage = async (fileItem) => {
     const formData = new FormData();
-    formData.append("file", files[0]);
+    formData.append("file", fileItem[0].file);
     formData.append("upload_preset", "users_photo");
     const { data } = await axios.post(
       "https://api.cloudinary.com/v1_1/dozwiqjh1/image/upload",
@@ -48,7 +52,7 @@ const UserAccount = () => {
     setUser(data);
     setLoadingImage(false);
   };
-
+  const pond = useRef(null);
   return (
     <>
       <UserNavBar />
@@ -96,17 +100,26 @@ const UserAccount = () => {
               />
             )
           )}
-
-          <Input
+         <Box 
             mt="2rem"
             w="100%"
             id="inputTag"
             type="file"
-            color="white"
-            pt="5px"
-            onChange={uploadImage}
-          />
-
+            pt="5px">
+           <FilePond
+            ref={pond}
+            maxFiles={1}
+            acceptedFileTypes={['image/png', 'image/jpeg']}
+            onupdatefiles={uploadImage}
+            // onprocessfile={(error, file) => {
+              //   // Si no hay errores, ocultamos la vista previa
+              //   if (!error) {
+                //     pond.current.removeFiles();
+                //   }
+                // }} 
+                />
+                </Box>
+ 
           <Box pt="10px">
             <Button
               size="lg"
