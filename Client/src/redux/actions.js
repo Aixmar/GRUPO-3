@@ -19,6 +19,7 @@ import {
   UPDATE_CART_ITEM_QUANTITY,
   OPEN_SIGNUP_DRAWER,
   USER_FAVORITES,
+  CLEAR_USER,
 } from "./actionTypes";
 import axios from "axios";
 
@@ -124,3 +125,8 @@ export const addFavorite = (itemFav) => {
     return dispatch({type: USER_FAVORITES, payload: user.data});
   };
 };
+
+export const clearUser = () => {
+  return { type: CLEAR_USER };
+};
+

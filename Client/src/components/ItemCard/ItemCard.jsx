@@ -13,7 +13,7 @@ import {
   AlertDialog,
 } from "@chakra-ui/react";
 import { Button, IconButton } from "@chakra-ui/button";
-import { pushToCart, addFavorite, getUserById } from "../../redux/actions";
+import { pushToCart, addFavorite, getUserById, openSignupDrawer } from "../../redux/actions";
 import { useEffect, useState } from "react";
 import { useAuthProv } from "../../context/AuthProvider";
 
@@ -54,14 +54,15 @@ const ItemCard = (props) => {
 
   const handleClickFavorite = () => {
     const itemFav = { productId: props.id, userId: user.id };
-    dispatch(addFavorite(itemFav));
+    !user.email
+      ? dispatch(openSignupDrawer(true))
+      : dispatch(addFavorite(itemFav));
   };
 
   const USUARIOAESCUCHAR = useSelector((state) => state.user);
-  const isFavorite = USUARIOAESCUCHAR.favorites.some(
-    (favorite) => favorite.id === props.id
-  );
-  // console.log(isFavorite);
+  const isFavorite = USUARIOAESCUCHAR.email
+    ? USUARIOAESCUCHAR.favorites.some((favorite) => favorite.id === props.id)
+    : null;
 
   return (
     <Box
@@ -86,17 +87,17 @@ const ItemCard = (props) => {
           <Text fontSize="lg" fontWeight="semibold" color="white">
             {props.name}
           </Text>
-          
-          <IconButton
-            icon={isFavorite ? <AiFillHeart /> : <AiOutlineHeart />}
-            bg='transparent'
-            class="favorite-button"
-            zIndex="1"
-            bottom="0.5rem"
-            fontSize="3xl"
-            onClick={handleClickFavorite}
-          />  
-
+          {
+            <IconButton
+              icon={isFavorite ? <AiFillHeart /> : <AiOutlineHeart />}
+              bg="transparent"
+              class="favorite-button"
+              zIndex="1"
+              bottom="0.5rem"
+              fontSize="3xl"
+              onClick={handleClickFavorite}
+            />
+          }
         </Flex>
         <Flex direction="row" justify="space-between">
           <Text fontSize="lg" fontWeight="semibold" color="white">
