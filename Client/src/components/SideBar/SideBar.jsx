@@ -2,6 +2,7 @@ import {Avatar, Button, Divider, Flex, Heading,IconButton,Spacer,Text} from "@ch
 import { useState } from "react"
 import {FiMenu, FiUser} from "react-icons/fi"
 import {RiShoppingBasketFill} from "react-icons/ri"
+import {AiFillSetting} from "react-icons/ai"
 import { Link } from "react-router-dom"
 
 const SideBar = () => {
@@ -28,6 +29,7 @@ const SideBar = () => {
                 <Link to= "/users" ><IconButton mt='1rem' icon={<FiUser/>}/></Link>                
                 <Link to= "/products" ><IconButton mt='1rem' icon={<RiShoppingBasketFill />} /></Link>
                 <Link to= "/createProduct" ><IconButton mt='1rem' icon={<RiShoppingBasketFill />} /></Link>                
+                <Link to= "/adminAccount" ><IconButton mt='1rem' icon={<AiFillSetting />} /></Link>                
             </Flex>
 
             <Flex
