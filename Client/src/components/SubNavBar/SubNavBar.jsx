@@ -14,7 +14,7 @@ function SubNavbar() {
         <Button
           bgGradient="linear(to-l,#000000, #272727)"
           borderRadius="full"
-          mr="165px"
+          mr="255px"
           ml="275px"
         >
           <ChakraLink as={Link} to="/allpizzas" color="#f27825">
@@ -24,7 +24,7 @@ function SubNavbar() {
         
         
         <Button bgGradient="linear(to-l,#000000, #272727)"
-          borderRadius="full" mr="165px">
+          borderRadius="full" mr="255px">
         <ChakraLink as={Link} to="/alldrinks" color="#f27825" >
           All Drinks
         </ChakraLink>
