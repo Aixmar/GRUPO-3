@@ -13,7 +13,10 @@ import {
   ModalHeader,
   ModalCloseButton,
   ModalBody,
+  Flex,
+  Avatar,
 } from "@chakra-ui/react";
+import { StarIcon } from "@chakra-ui/icons";
 import axios from "axios";
 import css from "./ItemDetail.module.css";
 
@@ -195,24 +198,68 @@ const ItemDetail = () => {
             <Modal isOpen={isOpen} onClose={handleModal}>
               <ModalOverlay />
               <ModalContent>
-                <ModalHeader fontFamily="Montserrat"
-                        fontSize="1.2rem"
-                        fontWeight="bold"
-                        color="#272727">Reviews</ModalHeader>
+                <ModalHeader
+                  fontFamily="Montserrat"
+                  fontSize="1.2rem"
+                  fontWeight="bold"
+                  color="#272727"
+                >
+                  Reviews
+                </ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
                   {pizza.reviews ? (
                     pizza.reviews.map((review) => (
-                      <Text
-                        fontFamily="Montserrat"
-                        fontSize="1.2rem"
-                        fontWeight="semibold"
-                        color="#f27825"
-                      > Rating: 
-                        <Text color="#272727" display="inline">
-                        {" "} {review.rating} {" | "} {review.review}
-                        </Text>
-                      </Text>
+                      <Flex
+                        key={review.name}
+                        alignItems="center"
+                        flexDirection="row"
+                        pb="2rem"
+                      >
+                        <Avatar size="xl" src={review.image} />
+                        <Box ml="1.5rem">
+                          <Text
+                            fontFamily="Montserrat"
+                            fontSize="1.2rem"
+                            fontWeight="semibold"
+                            color="#f27825"
+                          >
+                            Name:
+                            <Text color="#272727" display="inline">
+                              {" "}
+                              {review.name}
+                            </Text>
+                          </Text>
+                          <Flex alignItems="center">
+                            {[...Array(5)].map((_, index) => {
+                              const value = index + 1;
+                              return (
+                                <Box key={index} mr={2}>
+                                  <StarIcon
+                                    color={
+                                      value <= review.rating
+                                        ? "#FFD700"
+                                        : "gray.300"
+                                    }
+                                  />
+                                </Box>
+                              );
+                            })}
+                          </Flex>
+                          <Text
+                            fontFamily="Montserrat"
+                            fontSize="1.2rem"
+                            fontWeight="semibold"
+                            color="#f27825"
+                          >
+                            Review:
+                            <Text color="#272727" display="inline">
+                              {" "}
+                              {review.review}
+                            </Text>
+                          </Text>
+                        </Box>
+                      </Flex>
                     ))
                   ) : (
                     <Text>No reviews</Text>
