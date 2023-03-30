@@ -20,6 +20,7 @@ const InfoPayment = () => {
     };
   });
 
+
   const { user } = useAuthProv();
 
   const formMail = {
@@ -30,6 +31,10 @@ const InfoPayment = () => {
 
   const totalPrice = cart.reduce((total, item) => total + item.price*item.quantity, 0) || 0;
 
+  const cartSale = {
+    total: totalPrice,
+    products: cart.length ? cart : null
+  }
 
   const [paymentId, setPaymentId] = useState("123456789");
   const [showStatusScreen, setShowStatusScreen] = useState(false);
@@ -44,8 +49,14 @@ const InfoPayment = () => {
   const dispatch = useDispatch()
   useEffect(() => {
         if (statusPayment === 'approved') {
+
+          
+        
+
           axios.post('/sendmail/buyitem', formMail )
           axios.put('/users/updateCartPurchase', updateCartUser )
+          axios.post('/sales', cartSale)
+
           dispatch(clearCartUser())
         }
   },[paymentId])
