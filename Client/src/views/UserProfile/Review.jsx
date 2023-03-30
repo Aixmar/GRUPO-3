@@ -59,7 +59,7 @@ const Review = (props) => {
         await axios.put(`/pizzas/reviews/${item.id}`, form)
         setReviewFound(true)
         toast({
-          title: "Item added",
+          title: "Review added",
           position: "top-center",
           status: "success",
           duration: 2000,
@@ -78,7 +78,6 @@ const Review = (props) => {
       borderRadius="lg"
       p={4}
       mt={4}
-      onSubmit={handleSubmit}
     >
       <form onSubmit={handleSubmit}>
         <FormControl id="rating" mb={4}>
