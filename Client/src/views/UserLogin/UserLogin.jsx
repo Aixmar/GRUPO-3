@@ -1,6 +1,6 @@
 import { Button, FormControl, FormLabel, Input, Box, Text, Image,FormHelperText } from "@chakra-ui/react";
 import { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation,Link } from "react-router-dom";
 import axios from "axios";
 import { useAuthProv } from "../../context/AuthProvider";
 import logoG from '../../assets/logoGoogle.png'
@@ -43,7 +43,7 @@ const UserLogin = ({ onClose }) => {
       // window.localStorage.setItem('loggedUser' , JSON.stringify({...form,accessToken}));
       setErr('')
     } catch (error) {
-      console.log(error.response.data.error);
+      console.log(error);
       setErr(error.response.data.error)
     } finally {
       setIsLoading(false);
@@ -139,6 +139,10 @@ const UserLogin = ({ onClose }) => {
             <Image src={logoG} alg='logoGoogle' height='2rem' mr='14px' />
             <Text >Sign in with Google</Text>
           </Button>
+          <Link to="forgot">
+          <Text textAlign='center' color='#fff' >Forgot your password?</Text>
+          </Link>
+          
         </Box>
         
       </form>

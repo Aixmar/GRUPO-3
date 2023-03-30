@@ -25,6 +25,9 @@ import Products from "./AdminDashboard/Products/Products";
 import CreateProduct from './AdminDashboard/NewProduct/CreateProduct/CreateProduct';
 import CheckOut from "./CheckOut/CheckOut";
 import Unauthorized from "./Unauthorized/Unauthorized"
+import ForgottenPassword from "./forgottenPassword/ForgottenPassword"
+import ResetPassword from "./ResetPassword/ResetPassword"
+import AdminAccount from "./AdminDashboard/AdminAccount/AdminAccount";
 
 export {
   Landing,
@@ -53,5 +56,8 @@ export {
   Products,
   CreateProduct,
   CheckOut,
-  Unauthorized
+  Unauthorized,
+  ForgottenPassword,
+  ResetPassword,
+  AdminAccount,
 };
