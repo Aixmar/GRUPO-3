@@ -13,7 +13,12 @@ import {
   AlertDialog,
 } from "@chakra-ui/react";
 import { Button, IconButton } from "@chakra-ui/button";
-import { pushToCart, addFavorite, getUserById, openSignupDrawer } from "../../redux/actions";
+import {
+  pushToCart,
+  addFavorite,
+  getUserById,
+  openSignupDrawer,
+} from "../../redux/actions";
 import { useEffect, useState } from "react";
 import { useAuthProv } from "../../context/AuthProvider";
 
@@ -60,7 +65,7 @@ const ItemCard = (props) => {
   };
 
   const USUARIOAESCUCHAR = useSelector((state) => state.user);
-  const isFavorite = USUARIOAESCUCHAR.email
+  const isFavorite = USUARIOAESCUCHAR && USUARIOAESCUCHAR.email
     ? USUARIOAESCUCHAR.favorites.some((favorite) => favorite.id === props.id)
     : null;
 
@@ -84,7 +89,12 @@ const ItemCard = (props) => {
       </Link>
       <Grid templateColumns="1fr" templateRows="1fr 50px" p="4">
         <Flex direction="row" justify="space-between" alignItems="center">
-          <Text fontFamily="Montserrat" fontSize="lg" fontWeight="semibold" color="white">
+          <Text
+            fontFamily="Montserrat"
+            fontSize="lg"
+            fontWeight="semibold"
+            color="white"
+          >
             {props.name}
           </Text>
           {
@@ -98,8 +108,18 @@ const ItemCard = (props) => {
             />
           }
         </Flex>
-        <Flex direction="row" justify="space-between" alignItems="center" my="2">
-          <Text fontFamily="Montserrat" fontSize="lg" fontWeight="semibold" color="white">
+        <Flex
+          direction="row"
+          justify="space-between"
+          alignItems="center"
+          my="2"
+        >
+          <Text
+            fontFamily="Montserrat"
+            fontSize="lg"
+            fontWeight="semibold"
+            color="white"
+          >
             ⭐ {props.rating}
           </Text>
           <Select w="5rem" value={quantity} onChange={handleInputChange}>
@@ -108,8 +128,18 @@ const ItemCard = (props) => {
             <option value={3}>3</option>
           </Select>
         </Flex>
-        <Flex direction="row" justifyContent="space-between" alignItems="center">
-          <Text fontFamily="Montserrat" fontSize="2xl" fontWeight="bold" color="#272727" mr="2">
+        <Flex
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+        >
+          <Text
+            fontFamily="Montserrat"
+            fontSize="2xl"
+            fontWeight="bold"
+            color="#272727"
+            mr="2"
+          >
             ${props.price}
           </Text>
 
