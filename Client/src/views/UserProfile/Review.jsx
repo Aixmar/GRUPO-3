@@ -78,7 +78,6 @@ const Review = (props) => {
       borderRadius="lg"
       p={4}
       mt={4}
-      onSubmit={handleSubmit}
     >
       <form onSubmit={handleSubmit}>
         <FormControl id="rating" mb={4}>
