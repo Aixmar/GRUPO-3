@@ -21,37 +21,50 @@ import axios from "axios";
 import css from "./ItemDetail.module.css";
 
 const ItemDetail = () => {
+
   const { id } = useParams();
   const dispatch = useDispatch();
   const [pizza, setPizza] = useState({});
+  const [isOpen, setIsOpen] = useState(false);
+
+
 
   const clickHandler = () => {
     const modal = document.querySelector("#createPizzaModal");
     dispatch(pushToCart(pizza));
     modal.showModal();
   };
-  const clickHandlerModal = () => {
-    const modal = document.querySelector("#createPizzaModal");
-    modal.close();
+
+  
+  const getUserReview = (currentPizza) => {
+    currentPizza?.reviews?.map( async (review) => {    
+      const { data } = await axios.get(`/users/${review.userId}`);
+      review.image = data.image;
+    });
+    setPizza({ ...currentPizza });
   };
+  
+
   useEffect(() => {
     axios
-      .get(`/pizzas/${id}`)
-      .then((data) => data.data)
-      .then((pizza) => setPizza(pizza));
+    .get(`/pizzas/${id}`)
+    .then((data) => data.data)
+    .then((pizza) => {
+      setPizza(pizza);
+      getUserReview(pizza);     
+    });
 
-    window.scrollTo(0, 0);
-    document.querySelector("body").classList.add(css.disableScroll);
-    return () =>
-      document.querySelector("body").classList.remove(css.disableScroll);
-  }, []);
-  console.log("pizza------->", pizza);
-
-  // console.log('HOLA SOY LOS TOPPINGS', pizza.detail.toppingIngredients)
-  const [isOpen, setIsOpen] = useState(false);
+      document.querySelector("body").classList.add(css.disableScroll);    
+      return () => document.querySelector("body").classList.remove(css.disableScroll);
+    }, []);
+    
+    
   const handleModal = () => {
     setIsOpen(!isOpen);
+   
   };
+
+
 
   return (
     <Box
@@ -106,11 +119,7 @@ const ItemDetail = () => {
                 fontWeight="semibold"
                 color="white"
               >
-                <Text color="#f27825" display="inline">
-                  Dough:
-                </Text>{" "}
-                {pizza?.detail?.dough}
-              </Text>
+                <Text color="#f27825" display="inline">Dough:</Text> {pizza?.detail?.dough}</Text>
             )}
             {pizza.category === "pizza" && (
               <Text
@@ -119,11 +128,7 @@ const ItemDetail = () => {
                 fontWeight="semibold"
                 color="white"
               >
-                <Text color="#f27825" display="inline">
-                  Base:
-                </Text>{" "}
-                {pizza?.detail?.base}
-              </Text>
+                <Text color="#f27825" display="inline">Base:</Text> {pizza?.detail?.base}</Text>
             )}
             {pizza.category !== "pizza" && (
               <Text
@@ -132,11 +137,7 @@ const ItemDetail = () => {
                 fontWeight="semibold"
                 color="white"
               >
-                <Text color="#f27825" display="inline">
-                  Description:
-                </Text>{" "}
-                {pizza?.detail?.description}
-              </Text>
+                <Text color="#f27825" display="inline">Description:</Text> {pizza?.detail?.description}</Text>
             )}
             {pizza.category === "pizza" && (
               <Text
@@ -145,11 +146,7 @@ const ItemDetail = () => {
                 fontWeight="semibold"
                 color="white"
               >
-                <Text color="#f27825" display="inline">
-                  Mozzarella:
-                </Text>{" "}
-                {pizza?.detail?.mozzarella}
-              </Text>
+                <Text color="#f27825" display="inline">Mozzarella:</Text> {pizza?.detail?.mozzarella}</Text>
             )}
             {pizza.category === "pizza" &&
               pizza.detail.meatIngredients.length !== 0 && (
@@ -159,11 +156,7 @@ const ItemDetail = () => {
                   fontWeight="semibold"
                   color="white"
                 >
-                  <Text color="#f27825" display="inline">
-                    Meat ingredients:
-                  </Text>{" "}
-                  {pizza?.detail?.meatIngredients?.join(", ")}
-                </Text>
+                  <Text color="#f27825" display="inline">Meat ingredients:</Text> {pizza?.detail?.meatIngredients?.join(", ")}</Text>
               )}
             {pizza.category === "pizza" &&
               pizza.detail.cheeseIngredients.length !== 0 && (
@@ -173,11 +166,7 @@ const ItemDetail = () => {
                   fontWeight="semibold"
                   color="white"
                 >
-                  <Text color="#f27825" display="inline">
-                    Cheese ingredients:
-                  </Text>{" "}
-                  {pizza?.detail?.cheeseIngredients?.join(", ")}
-                </Text>
+                  <Text color="#f27825" display="inline">Cheese ingredients:</Text> {pizza?.detail?.cheeseIngredients?.join(", ")}</Text>
               )}
             {pizza.category === "pizza" &&
               pizza.detail.toppingIngredients.length !== 0 && (
@@ -188,13 +177,11 @@ const ItemDetail = () => {
                   color="white"
                   mb="1rem"
                 >
-                  <Text color="#f27825" display="inline">
-                    Topping ingredients:
-                  </Text>{" "}
-                  {pizza?.detail?.toppingIngredients?.join(", ")}
-                </Text>
+                  <Text color="#f27825" display="inline">Topping ingredients:</Text> {pizza?.detail?.toppingIngredients?.join(", ")}</Text>
               )}
+
             <Button onClick={handleModal}>See reviews</Button>
+
             <Modal isOpen={isOpen} onClose={handleModal}>
               <ModalOverlay />
               <ModalContent>
