@@ -22,6 +22,10 @@ import {
   Button,
   Image,
   CloseButton,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem
 } from "@chakra-ui/react";
 import { Link as RouterLink, useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -71,7 +75,33 @@ const NavBar = () => {
     const newCart = cartItems.filter((item, i) => i !== index);
     dispatch(popToCart(newCart));
   };
-  ///////////////////
+  ///////////////////ProfileSelect///
+
+  const links = [
+    {
+      label: "Account",
+      to: "/profile/account",
+    },
+    {
+      label: "Settings",
+      to: "/profile/settings",
+    },
+    {
+      label: "Favorites",
+      to: "/profile/stars",
+    },
+    {
+      label: "History",
+      to: "/profile/history",
+    },
+  ];
+    
+    const [selectedOption, setSelectedOption] = useState("");
+  
+    const handleLinkClick = (to) => {
+      setSelectedOption(to);
+    };
+  ///////////////////////////////
 
   const updateCartUser = { cart: cartItems, userId: user.id };
 
@@ -152,7 +182,7 @@ const NavBar = () => {
                 as={RouterLink}
                 to="/allpizzas"
                 _hover={{ color: "#f27825" }}
-                color={pathname === '/allpizzas' ? '#f27825' : '#fff'}
+                color={pathname === '/allpizzas' || pathname === '/alldrinks' || pathname === '/allsides' ? '#f27825' : '#fff'}
               >
                 TRADITIONAL MENU
               </BreadcrumbLink>
@@ -182,17 +212,31 @@ const NavBar = () => {
                   </BreadcrumbLink>
                 </BreadcrumbItem>
               ) : user.email && (
-                <BreadcrumbItem>
-                  <BreadcrumbLink
-                    as={RouterLink}
+              <BreadcrumbItem>
+                <Menu>
+                  <MenuButton
+                    as={BreadcrumbLink}
                     to="/profile/account"
                     _hover={{ color: "#f27825" }}
-                    color={pathname.includes('/profile/') ? '#f27825' : '#fff'}
+                    color={pathname.includes("/profile/") ? "#f27825" : "#fff"}
                   >
                     PROFILE
-                  </BreadcrumbLink>
-                </BreadcrumbItem> )            
-            }
+                  </MenuButton>
+                  <MenuList color="black" zIndex={999}>
+                  {links.map((link, index) => (
+                    <RouterLink to={link.to} color="black">
+                      <MenuItem
+                        key={index}
+                        onClick={() => handleLinkClick(link.to)}
+                        _hover={{ color: "#f27825" }}
+                        color={pathname === link.to ? "#f27825" : "black"}>
+                        {link.label}
+                      </MenuItem>
+                    </RouterLink>
+                  ))}
+                </MenuList>
+              </Menu>
+            </BreadcrumbItem>)}
            
             {/* //////////////////////////////////////////////////// DRAWER CART /////////////////////////////////////// */}
             

@@ -1,7 +1,6 @@
 import Landing from "./Landing/Landing";
 import Home from "./Home/Home";
 import UserForm from "./UserForm/UserForm";
-import UserNavBar from "./UserProfile/UserNavBar";
 import NavBar from "../components/NavBar/NavBar";
 import About from "./About/About";
 import ItemDetail from "./ItemDetail/ItemDetail";
@@ -35,7 +34,6 @@ export {
   About,
   NavBar,
   UserForm,
-  UserNavBar,
   ItemDetail,
   CreatePizza,
   AllPizzas,

@@ -8,8 +8,6 @@ import {
   Textarea,
   Input,
 } from "@chakra-ui/react";
-import UserNavBar from "./UserNavBar";
-import user from "./json";
 import Review from "./Review";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -37,7 +35,7 @@ const UserHistoryDetail = () => {
 
   return (
     <div>
-      <UserNavBar />
+  
       <Box p="6" bg="gray.50" rounded="md">
         <Heading as="h3" size="lg" mb="4">
           {item.name}
