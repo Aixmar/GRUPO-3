@@ -59,7 +59,7 @@ const UserAccount = () => {
   const handleUpdateImage = async () => {
     setLoadingImage(true);
     const putImage = { urlImage: currentImage, userId: user.id };
-    const { data } = await axios.put("http://localhost:3001/users/image", putImage);
+    const { data } = await axios.put("/users/image", putImage);
     setUser(data);
     toast({
       title: "Image has been changed",
