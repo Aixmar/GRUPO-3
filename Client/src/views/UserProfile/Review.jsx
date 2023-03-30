@@ -59,7 +59,7 @@ const Review = (props) => {
         await axios.put(`/pizzas/reviews/${item.id}`, form)
         setReviewFound(true)
         toast({
-          title: "Item added",
+          title: "Review added",
           position: "top-center",
           status: "success",
           duration: 2000,
