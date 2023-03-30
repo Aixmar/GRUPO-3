@@ -17,18 +17,6 @@ export const AuthProvider = ({children}) =>{
     const navigate = useNavigate();
     const [ user, setUser ] = useState(JSON.parse(window.localStorage.getItem('loggedUser')) || {});
 
-    useEffect(() => {
-        const logged = onAuthStateChanged(authProv, (currentUser) => {
-            if(user.name) return;
-            if (!currentUser) {
-                console.log('no user logged in');
-                setUser('');
-            } else {
-                setUser(currentUser);
-            };
-        });
-        return () => logged();
-    }, []);
 
     const loginWithGoogle = async () => {
         const googleResponse = new GoogleAuthProvider();
@@ -37,15 +25,15 @@ export const AuthProvider = ({children}) =>{
             if (!user.email) throw Error('something went wrong');
             
             const getUsers = await axios.get('/users');
-            const userLogin = getUsers.data.filter((userDb) => userDb.email === user.email);
+            const userLogin = await getUsers.data.filter((userDb) => userDb.email === user.email);
 
             if (!userLogin.length) {    
                 const userName = user?.displayName?.split(' ')[0];
                 const userLastName = user?.displayName?.split(' ')[1];            
                 const userGoogle = { name: userName, lastName: userLastName, email: user?.email, password: user?.uid, image: user?.photoURL, birthday: '00-00-00', cart: [], rol: 'user', favorites: [] };
                 const { data } = await axios.post("/users", userGoogle);
-                window.localStorage.setItem('loggedUser' , JSON.stringify(data));
                 setUser(data);
+                window.localStorage.setItem('loggedUser' , JSON.stringify(data));
             } else {
                 const userGoogle = { email: user?.email, password: user?.uid };
                 const { data } = await axios.post("/users/login", userGoogle, { headers : { 'Content-Type' : 'application/json' }, withCredentials: true });
@@ -59,8 +47,8 @@ export const AuthProvider = ({children}) =>{
     };
 
     const googleLogout = async () => {
-        const response = await signOut(authProv);
-        console.log(response);
+        await signOut(authProv);
+        setUser({});
     };
 
 
