@@ -69,7 +69,7 @@ const UserLogin = ({ onClose }) => {
       
       <form onSubmit={submitHandler}>
       
-        <Box bgGradient="linear-gradient(to right, #f27825, #eab830)" w="333px"p="10" rounded="md" boxShadow="lg" >
+        <Box bgGradient="linear-gradient(to right, #f27825, #eab830)" w="333px" p='2rem 2rem 1rem' rounded="md" boxShadow="lg" >
         
           <FormControl id="email">
           {err !== '' && (
@@ -139,10 +139,11 @@ const UserLogin = ({ onClose }) => {
             <Image src={logoG} alg='logoGoogle' height='2rem' mr='14px' />
             <Text >Sign in with Google</Text>
           </Button>
-          <Link to="forgot">
-          <Text textAlign='center' color='#fff' >Forgot your password?</Text>
-          </Link>
-          
+            <Link to="forgot" >
+              <Box h='2.4rem' mt='2rem' display='flex' alignItems='flex-end' justifyContent='center' borderTop='1px solid #fff' onClick={onClose} >
+                <Text textAlign='center' color='#fff' fontSize='1.2rem' >Forgot your password?</Text>
+              </Box>
+            </Link>
         </Box>
         
       </form>

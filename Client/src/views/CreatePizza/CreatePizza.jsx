@@ -4,7 +4,15 @@ import { Link } from "react-router-dom";
 import PizzaCreated from "./PizzaCreated";
 import IngredientSelector from "./IngredientSelector";
 import { getIngredients, pushToCart } from "../../redux/actions";
-import { Button, Text, Grid, GridItem, FormLabel, Radio, RadioGroup, Stack, Box } from "@chakra-ui/react";
+import { Button, Text, Grid, GridItem, FormLabel, Radio, RadioGroup, Stack, Box,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Image } from "@chakra-ui/react";
 import validate from "./validate";
 import css from './CreatePizza.module.css';
 import { ok, createpizza } from "../../assets/CloudinaryImg";
@@ -40,6 +48,7 @@ const CreatePizza = () => {
   const [meats, setMeats] = useState([]);  
   const [errors, setErrors] = useState({});
   const [form, setForm] = useState(initialStateForm);
+  const [ isOpen, setIsOpen ] = useState(false);
 
 
   useEffect(() => {
@@ -80,6 +89,9 @@ const CreatePizza = () => {
   };
 
 
+  const handleClose = () => setIsOpen(false);
+  const handleOpen = () => setIsOpen(true);
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -87,10 +99,11 @@ const CreatePizza = () => {
     setErrors(hasErrors);
 
     if(!Object.values(hasErrors).length){
-      const modal = document.querySelector("#createPizzaModal");
+      // const modal = document.querySelector("#createPizzaModal");
+      // modal.showModal();
       dispatch(pushToCart(form));
       setForm(initialStateForm);
-      modal.showModal();
+      handleOpen();
     }; 
   };
 
@@ -188,23 +201,20 @@ const CreatePizza = () => {
         </Box>
       </Box>
          
+      <Modal isOpen={isOpen} onClose={handleClose} >
+          <ModalOverlay backdropFilter='blur(6px)' bg='#000000b6' />
+          <ModalContent margin='auto'  >
+          <ModalCloseButton/>
+            <Image src={ok} alt="ok" h='2.8rem' objectFit='contain' mt='1rem' mb='0' />
+            <ModalHeader textAlign='center' fontSize='1.8rem' p='0' >Pizza created successfully!</ModalHeader>
+            <ModalBody textAlign='center' fontSize='1.4rem' >
+            <Link to='/allpizzas' ><Button mt='.6rem' fontSize='1.4rem' bg={"orange.400"} color={"white"} _hover={{ bg: "orange.500" }} onClick={handleClose} >Continue shopping</Button></Link>
+            <Text>or</Text>
+            <Link to='/cart' ><Button mb='.6rem' fontSize='1.4rem' bg={"orange.400"} color={"white"} _hover={{ bg: "orange.500" }} onClick='' >Go to cart</Button></Link>
+            </ModalBody>
+          </ModalContent>
+        </Modal>
 
-          <dialog id="createPizzaModal" className={css.modalCreatePizza} >
-            <img src={ok} alt="ok" className={css.okIco} />
-            <h2>Pizza created successfully!</h2>
-            <div>
-              <Link to="/cart">
-                <Button bg={"orange"} fontSize={"2rem"} width={"90%"} p={"1.6rem"} margin={"1.2rem 0 .8rem 0"} >
-                  Go to cart
-                </Button>
-              </Link>
-              <Link to="/allpizzas">
-                <Button bg={"orange"} fontSize={"2rem"} width={"90%"} p={"1.6rem"} margin={"1.2rem 0 .8rem 0"} >
-                  Continue shopping
-                </Button>
-              </Link>
-            </div>
-          </dialog>
     </Box>
     </>
   );
