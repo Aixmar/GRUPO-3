@@ -1,6 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
+
 const StatusScreen = ({ payment_id, showStatusScreen }) => {
   const mp = new MercadoPago("TEST-70064824-0e86-4690-a60d-7c2ff56441f8");
   const bricksBuilder = mp.bricks();
@@ -25,14 +26,16 @@ const StatusScreen = ({ payment_id, showStatusScreen }) => {
       settings
     );
   };
+  
 
+  
   useEffect(() => {
     if (showStatusScreen) {
-      renderStausScreenBrick(bricksBuilder);
-    }
+      renderStausScreenBrick(bricksBuilder)
+    };
   }, [showStatusScreen]);
 
-  return <Box id="statusScreenBrick_container" />;
+  return( <Box id="statusScreenBrick_container" w='26rem' h='14rem' /> )
 };
 
 export default StatusScreen;

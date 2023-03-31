@@ -6,12 +6,25 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from 'axios'
 import { useAuthProv } from "../../context/AuthProvider";
 import { clearCartUser } from "../../redux/actions";
+import { Spinner } from "@chakra-ui/react";
+
+
 
 const InfoPayment = () => {
   const mp = new MercadoPago("TEST-70064824-0e86-4690-a60d-7c2ff56441f8");
   const bricksBuilder = mp.bricks();
-
   const cart = useSelector((state) => state.cart) || [];
+  const [paymentId, setPaymentId] = useState("123456789");
+  const [showStatusScreen, setShowStatusScreen] = useState(false);
+  const [statusPayment, setStatusPayment] = useState('');
+  const [ dataResponse, setdataResponse] = useState();
+  const dispatch = useDispatch()
+  const { user } = useAuthProv();
+  const updateCartUser = { cart: cart , userId: user.id };
+  const [loader, setLoader] = useState(false);
+
+
+  
   const cartMail = cart.map((product) => {
     return {
       name: product.name,
@@ -21,15 +34,15 @@ const InfoPayment = () => {
   });
 
 
-  const { user } = useAuthProv();
-
   const formMail = {
       items: cartMail,
       name: user.name || user.displayName,
       email: user.email,
     }
 
+
   const totalPrice = cart.reduce((total, item) => total + item.price*item.quantity, 0) || 0;
+
 
   const cartSale = {
     total: totalPrice,
@@ -37,29 +50,21 @@ const InfoPayment = () => {
     userName : user.name + ' ' + user.lastName
   }
 
-  const [paymentId, setPaymentId] = useState("123456789");
-  const [showStatusScreen, setShowStatusScreen] = useState(false);
-  const [statusPayment, setStatusPayment] = useState('');
-  const [ dataResponse, setdataResponse] = useState();
 
-  console.log('AQUI QUIERO EL ID PAY', paymentId);
-
-  const updateCartUser = { cart: cart , userId: user.id };
-  console.log(statusPayment);
-
-  const dispatch = useDispatch()
   useEffect(() => {
-        if (statusPayment === 'approved') {
+    setLoader(true);
+    setTimeout(() => setLoader(false), 3500);
+  }, []);
 
-          
-        
 
-          axios.post('/sendmail/buyitem', formMail )
-          axios.put('/users/updateCartPurchase', updateCartUser )
-          axios.post('/sales', cartSale)
+  useEffect(() => {
+    if (statusPayment === 'approved') {
+      axios.post('/sendmail/buyitem', formMail )
+      axios.put('/users/updateCartPurchase', updateCartUser )
+      axios.post('/sales', cartSale)
 
-          dispatch(clearCartUser())
-        }
+      dispatch(clearCartUser())
+    }
   },[paymentId])
   
 
@@ -77,7 +82,7 @@ const InfoPayment = () => {
         },
         onSubmit: (cardFormData) => {
           // callback llamado cuando el usuario haga clic en el botón enviar los datos
-          console.log(JSON.stringify(cardFormData));
+          // console.log(JSON.stringify(cardFormData));
           // ejemplo de envío de los datos recolectados por el Brick a su servidor
           return new Promise((resolve, reject) => {
             fetch("http://localhost:3001/process_payment", {
@@ -89,14 +94,16 @@ const InfoPayment = () => {
             })
               .then((response) => {
                 // recibir el resultado del pago
-                console.log("Respuesta del servidor:", response);
+                // console.log("Respuesta del servidor:", response);
                 response.json().then((data) => {
-                  console.log("Datos de respuesta:", data);
+                  // console.log("Datos de respuesta:", data);
                   setPaymentId(data.id);
                   setShowStatusScreen(true)
                   setStatusPayment(data.status);
                   setdataResponse(data)
                   resolve();
+                  setLoader(true);
+                  setTimeout(() => setLoader(false), 1000);
                 });
               })
               .catch((error) => {
@@ -104,14 +111,16 @@ const InfoPayment = () => {
                 console.error("Error al enviar solicitud POST:", error);
                 reject();
               });
-          });
+            });
+          },
+          
+          onError: (error) => {
+            // callback llamado para todos los casos de error de Brick
+            console.error(error);
+          },
         },
-        onError: (error) => {
-          // callback llamado para todos los casos de error de Brick
-          console.error(error);
-        },
-      },
-    };
+      };
+        
     const cardPaymentBrickController = await bricksBuilder.create(
       "cardPayment",
       "cardPaymentBrick_container",
@@ -122,15 +131,21 @@ const InfoPayment = () => {
   if (!showStatusScreen) renderCardPaymentBrick(bricksBuilder);
 
   return (
-    <Box>
+    loader ? <Box display='flex' justifyContent='center' alignItems='center' w='25rem' ><Spinner size='lg' /></Box>
+    : (<Box>
       {!showStatusScreen && <Box w="25rem" id="cardPaymentBrick_container" />}
-      {showStatusScreen && (
+
+      { loader ? <Box display='flex' justifyContent='center' alignItems='center' w='25rem' ><Spinner size='lg' /></Box> 
+      : showStatusScreen && (
         <StatusScreen
+          loader={loader}
+          setLoader={setLoader}
           payment_id={paymentId}
           showStatusScreen={showStatusScreen}
-        />
+          />
       )}
-    </Box>
+      </Box>)
+  
   );
 };
 
