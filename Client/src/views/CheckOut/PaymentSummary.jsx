@@ -7,6 +7,7 @@ import {
   Text,
   useColorModeValue as mode,
   useDisclosure,
+  Box
 } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 
@@ -17,18 +18,14 @@ export const PaymentSummary = () => {
  
 
   return (
-    <Stack spacing="8" borderWidth="1px" rounded="lg" padding="8" width="full">
-      <Heading size="md">Total a Pagar</Heading>
+    <Stack spacing="" border='1px solid #bcbcbc' rounded="xl" padding="4" width="full">
+      <Heading fontSize='1.6rem' m='.2rem 0' >Total to pay</Heading>
+      <Text fontSize="sm" color='#aaa' cursor='pointer' >See more details</Text>
 
-      <Stack spacing="6">
+      <Stack >
         <Flex justify="space-between">
-          <Text fontSize="lg" fontWeight="semibold">
-            Total
-          </Text>
-          <Text fontSize="xl" fontWeight="extrabold">
-            ${totalPrice || 0}
-            
-          </Text>
+          <Text fontSize="lg" fontWeight="semibold" mt='2.6rem' >Final total:</Text>
+          <Text fontSize="1.6rem" fontWeight="extrabold" mt='2rem' >${totalPrice || 0}</Text>
         </Flex>
       </Stack>
       
