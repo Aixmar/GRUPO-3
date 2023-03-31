@@ -26,10 +26,10 @@ const SalesContainer = (props) => {
     const paginated = (pageNumber) => {
         setCurrentPage(pageNumber)
     }
-    console.log(sales[0].userName);
     return (
         <Box width="100%" maxWidth="1500px">
             <Heading marginBottom={5} marginTop={10}>Sales</Heading>
+            {sales.length !== 0 ? 
         <TableContainer>
   <Table variant='simple'>
     
@@ -71,7 +71,9 @@ const SalesContainer = (props) => {
       }
     </Tbody>
   </Table>
-</TableContainer>   
+</TableContainer>
+: <Text fontWeight='bold' >There is not any sale</Text>
+}   
         </Box>
     )
 }
