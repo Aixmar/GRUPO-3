@@ -47,22 +47,23 @@ const UpdateEmailForm = (props) => {
   };
 
   return (
-    <Box color='#fff' >
+    <Box color='#000' bg='gray' borderRadius='8px' p='10px' >
       {showForm && (
         <form onSubmit={handleSubmit}>
-          <FormControl id="newEmail">
+          <FormControl display='flex' flexDir='column' alignItems='center' id="newEmail">
             <FormLabel>New Email:</FormLabel>
             <Input
-              w='40%'
+              bg='#fff'
+              w='90%'
               type="email"
               value={newEmail}
               onChange={handleEmailChange}
               required
             />
-          </FormControl>
-          <Button mt={4} colorScheme="teal" type="submit">
+          <Button m='10px 0 1rem' w='90%' colorScheme="teal" type="submit" >
             Save
           </Button>
+          </FormControl>
         </form>
       )}
       {isEmailUpdated && (

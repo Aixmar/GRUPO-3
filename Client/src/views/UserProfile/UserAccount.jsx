@@ -1,5 +1,5 @@
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
-import { Box, Heading, Text, Button, Input, Image } from "@chakra-ui/react";
+import { Box, Heading, Text, Button, Input, Image, Card, CardHeader, CardBody, Stack, StackDivider } from "@chakra-ui/react";
 import UpdateEmailForm from "./Updates/UpdateEmail";
 import UpdatePasswordForm from "./Updates/UpdatePassword";
 import { useState, useRef, useEffect } from "react";
@@ -13,6 +13,7 @@ import axios from "axios";
 import userProfile from "../../assets/userProfile.png";
 import { useToast } from "@chakra-ui/react";
 import { motion } from "framer-motion";
+import UserSettings from "./UserSettings";
 registerPlugin(FilePondPluginFileValidateType, FilePondPluginImagePreview);
 
 
@@ -78,15 +79,18 @@ const UserAccount = () => {
   };
 
 
+  const hiddenPassword = user && user.password.replace(/./g, "*");
+
+
 
   return (
     <>
       
 
-      <Box display="flex" w="100%" h="100vh" bgGradient="linear(to-l,#000000, #272727)" >
-        <Box ml="2rem" className="profile">
+      <Box display="flex" w="100%" minHeight="100vh" bgGradient="linear(to-l,#000000, #272727)" >
+        <Box ml="2rem" className="profile" w='auto' >
 
-          <Heading pt="10px" pb="20px" color="white" as="h1" size="lg" ml='6rem' mb='1rem' >Personal Info</Heading>
+          <Heading pt="10px" pb="20px" color="white" as="h1" size="lg" mb='1rem' ml='1rem' textAlign='center' w='100%' >Profile pic</Heading>
 
           {
             loadingImage ? ( <Box w='20rem'  h='20rem' display='flex' justifyContent='center' alignItems='center' ml="2rem" ><LoadingSpinner /></Box> ) : (( currentImage && ( <Image src={currentImage} w="20rem" h="20rem" objectFit="cover" borderRadius="50%" ml="2rem" /> )) 
@@ -113,19 +117,75 @@ const UserAccount = () => {
                 acceptedFileTypes={['image/png', 'image/jpeg']} 
                 onupdatefiles={uploadImage}
                 labelIdle='Drag & drop your pic here or browse...'                 
-                // onprocessfile={(error, file) => {
-                  //   // Si no hay errores, ocultamos la vista previa
-                  //   if (!error) {
-                    //     pond.current.removeFiles();
-                    //   }
-                    // }} 
                     />
           </Box>
   
 
         </Box>
 
-        <Box ml="2rem" pl="2rem" w="70%" mt="4rem">
+        <Card minHeight='36rem' height={(isUpdateEmailFormVisible || isUpdatePasswordFormVisible ? '44rem' : '32rem') } w='40%' ml='4rem' >
+          <CardHeader>
+            <Heading size='lg'>Personal Info</Heading>
+          </CardHeader>
+
+          <CardBody>
+            <Stack divider={<StackDivider />} spacing='4'>
+
+              <Box>
+                <Heading size='md' >Name</Heading>
+                <Text pt='2' fontSize='lg'>{user.name}</Text>
+              </Box>
+
+              <Box>
+                <Heading size='md' >Last name</Heading>
+                <Text pt='2' fontSize='lg'>{user.lastName}</Text>
+              </Box>
+
+              <Box>
+                <Heading size='md' >Birthday</Heading>
+                <Text pt='2' fontSize='lg'>{user.birthday || '--/--/--'}</Text>
+              </Box>
+
+              <Box>
+                <Box display='flex' justifyContent='space-between' >
+                  <Box>
+                    <Heading size='md' >Email</Heading>
+                    <Text pt='2' fontSize='lg'>{user.email}</Text>
+                  </Box>
+                  <Box pt="10px">
+                    <Button size="sm" colorScheme="orange" onClick={toggleUpdateEmailForm} >Update</Button>
+                  </Box>
+                </Box>
+                <Box>
+                  {isUpdateEmailFormVisible && ( <UpdateEmailForm onClose formtype="email" {...user} /> )}
+                </Box>
+              </Box>
+
+              <Box>
+                <Box display='flex' justifyContent='space-between' >
+                  <Box>
+                    <Heading size='md' >Password</Heading>
+                    <Text pt='2' fontSize='lg'>{hiddenPassword}</Text>
+                  </Box>
+                  <Box pt="10px">
+                  <Button size="sm" colorScheme="orange" onClick={toggleUpdatePasswordForm} >Update</Button>
+                  </Box>
+                </Box>
+                <Box>
+                {isUpdatePasswordFormVisible && ( <UpdatePasswordForm formType="password" {...user} /> )}
+                </Box>
+              </Box>
+
+            </Stack>
+          </CardBody>
+        </Card>
+
+
+        <UserSettings/>
+
+
+
+        {/* <Box ml="2rem" pl="2rem" w="70%" mt="4rem">
 
           <Box display="flex" color="white" as="h2" fontSize="1.6rem" size="md">
             <Text color="white" fontWeight="bold" as="h2" size="md">Name:</Text>
@@ -163,7 +223,7 @@ const UserAccount = () => {
 
           {isUpdatePasswordFormVisible && ( <UpdatePasswordForm formType="password" {...user} /> )}
 
-        </Box>
+        </Box> */}
       </Box>
     </>
   );

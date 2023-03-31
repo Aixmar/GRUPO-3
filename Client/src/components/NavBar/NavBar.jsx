@@ -82,10 +82,10 @@ const NavBar = () => {
       label: "Account",
       to: "/profile/account",
     },
-    {
-      label: "Settings",
-      to: "/profile/settings",
-    },
+    // {
+    //   label: "Settings",
+    //   to: "/profile/settings",
+    // },
     {
       label: "Favorites",
       to: "/profile/stars",

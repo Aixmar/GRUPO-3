@@ -71,13 +71,14 @@ useEffect(() => {
  
   return (
     <>
-      <Box w='40%' color='#fff' >
+      <Box  color='#000' bg='gray' borderRadius='8px' p='10px' >
         {!isPasswordUpdated && (
           <form onSubmit={handleSubmit}>
             <FormControl id="newPassword">
               <FormLabel>New Password:</FormLabel>
               <InputGroup size="md">
                 <Input
+                  bg='#fff'
                   pr="4.5rem"
                   type={show ? "text" : "password"}
                   placeholder="Enter password"
@@ -95,6 +96,7 @@ useEffect(() => {
             <FormControl id="confirmNewPassword">
               <FormLabel>Confirm New Password:</FormLabel>
               <Input
+                bg='#fff'
                 pr="4.5rem"
                 type={show ? "text" : "password"}
                 placeholder="Confirm password"
