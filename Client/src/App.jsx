@@ -33,6 +33,8 @@ import {
   ResetPassword,
   AdminAccount,
   OurStory,
+  Sales
+
 } from "./views/index";
 
 function App() {
@@ -65,12 +67,14 @@ function App() {
         
         <Route element={<RequireAuth allowedRol={'admin'}/>}>         
           <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/users" element={<Users />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/createProduct" element={<CreateProduct />} />
+          <Route path="/adminAccount" element={<AdminAccount />} />
+          <Route path="/sales" element={<Sales />}/>
         </Route>
         
-        <Route path="/users" element={<Users />} />
-        <Route path="/products" element={<Products />} />
-        <Route path="/createProduct" element={<CreateProduct />} />
-        <Route path="/adminAccount" element={<AdminAccount />} />
+        
           
         <Route  path="/forgot" element={<ForgottenPassword />}/>
         <Route path="/resetPassword/:id/:tokenResetPassword" element={<ResetPassword />} />

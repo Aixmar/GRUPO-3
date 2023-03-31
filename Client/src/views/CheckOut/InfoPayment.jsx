@@ -33,7 +33,8 @@ const InfoPayment = () => {
 
   const cartSale = {
     total: totalPrice,
-    products: cart.length ? cart : null
+    products: cart.length ? cart : null,
+    userName : user.name + ' ' + user.lastName
   }
 
   const [paymentId, setPaymentId] = useState("123456789");
@@ -79,7 +80,7 @@ const InfoPayment = () => {
           console.log(JSON.stringify(cardFormData));
           // ejemplo de envío de los datos recolectados por el Brick a su servidor
           return new Promise((resolve, reject) => {
-            fetch("https://grupo-3-back-production.up.railway.app/process_payment", {
+            fetch("http://localhost:3001/process_payment", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
