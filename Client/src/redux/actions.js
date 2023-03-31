@@ -21,6 +21,7 @@ import {
   GET_ITEM_DETAIL,
   USER_FAVORITES,
   CLEAR_USER,
+  GET_SALES
 
 } from "./actionTypes";
 import axios from "axios";
@@ -138,4 +139,11 @@ export const addFavorite = (itemFav) => {
 export const clearUser = () => {
   return { type: CLEAR_USER };
 };
+
+export const getSales = () => {
+  return async function (dispatch) {
+    let response = await axios.get("/sales");
+    return dispatch({ type: GET_SALES, payload: response.data });
+  };
+}
 

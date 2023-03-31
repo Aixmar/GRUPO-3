@@ -19,6 +19,7 @@ import {
   GET_ITEM_DETAIL,
   USER_FAVORITES,
   CLEAR_USER,
+  GET_SALES
 
 } from "./actionTypes";
 
@@ -37,8 +38,8 @@ const initialState = {
   filterPizzasTerms: {},
   user: {},
   users:[],
-  signupDrawer: false
-
+  signupDrawer: false,
+  sales : []
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -189,6 +190,13 @@ const rootReducer = (state = initialState, action) => {
 
     case CLEAR_USER:
       return {...state, user:{}}
+
+    case GET_SALES:
+      
+      return{
+        ...state,
+        sales : action.payload
+      }
       
     default:
       return { ...state };
