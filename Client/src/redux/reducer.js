@@ -39,6 +39,7 @@ const initialState = {
   user: {},
   users:[],
   signupDrawer: false,
+
   sales: [],
 
 };
@@ -190,10 +191,12 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, user: action.payload };
 
     case CLEAR_USER:
+
       return {...state, user:{}};
     
     case GET_SALES:
       return {...state, sales: action.payload}
+
       
     default:
       return { ...state };
