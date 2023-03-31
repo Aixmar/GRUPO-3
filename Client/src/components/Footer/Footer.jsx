@@ -47,13 +47,13 @@ const Footer = () => {
 
             <Text {...textStyles} onClick={handleWorkClick} cursor="pointer"  >Work with us</Text>
             {showModal && <CustomModal onClose={() => setShowModal(false)} />}
-            <Text {...textStyles}>franchise yourself</Text>
+            {/* <Text {...textStyles}>franchise yourself</Text> */}
           </Box>
           <Box flex="1">
             <Text {...titleStyles}>Nutrition and Quality</Text>
-            <Text {...textStyles}>Without gluten</Text>
-            <Text {...textStyles}>Nutritional values</Text>
-            <Text {...textStyles}>Quality food</Text>
+            <Text {...textStyles}>Without gluten ✓</Text>
+            <Text {...textStyles}>Nutritional values ✓ </Text>
+            <Text {...textStyles}>Quality food ✓</Text>
           </Box>
         </Flex>
         <Box textAlign="center">
