@@ -33,7 +33,8 @@ const InfoPayment = () => {
 
   const cartSale = {
     total: totalPrice,
-    products: cart.length ? cart : null
+    products: cart.length ? cart : null,
+    userName : user.name + ' ' + user.lastName
   }
 
   const [paymentId, setPaymentId] = useState("123456789");

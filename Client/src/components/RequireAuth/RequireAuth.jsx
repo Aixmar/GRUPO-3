@@ -11,9 +11,7 @@ const RequireAuth = ({allowedRol})=>{
     console.log(user?.email);
     console.log(user);
     return(
-        user?.rol === 'admin' 
-        ? (<Outlet />) 
-        :  user?.rol === allowedRol 
+        user?.rol === allowedRol 
             ? (<Outlet />) 
             : user?.email
                 ? <Navigate to="/unauthorized"  state={{from:location}} replace={true}/>

@@ -142,8 +142,10 @@ export const clearUser = () => {
 
 export const getSales = () => {
   return async function (dispatch) {
+
     const response = await axios.get('/sales')
     dispatch({ type: GET_SALES, payload: response.data})
   }
+
 }
 

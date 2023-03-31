@@ -27,6 +27,7 @@ import Unauthorized from "./Unauthorized/Unauthorized"
 import ForgottenPassword from "./forgottenPassword/ForgottenPassword"
 import ResetPassword from "./ResetPassword/ResetPassword"
 import AdminAccount from "./AdminDashboard/AdminAccount/AdminAccount";
+import Sales from "./AdminDashboard/Sales/Sales"
 
 export {
   Landing,
@@ -58,4 +59,5 @@ export {
   ForgottenPassword,
   ResetPassword,
   AdminAccount,
+  Sales
 };
