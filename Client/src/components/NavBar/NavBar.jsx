@@ -241,7 +241,7 @@ const NavBar = () => {
             {/* //////////////////////////////////////////////////// DRAWER CART /////////////////////////////////////// */}
             
             <BreadcrumbItem>                
-  <Image onClick={handleopenDrawCart1}  cursor="pointer" src={cartlogo} width="50px" height="50px" />
+  <Image onClick={handleopenDrawCart1} cursor="pointer" src={cartlogo} width="50px" height="50px" />
   <Drawer
     isOpen={openDrawCart1}
     placement="right"
@@ -251,33 +251,31 @@ const NavBar = () => {
     <DrawerOverlay />
     <DrawerContent>
       <DrawerCloseButton />
-      <DrawerHeader>CART</DrawerHeader>
+      <DrawerHeader fontSize='1.8rem' >YOUR CART</DrawerHeader>
       <DrawerBody>
         {cartItems.length === 0 ? (
           <Text>There are no items in the cart</Text>
         ) : (
           <>
-            <Heading color="#f27825" pb="20px">Selected products </Heading>
-            <UnorderedList listStyleType="none">
+            <Heading color="#f27825" pb="20px" fontSize='1.8rem' >Selected products </Heading>
+            <UnorderedList w='100%' m='0' listStyleType="none">
               {cartItems.map((item, index) => (
-                <ListItem key={item.name}>
-                  <Image
-                    src={item.image}
-                    alt={item.name}
-                    boxSize="50px"
-                    mr="4"
-                  />
-                  <span>{item.name}</span>
-                  <span style={{ marginLeft: "1rem" }}>
-                    ${item.price}
-                  </span>
-                  <CloseButton
-                    onClick={() => onClickDelete(index)}
-                    w="4rem"
-                    color="red"
-                  >
-                    Delete
-                  </CloseButton>
+                <ListItem key={item.name} border='1px solid #bcbcbc' rounded='md' h='5rem' display='flex' mb='.2rem' >
+
+                  <Image src={item.image} alt={item.name} h='4rem' w='auto' objectFit='cover' m='auto 2px' border='1px solid #bcbcbc' borderRadius='full' />
+
+                  <Flex flexDirection='column' w='100%' >
+                    <Flex h='2rem' m='.4rem 0' fontSize='1rem' fontWeight='bold' justifyContent='space-between' mr='1rem' >
+                      <Text ml='10px' >{item.name}</Text>
+                      <Text >${item.price}</Text>
+                    </Flex>
+                    <Flex  justifyContent='flex-end'  >
+                    <CloseButton w='3rem' mr='10px' mb='5px' onClick={() => onClickDelete(index)} color="red" _hover={{background: '#f34949', color: '#fff' }} >
+                      Delete
+                    </CloseButton>
+                    </Flex>
+                  </Flex>
+
                 </ListItem>
               ))}
             </UnorderedList>
@@ -288,7 +286,7 @@ const NavBar = () => {
         <Button variant="outline" mr={3} onClick={handleCloseDrawCart1}>
           Continue shopping
         </Button>
-        <Link as={RouterLink} to='/cart' onClick={handleNavigate}>
+        <Link as={RouterLink} to='/cart' style={{textDecoration: 'none' }} onClick={handleNavigate}>
           <Button colorScheme="orange">Go to Cart</Button>
         </Link>
       </DrawerFooter>
