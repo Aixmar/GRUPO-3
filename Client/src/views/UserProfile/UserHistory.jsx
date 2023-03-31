@@ -1,4 +1,3 @@
-import UserNavBar from "./UserNavBar";
 import { Box, Grid, GridItem, Text, Link } from "@chakra-ui/react";
 // import { useAuthProv } from "../../context/AuthProvider";
 import {  useSelector } from "react-redux";
@@ -18,9 +17,6 @@ const UserHistory = () => {
 
   return (
     <div>
-   
-      <UserNavBar />
-  
         <Text fontSize="xl" fontWeight="bold" mb="4">
           Purchase History
         </Text>

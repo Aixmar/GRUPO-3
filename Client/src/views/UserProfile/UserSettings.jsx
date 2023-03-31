@@ -1,5 +1,3 @@
-
-import UserNavBar from "./UserNavBar";
 import {
   Box,
   Heading,
@@ -22,7 +20,7 @@ const UserSettings = () => {
   };
   return (
     <div>
-      <UserNavBar />
+     
       <Box className="profile">
         <Heading as="h1" size="lg">
           Settings

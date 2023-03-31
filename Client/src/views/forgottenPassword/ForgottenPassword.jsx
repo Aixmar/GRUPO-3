@@ -8,6 +8,7 @@ import {
     FormLabel,
     Input,
     Stack,
+
     FormHelperText,
     Text,
     Modal,
@@ -17,8 +18,7 @@ import {
     ModalFooter,
     ModalBody,
     ModalCloseButton,
-    Image
-  } from "@chakra-ui/react";
+    Image } from "@chakra-ui/react";
   import { ok } from "../../assets/CloudinaryImg";
 
 
@@ -30,15 +30,8 @@ const ForgottenPassword = () =>{
     const [success,setSuccess] = useState('')
     const [isOpen, setIsOpen] = useState(false);
 
-
-    
-    const goToMenuHandler = () => {
-        const modal = document.querySelector("#forgot");
-        modal.close();
-        onClose();
-      };
-
-
+ 
+  
     const emailHandler = (e) =>{
         setUserEmail({
             email : e.target.value
