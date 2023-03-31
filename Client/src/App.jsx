@@ -8,7 +8,6 @@ import {
   About,
   NavBar,
   UserForm,
-  UserNavBar,
   ItemDetail,
   CreatePizza,
   AllPizzas,
@@ -60,7 +59,7 @@ function App() {
           <Route path="/createpizza" element={<CreatePizza />} />
 {/* Todo lo que esue dentro de la ruta RequireAuth esta protegido para que solo pueda acceder un usuario logueado con el rol asignado */}
         <Route element={<RequireAuth allowedRol={'user'}/>}>         
-          <Route path="/profile" element={<UserNavBar />} />
+          <Route path="/profile" element={<UserAccount />} />
           <Route path="/checkout" element={<CheckOut />} />
         </Route>
         
@@ -79,9 +78,6 @@ function App() {
         <Route path="/resetPassword/:id/:tokenResetPassword" element={<ResetPassword />} />
         <Route path="/itemdetail/:id" element={<ItemDetail />} />
         <Route path="/sidedetail/:id" element={<SideDetail />} />
-
-
-        <Route path="/profile" element={<UserNavBar/>} />
         <Route path="/profile/settings" element={<UserSettings />} />
         <Route path="/profile/account" element={<UserAccount />} />
         <Route path="/profile/stars" element={<UserStars />} />

@@ -1,4 +1,3 @@
-import UserNavBar from "./UserNavBar";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import { Box, Heading, Text, Button, Input, Image } from "@chakra-ui/react";
 import UpdateEmailForm from "./Updates/UpdateEmail";
@@ -59,7 +58,7 @@ const UserAccount = () => {
   const handleUpdateImage = async () => {
     setLoadingImage(true);
     const putImage = { urlImage: currentImage, userId: user.id };
-    const { data } = await axios.put("http://localhost:3001/users/image", putImage);
+    const { data } = await axios.put("/users/image", putImage);
     setUser(data);
     toast({
       title: "Image has been changed",
@@ -82,7 +81,7 @@ const UserAccount = () => {
 
   return (
     <>
-      <UserNavBar />
+      
 
       <Box display="flex" w="100%" h="100vh" bgGradient="linear(to-l,#000000, #272727)" >
         <Box ml="2rem" className="profile">

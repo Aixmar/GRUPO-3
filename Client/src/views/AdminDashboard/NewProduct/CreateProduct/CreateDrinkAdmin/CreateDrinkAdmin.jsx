@@ -2,7 +2,15 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import CreatedDrink from "./CreatedDrink";
-import { Button, Text, Grid, GridItem, FormLabel, Radio, RadioGroup, Stack, Box, Input, Switch, Select, Flex, StackDivider, Textarea } from "@chakra-ui/react";
+import { Button, Text, Grid, GridItem, FormLabel, Radio, RadioGroup, Stack, Box, Input, Switch, Select, Flex, StackDivider, Textarea,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Image } from "@chakra-ui/react";
 import validate from "./validate";
 import css from '../CreateProduct.module.css';
 import { ok } from "../../../../../assets/CloudinaryImg.js";
@@ -26,6 +34,7 @@ const CreateDrinkAdmin = () => {
 
   const [form, setForm] = useState(initialStateForm);
   const [errors, setErrors] = useState({});
+  const [isOpen, setIsOpen] = useState(false);
 
 
 
@@ -58,6 +67,12 @@ const CreateDrinkAdmin = () => {
     setForm({ ...form, image: data.secure_url });
   };
 
+  
+  const handleClose = () => setIsOpen(false);
+
+  useEffect(() => {
+    return () => setForm(initialStateForm);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -66,13 +81,11 @@ const CreateDrinkAdmin = () => {
     setErrors(hasErrors);
 
     if(!Object.values(hasErrors).length){
-        const modal = document.querySelector("#createDrinkModal");
-        setForm(initialStateForm);    
-        const { data } = await axios.post('/pizzas', form);
-        modal.showModal();
+      setIsOpen(true);
+      setForm(initialStateForm);    
+      await axios.post('/pizzas', form);
     }; 
   };
-
 
 
 
@@ -166,17 +179,20 @@ const CreateDrinkAdmin = () => {
         </Box>
          
 
-          <dialog id="createDrinkModal" className={css.modalCreatePizza} >
-            <img src={ok} alt="ok" className={css.okIco} />
-            <h2>Drink created successfully!</h2>
-            <div>
-              <Link to="/allpizzas">
-                <Button bg={"orange"} fontSize={"2rem"} width={"90%"} p={"1.6rem"} margin={"1.2rem 0 .8rem 0"} >
-                  Go to menu
-                </Button>
-              </Link>
-            </div>
-          </dialog>
+        <Modal isOpen={isOpen} onClose={handleClose} >
+          <ModalOverlay backdropFilter='blur(6px)' bg='#000000b6' />
+          <ModalContent margin='auto'  >
+          <ModalCloseButton/>
+            <Image src={ok} alt="ok" h='2.8rem' objectFit='contain' mt='1rem' mb='0' />
+            <ModalHeader textAlign='center' fontSize='1.8rem' p='0' >Drink created successfully!</ModalHeader>
+            <ModalBody textAlign='center' fontSize='1.4rem' >
+            <Link to='/allpizzas' ><Button mt='.6rem' fontSize='1.4rem' bg={"orange.400"} color={"white"} _hover={{ bg: "orange.500" }} onClick={handleClose} >Go to menu</Button></Link>
+            <Text>or</Text>
+            <Link to='/createProduct' ><Button mb='.6rem' fontSize='1.4rem' bg={"orange.400"} color={"white"} _hover={{ bg: "orange.500" }} onClick={handleClose} >Add more items</Button></Link>
+            </ModalBody>
+          </ModalContent>
+        </Modal>
+
     </Box>
     </>
   );
