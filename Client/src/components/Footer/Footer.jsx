@@ -2,8 +2,18 @@ import {footerStyles, titleStyles, textStyles} from './footerStyles'
 import { Box , Flex, Image, Text} from "@chakra-ui/react";
 import { insta, twitter, fb } from '../../assets/CloudinaryImg';
 import { Link } from 'react-router-dom';
+import CustomModal from './Helper/CustomModal';
+import { useState } from 'react';
 
 const Footer = () => {
+
+  const [showModal, setShowModal] = useState(false);
+
+  const handleWorkClick = () => {
+    setShowModal(true);
+  };
+
+
     return (
   
       //aplicamos estilos a los componentes utilizando la sintaxis de spread operator {...estilos}.
@@ -35,7 +45,8 @@ const Footer = () => {
             <Text {...textStyles}>Our history</Text>
           </Link>
 
-            <Text {...textStyles}>Work with us</Text>
+            <Text {...textStyles} onClick={handleWorkClick} cursor="pointer"  >Work with us</Text>
+            {showModal && <CustomModal onClose={() => setShowModal(false)} />}
             <Text {...textStyles}>franchise yourself</Text>
           </Box>
           <Box flex="1">
