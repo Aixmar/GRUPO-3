@@ -1,6 +1,7 @@
-import {CloseButton, Flex, Link, Select, Spacer, useColorModeValue } from "@chakra-ui/react";
+import { CloseButton,Flex, Select, Spacer, useColorModeValue, Button, AlertDialog, AlertDialogBody, AlertDialogFooter, AlertDialogHeader, AlertDialogContent, AlertDialogOverlay } from "@chakra-ui/react";
 import { PriceTag } from "../PriceTag/PriceTag";
 import { CartProductMeta } from "../CartProductMeta/CartProductMeta";
+import { useState } from "react";
 
 const QuantitySelect = (props) => {
   return (
@@ -19,6 +20,7 @@ export const CartItem = (props) => {
   
   const {
     isGiftWrapping,
+    onClickDelete,
     name,
     description,
     quantity,
@@ -26,11 +28,20 @@ export const CartItem = (props) => {
     currency,
     price,
     onChangeQuantity,
-    onClickDelete,
-    index,
+     index,
     itemId,
   } = props;
 
+  const [isAlertOpen, setIsAlertOpen] = useState(false);
+
+  const onCloseAlert = () => setIsAlertOpen(false);
+
+  const onClickDeleteFirst = (index) => setIsAlertOpen(true);
+
+  const handleClickDelete = () => {
+    onClickDelete(index);
+    onCloseAlert();
+  };
 
   return (
     <Flex direction={{ base: "column", md: "row" }} justify="space-between" align="center">
@@ -53,26 +64,45 @@ export const CartItem = (props) => {
         />
         <PriceTag price={price} currency={currency} />
         <Spacer></Spacer>
+
+        {/* este botón es la X */}
         <CloseButton
-          color="#f27825"
-          aria-label={`Delete ${name} from cart`}
-          onClick={() => onClickDelete(index)}
-        />
+            color="#f27825"
+            aria-label={`Delete ${name} from cart`}
+            onClick={onClickDeleteFirst}/>
+
       </Flex>
 
       {/* Mobile */}
       <Flex mt="4" align="center" width="full" justify="space-between" display={{base: "flex", md: "none",}}>
+        <AlertDialog
+          isOpen={isAlertOpen}
+          onClose={onCloseAlert}
+          leastDestructiveRef={undefined}
+        >
+          <AlertDialogOverlay>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                ¿Are you sure you want to delete this product?
+              </AlertDialogHeader>
+              <AlertDialogBody>
+                You cannot undo it.
+              </AlertDialogBody>
+              <AlertDialogFooter>
+                <Button colorScheme="red" mr={3} onClick={onCloseAlert}>
+                  Cancel
+                </Button>
+                <Button variant="ghost" onClick={() => handleClickDelete()} ml={3}>
+                  Delete
+                </Button>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialogOverlay>
+        </AlertDialog>
         <CloseButton
           aria-label={`Delete ${name} from cart`}
-          onClick={() => onClickDelete(index)}
+          onClick={() => handleClickDelete}
         />
-        <Spacer></Spacer>
-        {/* <QuantitySelect
-          value={quantity}
-          onChange={(e) => {
-            onChangeQuantity?.(+e.currentTarget.value);
-          }}
-        /> */}
         <Spacer></Spacer>
         <PriceTag price={price} currency={currency} />
       </Flex>
