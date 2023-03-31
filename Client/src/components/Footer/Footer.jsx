@@ -1,6 +1,7 @@
 import {footerStyles, titleStyles, textStyles} from './footerStyles'
 import { Box , Flex, Image, Text} from "@chakra-ui/react";
 import { insta, twitter, fb } from '../../assets/CloudinaryImg';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
     return (
@@ -12,14 +13,28 @@ const Footer = () => {
             <Text {...titleStyles}>Contact</Text>
             <Text {...textStyles}>support@mix2pizza.app</Text>
             <Flex mt={4}>
+
+            <Link to="https://www.facebook.com/pizzeriaguerrin/" target="_blank">
               <Image boxSize="30px" src={fb} mr={4} />
+            </Link>
+
+            <Link to="https://www.instagram.com/pizzeriaguerrin/" target="_blank">
               <Image boxSize="30px" src={insta} mr={4} />
+            </Link>
+
+            <Link to="https://twitter.com/PizzeriaGuerrin" target="_blank" >
               <Image boxSize="30px" src={twitter} />
+            </Link>
+
             </Flex>
           </Box>
           <Box flex="1">
             <Text {...titleStyles}>About us</Text>
+
+          <Link to="/ourstory" >
             <Text {...textStyles}>Our history</Text>
+          </Link>
+
             <Text {...textStyles}>Work with us</Text>
             <Text {...textStyles}>franchise yourself</Text>
           </Box>
