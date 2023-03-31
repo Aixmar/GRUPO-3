@@ -3,6 +3,7 @@ import { useState } from "react"
 import {FiMenu, FiUser} from "react-icons/fi"
 import {RiShoppingBasketFill} from "react-icons/ri"
 import {AiFillSetting,AiFillAlipaySquare} from "react-icons/ai"
+import {BsReceipt} from "react-icons/bs"
 
 
 
@@ -33,7 +34,7 @@ const SideBar = () => {
                 <Link to= "/products" ><IconButton mt='1rem' icon={<RiShoppingBasketFill />} /></Link>
                 <Link to= "/createProduct" ><IconButton mt='1rem' icon={<RiShoppingBasketFill />} /></Link>                
                 <Link to= "/adminAccount" ><IconButton mt='1rem' icon={<AiFillSetting />} /></Link>
-                <Link to= "/sales" > SALES </Link>                
+                <Link to= "/sales" > <IconButton mt='1rem' icon={<BsReceipt />} /> </Link>                
             </Flex>
 
             <Flex
