@@ -14,28 +14,31 @@ import {
   ModalCloseButton,
   ModalBody,
   Flex,
-  Avatar,
-} from "@chakra-ui/react";
+  Avatar } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
 import axios from "axios";
 import css from "./ItemDetail.module.css";
+import { ok } from "../../assets/CloudinaryImg";
 
 const ItemDetail = () => {
 
   const { id } = useParams();
   const dispatch = useDispatch();
   const [pizza, setPizza] = useState({});
+  const [ modalAddtocart, setModalAddtocart ] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
 
 
   const clickHandler = () => {
-    const modal = document.querySelector("#createPizzaModal");
     dispatch(pushToCart(pizza));
-    modal.showModal();
+    setModalAddtocart(true);
   };
 
-  
+
+  const handleClose = () => setModalAddtocart(false);
+
+
   const getUserReview = (currentPizza) => {
     currentPizza?.reviews?.map( async (review) => {    
       const { data } = await axios.get(`/users/${review.userId}`);
@@ -54,16 +57,15 @@ const ItemDetail = () => {
       getUserReview(pizza);     
     });
 
-      document.querySelector("body").classList.add(css.disableScroll);    
-      return () => document.querySelector("body").classList.remove(css.disableScroll);
-    }, []);
-    
-    
-  const handleModal = () => {
-    setIsOpen(!isOpen);
-   
-  };
+    window.scrollTo(0, 0);
+    document.querySelector("body").classList.add(css.disableScroll);
+    return () => document.querySelector("body").classList.remove(css.disableScroll);
+  }, []);
 
+
+  const handleModal = () => {
+    setIsOpen(!isOpen);   
+  };
 
 
   return (
@@ -286,33 +288,21 @@ const ItemDetail = () => {
           </Box>
         </Box>
 
-        <dialog className={css.modalAddToCart} id="createPizzaModal">
-          <h2>Pizza added to cart successfully!</h2>
-          <div>
-            <Link to="/allpizzas">
-              <Button
-                fontSize={"1.4rem"}
-                width={"90%"}
-                p={"1.6rem"}
-                margin={"1.2rem 0 .8rem 0"}
-                background="linear-gradient(to right, #f27833, #eab830)"
-              >
-                Continue buying
-              </Button>
-            </Link>
-            <Link to="/cart">
-              <Button
-                fontSize={"1.4rem"}
-                width={"90%"}
-                p={"1.6rem"}
-                margin={"1.2rem 0 .8rem 0"}
-                background="linear-gradient(to right, #f27833, #eab830)"
-              >
-                Go to cart
-              </Button>
-            </Link>
-          </div>
-        </dialog>
+
+        <Modal isOpen={modalAddtocart} onClose={handleClose} >
+          <ModalOverlay backdropFilter='blur(6px)' bg='#000000b6' />
+          <ModalContent margin='auto'  >
+          <ModalCloseButton/>
+            <Image src={ok} alt="ok" h='2.8rem' objectFit='contain' mt='1rem' mb='0' />
+            <ModalHeader textAlign='center' fontSize='1.8rem' p='0' >Added to cart successfully!</ModalHeader>
+            <ModalBody textAlign='center' fontSize='1.4rem' >
+            <Link to='/allpizzas' ><Button mt='.6rem' fontSize='1.4rem' bg={"orange.400"} color={"white"} _hover={{ bg: "orange.500" }} onClick={handleClose} >Continue shopping</Button></Link>
+            <Text>or</Text>
+            <Link to='/cart' ><Button mb='.6rem' fontSize='1.4rem' bg={"orange.400"} color={"white"} _hover={{ bg: "orange.500" }} onClick={handleClose} >Go to cart</Button></Link>
+            </ModalBody>
+          </ModalContent>
+        </Modal>
+
       </Box>
     </Box>
   );

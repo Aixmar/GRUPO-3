@@ -57,13 +57,7 @@ const SideDetail = () => {
               >Add to cart</Button>
             </Box>
           </Box>
-          <dialog id='addSideModal' >
-            <h2>Side added succesfully!</h2>
-            <div >
-              <Link to='/allsides' ><Button variantColor="teal" fontSize={'2rem'} width={'90%'} p={'1.6rem'} margin={'1.2rem 0 .8rem 0'} >Continue buying</Button></Link>
-              <Link to='/cart' ><Button variantColor="orange" fontSize={'2rem'} width={'90%'} p={'1.6rem'} margin={'1.2rem 0 .8rem 0'} >Go to cart</Button></Link>
-            </div>
-          </dialog>
+
         </Box>
         </Box>
       );
