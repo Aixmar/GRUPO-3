@@ -20,6 +20,7 @@ import {
   openSignupDrawer,
 } from "../../redux/actions";
 import { useAuthProv } from "../../context/AuthProvider";
+import { useState } from "react";
 
 const ItemCard = (props) => {
   const cart = useSelector((state) => state.cart);

@@ -55,10 +55,10 @@ const MainPage = () => {
 
   
 return (
-  <Flex  wrap="wrap" mt="10" justifyContent="center">
-    <Heading marginTop={5}> Sales 2023 </Heading>         
+  <Flex  wrap="wrap"gap='5' justifyContent="center" direction='column' align='center' px='20' >
+    <Heading > Sales 2023 </Heading>         
     <BasicBarChart labels={Object.keys(salesPerMonth)} values={Object.values(salesPerMonth)} />
-    <Heading marginTop={20}>Total earnings in sales</Heading>
+    <Heading >Total earnings in sales</Heading>
     <BasicBarChart labels={Object.keys(earningsperMonth)} values={Object.values(earningsperMonth)} />
   </Flex>
   );
