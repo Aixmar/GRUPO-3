@@ -3,6 +3,7 @@ import { useState } from "react"
 import {FiMenu, FiUser} from "react-icons/fi"
 import {RiShoppingBasketFill} from "react-icons/ri"
 import {AiFillSetting,AiFillAlipaySquare} from "react-icons/ai"
+import {IoIosHammer} from "react-icons/io"
 import {BsReceipt} from "react-icons/bs"
 
 
@@ -30,9 +31,9 @@ const SideBar = () => {
             <Flex p="5%" flexDirection="column" alignItems="flex-start" as="nav">
                 <IconButton background="none" _hover={{background:"none"}} />
                 <Link to= "/admin" ><Button>Main Page</Button></Link>
-                <Link to= "/users" ><IconButton mt='1rem' icon={<FiUser/>}/></Link>                
+                <Link to= "/users" ><IconButton mt='1rem' icon={<FiUser/>}  /></Link>                
                 <Link to= "/products" ><IconButton mt='1rem' icon={<RiShoppingBasketFill />} /></Link>
-                <Link to= "/createProduct" ><IconButton mt='1rem' icon={<RiShoppingBasketFill />} /></Link>                
+                <Link to= "/createProduct" ><IconButton mt='1rem' icon={<IoIosHammer />} /></Link>                
                 <Link to= "/adminAccount" ><IconButton mt='1rem' icon={<AiFillSetting />} /></Link>
                 <Link to= "/sales" > <IconButton mt='1rem' icon={<BsReceipt />} /> </Link>                
             </Flex>
