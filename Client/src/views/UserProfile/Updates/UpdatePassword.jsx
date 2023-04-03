@@ -36,7 +36,6 @@ const UpdatePasswordForm = (props) => {
   const handleConfirmPasswordChange = (event) => {
     setConfirmNewPassword(event.target.value);
     setError(validate(newPassword, confirmNewPassword))
-    console.log(event.target.value);
   };
 useEffect(() => {
   setError(validate(newPassword, confirmNewPassword))
@@ -62,17 +61,12 @@ useEffect(() => {
     setNewPassword("");
     setConfirmNewPassword("");
     setIsPasswordUpdated(true);
-    setTimeout(() => {
-      setIsPasswordUpdated(false); // Oculta el alert después de 5 segundos
-      props.toggleUpdatePasswordForm(false)
-    }, 5000);
+    props.handleUpdatePasswordSuccess()
   };
 
  
   return (
-    <>
-      <Box  color='#000' bg='gray' borderRadius='8px' p='10px' >
-        {!isPasswordUpdated && (
+      !isPasswordUpdated && (<Box  color='#000' bg='gray' borderRadius='8px' p='10px' >
           <form onSubmit={handleSubmit}>
             <FormControl id="newPassword">
               <FormLabel>New Password:</FormLabel>
@@ -110,23 +104,7 @@ useEffect(() => {
               Save
             </Button>
           </form>
-        )}
-
-        <motion.div
-          initial={{ opacity: 0, y: -50 }}
-          animate={
-            isPasswordUpdated ? { opacity: 1, y: 0 } : { opacity: 0, y: -50 }
-          }
-          transition={{ duration: 0.5 }}
-          style={{ position: "fixed", top: "20px", right: "20px" }}
-        >
-          <Alert status="success" variant="subtle" alignItems="center" color='black'>
-            <AlertIcon />
-            Password updated succesfully
-          </Alert>
-        </motion.div>
-      </Box>
-    </>
+      </Box>)
   );
 };
 
