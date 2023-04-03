@@ -49,7 +49,7 @@ const UserHistory = () => {
               ))
             }
           </Grid>
-          ) : ( <Box mt='4rem' fontFamily="sans-serif" fontSize="xl" color='#fff' ><Text textAlign='center' >No previus purchase 😕</Text></Box> )
+          ) : ( <Box mt='4rem' fontFamily="sans-serif" fontSize="xl" color='#fff' ><Text textAlign='center' >No previous purchase 😕</Text></Box> )
         }
       </Box>
   );
