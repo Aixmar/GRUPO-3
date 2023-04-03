@@ -14,7 +14,7 @@ const CartExtras = () => {
 
   ////////////PAGINADO /////////////////////////////////////////////////
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 4;
+  const itemsPerPage = 6;
   const numPages = Math.ceil(drinks.length / itemsPerPage);
   
   const handleClickPrevious = () => {
