@@ -33,7 +33,9 @@ function CustomModal(props) {
         <ModalHeader>Work with us!</ModalHeader>
         <ModalBody>
           <Text>Please send us your CV to our mail:</Text>
-          <Text fontWeight="bold"  cursor="pointer" onClick={handleEmailClick}>{email}</Text>
+          
+          <Text fontWeight="bold"  color="blue.500" cursor="pointer" onClick={handleEmailClick}><u>{email}</u></Text>
+          
         </ModalBody>
 
         <ModalFooter>
