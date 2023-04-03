@@ -105,7 +105,7 @@ const UserAccount = () => {
   };
 
 
-  const hiddenPassword = user && user.password.replace(/./g, "*");
+  const hiddenPassword = user.password && user.password.replace(/./g, "*");
 
 
 
