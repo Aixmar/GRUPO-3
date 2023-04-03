@@ -56,7 +56,8 @@ useEffect(() => {
     event.preventDefault();
     if (error.length) return;
     const putPassword = { password: newPassword, userId: props.id };
-    await axios.put("http://localhost:3001/users/password", putPassword); // Esperar a que la actualización se complete
+    await axios.put("https://grupo-3-back-production.up.railway.app/users/password", putPassword); // Esperar a que la actualización se complete
+    //await axios.put("http://localhost:3001/users/password", putPassword); // Esperar a que la actualización se complete
     dispatch(getUserById(props.id));
     setNewPassword("");
     setConfirmNewPassword("");
