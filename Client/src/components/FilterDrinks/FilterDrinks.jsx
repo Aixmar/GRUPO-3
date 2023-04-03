@@ -74,10 +74,10 @@ const FilterDrinks = () => {
       handleInputChange={handleInputChange} 
       valueState={filterTerms.filterSugar}
       />
-      <SelectStock
+      {/* <SelectStock
         handleInputChange={handleInputChange}
         valueState={filterTerms.selectStock}
-      />
+      /> */}
       <br />
       <SelectOrderRating
         handleInputChange={handleInputChange}
