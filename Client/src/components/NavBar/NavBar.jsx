@@ -335,8 +335,8 @@ const NavBar = () => {
               </>
             )}
 
-            { user?.image ? ( <Image src={user.image} alt="profile" h="3rem" w='3rem' ml="2rem" objectFit='cover' borderRadius='50%' /> )
-            : user.email && ( <Image src={profImg} alt="profile" h="3rem" w='3rem' ml="2rem" objectFit='cover' borderRadius='50%' /> )
+            { user?.image ? <Image src={user.image} alt="profile" h="3rem" w='3rem' ml="2rem" objectFit='cover' borderRadius='50%' />
+            : user?.email && <Image src={profImg} alt="profile" h="3rem" w='3rem' ml="2rem" objectFit='cover' borderRadius='50%' />
               
             }
           </Breadcrumb>
