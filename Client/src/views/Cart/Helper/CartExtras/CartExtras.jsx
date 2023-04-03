@@ -66,7 +66,7 @@ const CartExtras = () => {
                 {drink.name}
               </Heading>
               <Text fontSize="lg" color="white">
-                Price: {drink.price}
+                Price: ${drink.price}
               </Text>
               <Button
                 colorScheme="orange"
