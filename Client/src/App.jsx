@@ -33,7 +33,8 @@ import {
   ResetPassword,
   AdminAccount,
   OurStory,
-  Sales
+  Sales,
+  MustBeLogged
 
 } from "./views/index";
 
@@ -90,7 +91,7 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<CheckOut />} />
         <Route path="/unauthorized" element={<Unauthorized />}></Route>
-        
+        <Route path="/mustLog" element={<MustBeLogged />} />
         <Route path="*" element={<Error404 />} />
         <Route path="/ourstory" element={<OurStory />} />
 

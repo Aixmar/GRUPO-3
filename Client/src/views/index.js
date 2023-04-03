@@ -29,6 +29,7 @@ import ResetPassword from "./ResetPassword/ResetPassword"
 import AdminAccount from "./AdminDashboard/AdminAccount/AdminAccount";
 import OurStory from "./OurStory/OurStory";
 import Sales from "./AdminDashboard/Sales/Sales"
+import MustBeLogged from "./MustBeLogged/MustBeLogged"
 
 
 export {
@@ -62,5 +63,6 @@ export {
   ResetPassword,
   AdminAccount,
   OurStory,
-  Sales
+  Sales,
+  MustBeLogged
 };

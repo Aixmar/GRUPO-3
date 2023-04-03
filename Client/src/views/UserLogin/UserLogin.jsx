@@ -45,11 +45,12 @@ const UserLogin = ({ onClose }) => {
       // setAuth({...form, accessToken})
       // window.localStorage.setItem('loggedUser' , JSON.stringify({...form,accessToken}));
       setErr('')
+      onClose();
     } catch (error) {
       // console.log(error);
       setErr(error.response.data.error)
     } finally {
-      onClose();
+      
       setLoader(false);
     }
   };
