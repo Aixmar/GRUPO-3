@@ -6,7 +6,7 @@ import { Route } from "react-router-dom"
 const AdminDashboard = () => {
 
     return (
-        <Flex>
+        <Flex bgGradient="linear(to-l,#000000, #272727)">
             <Flex>
             <SideBar />
             </Flex>

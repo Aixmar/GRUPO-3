@@ -28,17 +28,17 @@ const SalesContainer = (props) => {
     }
     return (
         <Box width="100%" maxWidth="1500px">
-            <Heading marginBottom={5} marginTop={10}>Sales</Heading>
+            <Heading marginBottom={5} marginTop={10} color="#f27825">Sales</Heading>
             {sales.length !== 0 ? 
         <TableContainer>
   <Table variant='simple'>
     
     <Thead>
       <Tr>
-        <Th color="orange.500" scope="col">CLIENT</Th>
-        <Th color="orange.500" scope="col">ORDER</Th>
-        <Th color="orange.500" scope="col" isNumeric>TOTAL</Th>
-        <Th color="orange.500" scope="col" isNumeric>DATE</Th>
+        <Th color="white" scope="col">CLIENT</Th>
+        <Th color="white" scope="col">ORDER</Th>
+        <Th color="white" scope="col" isNumeric>TOTAL</Th>
+        <Th color="white" scope="col" isNumeric>DATE</Th>
       </Tr>
     </Thead>
     <Tbody>
@@ -72,7 +72,7 @@ const SalesContainer = (props) => {
     </Tbody>
   </Table>
 </TableContainer>
-: <Text fontWeight='bold' >There is not any sale</Text>
+: <Text fontWeight='bold' color="white">There is not any sale</Text>
 }   
         </Box>
     )

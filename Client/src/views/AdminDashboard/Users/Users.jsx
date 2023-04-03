@@ -16,7 +16,7 @@ const Users = () => {
     dispatch(getAllUsers())
   },[dispatch])
    return (
-     <Flex>
+     <Flex bgGradient="linear(to-l,#000000, #272727)">
          <Flex>
              <SideBar />
              <Box paddingLeft="50px">

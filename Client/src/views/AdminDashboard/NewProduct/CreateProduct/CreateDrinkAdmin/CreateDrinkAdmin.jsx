@@ -165,13 +165,13 @@ const CreateDrinkAdmin = () => {
             
             <Box width='36%' height='70vh' display='flex' flexDirection='column' borderLeft='1px solid #545454b9'  >
                 <CreatedDrink form={form} setForm={setForm} ></CreatedDrink>
-                <Box display='flex' justifyContent='space-around' alignItems='center' mb='2rem' >
+                <Box display='flex' justifyContent='space-around' alignItems='center' mb='2rem' mr="2rem" ml="2rem">
                     <Box >
                         <FormLabel htmlFor='price' fontWeight="bold" >Price:</FormLabel>
                         <Input type='number' name='price' value={form.price} onChange={handleInputChange} border='1px solid #545454b9' htmlSize={2} width='50%' />
                           {errors.price && <Text color="red" mb='1rem' >{errors.price}</Text>}
                     </Box>
-                    <Button onClick={handleSubmit} type="submit" hoverbg="black" borderRadius="full" mt='1.4rem' fontSize='2rem' padding="2rem 1.4rem" background="linear-gradient(to right, #f27833, #eab830)" >
+                    <Button onClick={handleSubmit} type="submit" hoverbg="black" borderRadius="full" mt='1.4rem' fontSize='1.5rem' padding="2rem 2.5rem" background="linear-gradient(to right, #f27833, #eab830)" >
                         Create new drink
                     </Button>
                 </Box>
