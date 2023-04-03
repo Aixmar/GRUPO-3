@@ -117,8 +117,8 @@ const CreatePizza = () => {
       <Box display='flex' heigth='100vh' width='96%' margin='0 auto' border='1px solid #fff' borderRadius='6px' >
         <Box display="flex" width='64%' mt='1.2rem'>        
             <Grid templateColumns="repeat(4, 1fr)" templateRows='50% 50%' width='100%' color="white"  >
-              <GridItem ml='2.2rem' >
-                <RadioGroup colorScheme="orange">
+              <GridItem ml='1rem' >
+                <RadioGroup colorScheme="orange" >
                   <FormLabel fontWeight="bold" >Dough type (Select 1):</FormLabel>
                   <Stack >
                     {
@@ -190,11 +190,11 @@ const CreatePizza = () => {
             </Grid>
           </Box>
           
-        <Box width='36%' height='70vh' display='flex' flexDirection='column' borderLeft='1px solid #fff' >
+        <Box width='36%' height='auto' display='flex' flexDirection='column' borderLeft='1px solid #fff' >
           <PizzaCreated form={form} setForm={setForm} toppings={toppings} setToppings={setToppings} cheeses={cheeses} setCheeses={setCheeses} meats={meats} setMeats={setMeats} ></PizzaCreated>
           <Box display='flex' justifyContent='space-around' alignItems='center' ml="2rem" mr="2rem" mb='2rem' >
-            <Box><Text color='#fff' fontSize='1.4rem' width='14rem' >Total price: {form.price}</Text></Box>
-            <Button onClick={handleSubmit} type="submit" hoverbg="white" borderRadius="full" fontSize='2rem' padding="2rem 1.4rem" background="linear-gradient(to right, #f27833, #eab830)" >
+            <Box><Text color='#fff' fontSize={{ base: '1rem', md: '1.4rem' }} width='14rem' >Total price: {form.price}</Text></Box>
+            <Button onClick={handleSubmit} type="submit" hoverbg="white" borderRadius="full" fontSize={{ base: '1rem', md: '1rem' }} padding={{ base: '1.5rem 0.8rem', md: '2rem 1.4rem' }} background="linear-gradient(to right, #f27833, #eab830)" >
               Add to cart
             </Button>
           </Box>

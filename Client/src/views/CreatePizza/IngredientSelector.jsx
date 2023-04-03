@@ -32,7 +32,7 @@ const IngredientSelector = ({ toppings, setToppings, cheeses, setCheeses, meats,
                         disabled={ form.detail.toppingIngredients.length === 2 ? true : false }
                         name='toppingIngredients'
                         onChange={handleOnChange}
-                        width='15rem'
+                        width={{ base: '15rem', md: '10rem' }}
                         cursor='pointer'
                         color="#f27825"
                         >
@@ -51,7 +51,7 @@ const IngredientSelector = ({ toppings, setToppings, cheeses, setCheeses, meats,
                         disabled={ form.detail.cheeseIngredients.length === 3 ? true : false }
                         name='cheeseIngredients'
                         onChange={handleOnChange}
-                        width='15rem'
+                        width={{ base: '15rem', md: '10rem' }}
                         cursor='pointer'
                         color="#f27825" >
                         <option>Select Cheeses</option>
@@ -69,7 +69,7 @@ const IngredientSelector = ({ toppings, setToppings, cheeses, setCheeses, meats,
                     disabled={ form.detail.meatIngredients.length === 3 ? true : false }
                     name='meatIngredients' 
                     onChange={handleOnChange}
-                    width='15rem'
+                    width={{ base: '15rem', md: '10rem' }}
                     cursor='pointer'
                     color="#f27825" >
                         <option>Select Meats</option>

@@ -259,26 +259,24 @@ const NavBar = () => {
           <>
             <Heading color="#f27825" pb="20px" fontSize='1.8rem' >Selected products </Heading>
             <UnorderedList w='100%' m='0' listStyleType="none">
-              {cartItems.map((item, index) => (
-                <ListItem key={item.name} border='1px solid #bcbcbc' rounded='md' h='5rem' display='flex' mb='.2rem' >
+  {cartItems.map((item, index) => (
+    <ListItem key={item.name} border='1px solid #bcbcbc' rounded='md' h='5rem' display='flex' mb='.2rem'>
+      <Image src={item.image} alt={item.name} h='4rem' w='auto' objectFit='cover' m='auto 2px' border='1px solid #bcbcbc' borderRadius='full' />
+      <Flex flexDirection='column' w='100%'>
+        <Flex h='2rem' m='.4rem 0' fontSize={{ base: '1em', md: '1.2em' }} fontWeight='bold' justifyContent='space-between' mr='1rem'>
+          <Text ml='10px' overflowWrap='anywhere' overflow= 'hidden' flexWrap='wrap' sx={{ WebkitLineClamp: [1, 2], WebkitBoxOrient: 'vertical', display: '-webkit-box' }}>{item.name}</Text>
+          <Text>${item.price}</Text>
+        </Flex>
+        <Flex justifyContent='flex-end'>
+          <CloseButton w='3rem' mr='10px' mb='5px' onClick={() => onClickDelete(index)} color="red" _hover={{ background: '#f34949', color: '#fff' }}>
+            Delete
+          </CloseButton>
+        </Flex>
+      </Flex>
+    </ListItem>
+  ))}
+</UnorderedList>
 
-                  <Image src={item.image} alt={item.name} h='4rem' w='auto' objectFit='cover' m='auto 2px' border='1px solid #bcbcbc' borderRadius='full' />
-
-                  <Flex flexDirection='column' w='100%' >
-                    <Flex h='2rem' m='.4rem 0' fontSize='1rem' fontWeight='bold' justifyContent='space-between' mr='1rem' >
-                      <Text ml='10px' >{item.name}</Text>
-                      <Text >${item.price}</Text>
-                    </Flex>
-                    <Flex  justifyContent='flex-end'  >
-                    <CloseButton w='3rem' mr='10px' mb='5px' onClick={() => onClickDelete(index)} color="red" _hover={{background: '#f34949', color: '#fff' }} >
-                      Delete
-                    </CloseButton>
-                    </Flex>
-                  </Flex>
-
-                </ListItem>
-              ))}
-            </UnorderedList>
           </>
         )}
       </DrawerBody>
