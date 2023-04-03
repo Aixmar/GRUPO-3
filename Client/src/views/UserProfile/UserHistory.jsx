@@ -1,15 +1,23 @@
 import { Box, Grid, GridItem, Text, Image, Flex, Button } from "@chakra-ui/react";
-// import { useAuthProv } from "../../context/AuthProvider";
+import { useAuthProv } from "../../context/AuthProvider";
 import { Link } from "react-router-dom";
-import {  useSelector } from "react-redux";
+import {  useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getUserById } from "../../redux/actions";
 
 
 const UserHistory = () => {
 
-  // const dispatch = useDispatch();
-  // const { user } = useAuthProv();
-  
+  const dispatch = useDispatch();
   const user1 = useSelector((state) => state.user);
+  const { user } = useAuthProv();
+
+
+
+  useEffect(() => {
+    dispatch(getUserById(user.id));
+  }, []);
+  
   
   const prevPurchase = user1.previusPurchase;
 
@@ -19,7 +27,6 @@ const UserHistory = () => {
   return (
       <Box minHeight='100vh' bgGradient="linear(to-l,#000000, #272727)" p="4">
 
-        {/* <Text color='#fff' fontSize="2rem" fontWeight="bold" mb="4">Purchase History</Text> */}
 
         {
           prevPurchase?.length > 0 ? (
