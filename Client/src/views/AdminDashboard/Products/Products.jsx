@@ -15,7 +15,7 @@ const Products = () => {
     }, [products])
     return (
         <>
-            <Flex>
+            <Flex bgGradient="linear(to-l,#000000, #272727)">
                 <SideBar />
                 <Box paddingLeft="50px">
                     <ProductsContainer products={products}/>

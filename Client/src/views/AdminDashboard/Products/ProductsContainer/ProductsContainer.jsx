@@ -20,32 +20,32 @@ const ProductsContainer = (props) => {
 
     return (
         <Box width="100%" maxWidth="1500px">
-            <Heading marginBottom={5} marginTop={10}>Products</Heading>
+            <Heading marginBottom={5} marginTop={10} color="white">Products</Heading>
             
-             <Flex py="4" borderBottom="1px solid gray">
+             <Flex py="4" borderBottom="1px solid white">
 
         <Flex marginLeft={5}>
-          <Box flex="1"><Text fontWeight="bold" color="orange.500">ID</Text></Box>
+          <Box flex="1"><Text fontWeight="bold" color="#f27825">ID</Text></Box>
         </Flex>
 
         <Flex marginLeft={7}>
-          <Box flex="2"><Text fontWeight="bold" color="orange.500" >IMAGE</Text></Box>
+          <Box flex="2"><Text fontWeight="bold" color="#f27825" >IMAGE</Text></Box>
         </Flex>
 
         <Flex marginLeft={5}>
-          <Box flex="3"><Text fontWeight="bold" color="orange.500" >NAME</Text></Box>
+          <Box flex="3"><Text fontWeight="bold" color="#f27825" >NAME</Text></Box>
         </Flex>
 
          <Flex marginLeft={20}>
-          <Box flex="4"><Text fontWeight="bold" color="orange.500" >PRICE</Text></Box>
+          <Box flex="4"><Text fontWeight="bold" color="#f27825" >PRICE</Text></Box>
           </Flex>
 
           <Flex marginLeft={5}>
-          <Box flex="5"><Text fontWeight="bold" color="orange.500">QUANT.</Text></Box>
+          <Box flex="5"><Text fontWeight="bold" color="#f27825">QUANT.</Text></Box>
           </Flex>
 
           <Flex marginLeft={3}>
-          <Box flex="6"><Text fontWeight="bold" color="orange.500">AVAIL.</Text></Box>
+          <Box flex="6"><Text fontWeight="bold" color="#f27825">AVAIL.</Text></Box>
           </Flex>
 
         </Flex>
@@ -64,7 +64,7 @@ const ProductsContainer = (props) => {
                 )
                 )
             }
-                        <Box>
+                        <Box pt="20px">
                             <ProductsPaginated
                                 products={products.length}
                                 productsPerPage={productsPerPage}

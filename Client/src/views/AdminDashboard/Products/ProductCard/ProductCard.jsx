@@ -18,12 +18,12 @@ const ProductCard = (props) => {
         .then()
     },[active])
     return (
-        <Flex padding="20px" border="1px solid black">
-            <Text marginRight={10}>{props.id}</Text>
+        <Flex padding="20px" border="1px solid white">
+            <Text marginRight={10} color="#f27825">{props.id}</Text>
             <Image w="45px" src={props.image} marginRight={5} alt={props.name} />
-            <Text marginRight={10}>{props.name}</Text>
-            <Text marginRight={5}>${props.price}</Text>
-            <Text paddingLeft="10px" marginRight={5}>{props.stock} prod.</Text>
+            <Text marginRight={10} color="white">{props.name}</Text>
+            <Text marginRight={5} color="white">${props.price}</Text>
+            <Text paddingLeft="10px" marginRight={5} color="white">{props.stock} prod.</Text>
             {
                 active === false ? <IconButton icon={<FcApproval />} onClick={clickHandlerDisable}></IconButton> :
                     <IconButton icon={<FcCancel />} onClick={clickHandlerDisable}></IconButton>
