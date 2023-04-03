@@ -31,7 +31,7 @@ const ItemDetail = () => {
 
 
   const clickHandler = () => {
-    dispatch(pushToCart(pizza));
+    dispatch(pushToCart({...pizza, quantity: 1}));
     setModalAddtocart(true);
   };
 
