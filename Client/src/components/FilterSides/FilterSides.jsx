@@ -70,10 +70,10 @@ const FilterSides = () => {
                 handleInputChange={handleInputChange}
                 valueState={sidesTerms.filterTaste}
             />
-            <FilterStock
+            {/* <FilterStock
                 handleInputChange={handleInputChange}
                 valueState={sidesTerms.filterStock}
-            />
+            /> */}
             <br />
             <SelectOrderRating
                 handleInputChange={handleInputChange}

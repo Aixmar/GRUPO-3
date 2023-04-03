@@ -68,10 +68,10 @@ const FilterPizzas = () => {
         handleInputChange={handleInputChange}
         valueState={filterTerms.selectByType}
       />
-      <SelectStock
+      {/* <SelectStock
         handleInputChange={handleInputChange}
         valueState={filterTerms.selectStock}
-      />
+      /> */}
       <br />
       <SelectOrderRating
         handleInputChange={handleInputChange}
