@@ -1,5 +1,5 @@
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
-import { Box, Heading, Text, Button, Input, Image, Card, CardHeader, CardBody, Stack, StackDivider } from "@chakra-ui/react";
+import { Box, Heading, Text, Button, Input, Image, Card, CardHeader, CardBody, Stack, StackDivider, Alert, AlertIcon, AlertTitle, AlertDescription, } from "@chakra-ui/react";
 import UpdateEmailForm from "./Updates/UpdateEmail";
 import UpdatePasswordForm from "./Updates/UpdatePassword";
 import { useState, useRef, useEffect } from "react";
@@ -27,22 +27,48 @@ const UserAccount = () => {
   const [loadingImage, setLoadingImage] = useState(false);
   const pond = useRef(null);
 
-  
-  
   useEffect(() => {
     window.localStorage.setItem('loggedUser', JSON.stringify(user));
-  }, [user.image]);
+  }, [user]);
 
 
   const toggleUpdateEmailForm = () => {
     setIsUpdateEmailFormVisible(!isUpdateEmailFormVisible);
   };
-
+  const handleUpdateEmailSuccess = () => {
+    toggleUpdateEmailForm();
+    toast({
+      title: "Email has been changed",
+      position: "top-center",
+      status: "success",
+      duration: 2000,
+      isClosable: true,
+      variant: "subtle",
+      style: {
+        backgroundColor: "white",
+        color: "orange",
+      },
+    });
+  };
 
   const toggleUpdatePasswordForm = () => {
     setIsUpdatePasswordFormVisible(!isUpdatePasswordFormVisible);
   };
-
+  const handleUpdatePasswordSuccess = () => {
+    toggleUpdatePasswordForm();
+    toast({
+      title: "Password has been changed",
+      position: "top-center",
+      status: "success",
+      duration: 2000,
+      isClosable: true,
+      variant: "subtle",
+      style: {
+        backgroundColor: "white",
+        color: "orange",
+      },
+    });
+  };
 
   const uploadImage = async (fileItem) => {
     if (!fileItem[0]?.file?.name) return setCurrentImage('');  
@@ -85,11 +111,8 @@ const UserAccount = () => {
 
   return (
     <>
-      
-
       <Box display="flex" w="100%" minHeight="100vh" bgGradient="linear(to-l,#000000, #272727)" >
         <Box ml="2rem" className="profile" w='auto' >
-
           <Heading pt="10px" pb="20px" color="white" as="h1" size="lg" mb='1rem' ml='1rem' textAlign='center' w='100%' >Profile pic</Heading>
 
           {
@@ -114,16 +137,14 @@ const UserAccount = () => {
               <FilePond 
                 ref={pond} 
                 maxFiles={1} 
-                acceptedFileTypes={['image/png', 'image/jpeg']} 
+                acceptedFileTypes={['image/png', 'image/jpeg', 'image/jpg']} 
                 onupdatefiles={uploadImage}
                 labelIdle='Drag & drop your pic here or browse...'                 
                     />
           </Box>
-  
-
         </Box>
-
-        <Card minHeight='36rem' height={(isUpdateEmailFormVisible || isUpdatePasswordFormVisible ? '44rem' : '32rem') } w='40%' ml='4rem' >
+        
+        <Card minHeight='36rem' height={(isUpdateEmailFormVisible || isUpdatePasswordFormVisible ? '48rem' : '32rem') } w='40%' ml='4rem' >
           <CardHeader>
             <Heading size='lg'>Personal Info</Heading>
           </CardHeader>
@@ -157,10 +178,10 @@ const UserAccount = () => {
                   </Box>
                 </Box>
                 <Box>
-                  {isUpdateEmailFormVisible && ( <UpdateEmailForm onClose formtype="email" {...user} /> )}
+                  {isUpdateEmailFormVisible && ( <UpdateEmailForm toggleUpdateEmailForm={toggleUpdateEmailForm} setUser={setUser} formtype="email" {...user} handleUpdateEmailSuccess={handleUpdateEmailSuccess} /> )}
                 </Box>
               </Box>
-
+             
               <Box>
                 <Box display='flex' justifyContent='space-between' >
                   <Box>
@@ -172,7 +193,7 @@ const UserAccount = () => {
                   </Box>
                 </Box>
                 <Box>
-                {isUpdatePasswordFormVisible && ( <UpdatePasswordForm formType="password" {...user} /> )}
+                {isUpdatePasswordFormVisible && ( <UpdatePasswordForm toggleUpdatePasswordForm={toggleUpdatePasswordForm} setUser={setUser} formType="password" {...user} handleUpdatePasswordSuccess={handleUpdatePasswordSuccess}/> )}
                 </Box>
               </Box>
 

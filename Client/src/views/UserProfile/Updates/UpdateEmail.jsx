@@ -40,15 +40,13 @@ const UpdateEmailForm = (props) => {
     props.setUser(data);
     setIsEmailUpdated(true); // Actualiza el estado para indicar que el correo electrónico se ha actualizado
     setShowForm(false); // Oculta el formulario
-    setTimeout(() => {
-      setIsEmailUpdated(false); // Oculta el alert después de 5 segundos
-      props.toggleUpdateEmailForm(false)
-    }, 5000);
+    props.handleUpdateEmailSuccess() // llama a la función onUpdateSuccess pasada como prop desde el componente padre
   };
 
   return (
-    <Box color='#000' bg='gray' borderRadius='8px' p='10px' >
-      {showForm && (
+
+   showForm && 
+      (<Box color='#000' bg='gray' borderRadius='8px' p='10px' >
         <form onSubmit={handleSubmit}>
           <FormControl display='flex' flexDir='column' alignItems='center' id="newEmail">
             <FormLabel>New Email:</FormLabel>
@@ -59,28 +57,15 @@ const UpdateEmailForm = (props) => {
               value={newEmail}
               onChange={handleEmailChange}
               required
-            />
+              />
           <Button m='10px 0 1rem' w='90%' colorScheme="teal" type="submit" >
             Save
           </Button>
           </FormControl>
         </form>
-      )}
-      {isEmailUpdated && (
-        <motion.div
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -50 }}
-          transition={{ duration: 0.5 }}
-          style={{ position: "fixed", top: "20px", right: "20px" }}
-        >
-          <Alert status="success" variant="subtle" alignItems="center" color='black'>
-            <AlertIcon />
-            Email updated successfully
-          </Alert>
-        </motion.div>
-      )}
-    </Box>
+      </Box> )
+         
+   
   );
 };
 
