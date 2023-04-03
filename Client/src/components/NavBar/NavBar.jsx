@@ -62,11 +62,11 @@ const NavBar = () => {
 
   const handleCloseDrawCart1 = () => {
     setopenDrawCart1(false);
-    }
-
+  }
+  
   function handleNavigate() {
     onClose();
-    history.push("/cart");
+    setopenDrawCart1(false);
     dispatch(openSignupDrawer(false));
   }
 
