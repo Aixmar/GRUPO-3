@@ -9,13 +9,13 @@ import {
     Input,
     Stack,
     FormHelperText,
-    // Modal,
-    // ModalOverlay,
-    // ModalContent,
-    // ModalHeader,
-    // ModalFooter,
-    // ModalBody,
-    // ModalCloseButton,
+     Modal,
+     ModalOverlay,
+     ModalContent,
+     ModalHeader,
+     ModalFooter,
+     ModalBody,
+     ModalCloseButton,
   } from "@chakra-ui/react";
 
 
@@ -31,7 +31,9 @@ const regExPassword = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/;
 const {id ,tokenResetPassword } = useParams()
 const tokenResetPasswordCambiado = tokenResetPassword.replaceAll("$",".")
 const [isSubmitting, setIsSubmitting] = useState(true);
+const [isOpen, setIsOpen] = useState(false);
 
+const handleClose = () => setModalAddtocart(false);
 const goToMenuHandler = () => {
     const modal = document.querySelector("#reset");
     modal.close();
@@ -62,20 +64,19 @@ const handleSubmit = async(e) =>{
         }
     })
     .then(res => {
-        const modal = document.querySelector("#reset");
-        modal.showModal();
+      setIsOpen(true);
     })
     .catch(err => console.log(err))
 }
 
     return (
-        <Box>
+        <Box bgGradient="linear-gradient(to right, #f27825, #eab830)" h='100vh' >
       <Stack
-        
+        m='auto'
         bgGradient="linear-gradient(to right, #f27825, #eab830)"
         color="white"
         borderRadius="md"
-        w="333px"
+        w="40rem"
         padding="8"
         // spacing="6"
         as="form"
@@ -122,25 +123,18 @@ const handleSubmit = async(e) =>{
         >
           Change password
         </Button>
-
-        <dialog id="reset" >
-          <h2>Password changed succesfully!</h2>
-          <div>
-            <Link to="/allpizzas">
-              <button
-                m="1rem 0"
-                p="1.6rem 2rem 1.6rem"
-                fontSize="1.6rem"
-                bg={"orange.400"}
-                color={"white"}
-                _hover={{ bg: "orange.500" }}
-                onClick={goToMenuHandler}
-              >
-                Go to menu
-              </button>
-            </Link>
-          </div>
-        </dialog>
+        <Modal isOpen={isOpen} onClose={handleClose} size='xl' >
+          <ModalOverlay backdropFilter='blur(6px)' bg='#000000b6' />
+          <ModalContent margin='auto' >
+          <ModalCloseButton/>
+            <ModalHeader textAlign='center' fontSize='1.8rem' p='0' >Password changed succesfully </ModalHeader>
+            <ModalBody textAlign='center' fontSize='1.4rem' >
+            </ModalBody>
+            <ModalFooter display='flex' justifyContent='center' p='0' mb='.4rem' >
+              <Link to='/home' ><Button mb='.6rem' fontSize='1.4rem' bg={"orange.400"} color={"white"} _hover={{ bg: "orange.500" }} onClick={handleClose} >Back home</Button></Link>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
       </Stack>
     </Box>
     )

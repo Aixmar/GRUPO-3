@@ -8,7 +8,6 @@ import {
   About,
   NavBar,
   UserForm,
-  UserNavBar,
   ItemDetail,
   CreatePizza,
   AllPizzas,
@@ -33,6 +32,9 @@ import {
   ForgottenPassword,
   ResetPassword,
   AdminAccount,
+  OurStory,
+  Sales
+
 } from "./views/index";
 
 function App() {
@@ -59,26 +61,25 @@ function App() {
           <Route path="/createpizza" element={<CreatePizza />} />
 {/* Todo lo que esue dentro de la ruta RequireAuth esta protegido para que solo pueda acceder un usuario logueado con el rol asignado */}
         <Route element={<RequireAuth allowedRol={'user'}/>}>         
-          <Route path="/profile" element={<UserNavBar />} />
+          <Route path="/profile" element={<UserAccount />} />
           <Route path="/checkout" element={<CheckOut />} />
         </Route>
         
         <Route element={<RequireAuth allowedRol={'admin'}/>}>         
           <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/users" element={<Users />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/createProduct" element={<CreateProduct />} />
+          <Route path="/adminAccount" element={<AdminAccount />} />
+          <Route path="/sales" element={<Sales />}/>
         </Route>
         
-        <Route path="/users" element={<Users />} />
-        <Route path="/products" element={<Products />} />
-        <Route path="/createProduct" element={<CreateProduct />} />
-        <Route path="/adminAccount" element={<AdminAccount />} />
+        
           
         <Route  path="/forgot" element={<ForgottenPassword />}/>
         <Route path="/resetPassword/:id/:tokenResetPassword" element={<ResetPassword />} />
         <Route path="/itemdetail/:id" element={<ItemDetail />} />
         <Route path="/sidedetail/:id" element={<SideDetail />} />
-
-
-        <Route path="/profile" element={<UserNavBar/>} />
         <Route path="/profile/settings" element={<UserSettings />} />
         <Route path="/profile/account" element={<UserAccount />} />
         <Route path="/profile/stars" element={<UserStars />} />
@@ -89,7 +90,11 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<CheckOut />} />
         <Route path="/unauthorized" element={<Unauthorized />}></Route>
+        
         <Route path="*" element={<Error404 />} />
+        <Route path="/ourstory" element={<OurStory />} />
+
+
       </Routes>
     </div>
   );

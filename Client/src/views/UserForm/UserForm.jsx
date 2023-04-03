@@ -6,13 +6,15 @@ import {
   Input,
   Stack,
   FormHelperText,
-  // Modal,
-  // ModalOverlay,
-  // ModalContent,
-  // ModalHeader,
-  // ModalFooter,
-  // ModalBody,
-  // ModalCloseButton,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Image,
+  Text
 } from "@chakra-ui/react";
 
 import { useEffect, useState } from "react";
@@ -20,7 +22,6 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import validate from "./validate";
 import { ok } from "../../assets/CloudinaryImg";
-import css from "./UserForm.module.css";
 import { useAuthProv } from "../../context/AuthProvider";
 
 const UserForm = ({ onClose }) => {
@@ -40,18 +41,17 @@ const UserForm = ({ onClose }) => {
   const [backResponse, setBackResponse] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [emailRegistered,setEmailRegistered] = useState('')
-
-  // // modal chakra
-  // const [ isOpen, setIsOpen ] = useState(false);
-  // const handleClose = () => setIsOpen(false);
-  // const handleOpen = () => setIsOpen(true);
   const navigate = useNavigate();
   const { setUser, loginWithGoogle } = useAuthProv();
+  const [ isOpen, setIsOpen ] = useState(false);
+
+
 
   useEffect(() => {
     const hasErrors = Object.keys(errors).length > 0;
     setIsSubmitting(!form.email || !form.password || hasErrors);
   }, [form, errors]);
+
 
   const inputChangeHandler = (event) => {
     const { name, value } = event.target;
@@ -59,14 +59,17 @@ const UserForm = ({ onClose }) => {
     setErrors(validate({ ...form, [name]: value }));
   };
 
+
+  const handleClose = () => setIsOpen(false);
+  const handleOpen = () => setIsOpen(true);
+
+
   const submitHandler = async (event) => {
     event.preventDefault();
    
     try {
       const response = await axios.post("/users", form);
-      console.log(response.data);
-      const modal = document.querySelector("#signUpModal");
-      modal.showModal();
+      handleOpen();
       setBackResponse(response.data);
       const email = await axios.post("/sendmail/register", { email: form.email });
       setForm({ email: "", password: "" });
@@ -79,28 +82,17 @@ const UserForm = ({ onClose }) => {
       navigate(from, { replace: true });
       // setTimeout(() => onClose(), 4000);
     } catch (error) {
-      console.log(error);
       if(error.response) setEmailRegistered(error.response.data.error)
     }
   };
 
-  // el que estaba antes de loguear automaticamente
-
-  // const submitHandler = async (event) => {
-  //   event.preventDefault();
-  //   const { data } = await axios.post("/users", form);
-  //   const modal = document.querySelector("#signUpModal")
-  //   modal.showModal();
-  //   // setTimeout(() => onClose(), 3000);
-  //   setBackResponse(data);
-  //   setForm({ email: "", password: "" });
-  // };
 
   const goToMenuHandler = () => {
-    const modal = document.querySelector("#signUpModal");
-    modal.close();
     onClose();
+    handleClose();
   };
+
+
 
   return (
     <Box
@@ -261,45 +253,22 @@ const UserForm = ({ onClose }) => {
         >
           Sign In
         </Button>
-        {/* <Link to="/forgot-password">Forgot Password</Link> */}
-        {/* 
-        <Modal isOpen={isOpen} onClose={handleClose} centered >
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>Título del Modal</ModalHeader>
-            <ModalBody>
-              Contenido del Modal. Puedes agregar cualquier componente aquí.
+        
+        <Modal isOpen={isOpen} onClose={handleClose} >
+          <ModalOverlay backdropFilter='blur(6px)' bg='#000000b6' />
+          <ModalContent margin='auto'  >
+          {/* <ModalCloseButton/> */}
+            <Image src={ok} alt="ok" h='2.8rem' objectFit='contain' mt='1rem' mb='0' />
+            <ModalHeader textAlign='center' fontSize='1.8rem' p='0' >Successful registered</ModalHeader>
+            <ModalBody textAlign='center' fontSize='1.4rem' >
+              <Text >Welcome to <Text color="orange.500" display='inline' >Mix 2 Pizza</Text>, {backResponse.name}!</Text>
             </ModalBody>
-
-            <ModalFooter>
-              <Button colorScheme="blue" mr={3} onClick={handleClose}>
-                Cerrar
-              </Button>
-              <Button variant="ghost">Otro botón</Button>
+            <ModalFooter display='flex' justifyContent='center' >
+            <Link to='allpizzas' ><Button fontSize='1.2rem' bg={"orange.400"} color={"white"} _hover={{ bg: "orange.500" }} onClick={goToMenuHandler} >Go to menu</Button></Link>
             </ModalFooter>
           </ModalContent>
         </Modal>
- */}
 
-        <dialog id="signUpModal" className={css.singUpDialog}>
-          <img src={ok} alt="ok" />
-          <h2>Successful registered, welcome {backResponse.name}!</h2>
-          <div>
-            <Link to="/allpizzas">
-              <Button
-                m="1rem 0"
-                p="1.6rem 2rem 1.6rem"
-                fontSize="1.6rem"
-                bg={"orange.400"}
-                color={"white"}
-                _hover={{ bg: "orange.500" }}
-                onClick={goToMenuHandler}
-              >
-                Go to menu
-              </Button>
-            </Link>
-          </div>
-        </dialog>
       </Stack>
     </Box>
   );

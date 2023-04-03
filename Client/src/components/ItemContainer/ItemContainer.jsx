@@ -42,7 +42,7 @@ const ItemContainer = (props) => {
               image={bebida.image}
               price={bebida.price}
               name={bebida.name}
-              rating={bebida.rating}
+              reviews={bebida.reviews}
               stock={bebida.stock}
             />
           ))

@@ -15,8 +15,12 @@ import { StarIcon } from "@chakra-ui/icons";
 import { useAuthProv } from "../../context/AuthProvider";
 import axios from "axios";
 import { getItemDetail } from "../../redux/actions";
+import { Link } from "react-router-dom";
+
+
 
 const Review = (props) => {
+
   const toast = useToast()
   const item = useSelector((state) => state.itemDetail)
   const { user } = useAuthProv()
@@ -27,19 +31,35 @@ const Review = (props) => {
       rating: null,
       review: ""
   })
+
+  const [errors, setErrors] = useState({})
   const [reviewFound,setReviewFound] = useState(false)
+
+  const validate = (form) => {
+    const newErrors = {};
+
+    if (!form.rating) newErrors.rating = "Rating required";
+    if (!form.review) newErrors.review = "Review required";
+
+    return newErrors;
+  }
+
   
   const handleReviewChange = (e) => {
     setForm({ ...form, review: e.target.value })
+    errors.review && setErrors(validate({ ...form, review: e.target.value }));
   };
 
   const handleRating = (value) => {
     setForm({ ...form,  rating: value })
+    errors.rating && setErrors(validate({ ...form,  rating: value }));
   };
 
   const reviewFound2 = item.reviews?.find(r => r.userId === user.id)
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const hasErrors = validate(form);
+    setErrors(hasErrors);
       if(reviewFound || reviewFound2){
         toast({
           title: "Review not added",
@@ -55,7 +75,7 @@ const Review = (props) => {
           },
         });
       }
-      else{
+       else if(!Object.values(hasErrors).length){
         await axios.put(`/pizzas/reviews/${item.id}`, form)
         setReviewFound(true)
         toast({
@@ -74,14 +94,15 @@ const Review = (props) => {
   };
   return (
     <Box
-      borderWidth="1px"
+      border='1px solid #aaa'
+      m='0 2rem'
       borderRadius="lg"
       p={4}
-      mt={4}
+      color='#fff'
     >
       <form onSubmit={handleSubmit}>
         <FormControl id="rating" mb={4}>
-          <FormLabel>Puntuación</FormLabel>
+          <FormLabel>How good was it?</FormLabel>
           <Flex alignItems="center">
             {[...Array(5)].map((_, index) => {
               const value = index + 1;
@@ -100,23 +121,31 @@ const Review = (props) => {
                 </Box>
               );
             })}
-
           </Flex>
-          <Input type="hidden" name="rating" value="" required />
+          {errors.rating && <Text color="red">{errors.rating}</Text> }
+          <Input type="hidden" name="review" value="" required />
         </FormControl>
-        <Box mt="8">
+        <Box mt="6">
           <FormControl>
-            <FormLabel>Review</FormLabel>
+            <FormLabel>Do you have a review on "{item.name}"?</FormLabel>
             <Textarea
+              border='1px solid #454545'
               value={form.review}
               onChange={handleReviewChange}
               placeholder="Write a review"
             />
           </FormControl>
-
-          <Button type="submit" mt="4" onSubmit={handleSubmit}>
-            Submit Review
-          </Button>
+          {errors.review && <Text color="red">{errors.review}</Text> }
+          <Flex justifyContent='flex-end' >       
+            <Button type="submit" mt="4" colorScheme="orange" onSubmit={handleSubmit}>
+              Submit Review
+            </Button>
+            <Link to="/profile/history">
+              <Button ml='2rem' mt="4" colorScheme="orange" >
+                Back to History
+              </Button>
+            </Link>
+          </Flex>
         </Box>
       </form>
     </Box>

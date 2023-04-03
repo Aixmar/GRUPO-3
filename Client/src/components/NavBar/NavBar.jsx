@@ -22,6 +22,10 @@ import {
   Button,
   Image,
   CloseButton,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem
 } from "@chakra-ui/react";
 import { Link as RouterLink, useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -71,7 +75,33 @@ const NavBar = () => {
     const newCart = cartItems.filter((item, i) => i !== index);
     dispatch(popToCart(newCart));
   };
-  ///////////////////
+  ///////////////////ProfileSelect///
+
+  const links = [
+    {
+      label: "Account",
+      to: "/profile/account",
+    },
+    // {
+    //   label: "Settings",
+    //   to: "/profile/settings",
+    // },
+    {
+      label: "Favorites",
+      to: "/profile/stars",
+    },
+    {
+      label: "History",
+      to: "/profile/history",
+    },
+  ];
+    
+    const [selectedOption, setSelectedOption] = useState("");
+  
+    const handleLinkClick = (to) => {
+      setSelectedOption(to);
+    };
+  ///////////////////////////////
 
   const updateCartUser = { cart: cartItems, userId: user.id };
 
@@ -152,7 +182,7 @@ const NavBar = () => {
                 as={RouterLink}
                 to="/allpizzas"
                 _hover={{ color: "#f27825" }}
-                color={pathname === '/allpizzas' ? '#f27825' : '#fff'}
+                color={pathname === '/allpizzas' || pathname === '/alldrinks' || pathname === '/allsides' ? '#f27825' : '#fff'}
               >
                 TRADITIONAL MENU
               </BreadcrumbLink>
@@ -182,22 +212,36 @@ const NavBar = () => {
                   </BreadcrumbLink>
                 </BreadcrumbItem>
               ) : user.email && (
-                <BreadcrumbItem>
-                  <BreadcrumbLink
-                    as={RouterLink}
+              <BreadcrumbItem>
+                <Menu>
+                  <MenuButton
+                    as={BreadcrumbLink}
                     to="/profile/account"
                     _hover={{ color: "#f27825" }}
-                    color={pathname.includes('/profile/') ? '#f27825' : '#fff'}
+                    color={pathname.includes("/profile/") ? "#f27825" : "#fff"}
                   >
                     PROFILE
-                  </BreadcrumbLink>
-                </BreadcrumbItem> )            
-            }
+                  </MenuButton>
+                  <MenuList color="black" zIndex={999}>
+                  {links.map((link, index) => (
+                    <RouterLink to={link.to} color="black">
+                      <MenuItem
+                        key={index}
+                        onClick={() => handleLinkClick(link.to)}
+                        _hover={{ color: "#f27825" }}
+                        color={pathname === link.to ? "#f27825" : "black"}>
+                        {link.label}
+                      </MenuItem>
+                    </RouterLink>
+                  ))}
+                </MenuList>
+              </Menu>
+            </BreadcrumbItem>)}
            
             {/* //////////////////////////////////////////////////// DRAWER CART /////////////////////////////////////// */}
             
             <BreadcrumbItem>                
-  <Image onClick={handleopenDrawCart1}  cursor="pointer" src={cartlogo} width="50px" height="50px" />
+  <Image onClick={handleopenDrawCart1} cursor="pointer" src={cartlogo} width="50px" height="50px" />
   <Drawer
     isOpen={openDrawCart1}
     placement="right"
@@ -207,33 +251,31 @@ const NavBar = () => {
     <DrawerOverlay />
     <DrawerContent>
       <DrawerCloseButton />
-      <DrawerHeader>CART</DrawerHeader>
+      <DrawerHeader fontSize='1.8rem' >YOUR CART</DrawerHeader>
       <DrawerBody>
         {cartItems.length === 0 ? (
           <Text>There are no items in the cart</Text>
         ) : (
           <>
-            <Heading color="#f27825" pb="20px">Selected products </Heading>
-            <UnorderedList listStyleType="none">
+            <Heading color="#f27825" pb="20px" fontSize='1.8rem' >Selected products </Heading>
+            <UnorderedList w='100%' m='0' listStyleType="none">
               {cartItems.map((item, index) => (
-                <ListItem key={item.name}>
-                  <Image
-                    src={item.image}
-                    alt={item.name}
-                    boxSize="50px"
-                    mr="4"
-                  />
-                  <span>{item.name}</span>
-                  <span style={{ marginLeft: "1rem" }}>
-                    ${item.price}
-                  </span>
-                  <CloseButton
-                    onClick={() => onClickDelete(index)}
-                    w="4rem"
-                    color="red"
-                  >
-                    Delete
-                  </CloseButton>
+                <ListItem key={item.name} border='1px solid #bcbcbc' rounded='md' h='5rem' display='flex' mb='.2rem' >
+
+                  <Image src={item.image} alt={item.name} h='4rem' w='auto' objectFit='cover' m='auto 2px' border='1px solid #bcbcbc' borderRadius='full' />
+
+                  <Flex flexDirection='column' w='100%' >
+                    <Flex h='2rem' m='.4rem 0' fontSize='1rem' fontWeight='bold' justifyContent='space-between' mr='1rem' >
+                      <Text ml='10px' >{item.name}</Text>
+                      <Text >${item.price}</Text>
+                    </Flex>
+                    <Flex  justifyContent='flex-end'  >
+                    <CloseButton w='3rem' mr='10px' mb='5px' onClick={() => onClickDelete(index)} color="red" _hover={{background: '#f34949', color: '#fff' }} >
+                      Delete
+                    </CloseButton>
+                    </Flex>
+                  </Flex>
+
                 </ListItem>
               ))}
             </UnorderedList>
@@ -244,7 +286,7 @@ const NavBar = () => {
         <Button variant="outline" mr={3} onClick={handleCloseDrawCart1}>
           Continue shopping
         </Button>
-        <Link as={RouterLink} to='/cart' onClick={handleNavigate}>
+        <Link as={RouterLink} to='/cart' style={{textDecoration: 'none' }} onClick={handleNavigate}>
           <Button colorScheme="orange">Go to Cart</Button>
         </Link>
       </DrawerFooter>
@@ -293,8 +335,8 @@ const NavBar = () => {
               </>
             )}
 
-            { user?.image ? ( <Image src={user.image} alt="profile" h="3rem" w='3rem' ml="2rem" objectFit='cover' borderRadius='50%' /> )
-            : user.email && ( <Image src={profImg} alt="profile" h="3rem" w='3rem' ml="2rem" objectFit='cover' borderRadius='50%' /> )
+            { user?.image ? <Image src={user.image} alt="profile" h="3rem" w='3rem' ml="2rem" objectFit='cover' borderRadius='50%' />
+            : user?.email && <Image src={profImg} alt="profile" h="3rem" w='3rem' ml="2rem" objectFit='cover' borderRadius='50%' />
               
             }
           </Breadcrumb>

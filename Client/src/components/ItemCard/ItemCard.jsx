@@ -19,8 +19,8 @@ import {
   getUserById,
   openSignupDrawer,
 } from "../../redux/actions";
-import { useEffect, useState } from "react";
 import { useAuthProv } from "../../context/AuthProvider";
+import { useState } from "react";
 
 const ItemCard = (props) => {
   const cart = useSelector((state) => state.cart);
@@ -69,6 +69,20 @@ const ItemCard = (props) => {
     ? USUARIOAESCUCHAR.favorites.some((favorite) => favorite.id === props.id)
     : null;
 
+  const ratingNums = props.reviews?.map(r => r.rating)
+  const total = 0
+
+  const getProm = (nums, total) => {
+    if (nums) {
+      for (let i = 0; i < nums.length; i++) {
+        total = total + nums[i]
+      }
+      const result = total / nums.length
+      return result
+    }
+  }
+  const ratingProm = getProm(ratingNums, total)
+
   return (
     <Box
       bgGradient="linear-gradient(to right, #f27825, #eab830)"
@@ -108,25 +122,26 @@ const ItemCard = (props) => {
             />
           }
         </Flex>
-        <Flex
-          direction="row"
-          justify="space-between"
-          alignItems="center"
-          my="2"
-        >
-          <Text
-            fontFamily="Montserrat"
-            fontSize="lg"
-            fontWeight="semibold"
-            color="white"
-          >
-            ⭐ {props.rating}
-          </Text>
-          <Select w="5rem" value={quantity} onChange={handleInputChange}>
-            <option value={1}>1</option>
-            <option value={2}>2</option>
-            <option value={3}>3</option>
-          </Select>
+        <Flex direction="row" alignItems="center" my="2" justify="space-between">
+          <Flex>
+            {props.reviews && (
+              <Text
+                fontFamily="Montserrat"
+                fontSize="lg"
+                fontWeight="semibold"
+                color="white"
+              >
+                ⭐ {ratingProm.toString().length === 1 ? ratingProm : ratingProm.toFixed(1)}
+              </Text>
+            )}
+            </Flex>
+            <Flex>
+            <Select w="5rem" value={quantity} onChange={handleInputChange}>
+              <option value={1}>1</option>
+              <option value={2}>2</option>
+              <option value={3}>3</option>
+            </Select>
+          </Flex>
         </Flex>
         <Flex
           direction="row"

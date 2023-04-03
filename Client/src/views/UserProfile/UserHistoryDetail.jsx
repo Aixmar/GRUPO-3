@@ -7,9 +7,9 @@ import {
   FormLabel,
   Textarea,
   Input,
+  Image,
+  Flex,
 } from "@chakra-ui/react";
-import UserNavBar from "./UserNavBar";
-import user from "./json";
 import Review from "./Review";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -36,111 +36,120 @@ const UserHistoryDetail = () => {
   }, [])
 
   return (
-    <div>
-      <UserNavBar />
-      <Box p="6" bg="gray.50" rounded="md">
-        <Heading as="h3" size="lg" mb="4">
-          {item.name}
-        </Heading>
-        <Box display="flex" alignItems="center" mb="4">
-          <Box w="48px" h="48px" mr="4">
-            <img src={item.image} alt={item.name} />
-          </Box>
-          <Box>
-            <Text>Price: ${item.price}</Text>
-          </Box>
-        </Box>
+    <Box minHeight="100vh" bgGradient="linear(to-l,#000000, #272727)" >
+  
+      <Box p='1rem' rounded="md" w='100%' color='#fff' display='flex' >
+        <Flex flexDir='column' rounded="md" w='46%' color='#fff' ml='1rem' >
+
+          <Heading display='flex' as="h3" size='lg' mb="4" justifyContent='space-between' alignItems='flex-end' >{item.name} <Text fontSize='1rem' >Price: ${item.price}</Text></Heading>
+          <Flex alignItems="center" mb="4">
+            <Box w='100%' >
+              <Image src={item.image} alt={item.name} h='17.4rem' w='100%' objectFit='cover' borderRadius='4px' />
+            </Box>
+          </Flex>
+
+        </Flex>
         {item.category === 'pizza' ? 
-        <Box>
-        <Heading as="h4" size="md" mb="2">
-          Ingredients
-        </Heading>
 
-        <Box>
-          <FormControl>
-            <FormLabel>Dough</FormLabel>
-            <Text>{item?.detail?.dough}</Text>
-          </FormControl>
-          <FormControl>
-            <FormLabel>Type</FormLabel>
-            <Text>{item?.detail?.type}</Text>
-          </FormControl>
-          <FormControl>
-            <FormLabel>Base</FormLabel>
-            <Text>{item?.detail?.base}</Text>
-          </FormControl>
-          <FormControl>
-            <FormLabel>Mozzarella</FormLabel>
-            <Text>{item?.detail?.mozzarella}</Text>
-          </FormControl>
-          <FormControl>
-            <FormLabel>Toppings</FormLabel>
-            {item?.detail?.toppingIngredients?.map((ingredient) => (
-              <Text key={ingredient}>{ingredient}</Text>
-            ))}
-          </FormControl>
-          <FormControl>
-            <FormLabel>Cheeses</FormLabel>
-            {item?.detail?.cheeseIngredients?.map((ingredient) => (
-              <Text key={ingredient}>{ingredient}</Text>
-            ))}
-          </FormControl>
-          <FormControl>
-            <FormLabel>Meats</FormLabel>
-            {item?.detail?.meatIngredients?.map((ingredient) => (
-              <Text key={ingredient}>{ingredient}</Text>
-            ))}
-          </FormControl>
+        <Box w='54%' h='auto' pl='10px' m='0 1rem' >
+          <Heading as="h3" size="lg" mb="4" >Ingredients</Heading>
+
+          <Box  >
+            <Flex p='1rem' border='1px solid #aaa' borderRadius='4px' textAlign='center' h='7rem' >         
+              <FormControl>
+                <FormLabel color='#f27825' textAlign='center' fontWeight='bold' borderBottom='1px solid #454545' pb='8px' >Dough</FormLabel>
+                <Text>{item?.detail?.dough}</Text>
+              </FormControl>
+              <FormControl>
+                <FormLabel color='#f27825' textAlign='center' fontWeight='bold'  borderBottom='1px solid #454545' pb='8px' >Type</FormLabel>
+                <Text>{item?.detail?.type}</Text>
+              </FormControl>
+              <FormControl>
+                <FormLabel color='#f27825' textAlign='center' fontWeight='bold'  borderBottom='1px solid #454545' pb='8px' >Base</FormLabel>
+                <Text>{item?.detail?.base}</Text>
+              </FormControl>
+              <FormControl>
+                <FormLabel color='#f27825' textAlign='center' fontWeight='bold'  borderBottom='1px solid #454545' pb='8px' >Mozzarella</FormLabel>
+                <Text>{item?.detail?.mozzarella}</Text>
+              </FormControl>
+            </Flex>
+            <Flex p='1rem' border='1px solid #aaa' borderRadius='4px' mt='2rem' textAlign='center' h='8.4rem' >          
+              <FormControl >
+                <FormLabel color='#f27825' textAlign='center' fontWeight='bold' borderBottom='1px solid #454545' pb='8px' >Toppings</FormLabel>
+                {item?.detail?.toppingIngredients?.map((ingredient) => (
+                  <Text key={ingredient}>{ingredient}</Text>
+                ))}
+              </FormControl>
+              <FormControl>
+                <FormLabel color='#f27825' textAlign='center' fontWeight='bold' borderBottom='1px solid #454545' pb='8px' >Cheeses</FormLabel>
+                {item?.detail?.cheeseIngredients?.map((ingredient) => (
+                  <Text key={ingredient}>{ingredient}</Text>
+                ))}
+              </FormControl>
+              <FormControl>
+                <FormLabel color='#f27825' textAlign='center' fontWeight='bold' borderBottom='1px solid #454545' pb='8px' >Meats</FormLabel>
+                {item?.detail?.meatIngredients?.map((ingredient) => (
+                  <Text key={ingredient}>{ingredient}</Text>
+                ))}
+              </FormControl>
+            </Flex>
+          </Box>
         </Box>
-      </Box>
+
         : item.category === 'drinks' ?
-        <Box>
-        <Box>
-          <FormControl>
-            <FormLabel>Sugar</FormLabel>
-            <Text>{item?.detail?.onSugar}</Text>
-          </FormControl>
-          <FormControl>
-            <FormLabel>Volumen</FormLabel>
-            <Text>{item?.detail?.volumen}</Text>
-          </FormControl>
-          <FormControl>
-            <FormLabel>Description</FormLabel>
-            <Text>{item?.detail?.description}</Text>
-          </FormControl>
-        </Box>
-      </Box>
-      : <Box>
-      <Heading as="h4" size="md" mb="2">
-        Ingredients
-      </Heading>
 
-      <Box>
-        <FormControl>
-          <FormLabel>Calories</FormLabel>
-          <Text>{item?.detail?.calories}</Text>
-        </FormControl>
-        <FormControl>
-          <FormLabel>Fat</FormLabel>
-          <Text>{item?.detail?.fat}</Text>
-        </FormControl>
-        <FormControl>
-          <FormLabel>Carbs</FormLabel>
-          <Text>{item?.detail?.carbs}</Text>
-        </FormControl>
-        <FormControl>
-          <FormLabel>Protein</FormLabel>
-          <Text>{item?.detail?.protein}</Text>
-        </FormControl>
-        <FormControl>
-          <FormLabel>Description</FormLabel>
-          <Text>{item?.detail?.description}</Text>
-        </FormControl>
-      </Box>
-    </Box>} 
-      </Box>
+        <Box w='54%' h='17.4rem' pl='10px' m='3.2rem 1rem 0' border='1px solid #aaa' borderRadius='4px' textAlign='center'  >
+          <Flex h='7rem' >
+            <FormControl>
+              <FormLabel color='#f27825' textAlign='center' fontWeight='bold' borderBottom='1px solid #454545' p='8px 0' >Sugar</FormLabel>
+              <Text>{item?.detail?.onSugar}</Text>
+            </FormControl>
+            <FormControl>
+              <FormLabel color='#f27825' textAlign='center' fontWeight='bold' borderBottom='1px solid #454545' p='8px 0' >Volumen</FormLabel>
+              <Text>{item?.detail?.volumen}</Text>
+            </FormControl>
+          </Flex>
+          <Flex h='8.4rem' mt='.6rem' >
+            <FormControl>
+              <FormLabel color='#f27825' textAlign='center' fontWeight='bold' borderBottom='1px solid #454545' p='8px 0' >Description</FormLabel>
+              <Text>{item?.detail?.description}</Text>
+            </FormControl>
+          </Flex>
+        </Box>
+
+      : 
+      
+        <Box w='54%' h='17.4rem' pl='10px' m='3.2rem 1rem 0' border='1px solid #aaa' borderRadius='4px' textAlign='center' >
+          <Flex h='7rem' >
+            <FormControl>
+              <FormLabel color='#f27825' textAlign='center' fontWeight='bold' borderBottom='1px solid #454545' p='8px 0' >Calories</FormLabel>
+              <Text>{item?.detail?.calories}</Text>
+            </FormControl>
+            <FormControl>
+              <FormLabel color='#f27825' textAlign='center' fontWeight='bold' borderBottom='1px solid #454545' p='8px 0' >Fat</FormLabel>
+              <Text>{item?.detail?.fat}</Text>
+            </FormControl>
+            <FormControl>
+              <FormLabel color='#f27825' textAlign='center' fontWeight='bold' borderBottom='1px solid #454545' p='8px 0' >Carbs</FormLabel>
+              <Text>{item?.detail?.carbs}</Text>
+            </FormControl>
+          </Flex>
+          <Flex h='8.4rem' mt='.6rem' >            
+            <FormControl>
+              <FormLabel color='#f27825' textAlign='center' fontWeight='bold' borderBottom='1px solid #454545' p='8px 0' >Protein</FormLabel>
+              <Text>{item?.detail?.protein}</Text>
+            </FormControl>
+            <FormControl>
+              <FormLabel color='#f27825' textAlign='center' fontWeight='bold' borderBottom='1px solid #454545' p='8px 0' >Description</FormLabel>
+              <Text>{item?.detail?.description}</Text>
+            </FormControl>
+          </Flex>
+        </Box>
+      }
+
+    </Box>
       <Review/>
-    </div>
+    </Box>
   );
 };
 

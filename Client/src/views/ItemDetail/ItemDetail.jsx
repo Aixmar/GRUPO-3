@@ -14,44 +14,59 @@ import {
   ModalCloseButton,
   ModalBody,
   Flex,
-  Avatar,
-} from "@chakra-ui/react";
+  Avatar } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
 import axios from "axios";
 import css from "./ItemDetail.module.css";
+import { ok } from "../../assets/CloudinaryImg";
 
 const ItemDetail = () => {
+
   const { id } = useParams();
   const dispatch = useDispatch();
   const [pizza, setPizza] = useState({});
+  const [ modalAddtocart, setModalAddtocart ] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
+
 
   const clickHandler = () => {
-    const modal = document.querySelector("#createPizzaModal");
     dispatch(pushToCart(pizza));
-    modal.showModal();
+    setModalAddtocart(true);
   };
-  const clickHandlerModal = () => {
-    const modal = document.querySelector("#createPizzaModal");
-    modal.close();
+
+
+  const handleClose = () => setModalAddtocart(false);
+
+
+  const getUserReview = (currentPizza) => {
+    currentPizza?.reviews?.map( async (review) => {    
+      const { data } = await axios.get(`/users/${review.userId}`);
+      review.image = data.image;
+    });
+    setPizza({ ...currentPizza });
   };
+  
+
   useEffect(() => {
     axios
-      .get(`/pizzas/${id}`)
-      .then((data) => data.data)
-      .then((pizza) => setPizza(pizza));
+    .get(`/pizzas/${id}`)
+    .then((data) => data.data)
+    .then((pizza) => {
+      setPizza(pizza);
+      getUserReview(pizza);     
+    });
 
     window.scrollTo(0, 0);
     document.querySelector("body").classList.add(css.disableScroll);
-    return () =>
-      document.querySelector("body").classList.remove(css.disableScroll);
+    return () => document.querySelector("body").classList.remove(css.disableScroll);
   }, []);
-  console.log("pizza------->", pizza);
 
-  // console.log('HOLA SOY LOS TOPPINGS', pizza.detail.toppingIngredients)
-  const [isOpen, setIsOpen] = useState(false);
+
   const handleModal = () => {
-    setIsOpen(!isOpen);
+    setIsOpen(!isOpen);   
   };
+
 
   return (
     <Box
@@ -106,11 +121,7 @@ const ItemDetail = () => {
                 fontWeight="semibold"
                 color="white"
               >
-                <Text color="#f27825" display="inline">
-                  Dough:
-                </Text>{" "}
-                {pizza?.detail?.dough}
-              </Text>
+                <Text color="#f27825" display="inline">Dough:</Text> {pizza?.detail?.dough}</Text>
             )}
             {pizza.category === "pizza" && (
               <Text
@@ -119,11 +130,7 @@ const ItemDetail = () => {
                 fontWeight="semibold"
                 color="white"
               >
-                <Text color="#f27825" display="inline">
-                  Base:
-                </Text>{" "}
-                {pizza?.detail?.base}
-              </Text>
+                <Text color="#f27825" display="inline">Base:</Text> {pizza?.detail?.base}</Text>
             )}
             {pizza.category !== "pizza" && (
               <Text
@@ -132,11 +139,7 @@ const ItemDetail = () => {
                 fontWeight="semibold"
                 color="white"
               >
-                <Text color="#f27825" display="inline">
-                  Description:
-                </Text>{" "}
-                {pizza?.detail?.description}
-              </Text>
+                <Text color="#f27825" display="inline">Description:</Text> {pizza?.detail?.description}</Text>
             )}
             {pizza.category === "pizza" && (
               <Text
@@ -145,11 +148,7 @@ const ItemDetail = () => {
                 fontWeight="semibold"
                 color="white"
               >
-                <Text color="#f27825" display="inline">
-                  Mozzarella:
-                </Text>{" "}
-                {pizza?.detail?.mozzarella}
-              </Text>
+                <Text color="#f27825" display="inline">Mozzarella:</Text> {pizza?.detail?.mozzarella}</Text>
             )}
             {pizza.category === "pizza" &&
               pizza.detail.meatIngredients.length !== 0 && (
@@ -159,11 +158,7 @@ const ItemDetail = () => {
                   fontWeight="semibold"
                   color="white"
                 >
-                  <Text color="#f27825" display="inline">
-                    Meat ingredients:
-                  </Text>{" "}
-                  {pizza?.detail?.meatIngredients?.join(", ")}
-                </Text>
+                  <Text color="#f27825" display="inline">Meat ingredients:</Text> {pizza?.detail?.meatIngredients?.join(", ")}</Text>
               )}
             {pizza.category === "pizza" &&
               pizza.detail.cheeseIngredients.length !== 0 && (
@@ -173,11 +168,7 @@ const ItemDetail = () => {
                   fontWeight="semibold"
                   color="white"
                 >
-                  <Text color="#f27825" display="inline">
-                    Cheese ingredients:
-                  </Text>{" "}
-                  {pizza?.detail?.cheeseIngredients?.join(", ")}
-                </Text>
+                  <Text color="#f27825" display="inline">Cheese ingredients:</Text> {pizza?.detail?.cheeseIngredients?.join(", ")}</Text>
               )}
             {pizza.category === "pizza" &&
               pizza.detail.toppingIngredients.length !== 0 && (
@@ -188,13 +179,11 @@ const ItemDetail = () => {
                   color="white"
                   mb="1rem"
                 >
-                  <Text color="#f27825" display="inline">
-                    Topping ingredients:
-                  </Text>{" "}
-                  {pizza?.detail?.toppingIngredients?.join(", ")}
-                </Text>
+                  <Text color="#f27825" display="inline">Topping ingredients:</Text> {pizza?.detail?.toppingIngredients?.join(", ")}</Text>
               )}
+
             <Button onClick={handleModal}>See reviews</Button>
+
             <Modal isOpen={isOpen} onClose={handleModal}>
               <ModalOverlay />
               <ModalContent>
@@ -299,33 +288,21 @@ const ItemDetail = () => {
           </Box>
         </Box>
 
-        <dialog className={css.modalAddToCart} id="createPizzaModal">
-          <h2>Pizza added to cart successfully!</h2>
-          <div>
-            <Link to="/allpizzas">
-              <Button
-                fontSize={"1.4rem"}
-                width={"90%"}
-                p={"1.6rem"}
-                margin={"1.2rem 0 .8rem 0"}
-                background="linear-gradient(to right, #f27833, #eab830)"
-              >
-                Continue buying
-              </Button>
-            </Link>
-            <Link to="/cart">
-              <Button
-                fontSize={"1.4rem"}
-                width={"90%"}
-                p={"1.6rem"}
-                margin={"1.2rem 0 .8rem 0"}
-                background="linear-gradient(to right, #f27833, #eab830)"
-              >
-                Go to cart
-              </Button>
-            </Link>
-          </div>
-        </dialog>
+
+        <Modal isOpen={modalAddtocart} onClose={handleClose} >
+          <ModalOverlay backdropFilter='blur(6px)' bg='#000000b6' />
+          <ModalContent margin='auto'  >
+          <ModalCloseButton/>
+            <Image src={ok} alt="ok" h='2.8rem' objectFit='contain' mt='1rem' mb='0' />
+            <ModalHeader textAlign='center' fontSize='1.8rem' p='0' >Added to cart successfully!</ModalHeader>
+            <ModalBody textAlign='center' fontSize='1.4rem' >
+            <Link to='/allpizzas' ><Button mt='.6rem' fontSize='1.4rem' bg={"orange.400"} color={"white"} _hover={{ bg: "orange.500" }} onClick={handleClose} >Continue shopping</Button></Link>
+            <Text>or</Text>
+            <Link to='/cart' ><Button mb='.6rem' fontSize='1.4rem' bg={"orange.400"} color={"white"} _hover={{ bg: "orange.500" }} onClick={handleClose} >Go to cart</Button></Link>
+            </ModalBody>
+          </ModalContent>
+        </Modal>
+
       </Box>
     </Box>
   );

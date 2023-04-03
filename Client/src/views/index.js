@@ -1,7 +1,6 @@
 import Landing from "./Landing/Landing";
 import Home from "./Home/Home";
 import UserForm from "./UserForm/UserForm";
-import UserNavBar from "./UserProfile/UserNavBar";
 import NavBar from "../components/NavBar/NavBar";
 import About from "./About/About";
 import ItemDetail from "./ItemDetail/ItemDetail";
@@ -28,6 +27,9 @@ import Unauthorized from "./Unauthorized/Unauthorized"
 import ForgottenPassword from "./forgottenPassword/ForgottenPassword"
 import ResetPassword from "./ResetPassword/ResetPassword"
 import AdminAccount from "./AdminDashboard/AdminAccount/AdminAccount";
+import OurStory from "./OurStory/OurStory";
+import Sales from "./AdminDashboard/Sales/Sales"
+
 
 export {
   Landing,
@@ -35,7 +37,6 @@ export {
   About,
   NavBar,
   UserForm,
-  UserNavBar,
   ItemDetail,
   CreatePizza,
   AllPizzas,
@@ -60,4 +61,6 @@ export {
   ForgottenPassword,
   ResetPassword,
   AdminAccount,
+  OurStory,
+  Sales
 };
