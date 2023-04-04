@@ -22,16 +22,44 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useAuthProv } from "../../context/AuthProvider";
+import axios from "axios";
+import { useToast } from "@chakra-ui/react";
 // import UpdateAddressForm from "./Updates/UpdateAdress";
 
 
 const UserSettings = () => {
+
   const { user } = useAuthProv();
   const [notificationsByEmail, setNotificationsByEmail] = useState(false);
-  const [isUpdateAddressFormVisible, setIsUpdateAddressFormVisible] =
-    useState(false);
+  const [isUpdateAddressFormVisible, setIsUpdateAddressFormVisible] = useState(false);
+  const [form, setForm] = useState({ country: '', city: '', address: '', postalCode: '' });
+  const toast = useToast();
+
+
   const toggleUpdateAddressForm = () => {
     setIsUpdateAddressFormVisible(!isUpdateAddressFormVisible);
+  };
+
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setForm({ ...form, [name]: value });
+  };
+
+  const updateLocation = async () => {
+    const { data } = await axios.put('/users/location', { location: { ...form }, userId: user.id });
+    toast({
+      title: "Location has been updated",
+      position: "top-center",
+      status: "success",
+      duration: 2000,
+      isClosable: true,
+      variant: "subtle",
+      style: {
+        backgroundColor: "white",
+        color: "orange",
+      },
+    });
   };
 
 
@@ -53,24 +81,25 @@ const UserSettings = () => {
             <AccordionPanel pb={4}>
               <FormControl>
                 <FormLabel>Country</FormLabel>
-                <Input h='2rem' type='text' />
+                <Input h='2rem' type='text' name='country' onChange={handleInputChange} />
               </FormControl>
               <FormControl>
                 <FormLabel>City</FormLabel>
-                <Input h='2rem' type='text' />
+                <Input h='2rem' type='text' name='city' onChange={handleInputChange} />
               </FormControl>
               <FormControl>
                 <FormLabel>Address</FormLabel>
-                <Input h='2rem' type='text' />
+                <Input h='2rem' type='text' name='address' onChange={handleInputChange} />
               </FormControl>
               <FormControl>
                 <FormLabel>Postal code</FormLabel>
-                <Input h='2rem' type='number' />
+                <Input h='2rem' type='number' name='postalCode' onChange={handleInputChange} />
+                <Button onClick={updateLocation} mt='1rem' >Update</Button>
               </FormControl>
             </AccordionPanel>
           </AccordionItem>
 
-          <AccordionItem borderRadius='10px' >
+          {/* <AccordionItem borderRadius='10px' >
               <AccordionButton>
                 <Text fontSize='1.2rem' fontWeight='bold' flex='1' textAlign='left'>Payment method</Text>
                 <AccordionIcon />
@@ -83,9 +112,9 @@ const UserSettings = () => {
               </FormControl>
               <Text fontSize='1rem' color='#8b8b8b' cursor='pointer' mt='.4rem' p='0' >Add card</Text>
             </AccordionPanel>
-          </AccordionItem>
+          </AccordionItem> */}
           
-          <AccordionItem borderRadius='10px' >
+          {/* <AccordionItem borderRadius='10px' >
               <AccordionButton>
                 <Text fontSize='1.2rem' fontWeight='bold' flex='1' textAlign='left'>Notifications</Text>
                 <AccordionIcon />
@@ -95,11 +124,10 @@ const UserSettings = () => {
               <Checkbox id="notifications" >Receive notifications by email</Checkbox>
               <Checkbox id="promotions" >Receive promotions by email</Checkbox>
             </FormControl>
-
               </AccordionPanel>
-          </AccordionItem>
+          </AccordionItem> */}
 
-          <AccordionItem borderRadius='10px' >
+          {/* <AccordionItem borderRadius='10px' >
               <AccordionButton>
                 <Text fontSize='1.2rem' fontWeight='bold' flex='1' textAlign='left'>Dietary</Text>
                 <AccordionIcon />
@@ -110,8 +138,8 @@ const UserSettings = () => {
               veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
               commodo consequat.
             </AccordionPanel>
-          </AccordionItem>
-
+          </AccordionItem> */}
+{/* 
           <AccordionItem borderRadius='10px' >
               <AccordionButton>
                 <Text fontSize='1.2rem' fontWeight='bold' flex='1' textAlign='left'>Comments and suggestions</Text>
@@ -120,7 +148,7 @@ const UserSettings = () => {
             <AccordionPanel pb={4}><Text mb='1rem' >If you have comments or suggestions for us, please let us know.</Text>
             <Textarea border='1px solid #bcbcbc' ></Textarea>
             </AccordionPanel>
-          </AccordionItem>
+          </AccordionItem> */}
 
         </Accordion>
           </CardBody>

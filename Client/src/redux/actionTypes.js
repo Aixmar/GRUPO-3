@@ -24,3 +24,6 @@ export const USER_FAVORITES = 'USER_FAVORITES';
 export const CLEAR_USER = 'CLEAR_USER';
 
 export const GET_SALES = 'GET_SALES'
+export const GET_ORDERS = 'GET_ORDERS'
+export const DELETE_ORDERS = 'DELETE_ORDERS'
+

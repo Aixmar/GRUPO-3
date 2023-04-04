@@ -13,7 +13,7 @@ const RequireAuth = ({allowedRol})=>{
             ? (<Outlet />) 
             : user?.email
                 ? <Navigate to="/unauthorized"  state={{from:location}} replace={true}/>
-                :<Navigate to="/home"  state={{from:location}} replace={true}/>
+                :<Navigate to="/mustLog"  state={{from:location}} replace={true}/>
     )
 }
 export default RequireAuth

@@ -45,7 +45,7 @@ const MainPage = () => {
     const data = labels.map((label, index) => ({ label, value: values[index] }));
   
     return (
-      <BarChart width={1000} height={300} data={data} barSize={50}>
+      <BarChart width={1000} height={300} data={data} barSize={50} >
         <XAxis dataKey="label" interval={0} />
         <YAxis />
         <Bar dataKey="value" fill="#3182ce" />
@@ -56,9 +56,9 @@ const MainPage = () => {
   
 return (
   <Flex  wrap="wrap"gap='5' justifyContent="center" direction='column' align='center' px='20' >
-    <Heading > Sales 2023 </Heading>         
+    <Heading color="white"> Sales 2023 </Heading>         
     <BasicBarChart labels={Object.keys(salesPerMonth)} values={Object.values(salesPerMonth)} />
-    <Heading >Total earnings in sales</Heading>
+    <Heading color="white">Total earnings in sales</Heading>
     <BasicBarChart labels={Object.keys(earningsperMonth)} values={Object.values(earningsperMonth)} />
   </Flex>
   );

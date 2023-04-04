@@ -233,12 +233,12 @@ const CreatePizzaAdmin = () => {
             
             <Box width='36%' height='70vh' display='flex' flexDirection='column' borderLeft='1px solid #545454b9'  >
                 <CreatedPizza form={form} setForm={setForm} toppings={toppings} setToppings={setToppings} cheeses={cheeses} setCheeses={setCheeses} meats={meats} setMeats={setMeats} ></CreatedPizza>
-                <Box display='flex' justifyContent='space-around' alignItems='center' mb='2rem' >
+                <Box display='flex' justifyContent='space-around' alignItems='center' mb='2rem' mr="2rem" ml="2rem" >
                   <Box >
                     <FormLabel htmlFor='price' fontWeight="bold" >Suggested price:</FormLabel>
                     <Input type='number' name='price' value={form.price} onChange={handleInputChange} border='1px solid #545454b9' htmlSize={2} width='50%' />
                   </Box>
-                  <Button onClick={handleSubmit} type="submit" hoverbg="black" borderRadius="full" fontSize='2rem' mt='1.4rem' padding="2rem 1.4rem" background="linear-gradient(to right, #f27833, #eab830)" >
+                  <Button onClick={handleSubmit} type="submit" hoverbg="black" borderRadius="full" fontSize='1.5rem' mt='1.4rem' padding="2rem 1.4rem" background="linear-gradient(to right, #f27833, #eab830)" >
                     Create new pizza
                   </Button>
                 </Box>

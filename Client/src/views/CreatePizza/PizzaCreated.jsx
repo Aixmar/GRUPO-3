@@ -43,8 +43,8 @@ const PizzaCreated = ({ form, setForm, toppings, setToppings, cheeses, setCheese
         <>
             <Box width='100%' height='100%' color='#fff' >
                 <Box display='flex' height='6rem' justifyContent='flex-start' mt='.4rem' ml='2rem' alignItems='center' >
-                    <Text color='white' fontSize='2.6rem' fontWeight="bold" >Your pizza</Text>
-                    <Image src={cookingpizza} alt='pizza' height='8.6rem' ml="90px" pt="10px"/>
+                    <Text color='white' fontSize={{ base: '2.6rem', md: '2rem' }} fontWeight="bold" >Your pizza</Text>
+                    <Image src={cookingpizza} alt='pizza' height={{ base: '8.6rem', md: '10rem' }} ml="90px" pt="10px" mb={{ base: '1rem', md: 0 }}/>
                 </Box>
 
                 <Box ml='2rem' height='1.6rem' ><Text color='#f27825' display='inline' >Dough: </Text><Text display='inline' ></Text>{form.detail.dough || <Text mr='12em' borderBottom='1px dashed #545454b9'></Text>}</Box>

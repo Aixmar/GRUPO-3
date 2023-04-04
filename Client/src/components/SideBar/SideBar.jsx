@@ -16,7 +16,7 @@ const SideBar = () => {
     return (
         <Flex
             position='fixed'
-            bg='#aaa'
+            bgGradient="linear-gradient(to right, #f27825, #eab830)"
             pos="sticky"
             // left="5"
             h="100vh"
@@ -51,7 +51,7 @@ const SideBar = () => {
                     <Avatar size="sm" src=""/>
                     <Flex flexDirection="column" ml={4}>
                         <Heading as="h3" size="sm">Mix2pizza</Heading>
-                        <Text color="gray">Admin</Text>
+                        <Text color="white">Admin</Text>
                     </Flex>
                 </Flex>
             </Flex>

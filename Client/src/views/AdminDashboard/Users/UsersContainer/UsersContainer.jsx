@@ -4,27 +4,27 @@ const UsersContainer = (props) => {
     const {users} = props
     return(
         <Box width="100%" maxWidth="1500px">
-        <Heading marginTop={10} marginBottom={3}>Users</Heading>
+        <Heading marginTop={10} marginBottom={3} color="white">Users</Heading>
         <Flex py="4" borderBottom="1px solid gray">
 
         <Flex marginLeft={5}>
-          <Box flex="1"><Text fontWeight="bold" color="orange.500">ID</Text></Box>
+          <Box flex="1"><Text fontWeight="bold" color="#f27825">ID</Text></Box>
         </Flex>
 
         <Flex marginLeft={10}>
-          <Box flex="2"><Text fontWeight="bold" color="orange.500" >NAME</Text></Box>
+          <Box flex="2"><Text fontWeight="bold" color="#f27825" >NAME</Text></Box>
         </Flex>
 
         <Flex marginLeft={20}>
-          <Box flex="3"><Text fontWeight="bold" color="orange.500" >LASTNAME</Text></Box>
+          <Box flex="3"><Text fontWeight="bold" color="#f27825" >LASTNAME</Text></Box>
         </Flex>
 
          <Flex marginLeft={40}>
-          <Box flex="4"><Text fontWeight="bold" color="orange.500" >EMAIL</Text></Box>
+          <Box flex="4"><Text fontWeight="bold" color="#f27825" >EMAIL</Text></Box>
           </Flex>
 
           <Flex marginLeft={40}>
-          <Box flex="5"><Text fontWeight="bold" color="orange.500">BIRTHDAY</Text></Box>
+          <Box flex="5"><Text fontWeight="bold" color="#f27825">BIRTHDAY</Text></Box>
           </Flex>
 
         </Flex>
