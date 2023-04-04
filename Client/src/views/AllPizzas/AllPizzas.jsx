@@ -24,7 +24,7 @@ const AllPizzas = () => {
   const pizzasFiltered = pizzasTermsFilters({ pizzas, filterPizzasTerms });
 
   return (
-    <Flex bgGradient="linear(to-l,#000000, #272727)">
+    <Flex h='100bh'bgGradient="linear(to-l,#000000, #272727)">
       <Box position="absolute" zIndex="10" w="100%">
         <SubNavBar />
       </Box>
