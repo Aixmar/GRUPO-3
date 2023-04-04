@@ -21,6 +21,7 @@ import {
 } from "../../redux/actions";
 import { useAuthProv } from "../../context/AuthProvider";
 import { useState } from "react";
+import { StarIcon } from "@chakra-ui/icons";
 
 const ItemCard = (props) => {
   const cart = useSelector((state) => state.cart);
@@ -133,6 +134,9 @@ const ItemCard = (props) => {
               >
                 ⭐ {ratingProm.toString().length === 1 ? ratingProm : ratingProm.toFixed(1)}
               </Text>
+            )}
+             {!props.reviews && (
+                <Text fontSize='xs' color='white'>No rating</Text>
             )}
             </Flex>
             <Flex>
