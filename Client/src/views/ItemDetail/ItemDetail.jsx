@@ -213,7 +213,7 @@ const ItemDetail = () => {
                             fontWeight="semibold"
                             color="#f27825"
                           >
-                            Name:
+                            {/* Name: */}
                             <Text color="#272727" display="inline">
                               {" "}
                               {review.name}
@@ -241,7 +241,7 @@ const ItemDetail = () => {
                             fontWeight="semibold"
                             color="#f27825"
                           >
-                            Review:
+                            {/* Review: */}
                             <Text color="#272727" display="inline">
                               {" "}
                               {review.review}
