@@ -25,7 +25,7 @@ const AllDrinks = () => {
   const drinksFiltered = drinksTermsFilters({ drinks, filterDrinksTerms });
 
   return (
-    <Flex bgGradient="linear(to-l,#000000, #272727)" h="100vh">
+    <Flex h="100vh" bgGradient="linear(to-l,#000000, #272727)">
       <Box position="absolute" zIndex="10" w="100%">
         <SubNavBar />
       </Box>
