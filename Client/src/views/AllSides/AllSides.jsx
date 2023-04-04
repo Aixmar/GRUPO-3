@@ -23,7 +23,7 @@ const AllSides = () => {
   }, [dispatch]);
 
   return (
-    <Flex bgGradient="linear(to-l,#000000, #272727)">
+    <Flex bgGradient="linear(to-l,#000000, #272727)" h="100vh">
       <Box position="absolute" zIndex="10" w="100%">
         <SubNavBar />
       </Box>
