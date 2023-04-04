@@ -23,6 +23,7 @@ import {
 import { useState } from "react";
 import { useAuthProv } from "../../context/AuthProvider";
 import axios from "axios";
+import { useToast } from "@chakra-ui/react";
 // import UpdateAddressForm from "./Updates/UpdateAdress";
 
 
@@ -32,6 +33,8 @@ const UserSettings = () => {
   const [notificationsByEmail, setNotificationsByEmail] = useState(false);
   const [isUpdateAddressFormVisible, setIsUpdateAddressFormVisible] = useState(false);
   const [form, setForm] = useState({ country: '', city: '', address: '', postalCode: '' });
+  const toast = useToast();
+
 
   const toggleUpdateAddressForm = () => {
     setIsUpdateAddressFormVisible(!isUpdateAddressFormVisible);
@@ -45,6 +48,18 @@ const UserSettings = () => {
 
   const updateLocation = async () => {
     const { data } = await axios.put('/users/location', { location: { ...form }, userId: user.id });
+    toast({
+      title: "Location has been updated",
+      position: "top-center",
+      status: "success",
+      duration: 2000,
+      isClosable: true,
+      variant: "subtle",
+      style: {
+        backgroundColor: "white",
+        color: "orange",
+      },
+    });
   };
 
 
