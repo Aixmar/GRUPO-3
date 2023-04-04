@@ -14,7 +14,8 @@ import {
   ModalCloseButton,
   ModalBody,
   Flex,
-  Avatar } from "@chakra-ui/react";
+  Avatar
+} from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
 import axios from "axios";
 import css from "./ItemDetail.module.css";
@@ -25,13 +26,13 @@ const ItemDetail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const [pizza, setPizza] = useState({});
-  const [ modalAddtocart, setModalAddtocart ] = useState(false);
+  const [modalAddtocart, setModalAddtocart] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
 
 
   const clickHandler = () => {
-    dispatch(pushToCart({...pizza, quantity: 1}));
+    dispatch(pushToCart({ ...pizza, quantity: 1 }));
     setModalAddtocart(true);
   };
 
@@ -40,22 +41,22 @@ const ItemDetail = () => {
 
 
   const getUserReview = (currentPizza) => {
-    currentPizza?.reviews?.map( async (review) => {    
+    currentPizza?.reviews?.map(async (review) => {
       const { data } = await axios.get(`/users/${review.userId}`);
       review.image = data.image;
     });
     setPizza({ ...currentPizza });
   };
-  
+
 
   useEffect(() => {
     axios
-    .get(`/pizzas/${id}`)
-    .then((data) => data.data)
-    .then((pizza) => {
-      setPizza(pizza);
-      getUserReview(pizza);     
-    });
+      .get(`/pizzas/${id}`)
+      .then((data) => data.data)
+      .then((pizza) => {
+        setPizza(pizza);
+        getUserReview(pizza);
+      });
 
     window.scrollTo(0, 0);
     document.querySelector("body").classList.add(css.disableScroll);
@@ -64,7 +65,7 @@ const ItemDetail = () => {
 
 
   const handleModal = () => {
-    setIsOpen(!isOpen);   
+    setIsOpen(!isOpen);
   };
 
 
@@ -184,7 +185,7 @@ const ItemDetail = () => {
 
             <Button onClick={handleModal}>See reviews</Button>
 
-            <Modal isOpen={isOpen} onClose={handleModal}>
+            <Modal isOpen={isOpen} onClose={handleModal} size="4xl">
               <ModalOverlay />
               <ModalContent>
                 <ModalHeader
@@ -196,7 +197,7 @@ const ItemDetail = () => {
                   Reviews
                 </ModalHeader>
                 <ModalCloseButton />
-                <ModalBody>
+                <ModalBody >
                   {pizza.reviews ? (
                     pizza.reviews.map((review) => (
                       <Flex
@@ -204,49 +205,48 @@ const ItemDetail = () => {
                         alignItems="center"
                         flexDirection="row"
                         pb="2rem"
+
                       >
                         <Avatar size="xl" src={review.image} />
                         <Box ml="1.5rem">
-                          <Text
+                          <Flex
                             fontFamily="Montserrat"
                             fontSize="1.2rem"
                             fontWeight="semibold"
                             color="#f27825"
+                            alignItems="center"
                           >
-                            Name:
-                            <Text color="#272727" display="inline">
+                            {/* Name: */}
+                            <Text color="black" fontWeight="bold" display="inline" >
                               {" "}
                               {review.name}
                             </Text>
-                          </Text>
-                          <Flex alignItems="center">
-                            {[...Array(5)].map((_, index) => {
-                              const value = index + 1;
-                              return (
-                                <Box key={index} mr={2}>
-                                  <StarIcon
-                                    color={
-                                      value <= review.rating
-                                        ? "#FFD700"
-                                        : "gray.300"
-                                    }
-                                  />
-                                </Box>
-                              );
-                            })}
+                            <Flex marginLeft="1rem" alignItems="center" marginBottom="0.5rem">
+                              {[...Array(5)].map((_, index) => {
+                                const value = index + 1;
+                                return (
+                                  <Box key={index} mr={2}>
+                                    <StarIcon
+                                      color={
+                                        value <= review.rating
+                                          ? "#FFD700"
+                                          : "gray.300"
+                                      }
+                                    />
+                                  </Box>
+                                );
+                              })}
+                            </Flex>
                           </Flex>
-                          <Text
-                            fontFamily="Montserrat"
+                          <Text fontFamily="Montserrat"
                             fontSize="1.2rem"
                             fontWeight="semibold"
-                            color="#f27825"
-                          >
-                            Review:
-                            <Text color="#272727" display="inline">
-                              {" "}
-                              {review.review}
-                            </Text>
+                            display="flex"
+                            noOfLines={0} maxWidth="43rem">
+                            {" "}
+                            {review.review}
                           </Text>
+
                         </Box>
                       </Flex>
                     ))
@@ -292,13 +292,13 @@ const ItemDetail = () => {
         <Modal isOpen={modalAddtocart} onClose={handleClose} >
           <ModalOverlay backdropFilter='blur(6px)' bg='#000000b6' />
           <ModalContent margin='auto'  >
-          <ModalCloseButton/>
+            <ModalCloseButton />
             <Image src={ok} alt="ok" h='2.8rem' objectFit='contain' mt='1rem' mb='0' />
             <ModalHeader textAlign='center' fontSize='1.8rem' p='0' >Added to cart successfully!</ModalHeader>
             <ModalBody textAlign='center' fontSize='1.4rem' >
-            <Link to='/allpizzas' ><Button mt='.6rem' fontSize='1.4rem' bg={"orange.400"} color={"white"} _hover={{ bg: "orange.500" }} onClick={handleClose} >Continue shopping</Button></Link>
-            <Text>or</Text>
-            <Link to='/cart' ><Button mb='.6rem' fontSize='1.4rem' bg={"orange.400"} color={"white"} _hover={{ bg: "orange.500" }} onClick={handleClose} >Go to cart</Button></Link>
+              <Link to='/allpizzas' ><Button mt='.6rem' fontSize='1.4rem' bg={"orange.400"} color={"white"} _hover={{ bg: "orange.500" }} onClick={handleClose} >Continue shopping</Button></Link>
+              <Text>or</Text>
+              <Link to='/cart' ><Button mb='.6rem' fontSize='1.4rem' bg={"orange.400"} color={"white"} _hover={{ bg: "orange.500" }} onClick={handleClose} >Go to cart</Button></Link>
             </ModalBody>
           </ModalContent>
         </Modal>

@@ -33,6 +33,7 @@ const UserHistory = () => {
           <Grid templateColumns="repeat(4, 1fr)" gap="4">
             {
               prevPurchase.map((item) => (
+                item.name !== "Create your pizza" &&
                 <GridItem key={item.id} >
                   <Box borderRadius="lg" color='#fff' border='1px solid' h='14.6rem' p="4">
                     <Box >
