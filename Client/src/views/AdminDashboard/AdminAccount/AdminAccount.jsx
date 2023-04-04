@@ -48,7 +48,18 @@ const AdminAccount = () => {
       const putImage = { urlImage: currentImage, userId: user.id };
       const { data } = await axios.put("/users/image", putImage);
       setUser(data);
-      toast({ title: "Image has been changed", color: "orange" });
+      toast({
+        title: "Image has been changed",
+        position: "top-center",
+        status: "success",
+        duration: 2000,
+        isClosable: true,
+        variant: "subtle",
+        style: {
+          backgroundColor: "white",
+          color: "orange",
+        },
+      });
       pond.current.removeFiles();
       setLoadingImage(false);
       setCurrentImage('');

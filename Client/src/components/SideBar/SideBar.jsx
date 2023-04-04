@@ -5,6 +5,7 @@ import {RiShoppingBasketFill} from "react-icons/ri"
 import {AiFillSetting,AiFillAlipaySquare} from "react-icons/ai"
 import {IoIosHammer} from "react-icons/io"
 import {BsReceipt} from "react-icons/bs"
+import { useAuthProv } from "../../context/AuthProvider";
 
 
 
@@ -12,6 +13,7 @@ import { Link } from "react-router-dom"
 
 const SideBar = () => {
     // const [navSize, setNavSize] = useState("large")
+    const {user} = useAuthProv()
 
     return (
         <Flex
@@ -48,7 +50,7 @@ const SideBar = () => {
             >
                 <Divider/>
                 <Flex mt={4} align="center">
-                    <Avatar size="sm" src=""/>
+                    <Avatar size="sm" src={user.image ? user.image : ""}/>
                     <Flex flexDirection="column" ml={4}>
                         <Heading as="h3" size="sm">Mix2pizza</Heading>
                         <Text color="white">Admin</Text>

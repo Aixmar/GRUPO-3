@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Link, Text } from "@chakra-ui/react";
+import { Button, Link, Text,Box,Flex } from "@chakra-ui/react";
 
 const ProductsPaginated = ({ products, productsPerPage, paginated }) => {
   const pageNumber = [];
@@ -38,8 +38,7 @@ const ProductsPaginated = ({ products, productsPerPage, paginated }) => {
   }, [products]);
 
   return (
-    <>
-      <div>
+      <Flex alignItems="center"> 
         {current > 1 && (
           <Button
             borderRadius="10px"
@@ -53,9 +52,9 @@ const ProductsPaginated = ({ products, productsPerPage, paginated }) => {
           </Button>
         )}
         {pageNumber.length && (
-          <a>
+          <Text color="white" padding="10px">
             {current} of {pageNumber.length}
-          </a>
+          </Text>
         )}
         {current < pageNumber.length && (
           <Button borderRadius="10px" padding="10px"
@@ -71,8 +70,7 @@ const ProductsPaginated = ({ products, productsPerPage, paginated }) => {
             Last
           </Button>
         )}
-      </div>
-    </>
+      </Flex>
   );
 };
 export default ProductsPaginated;

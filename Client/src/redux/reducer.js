@@ -181,9 +181,10 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case GET_ALL_USERS:
+      const orderUsersById = OrderById(action.payload)
       return{
         ...state,
-        users:action.payload
+        users:orderUsersById
       }
 
     case OPEN_SIGNUP_DRAWER:
