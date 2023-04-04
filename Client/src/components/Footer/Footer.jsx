@@ -58,7 +58,7 @@ const Footer = () => {
         </Flex>
         <Box textAlign="center">
           <Text fontSize="sm" color="#272727">
-            © 2023 Mix2Pizza Todos los derechos reservados.
+            © 2023 Mix2Pizza All rights reserved.
           </Text>
         </Box>
       </Box>
