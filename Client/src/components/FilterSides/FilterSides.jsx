@@ -88,7 +88,7 @@ const FilterSides = () => {
                 valueState={sidesTerms.selectOrderPrice}
             />
             <br />
-            <Button w='90%' onClick={handleOnClick}>CLEAR FILTERS</Button>
+            <Button w='70%' bgGradient="linear-gradient(to right, #f27825, #eab830)" onClick={handleOnClick}>CLEAR FILTERS</Button>
         </Flex>
     )
 }
