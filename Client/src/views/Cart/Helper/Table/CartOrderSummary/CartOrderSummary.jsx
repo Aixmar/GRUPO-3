@@ -50,7 +50,7 @@ export const CartOrderSummary = (props) => {
 
       <Stack spacing="6">
         <OrderSummaryItem label="Subtotal" value={props.totalPrice} />
-        <OrderSummaryItem label="Shipping + Tax">
+        {/* <OrderSummaryItem label="Shipping + Tax">
           <Link
             href="#"
             textDecor="underline"
@@ -69,7 +69,7 @@ export const CartOrderSummary = (props) => {
           >
             Add coupon code
           </Link>
-        </OrderSummaryItem>
+        </OrderSummaryItem> */}
         <Flex justify="space-between">
           <Text color="#f27825" fontSize="lg" fontWeight="semibold">
             Total
