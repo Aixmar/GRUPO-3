@@ -23,7 +23,7 @@ const ProductCard = (props) => {
             <Image w="45px" src={props.image} marginRight={5} alt={props.name} />
             <Text marginRight={10} color="white">{props.name}</Text>
             <Text marginRight={5} color="white">${props.price}</Text>
-            <Text paddingLeft="10px" marginRight={5} color="white">{props.stock} prod.</Text>
+            {/* <Text paddingLeft="10px" marginRight={5} color="white">{props.stock} prod.</Text> */}
             {
                 active === false ? <IconButton icon={<FcApproval />} onClick={clickHandlerDisable}></IconButton> :
                     <IconButton icon={<FcCancel />} onClick={clickHandlerDisable}></IconButton>
