@@ -4,21 +4,22 @@ import { Link, Link as RouterLink} from "react-router-dom";
 function SubNavbar() {
   return (
     <Flex
-      
+      direction='row'
       padding="1rem"
       bgGradient="linear-gradient(to right, #f27825, #eab830)"
       color="white"
+      justifyContent='center'
+      gap='20rem'
     >
-      <Box >
         
-        <Link as={RouterLink} to="/allpizzas">
-          <Button color="#f27825" bgGradient="linear(to-l,#000000, #272727)" borderRadius="full" mr="255px" ml="275px">
+        <Link  as={RouterLink} to="/allpizzas">
+          <Button color="#f27825" bgGradient="linear(to-l,#000000, #272727)" borderRadius="full">
               Pizzas
           </Button>
         </Link>
         
         <Link as={RouterLink} to="/alldrinks">
-          <Button bgGradient="linear(to-l,#000000, #272727)" color="#f27825" borderRadius="full" mr="255px">
+          <Button bgGradient="linear(to-l,#000000, #272727)" color="#f27825" borderRadius="full" >
             Drinks
           </Button>
         </Link>
@@ -28,7 +29,6 @@ function SubNavbar() {
             Sides
           </Button>
         </Link>
-      </Box>
     </Flex>
   );
 }
