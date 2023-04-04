@@ -56,7 +56,7 @@ const CartFooter = () => {
      
           <Box justifyContent="center" alignItems="center" pt="20px">
           <Text justifyContent="center"  fontSize="sm" color="#fcfaf7">
-              © 2023 Mix2Pizza Todos los derechos reservados.
+              © 2023 Mix2Pizza All rights reserved.
           </Text>
           </Box>
         
