@@ -27,7 +27,7 @@ const SalesContainer = (props) => {
         setCurrentPage(pageNumber)
     }
     return (
-        <Box width="100%" maxWidth="1500px">
+        <Box width="100%" maxWidth="1500px" color="white">
             <Heading marginBottom={5} marginTop={10} color="#f27825">Sales</Heading>
             {sales.length !== 0 ? 
         <TableContainer>
@@ -50,9 +50,9 @@ const SalesContainer = (props) => {
             
           return(
             <>
-            <Tr>
+            <Tr color="white">
                 <Td rowspan={sale.products.length}>{sale.userName}</Td>
-                <Td>{sale.products[0].name} x {sale.products[0].quantity}</Td>
+                <Td >{sale.products[0].name} x {sale.products[0].quantity}</Td>
                 <Td rowspan={sale.products.length}>{sale.total}</Td>
                 <Td rowspan={sale.products.length}>{date}</Td>
               </Tr>
