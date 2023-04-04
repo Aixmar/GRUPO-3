@@ -110,7 +110,7 @@ const UserSettings = () => {
               <FormControl>
                 <FormLabel>Postal code</FormLabel>
                 <Input h='2rem' type='number' name='postalCode' value={ !editLocation && user?.location?.postalCode ? user.location.postalCode : form.postalCode } isDisabled={ !editLocation } onChange={handleInputChange} />
-                { editLocation ? <Box><Button onClick={updateLocation} colorScheme="orange" mt='1rem' >Update</Button><Button onClick={editLocationHandler}  mt='1rem' >Cancel</Button></Box> : <Button onClick={editLocationHandler}  mt='1rem' >Edit</Button> }
+                { editLocation ? <Box><Button onClick={updateLocation} colorScheme="orange" mt='1rem' >Update</Button><Button onClick={editLocationHandler}  mt='1rem' >Cancel</Button></Box> : <Button colorScheme="orange" onClick={editLocationHandler}  mt='1rem' >Edit</Button> }
               </FormControl> 
             </AccordionPanel>
           </AccordionItem>
