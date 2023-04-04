@@ -59,10 +59,10 @@ const InfoPayment = () => {
 
   useEffect(() => {
     if (statusPayment === 'approved') {
-      axios.post('/sendmail/buyitem', formMail )
+      axios.post('/sendmail/buyitem', formMail)
       axios.put('/users/updateCartPurchase', updateCartUser )
       axios.post('/sales', cartSale)
-
+      axios.post('/orders', cartSale)
       dispatch(clearCartUser())
     }
   },[paymentId])

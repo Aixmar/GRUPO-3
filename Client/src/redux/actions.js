@@ -21,8 +21,9 @@ import {
   GET_ITEM_DETAIL,
   USER_FAVORITES,
   CLEAR_USER,
-  GET_SALES
-
+  GET_SALES,
+  GET_ORDERS,
+  DELETE_ORDERS,
 } from "./actionTypes";
 import axios from "axios";
 
@@ -146,6 +147,18 @@ export const getSales = () => {
     const response = await axios.get('/sales')
     dispatch({ type: GET_SALES, payload: response.data})
   }
-
 }
+
+export const getOrders = () => {
+  return async function (dispatch) {
+
+    const response = await axios.get('/orders')
+    dispatch({ type: GET_ORDERS, payload: response.data})
+  }
+}
+
+export const deleteOrders = (id) => {
+  return { type: DELETE_ORDERS, payload: id };
+}
+
 
