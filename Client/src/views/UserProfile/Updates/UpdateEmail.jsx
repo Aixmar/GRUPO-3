@@ -35,7 +35,8 @@ const UpdateEmailForm = (props) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const putEmail = { email: newEmail, userId: props.id };
-    const { data }= await axios.put("http://localhost:3001/users/email", putEmail);  // Esperar a que la actualización se complete
+    const { data }= await axios.put("https://grupo-3-back-production.up.railway.app/users/email", putEmail);  // Esperar a que la actualización se complete
+    //const { data }= await axios.put("http://localhost:3001/users/email", putEmail);  // Esperar a que la actualización se complete
     dispatch(getUserById(props.id));
     props.setUser(data);
     setIsEmailUpdated(true); // Actualiza el estado para indicar que el correo electrónico se ha actualizado

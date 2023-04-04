@@ -54,7 +54,9 @@ const ProductsContainer = (props) => {
                     <Box flex="4"><Text fontWeight="bold" color="#f27825" >PRICE</Text></Box>
                 </Flex>
 
+
                 {/* <Flex marginLeft={5}>
+
           <Box flex="5"><Text fontWeight="bold" color="#f27825">QUANT.</Text></Box>
           </Flex> */}
 
