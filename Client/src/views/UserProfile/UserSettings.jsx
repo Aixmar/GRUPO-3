@@ -20,7 +20,7 @@ import {
   Textarea,
   Input,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuthProv } from "../../context/AuthProvider";
 import axios from "axios";
 import { useToast } from "@chakra-ui/react";
@@ -29,11 +29,21 @@ import { useToast } from "@chakra-ui/react";
 
 const UserSettings = () => {
 
-  const { user } = useAuthProv();
+  const { user, setUser } = useAuthProv();
   const [notificationsByEmail, setNotificationsByEmail] = useState(false);
   const [isUpdateAddressFormVisible, setIsUpdateAddressFormVisible] = useState(false);
   const [form, setForm] = useState({ country: '', city: '', address: '', postalCode: '' });
   const toast = useToast();
+  const [editLocation, setEditLocation] = useState(false);
+
+  
+  
+  useEffect(() => {
+    if (user?.location){
+      console.log('existe user location----->', user.location)
+      setForm(user.location);
+    };
+  }, []);
 
 
   const toggleUpdateAddressForm = () => {
@@ -46,8 +56,10 @@ const UserSettings = () => {
     setForm({ ...form, [name]: value });
   };
 
+
   const updateLocation = async () => {
     const { data } = await axios.put('/users/location', { location: { ...form }, userId: user.id });
+    setUser(data);
     toast({
       title: "Location has been updated",
       position: "top-center",
@@ -60,8 +72,12 @@ const UserSettings = () => {
         color: "orange",
       },
     });
+    setEditLocation(false);
   };
 
+  const editLocationHandler = () => {
+    setEditLocation(!editLocation);
+  };
 
 
   return (
@@ -81,21 +97,21 @@ const UserSettings = () => {
             <AccordionPanel pb={4}>
               <FormControl>
                 <FormLabel>Country</FormLabel>
-                <Input h='2rem' type='text' name='country' onChange={handleInputChange} />
+                <Input h='2rem' type='text' name='country' value={ !editLocation && user?.location?.country ? user.location.country : form.country } isDisabled={ !editLocation } onChange={handleInputChange} />
               </FormControl>
               <FormControl>
                 <FormLabel>City</FormLabel>
-                <Input h='2rem' type='text' name='city' onChange={handleInputChange} />
+                <Input h='2rem' type='text' name='city' value={ !editLocation && user?.location?.city ? user.location.city : form.city } isDisabled={ !editLocation } onChange={handleInputChange} />
               </FormControl>
               <FormControl>
                 <FormLabel>Address</FormLabel>
-                <Input h='2rem' type='text' name='address' onChange={handleInputChange} />
+                <Input h='2rem' type='text' name='address' value={ !editLocation && user?.location?.address ? user.location.address : form.address } isDisabled={ !editLocation } onChange={handleInputChange} />
               </FormControl>
               <FormControl>
                 <FormLabel>Postal code</FormLabel>
-                <Input h='2rem' type='number' name='postalCode' onChange={handleInputChange} />
-                <Button onClick={updateLocation} mt='1rem' >Update</Button>
-              </FormControl>
+                <Input h='2rem' type='number' name='postalCode' value={ !editLocation && user?.location?.postalCode ? user.location.postalCode : form.postalCode } isDisabled={ !editLocation } onChange={handleInputChange} />
+                { editLocation ? <Box><Button onClick={updateLocation} colorScheme="orange" mt='1rem' >Update</Button><Button onClick={editLocationHandler}  mt='1rem' >Cancel</Button></Box> : <Button onClick={editLocationHandler}  mt='1rem' >Edit</Button> }
+              </FormControl> 
             </AccordionPanel>
           </AccordionItem>
 
