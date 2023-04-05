@@ -27,7 +27,7 @@ const SalesContainer = (props) => {
         setCurrentPage(pageNumber)
     }
     return (
-        <Box width="100%" maxWidth="1500px" color="white">
+        <Box width="100%" maxWidth="1300px" color="white">
             <Heading marginBottom={5} marginTop={10} color="#f27825">Sales</Heading>
             {sales.length !== 0 ? 
         <TableContainer>
